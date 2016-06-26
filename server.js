@@ -5,12 +5,13 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
+import morgan from "morgan";
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
-app.use(express.static(__dirname + '/dist'));
+app.use(morgan("dev"));
 
 if (isDeveloping) {
   const compiler = webpack(config);
@@ -29,6 +30,8 @@ if (isDeveloping) {
   }));
 
   app.use(webpackHotMiddleware(compiler));
+} else {
+  app.use(express.static(__dirname + '/dist'));
 }
 
 //app.get('*', function response(req, res) {

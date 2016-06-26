@@ -4,7 +4,7 @@
         "commonjs": true,
         "es6": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["google", "plugin:react/recommended"],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -82,11 +82,14 @@
         "keyword-spacing": "error",
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "lines-around-comment": "error",
         "max-depth": "error",
-        "max-len": "off",
+        "max-len": [
+            "error",
+            150
+        ],
         "max-nested-callbacks": "error",
         "max-params": "error",
         "max-statements": "error",
@@ -209,8 +212,10 @@
         "prefer-spread": "error",
         "prefer-template": "off",
         "quote-props": "off",
-        "quotes": "off",
-        "radix": "error",
+        "quotes": [
+            "error",
+            "double"
+        ],        "radix": "error",
         "require-jsdoc": "error",
         "require-yield": "error",
         "semi": "error",

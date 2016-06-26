@@ -5,12 +5,15 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var nodeModules = __dirname + '/node_modules';
 
+import CopyWebpackPlugin from "copy-webpack-plugin";
+
+
 var config = {
     addVendor: function (name, path) {
         this.resolve.alias[name] = path;
         this.module.noParse.push(new RegExp(path));
     },
-    devtool: 'eval-source-map',
+    devtool: 'eval',
     entry: [
         'webpack-hot-middleware/client?reload=true',
         path.join(__dirname, 'app/main.js')
@@ -24,9 +27,15 @@ var config = {
         alias: {}
     },
     plugins: [
+        new CopyWebpackPlugin([
+            {from: "app/images/", to: "images/"}, {
+                from: "app/extras"
+            }
+        ]),
         new HtmlWebpackPlugin({
             template: 'app/index.tpl.html',
             inject: 'body',
+            favicon: "app/favicon.ico",
             filename: 'index.html'
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
