@@ -4,10 +4,10 @@
 "use strict";
 
 import React from "react";
+import PhotoGallery from "./PhotoGallery";
 
 const Honda = React.createClass({
 
-  /* implement photo gallery */
   render() {
     return <div>
       <h2 className="text-primary">1997 Honda Shadow 750 ACE</h2>
@@ -17,6 +17,7 @@ const Honda = React.createClass({
         drum brake, but otherwise it was a solid bike. Unfortunately, I lost the
         bike to an accident on I294 on the way to Harley's 105th Anniversary
         Celebration in 2008.</p>
+      <PhotoGallery perPage={6} totalPhotos={6} filePrefix="images/hondaPhotos/photo" fileSuffix=".jpg" />
     </div>;
   }
 });

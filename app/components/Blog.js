@@ -23,7 +23,6 @@ const Blog = React.createClass({
     }).done((response) => {
       this.setState({feeds: response.responseData.feed.entries})
     });
-
   },
 
   createMarkup(html) {

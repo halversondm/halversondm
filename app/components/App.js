@@ -43,7 +43,7 @@ let App = React.createClass({
           {this.props.children}
           <hr />
           <footer>
-            <p>&copy; 2016 dmhweb.org</p>
+            <p>&copy; 2016 halversondm.com</p>
           </footer>
         </div>
       </div>);

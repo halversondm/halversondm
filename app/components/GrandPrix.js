@@ -4,6 +4,7 @@
 "use strict";
 
 import React from "react";
+import PhotoGallery from "./PhotoGallery";
 
 const GrandPrix = React.createClass({
 
@@ -58,6 +59,7 @@ const GrandPrix = React.createClass({
           track.
         </li>
       </ul>
+      <PhotoGallery perPage={38} totalPhotos={38} filePrefix="images/grandPrixPhotos/photo" fileSuffix=".jpg" />
     </div>;
   }
 });
