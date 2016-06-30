@@ -30,8 +30,8 @@ const RPSLS = React.createClass({
   },
   human(event) {
     this.setState(this.getInitialState());
-    let choice = event.currentTarget.dataset.choice;
-    let player2 = gameService.getPick();
+    const choice = event.currentTarget.dataset.choice;
+    const player2 = gameService.getPick();
     this.setPlayer1Class(choice);
     this.setPlayer2Class(player2);
     gameService.setPlayer1(choice);

@@ -83,11 +83,11 @@ const PhotoGallery = React.createClass({
     var photoIndex = Number(event.currentTarget.dataset.i);
     this.showHideButtons(photoIndex);
   },
-  prev(event) {
+  prev() {
     var photoIndex = this.state.photoIndex - 1;
     this.showHideButtons(photoIndex);
   },
-  next(event) {
+  next() {
     var photoIndex = this.state.photoIndex + 1;
     this.showHideButtons(photoIndex);
   },

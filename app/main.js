@@ -4,7 +4,7 @@ import {render} from "react-dom";
 import "./bootswatch/dist/bootswatch.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "./main.css";
-import {Router, Route, hashHistory, IndexRoute} from 'react-router';
+import {Router, Route, hashHistory, IndexRoute} from "react-router";
 import App from "./components/App";
 import Home from "./components/Home";
 import About from "./components/About";

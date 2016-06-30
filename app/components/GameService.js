@@ -15,6 +15,10 @@ class GameService {
     this.LIZARD_EATS_PAPER = "Lizard Eats Paper";
     this.SCISSORS_CUT_PAPER = "Scissors Cuts Paper";
     this.PAPER_COVERS_ROCK = "Paper Covers Rock";
+    this.init();
+  }
+
+  init() {
     this.SPOCK_VAPORIZES_ROCK = "Spock Vaporizes Rock";
     this.ROCK_CRUSHES_LIZARD = "Rock Crushes Lizard";
     this.ROCK_SMASHES_SCISSORS = "Rock Crushes Scissors";

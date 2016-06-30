@@ -16,12 +16,12 @@ const Blog = React.createClass({
   },
 
   componentDidMount() {
-    let url = service + encodeURIComponent(myBlog);
+    const url = service + encodeURIComponent(myBlog);
     $.ajax({
       url: url,
       dataType: "jsonp"
-    }).done((response) => {
-      this.setState({feeds: response.responseData.feed.entries})
+    }).done(response => {
+      this.setState({feeds: response.responseData.feed.entries});
     });
   },
 
@@ -39,7 +39,7 @@ const Blog = React.createClass({
         <p>A technology focused blog that I write on <a
           href="//tech-dan.blogspot.com" target="_blank">Blogger</a>.</p>
         <div className="input-prepend" hidden={this.state.feeds.length === 0}>
-          <span className="add-on"><i className="icon-search"></i></span>
+          <span className="add-on"><i className="icon-search" /></span>
           <input className="span12" type="text" placeholder="Search"/>
           <span className="badge badge-warning"
                 hidden={this.state.feeds.length === 0}>

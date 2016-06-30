@@ -26,7 +26,7 @@ const Grades = React.createClass({
     studentList.splice(event.currentTarget.dataset.key, 1);
     this.setState({studentList: studentList});
   },
-  addStudent(event) {
+  addStudent() {
     var student = this.state.student;
     var quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200;
     var midterm = student.midterm / 100;
@@ -34,17 +34,7 @@ const Grades = React.createClass({
     var finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
       (final * 0.5)) * 100;
     student.classAverage = Math.round(finalGrade);
-    if (finalGrade >= 90) {
-      student.letterGrade = "A";
-    } else if (finalGrade >= 80 && finalGrade <= 89) {
-      student.letterGrade = "B";
-    } else if (finalGrade >= 70 && finalGrade <= 79) {
-      student.letterGrade = "C";
-    } else if (finalGrade >= 60 && finalGrade <= 69) {
-      student.letterGrade = "D";
-    } else {
-      student.letterGrade = "F";
-    }
+    student = this.determineLetterGrade(finalGrade, student);
     var studentList = this.state.studentList;
     studentList.push(student);
     this.setState({
@@ -59,6 +49,20 @@ const Grades = React.createClass({
         letterGrade: ""
       }
     });
+  },
+  determineLetterGrade(finalGrade, student) {
+    if (finalGrade >= 90) {
+      student.letterGrade = "A";
+    } else if (finalGrade >= 80 && finalGrade <= 89) {
+      student.letterGrade = "B";
+    } else if (finalGrade >= 70 && finalGrade <= 79) {
+      student.letterGrade = "C";
+    } else if (finalGrade >= 60 && finalGrade <= 69) {
+      student.letterGrade = "D";
+    } else {
+      student.letterGrade = "F";
+    }
+    return student;
   },
   studentNumberChange(event) {
     var student = this.state.student;

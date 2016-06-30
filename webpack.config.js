@@ -1,11 +1,11 @@
 "use strict";
 
-import path from "path";
-import webpack from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import CopyWebpackPlugin from "copy-webpack-plugin";
+var path = require("path");
+var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const config = {
+var config = {
   devtool: "eval",
   entry: [
     "webpack-hot-middleware/client?reload=true",
@@ -40,15 +40,20 @@ const config = {
     })
   ],
   module: {
-    loaders: [
-      {test: /\.js?$/, exclude: /node_modules/, loader: "babel"},
-      {test: /\.json?$/, loader: "json"},
-      {test: /\.css$/, loader: "style-loader!css-loader"},
-      {
-        test: /\.(ttf|eot|woff2|svg|png|woff)$/,
-        loader: "url-loader?limit=100000"
-      }
-    ]
+    loaders: [{
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      loader: "babel"
+    }, {
+      test: /\.css$/,
+      loader: "style!css"
+    }, {
+      test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
+      loader: "file-loader"
+    }, {
+      test: /\.(jpg|jpeg)$/,
+      loader: "file-loader?name=images/[name].[ext]"
+    }]
   }
 };
 

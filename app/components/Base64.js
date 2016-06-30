@@ -17,21 +17,21 @@ const Base64 = React.createClass({
   setEncodeInput(event) {
     this.setState({encodeInput: event.target.value});
   },
-  goEncode(event) {
+  goEncode() {
     const encodeOutput = window.btoa(this.state.encodeInput);
     this.setState({encodeOutput: encodeOutput});
   },
-  clearEncode(event) {
+  clearEncode() {
     this.setState({encodeInput: "", encodeOutput: ""});
   },
   setDecodeInput(event) {
     this.setState({decodeInput: event.target.value});
   },
-  goDecode(event) {
+  goDecode() {
     const decodeOutput = window.atob(this.state.decodeInput);
     this.setState({decodeOutput: decodeOutput});
   },
-  clearDecode(event) {
+  clearDecode() {
     this.setState({decodeInput: "", decodeOutput: ""});
   },
   render() {
@@ -49,14 +49,14 @@ const Base64 = React.createClass({
               <div className="col-sm-10">
                 <textarea className="form-control" id="encodeInput"
                           value={this.state.encodeInput}
-                          onChange={this.setEncodeInput} required></textarea>
+                          onChange={this.setEncodeInput} required />
               </div>
             </div>
             <div className="form-group">
               <label forHtml="encodeOutput" className="col-sm-2 control-label">Encoded</label>
               <div className="col-sm-10">
                 <textarea className="form-control" id="encodeOutput"
-                          value={this.state.encodeOutput} readOnly></textarea>
+                          value={this.state.encodeOutput} readOnly />
               </div>
             </div>
             <div className="form-group ">
@@ -79,14 +79,14 @@ const Base64 = React.createClass({
               <div className="col-sm-10">
                 <textarea className="form-control" id="decodeInput"
                           value={this.state.decodeInput}
-                          onChange={this.setDecodeInput} required></textarea>
+                          onChange={this.setDecodeInput} required />
               </div>
             </div>
             <div className="form-group">
               <label forHtml="decodeOutput" className="col-sm-2 control-label">Un-encoded</label>
               <div className="col-sm-10">
                 <textarea className="form-control" id="decodeOutput"
-                          value={this.state.decodeOutput} readOnly></textarea>
+                          value={this.state.decodeOutput} readOnly />
               </div>
             </div>
             <div className="form-group ">

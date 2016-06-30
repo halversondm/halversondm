@@ -14,12 +14,12 @@ const UrlBuilder = React.createClass({
       assembledUrl: ""
     };
   },
-  addQuery(event) {
+  addQuery() {
     var queries = this.state.queries;
     queries.push(this.state.query);
     this.setState({queries: queries, query: {key: "", value: ""}});
   },
-  assemble(event) {
+  assemble() {
     var assembled = this.state.baseUrl + "?";
     var queries = this.state.queries;
     var count = 0;
@@ -41,7 +41,7 @@ const UrlBuilder = React.createClass({
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + value + "; " + expires;
   },
-  launch(event) {
+  launch() {
     var myWindow = window.open("", "MsgWindow", "toolbar=yes, scrollbars=yes, " +
       "resizable=yes, width=1024, height=768");
     myWindow.document.write("<html><head><meta http-equiv=\"X-UA-Compatible\"" +

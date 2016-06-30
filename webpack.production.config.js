@@ -4,9 +4,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-import CopyWebpackPlugin from "copy-webpack-plugin";
-
+var CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -48,16 +46,16 @@ module.exports = {
     loaders: [{
       test: /\.js?$/,
       exclude: /node_modules/,
-      loader: 'babel'
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
+      loader: "babel"
     }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+      loader: "style!css"
+    }, {
+      test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
+      loader: "file-loader"
+    }, {
+      test: /\.(jpg|jpeg)$/,
+      loader: "file-loader?name=images/[name].[ext]"
     }]
-  },
-  postcss: [
-    require('autoprefixer')
-  ]
+  }
 };

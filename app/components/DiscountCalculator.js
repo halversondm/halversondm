@@ -18,7 +18,7 @@ const DiscountCalculator = React.createClass({
       successMessage: ""
     };
   },
-  calculate(event) {
+  calculate() {
     discountCalculatorService.validate(this.state.discount1, this.state.discount2, this.state.labelPrice);
     if (discountCalculatorService.isError()) {
       this.setState({
@@ -33,7 +33,7 @@ const DiscountCalculator = React.createClass({
       });
     }
   },
-  clear(event) {
+  clear() {
     this.setState(this.getInitialState());
   },
   labelPriceChange(event) {
@@ -130,7 +130,4 @@ const DiscountCalculator = React.createClass({
 });
 
 export default DiscountCalculator;
-
-
-
 

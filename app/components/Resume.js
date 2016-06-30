@@ -356,4 +356,3 @@ const Resume = React.createClass({
 
 export default Resume;
 
-

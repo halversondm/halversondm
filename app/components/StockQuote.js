@@ -15,14 +15,14 @@ const StockQuote = React.createClass({
   },
   componentDidMount() {
     const stockList = ["MSFT", "AAPL", "JPM", "AMZN", "T", "F"];
-    stockList.forEach((stock) => {
+    stockList.forEach(stock => {
       setTimeout(this.callService(stock), 1000);
     });
   },
   inputStock(event) {
     this.setState({stockInput: event.target.value});
   },
-  submit(event) {
+  submit() {
     this.callService(this.state.stockInput);
     this.setState({stockInput: ""});
   },
@@ -31,7 +31,7 @@ const StockQuote = React.createClass({
     $.ajax({
       url: url,
       dataType: "jsonp"
-    }).then((data) => {
+    }).then(data => {
       var stocks = this.state.stocks;
       stocks.push(data);
       this.setState({stocks: stocks});
