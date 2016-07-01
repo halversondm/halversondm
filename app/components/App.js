@@ -8,7 +8,7 @@ import {Link} from "react-router";
 
 const App = React.createClass({
   propTypes: {
-    children: React.PropTypes.array
+    children: React.PropTypes.object
   },
 
   render() {
