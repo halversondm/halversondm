@@ -4,7 +4,7 @@
 "use strict";
 
 import React from "react";
-import $ from "jQuery";
+import $ from "jquery";
 
 const StockQuote = React.createClass({
   getInitialState() {

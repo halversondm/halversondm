@@ -11,7 +11,8 @@ const CheckboxSeries = React.createClass({
     labels: React.PropTypes.array,
     selected: React.PropTypes.array,
     otherLabelPlaceholder: React.PropTypes.string,
-    otherLabelText: React.PropTypes.string
+    otherLabelText: React.PropTypes.string,
+    reset: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -19,7 +20,8 @@ const CheckboxSeries = React.createClass({
       labels: [],
       selected: [],
       otherLabelPlaceholder: "",
-      otherLabelText: ""
+      otherLabelText: "",
+      reset: false
     };
   },
 
@@ -30,7 +32,6 @@ const CheckboxSeries = React.createClass({
       selected: this.props.selected
     };
   },
-
   toggleSelected(event) {
     var label = event.target.value;
     var selected = this.state.selected;
@@ -57,6 +58,15 @@ const CheckboxSeries = React.createClass({
   otherLabelChange(event) {
     var otherLabelText = event.target.value;
     this.setState({otherLabelText: otherLabelText});
+  },
+  pullCurrentState() {
+    return {
+      selected: this.state.selected,
+      otherLabelText: this.state.otherLabelText
+    };
+  },
+  reset() {
+    this.setState({otherLabelText: "", selected: [], otherLabelDisabled: true});
   },
   render() {
     return <div>
