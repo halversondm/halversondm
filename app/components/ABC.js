@@ -108,24 +108,28 @@ const ABC = React.createClass({
     var consequencePull = this.refs.consequences.pullCurrentState();
     user.consequence = consequencePull.selected;
     user.consequenceOther = consequencePull.otherLabelText;
-    // TODO do I need to update state here?
     this.setState({user: user});
     if (this.validSave()) {
       this.postToServer();
     }
   },
   postToServer() {
-    var messages = [];
+    var data = JSON.stringify(this.state.user);
+    console.log("ABC data sent ", data);
     $.ajax({
       url: "/saveABC",
-      data: JSON.stringify(this.state.user),
-      dataType: "json",
+      data: data,
+      contentType: "application/json",
       method: "POST"
-    }).then(() => {
-      messages.push("successful save");
+    }).then(response => {
+      var messages = [];
+      console.log("succ ", response);
+      messages.push(response);
       this.setState({messages: messages});
-    }, () => {
-      messages.push("unsuccessful save");
+    }, response => {
+      var messages = [];
+      console.log("unsucc ", response);
+      messages.push(response.status + " " + response.statusText);
       this.setState({messages: messages});
     });
   },

@@ -4,7 +4,7 @@ import {render} from "react-dom";
 import "./bootswatch/dist/bootswatch.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "./main.css";
-import {Router, Route, hashHistory, IndexRoute} from "react-router";
+import {Router, Route, browserHistory, IndexRoute} from "react-router";
 import App from "./components/App";
 import Home from "./components/Home";
 import About from "./components/About";
@@ -26,7 +26,7 @@ import StockQuote from "./components/StockQuote";
 import UrlBuilder from "./components/UrlBuilder";
 
 render(
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="/home" component={Home}/>
