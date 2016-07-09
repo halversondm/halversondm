@@ -19,6 +19,7 @@
     "start": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
+    "cross-env": "^1.0.8",
     "express": "^4.13.3",
     "body-parser": "^1.14.2",
     "mongoose": "^4.4.13",
