@@ -24,7 +24,7 @@ const PhotoGallery = React.createClass({
   getInitialState() {
     return {
       photoArray: [],
-      buttons: [],
+      pages: [],
       firstPhoto: [],
       lastPhoto: [],
       hidePrevious: false,
@@ -39,7 +39,7 @@ const PhotoGallery = React.createClass({
     var page = 0;
     var firstPhoto = [];
     var lastPhoto = [];
-    var buttons = [];
+    var pages = [];
     while (go) {
       if (page === 0) {
         firstPhoto.push(1);
@@ -54,7 +54,7 @@ const PhotoGallery = React.createClass({
         lastPhoto.push(nextLast);
       }
 
-      buttons.push(page + 1);
+      pages.push(page + 1);
       if (lastPhoto[page] === this.props.totalPhotos) {
         go = false;
       } else {
@@ -62,7 +62,7 @@ const PhotoGallery = React.createClass({
       }
     }
     this.setState({
-      buttons: buttons,
+      pages: pages,
       firstPhoto: firstPhoto,
       lastPhoto: lastPhoto
     });
@@ -76,10 +76,7 @@ const PhotoGallery = React.createClass({
     }
     this.setState({photoArray: photoArray});
   },
-  click(pageNumber) {
-    this.buildArray(pageNumber, this.state.firstPhoto, this.state.lastPhoto);
-  },
-  clickAction(event) {
+  imageClick(event) {
     var photoIndex = Number(event.currentTarget.dataset.i);
     this.showHideButtons(photoIndex);
   },
@@ -100,13 +97,17 @@ const PhotoGallery = React.createClass({
       photoIndex: photoIndex
     });
   },
+  pageClick(event) {
+    var page = Number(event.currentTarget.dataset.id);
+    this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto);
+  },
   render() {
     return <div id="photoGallery">
       <ul className="row">
         {
           this.state.photoArray.map((photo, i) => {
             return <li key={i} className="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-              <img onClick={this.clickAction} data-i={i}
+              <img onClick={this.imageClick} data-i={i}
                    className="img-responsive" data-toggle="modal"
                    data-target="#photoModal"
                    src={photo}/>
@@ -114,6 +115,15 @@ const PhotoGallery = React.createClass({
           })
         }
       </ul>
+      <div className="row">
+        {
+          this.state.pages.map((page, i) => {
+            return <button data-id={page} className="btn btn-sm btn-default"
+                           key={i}
+                           onClick={this.pageClick}>{"Page " + page}</button>;
+          })
+        }
+      </div>
       <div id="photoModal" className="modal">
         <div className="modal-dialog" role="document">
           <div className="modal-content">

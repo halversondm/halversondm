@@ -22,9 +22,9 @@ const App = React.createClass({
                         data-toggle="collapse"
                         data-target="#js-navbar-collapse">
                   <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
                 </button>
                 <div className="navbar-brand">@halversondm</div>
               </div>

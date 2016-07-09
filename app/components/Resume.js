@@ -11,7 +11,7 @@ const Resume = React.createClass({
     return <div className="resume">
       <header className="page-header">
         <h1 className="page-title">Resume of Daniel M. Halverson</h1>
-        <small><i className="fa fa-clock-o"></i> Last Updated on: Sunday,
+        <small><i className="fa fa-clock-o"/> Last Updated on: Sunday,
           February 01, 2015
         </small>
       </header>
@@ -34,7 +34,7 @@ const Resume = React.createClass({
                           <a
                             href="https://plus.google.com/u/0/114718071449100470041"
                             className="btn btn-social btn-block btn-google"> <i
-                            className="fa fa-google"></i>
+                            className="fa fa-google"/>
                           </a>
                         </div>
                         <div
@@ -42,7 +42,7 @@ const Resume = React.createClass({
                           <a href="https://www.facebook.com/daniel.m.halverson"
                              className="btn btn-social btn-block btn-facebook">
                             <i
-                              className="fa fa-facebook"></i>
+                              className="fa fa-facebook"/>
                           </a>
                         </div>
                         <div
@@ -50,7 +50,7 @@ const Resume = React.createClass({
                           <a href="https://twitter.com/halversondm"
                              className="btn btn-social btn-block btn-twitter">
                             <i
-                              className="fa fa-twitter"></i>
+                              className="fa fa-twitter" />
                           </a>
                         </div>
                         <div
@@ -58,21 +58,21 @@ const Resume = React.createClass({
                           <a href="http://www.linkedin.com/in/dmhalverson"
                              className="btn btn-social btn-block btn-linkedin">
                             <i
-                              className="fa fa-linkedin"></i>
+                              className="fa fa-linkedin" />
                           </a>
                         </div>
                         <div
                           className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
                           <a href="https://github.com/halversondm"
                              className="btn btn-social btn-block btn-github"> <i
-                            className="fa fa-github"></i>
+                            className="fa fa-github" />
                           </a>
                         </div>
                         <div
                           className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
                           <a href="http://stackoverflow.com/users/975640/dan"
                              className="btn btn-social btn-block btn-stackoverflow">
-                            <i className="fa fa-stack-overflow"></i>
+                            <i className="fa fa-stack-overflow" />
                           </a>
                         </div>
                       </div>
@@ -85,11 +85,11 @@ const Resume = React.createClass({
                       </li>
                       <li className="list-group-item">JPMorgan Chase & Co.</li>
                       <li className="list-group-item"><i
-                        className="fa fa-phone"></i>
+                        className="fa fa-phone"/>
                         630-346-4822
                       </li>
                       <li className="list-group-item"><i
-                        className="fa fa-envelope"></i>
+                        className="fa fa-envelope" />
                         daniel.m.halverson@gmail.com
                       </li>
                     </ul>
@@ -241,7 +241,7 @@ const Resume = React.createClass({
                     <li>Attended Systemation project management className</li>
                     <li>Certified by DST in DB2 and SQL usage</li>
                   </ul>
-                  <p></p>
+                  <p/>
                 </div>
               </ul>
             </div>

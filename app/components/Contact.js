@@ -58,7 +58,7 @@ const Contact = React.createClass({
                name="subject" placeholder="Subject"/>
         <br/>
               <textarea id="message" name="message" className="form-control"
-                        rows="3" placeholder="Message"></textarea>
+                        rows="3" placeholder="Message"/>
         <br/>
         <button type="submit" className="btn btn-success">Send</button>
       </form>

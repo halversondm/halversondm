@@ -8,7 +8,6 @@ import PhotoGallery from "./PhotoGallery";
 
 const GrandPrix = React.createClass({
 
-  /* implement photo gallery */
   render() {
     return <div>
       <h2 className="text-primary">2001 Pontiac Grand Prix GTP Coupe</h2>
@@ -59,7 +58,7 @@ const GrandPrix = React.createClass({
           track.
         </li>
       </ul>
-      <PhotoGallery perPage={38} totalPhotos={38} filePrefix="images/grandPrixPhotos/photo" fileSuffix=".jpg" />
+      <PhotoGallery perPage={9} totalPhotos={38} filePrefix="images/grandPrixPhotos/photo" fileSuffix=".jpg" />
     </div>;
   }
 });

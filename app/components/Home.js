@@ -52,7 +52,6 @@ const Home = React.createClass({
             </p>
           </div>
         </div>
-
       </div>
     );
   }

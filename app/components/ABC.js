@@ -298,12 +298,14 @@ const ABC = React.createClass({
           </div>
         </div>
         <br/>
-        <div className="row">
-          <div className="col-sm-12">
-            <input className="btn btn-success" type="submit"
+        <div className="form-inline">
+          <div className="form-group">
+            <input className="btn btn-success form-control" type="submit"
                    data-toggle="modal" data-target="#abcModal"
                    onClick={this.save} value="Save" id="save"/>
-            <input className="btn btn-danger" type="reset" onClick={this.reset}
+          </div>
+          <div className="form-group">
+            <input className="btn btn-danger form-control" type="reset" onClick={this.reset}
                    value="Reset" id="reset"/>
           </div>
         </div>

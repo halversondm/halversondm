@@ -9,7 +9,7 @@ class GameService {
     this.pick = "";
     this.player1 = "";
     this.player2 = "";
-    this.result = "";
+    this.roundResult = "";
     this.winner = "";
     this.PAPER_DISPROVES_SPOCK = "Paper Disproves Spock";
     this.LIZARD_EATS_PAPER = "Lizard Eats Paper";
@@ -42,25 +42,25 @@ class GameService {
   }
 
   getResult() {
-    return this.result;
+    return this.roundResult;
   }
 
   paper() {
     switch (this.player2) {
       case "spock":
-        this.result = this.PAPER_DISPROVES_SPOCK;
+        this.roundResult = this.PAPER_DISPROVES_SPOCK;
         this.winner = this.PLAYER_1;
         break;
       case "lizard":
-        this.result = this.LIZARD_EATS_PAPER;
+        this.roundResult = this.LIZARD_EATS_PAPER;
         this.winner = this.PLAYER_2;
         break;
       case "scissors":
-        this.result = this.SCISSORS_CUT_PAPER;
+        this.roundResult = this.SCISSORS_CUT_PAPER;
         this.winner = this.PLAYER_2;
         break;
       case "rock":
-        this.result = this.PAPER_COVERS_ROCK;
+        this.roundResult = this.PAPER_COVERS_ROCK;
         this.winner = this.PLAYER_1;
         break;
       default:
@@ -71,19 +71,19 @@ class GameService {
   rock() {
     switch (this.player2) {
       case "spock":
-        this.result = this.SPOCK_VAPORIZES_ROCK;
+        this.roundResult = this.SPOCK_VAPORIZES_ROCK;
         this.winner = this.PLAYER_2;
         break;
       case "lizard":
-        this.result = this.ROCK_CRUSHES_LIZARD;
+        this.roundResult = this.ROCK_CRUSHES_LIZARD;
         this.winner = this.PLAYER_1;
         break;
       case "scissors":
-        this.result = this.ROCK_SMASHES_SCISSORS;
+        this.roundResult = this.ROCK_SMASHES_SCISSORS;
         this.winner = this.PLAYER_1;
         break;
       case "paper":
-        this.result = this.PAPER_COVERS_ROCK;
+        this.roundResult = this.PAPER_COVERS_ROCK;
         this.winner = this.PLAYER_2;
         break;
       default:
@@ -94,19 +94,19 @@ class GameService {
   spock() {
     switch (this.player2) {
       case "rock":
-        this.result = this.SPOCK_VAPORIZES_ROCK;
+        this.roundResult = this.SPOCK_VAPORIZES_ROCK;
         this.winner = this.PLAYER_1;
         break;
       case "lizard":
-        this.result = this.LIZARD_POISONS_SPOCK;
+        this.roundResult = this.LIZARD_POISONS_SPOCK;
         this.winner = this.PLAYER_2;
         break;
       case "scissors":
-        this.result = this.SPOCK_BENDS_SCISSORS;
+        this.roundResult = this.SPOCK_BENDS_SCISSORS;
         this.winner = this.PLAYER_1;
         break;
       case "paper":
-        this.result = this.PAPER_DISPROVES_SPOCK;
+        this.roundResult = this.PAPER_DISPROVES_SPOCK;
         this.winner = this.PLAYER_2;
         break;
       default:
@@ -117,19 +117,19 @@ class GameService {
   lizard() {
     switch (this.player2) {
       case "rock":
-        this.result = this.ROCK_CRUSHES_LIZARD;
+        this.roundResult = this.ROCK_CRUSHES_LIZARD;
         this.winner = this.PLAYER_2;
         break;
       case "spock":
-        this.result = this.LIZARD_POISONS_SPOCK;
+        this.roundResult = this.LIZARD_POISONS_SPOCK;
         this.winner = this.PLAYER_1;
         break;
       case "scissors":
-        this.result = this.SCISSORS_DECAPITATE_LIZARD;
+        this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
         this.winner = this.PLAYER_2;
         break;
       case "paper":
-        this.result = this.LIZARD_EATS_PAPER;
+        this.roundResult = this.LIZARD_EATS_PAPER;
         this.winner = this.PLAYER_1;
         break;
       default:
@@ -140,19 +140,19 @@ class GameService {
   scissors() {
     switch (this.player2) {
       case "rock":
-        this.result = this.ROCK_SMASHES_SCISSORS;
+        this.roundResult = this.ROCK_SMASHES_SCISSORS;
         this.winner = this.PLAYER_2;
         break;
       case "spock":
-        this.result = this.SPOCK_BENDS_SCISSORS;
+        this.roundResult = this.SPOCK_BENDS_SCISSORS;
         this.winner = this.PLAYER_2;
         break;
       case "lizard":
-        this.result = this.SCISSORS_DECAPITATE_LIZARD;
+        this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
         this.winner = this.PLAYER_1;
         break;
       case "paper":
-        this.result = this.SCISSORS_CUT_PAPER;
+        this.roundResult = this.SCISSORS_CUT_PAPER;
         this.winner = this.PLAYER_1;
         break;
       default:
@@ -162,7 +162,7 @@ class GameService {
 
   takeTurn() {
     this.winner = "Draw";
-    this.result = "No winner. Please try again.";
+    this.roundResult = "No winner. Please try again.";
     switch (this.player1) {
       case "spock":
         this.spock();
