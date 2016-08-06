@@ -4,7 +4,7 @@
 "use strict";
 
 import React from "react";
-import $ from "jquery";
+import jsonp from "./JSONP";
 
 const StockQuote = React.createClass({
   getInitialState() {
@@ -28,19 +28,17 @@ const StockQuote = React.createClass({
   },
   callService(stockSymbol) {
     var url = "http://dev.markitondemand.com/Api/v2/Quote/jsonp?&symbol=" + stockSymbol;
-    $.ajax({
-      url: url,
-      dataType: "jsonp"
-    }).then(data => {
-      var stocks = this.state.stocks;
-      stocks.push(data);
-      this.setState({stocks: stocks});
-    }, () => {
-      var stocks = this.state.stocks;
-      var stock = {Symbol: stockSymbol, Name: "Not Found"};
-      stocks.push(stock);
-      this.setState({stocks: stocks});
-    });
+    jsonp(url, response => {
+        var stocks = this.state.stocks;
+        stocks.push(response);
+        this.setState({stocks: stocks});
+      }, () => {
+        var stocks = this.state.stocks;
+        var stock = {Symbol: stockSymbol, Name: "Not Found"};
+        stocks.push(stock);
+        this.setState({stocks: stocks});
+      }
+    );
   },
   render() {
     return <div>

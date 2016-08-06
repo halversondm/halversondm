@@ -4,7 +4,7 @@
 "use strict";
 
 import React from "react";
-import $ from "jquery";
+import jsonp from "./JSONP";
 
 const service = "//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&q=";
 const myBlog = "http://tech-dan.blogspot.com/feeds/posts/default";
@@ -17,11 +17,11 @@ const Blog = React.createClass({
 
   componentDidMount() {
     const url = service + encodeURIComponent(myBlog);
-    $.ajax({
-      url: url,
-      dataType: "jsonp"
-    }).done(response => {
-      this.setState({feeds: response.responseData.feed.entries, filteredData: response.responseData.feed.entries});
+    jsonp(url, response => {
+      this.setState({
+        feeds: response.responseData.feed.entries,
+        filteredData: response.responseData.feed.entries
+      });
     });
   },
 
@@ -44,8 +44,9 @@ const Blog = React.createClass({
         <p>A technology focused blog that I write on <a
           href="//tech-dan.blogspot.com" target="_blank">Blogger</a>.</p>
         <div className="input-prepend">
-          <span className="add-on"><i className="icon-search" /></span>
-          <input className="span12" type="text" placeholder="Search" onChange={this.filterData} />
+          <span className="add-on"><i className="icon-search"/></span>
+          <input className="span12" type="text" placeholder="Search"
+                 onChange={this.filterData}/>
           <span className="badge badge-warning"
                 hidden={this.state.filteredData.length === this.state.feeds.length}>
             {this.state.filteredData.length} Items</span>
@@ -61,7 +62,7 @@ const Blog = React.createClass({
               </div>
               <div className="panel-body">
                 <p className="text-left"
-                   dangerouslySetInnerHTML={this.createMarkup(feed.content)} />
+                   dangerouslySetInnerHTML={this.createMarkup(feed.content)}/>
                 <span className="small">{feed.publishedDate}</span>
               </div>
             </div>;

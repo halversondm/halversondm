@@ -5,7 +5,7 @@
 
 import React from "react";
 import CheckboxSeries from "./CheckboxSeries";
-import $ from "jquery";
+import Modal from "react-bootstrap/lib/Modal";
 
 const antecedents = ["Given Direction/task, asked to do something",
   "Asked to wait", "Difficulty with task/activity",
@@ -35,6 +35,7 @@ const ABC = React.createClass({
     return {
       antecedentOtherDisabled: true,
       messages: [],
+      showModal: false,
       user: {
         when: "",
         antecedent: "",
@@ -50,6 +51,9 @@ const ABC = React.createClass({
         consequenceOther: ""
       }
     };
+  },
+  close() {
+    this.setState({showModal: false});
   },
   getTime() {
     var user = this.state.user;
@@ -108,7 +112,7 @@ const ABC = React.createClass({
     var consequencePull = this.refs.consequences.pullCurrentState();
     user.consequence = consequencePull.selected;
     user.consequenceOther = consequencePull.otherLabelText;
-    this.setState({user: user});
+    this.setState({user: user, showModal: true});
     if (this.validSave()) {
       this.postToServer();
     }
@@ -116,22 +120,24 @@ const ABC = React.createClass({
   postToServer() {
     var data = JSON.stringify(this.state.user);
     console.log("ABC data sent ", data);
-    $.ajax({
-      url: "/saveABC",
-      data: data,
-      contentType: "application/json",
-      method: "POST"
-    }).then(response => {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/saveABC");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = () => {
       var messages = [];
-      console.log("succ ", response);
-      messages.push(response);
+      if (xhr.status >= 200 && xhr.status < 400) {
+        console.log("succ ", xhr.responseText);
+        messages.push(xhr.responseText);
+      } else {
+        console.log("unsucc ", xhr.responseText);
+        messages.push(xhr.status + " " + xhr.statusText);
+      }
       this.setState({messages: messages});
-    }, response => {
-      var messages = [];
-      console.log("unsucc ", response);
-      messages.push(response.status + " " + response.statusText);
-      this.setState({messages: messages});
-    });
+    };
+    xhr.onerror = () => {
+      console.log(xhr);
+    };
+    xhr.send(data);
   },
   validSave() {
     var messages = [];
@@ -301,15 +307,32 @@ const ABC = React.createClass({
         <div className="form-inline">
           <div className="form-group">
             <input className="btn btn-success form-control" type="submit"
-                   data-toggle="modal" data-target="#abcModal"
                    onClick={this.save} value="Save" id="save"/>
           </div>
           <div className="form-group">
-            <input className="btn btn-danger form-control" type="reset" onClick={this.reset}
+            <input className="btn btn-danger form-control" type="reset"
+                   onClick={this.reset}
                    value="Reset" id="reset"/>
           </div>
         </div>
       </div>
+      <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal.Header>
+          <p>ABC Save Results</p>
+        </Modal.Header>
+        <Modal.Body>
+          <ul>
+            {
+              this.state.messages.map((message, i) => {
+                return <li key={i}>{message}</li>;
+              })
+            }
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <p style={{right: "auto"}}>Click anywhere to continue</p>
+        </Modal.Footer>
+      </Modal>
       <div id="abcModal" className="modal">
         <div className="modal-dialog" role="document">
           <div className="modal-content">

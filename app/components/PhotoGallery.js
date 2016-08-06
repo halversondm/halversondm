@@ -4,6 +4,7 @@
 "use strict";
 
 import React from "react";
+import Modal from "react-bootstrap/lib/Modal";
 
 const PhotoGallery = React.createClass({
 
@@ -28,7 +29,8 @@ const PhotoGallery = React.createClass({
       firstPhoto: [],
       lastPhoto: [],
       hidePrevious: false,
-      hideNext: false
+      hideNext: false,
+      showModal: false
     };
   },
   componentDidMount() {
@@ -79,6 +81,10 @@ const PhotoGallery = React.createClass({
   imageClick(event) {
     var photoIndex = Number(event.currentTarget.dataset.i);
     this.showHideButtons(photoIndex);
+    this.setState({showModal: true});
+  },
+  close() {
+    this.setState({showModal: false});
   },
   prev() {
     var photoIndex = this.state.photoIndex - 1;
@@ -108,8 +114,7 @@ const PhotoGallery = React.createClass({
           this.state.photoArray.map((photo, i) => {
             return <li key={i} className="col-lg-2 col-md-2 col-sm-3 col-xs-4">
               <img onClick={this.imageClick} data-i={i}
-                   className="img-responsive" data-toggle="modal"
-                   data-target="#photoModal"
+                   className="img-responsive"
                    src={photo}/>
             </li>;
           })
@@ -124,28 +129,24 @@ const PhotoGallery = React.createClass({
           })
         }
       </div>
-      <div id="photoModal" className="modal">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-body">
-              <img src={this.state.photoArray[this.state.photoIndex]}
-                   className="img-responsive"/>
-            </div>
-            <div className="modal-footer">
-              <ul className="pager">
-                <li className="previous">
-                  <input type="button" hidden={this.state.hidePrevious}
-                         onClick={this.prev} value="&larr; Previous"/>
-                </li>
-                <li className="next">
-                  <input type="button" hidden={this.state.hideNext}
-                         onClick={this.next} value="Next &rarr;"/>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal.Body>
+          <img src={this.state.photoArray[this.state.photoIndex]}
+               className="img-responsive"/>
+        </Modal.Body>
+        <Modal.Footer>
+          <ul className="pager">
+            <li className="previous">
+              <input type="button" hidden={this.state.hidePrevious}
+                     onClick={this.prev} value="&larr; Previous"/>
+            </li>
+            <li className="next">
+              <input type="button" hidden={this.state.hideNext}
+                     onClick={this.next} value="Next &rarr;"/>
+            </li>
+          </ul>
+        </Modal.Footer>
+      </Modal>
     </div>;
   }
 });

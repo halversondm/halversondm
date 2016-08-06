@@ -2,7 +2,6 @@
 import React from "react";
 import {render} from "react-dom";
 import "./bootswatch/dist/bootswatch.css";
-import "bootstrap/dist/js/bootstrap.js";
 import "./main.css";
 import {Router, Route, browserHistory, IndexRoute} from "react-router";
 import App from "./components/App";
