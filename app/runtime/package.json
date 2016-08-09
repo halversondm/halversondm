@@ -5,7 +5,7 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/halversondm/HalversonWeb.git"
+    "url": "https://github.com/halversondm/halversondm.git"
   },
   "keywords": [
     "express",
@@ -14,7 +14,7 @@
   ],
   "author": "Dan Halverson",
   "license": "MIT",
-  "homepage": "https://github.com/halversondm/HalversonWeb.git",
+  "homepage": "https://github.com/halversondm/halversondm.git",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server"
   },
