@@ -22,7 +22,7 @@
     "cross-env": "^1.0.8",
     "express": "^4.13.3",
     "body-parser": "^1.14.2",
-    "mongoose": "^4.4.13",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "aws-sdk": "^2.4.13"
   }
 }

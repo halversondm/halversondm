@@ -29,7 +29,6 @@
       "error",
       "always"
     ],
-    "arrow-parens": "error",
     "arrow-spacing": [
       "error",
       {
@@ -83,10 +82,6 @@
     ],
     "key-spacing": "error",
     "keyword-spacing": "error",
-    "linebreak-style": [
-      "error",
-      "windows"
-    ],
     "lines-around-comment": "error",
     "max-depth": "error",
     "max-len": [
@@ -150,7 +145,6 @@
     "no-param-reassign": "error",
     "no-path-concat": "error",
     "no-plusplus": "error",
-    "no-process-env": "error",
     "no-process-exit": "error",
     "no-proto": "error",
     "no-restricted-globals": "error",
@@ -206,7 +200,6 @@
     "padded-blocks": "off",
     "prefer-arrow-callback": "off",
     "prefer-const": "error",
-    "prefer-reflect": "error",
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "prefer-template": "off",
