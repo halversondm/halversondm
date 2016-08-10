@@ -2,11 +2,13 @@
  Main production server configuration using NodeJS and ExpressJS
  */
 "use strict";
+
+console.log("halversondm personal site");
 var path = require("path");
 var express = require("express");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
-var port = 80;
+var port = 3000;
 var app = express();
 var AWS = require("aws-sdk");
 
