@@ -5,195 +5,195 @@
 
 class GameService {
 
-  constructor() {
-    this.pick = "";
-    this.player1 = "";
-    this.player2 = "";
-    this.roundResult = "";
-    this.winner = "";
-    this.PAPER_DISPROVES_SPOCK = "Paper Disproves Spock";
-    this.LIZARD_EATS_PAPER = "Lizard Eats Paper";
-    this.SCISSORS_CUT_PAPER = "Scissors Cuts Paper";
-    this.PAPER_COVERS_ROCK = "Paper Covers Rock";
-    this.init();
-  }
-
-  init() {
-    this.SPOCK_VAPORIZES_ROCK = "Spock Vaporizes Rock";
-    this.ROCK_CRUSHES_LIZARD = "Rock Crushes Lizard";
-    this.ROCK_SMASHES_SCISSORS = "Rock Crushes Scissors";
-    this.LIZARD_POISONS_SPOCK = "Lizard Poisons Spock";
-    this.SPOCK_BENDS_SCISSORS = "Spock Smashes Scissors";
-    this.SCISSORS_DECAPITATE_LIZARD = "Scissors Decapitate Lizard";
-    this.PLAYER_1 = "Player 1";
-    this.PLAYER_2 = "Player 2";
-  }
-
-  setPlayer1(val) {
-    this.player1 = val;
-  }
-
-  setPlayer2(val) {
-    this.player2 = val;
-  }
-
-  getWinner() {
-    return this.winner;
-  }
-
-  getResult() {
-    return this.roundResult;
-  }
-
-  paper() {
-    switch (this.player2) {
-      case "spock":
-        this.roundResult = this.PAPER_DISPROVES_SPOCK;
-        this.winner = this.PLAYER_1;
-        break;
-      case "lizard":
-        this.roundResult = this.LIZARD_EATS_PAPER;
-        this.winner = this.PLAYER_2;
-        break;
-      case "scissors":
-        this.roundResult = this.SCISSORS_CUT_PAPER;
-        this.winner = this.PLAYER_2;
-        break;
-      case "rock":
-        this.roundResult = this.PAPER_COVERS_ROCK;
-        this.winner = this.PLAYER_1;
-        break;
-      default:
-        throw new Error("error with choice");
+    constructor() {
+        this.pick = "";
+        this.player1 = "";
+        this.player2 = "";
+        this.roundResult = "";
+        this.winner = "";
+        this.PAPER_DISPROVES_SPOCK = "Paper Disproves Spock";
+        this.LIZARD_EATS_PAPER = "Lizard Eats Paper";
+        this.SCISSORS_CUT_PAPER = "Scissors Cuts Paper";
+        this.PAPER_COVERS_ROCK = "Paper Covers Rock";
+        this.init();
     }
-  }
 
-  rock() {
-    switch (this.player2) {
-      case "spock":
-        this.roundResult = this.SPOCK_VAPORIZES_ROCK;
-        this.winner = this.PLAYER_2;
-        break;
-      case "lizard":
-        this.roundResult = this.ROCK_CRUSHES_LIZARD;
-        this.winner = this.PLAYER_1;
-        break;
-      case "scissors":
-        this.roundResult = this.ROCK_SMASHES_SCISSORS;
-        this.winner = this.PLAYER_1;
-        break;
-      case "paper":
-        this.roundResult = this.PAPER_COVERS_ROCK;
-        this.winner = this.PLAYER_2;
-        break;
-      default:
-        throw new Error("error with choice");
+    init() {
+        this.SPOCK_VAPORIZES_ROCK = "Spock Vaporizes Rock";
+        this.ROCK_CRUSHES_LIZARD = "Rock Crushes Lizard";
+        this.ROCK_SMASHES_SCISSORS = "Rock Crushes Scissors";
+        this.LIZARD_POISONS_SPOCK = "Lizard Poisons Spock";
+        this.SPOCK_BENDS_SCISSORS = "Spock Smashes Scissors";
+        this.SCISSORS_DECAPITATE_LIZARD = "Scissors Decapitate Lizard";
+        this.PLAYER_1 = "Player 1";
+        this.PLAYER_2 = "Player 2";
     }
-  }
 
-  spock() {
-    switch (this.player2) {
-      case "rock":
-        this.roundResult = this.SPOCK_VAPORIZES_ROCK;
-        this.winner = this.PLAYER_1;
-        break;
-      case "lizard":
-        this.roundResult = this.LIZARD_POISONS_SPOCK;
-        this.winner = this.PLAYER_2;
-        break;
-      case "scissors":
-        this.roundResult = this.SPOCK_BENDS_SCISSORS;
-        this.winner = this.PLAYER_1;
-        break;
-      case "paper":
-        this.roundResult = this.PAPER_DISPROVES_SPOCK;
-        this.winner = this.PLAYER_2;
-        break;
-      default:
-        throw new Error("error with choice");
+    setPlayer1(val) {
+        this.player1 = val;
     }
-  }
 
-  lizard() {
-    switch (this.player2) {
-      case "rock":
-        this.roundResult = this.ROCK_CRUSHES_LIZARD;
-        this.winner = this.PLAYER_2;
-        break;
-      case "spock":
-        this.roundResult = this.LIZARD_POISONS_SPOCK;
-        this.winner = this.PLAYER_1;
-        break;
-      case "scissors":
-        this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
-        this.winner = this.PLAYER_2;
-        break;
-      case "paper":
-        this.roundResult = this.LIZARD_EATS_PAPER;
-        this.winner = this.PLAYER_1;
-        break;
-      default:
-        throw new Error("error with choice");
+    setPlayer2(val) {
+        this.player2 = val;
     }
-  }
 
-  scissors() {
-    switch (this.player2) {
-      case "rock":
-        this.roundResult = this.ROCK_SMASHES_SCISSORS;
-        this.winner = this.PLAYER_2;
-        break;
-      case "spock":
-        this.roundResult = this.SPOCK_BENDS_SCISSORS;
-        this.winner = this.PLAYER_2;
-        break;
-      case "lizard":
-        this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
-        this.winner = this.PLAYER_1;
-        break;
-      case "paper":
-        this.roundResult = this.SCISSORS_CUT_PAPER;
-        this.winner = this.PLAYER_1;
-        break;
-      default:
-        throw new Error("error with choice");
+    getWinner() {
+        return this.winner;
     }
-  }
 
-  takeTurn() {
-    this.winner = "Draw";
-    this.roundResult = "No winner. Please try again.";
-    switch (this.player1) {
-      case "spock":
-        this.spock();
-        break;
-      case "rock":
-        this.rock();
-        break;
-      case "paper":
-        this.paper();
-        break;
-      case "lizard":
-        this.lizard();
-        break;
-      case "scissors":
-        this.scissors();
-        break;
-      default:
-        throw new Error("error with choice");
+    getResult() {
+        return this.roundResult;
     }
-  }
 
-  getPick() {
-    this.randomPick();
-    return this.pick;
-  }
+    paper() {
+        switch (this.player2) {
+            case "spock":
+                this.roundResult = this.PAPER_DISPROVES_SPOCK;
+                this.winner = this.PLAYER_1;
+                break;
+            case "lizard":
+                this.roundResult = this.LIZARD_EATS_PAPER;
+                this.winner = this.PLAYER_2;
+                break;
+            case "scissors":
+                this.roundResult = this.SCISSORS_CUT_PAPER;
+                this.winner = this.PLAYER_2;
+                break;
+            case "rock":
+                this.roundResult = this.PAPER_COVERS_ROCK;
+                this.winner = this.PLAYER_1;
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
 
-  randomPick() {
-    var picks = ["spock", "lizard", "scissors", "paper", "rock"];
-    var randomNumber = Math.floor((Math.random() * 5));
-    this.pick = picks[randomNumber];
-  }
+    rock() {
+        switch (this.player2) {
+            case "spock":
+                this.roundResult = this.SPOCK_VAPORIZES_ROCK;
+                this.winner = this.PLAYER_2;
+                break;
+            case "lizard":
+                this.roundResult = this.ROCK_CRUSHES_LIZARD;
+                this.winner = this.PLAYER_1;
+                break;
+            case "scissors":
+                this.roundResult = this.ROCK_SMASHES_SCISSORS;
+                this.winner = this.PLAYER_1;
+                break;
+            case "paper":
+                this.roundResult = this.PAPER_COVERS_ROCK;
+                this.winner = this.PLAYER_2;
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
+
+    spock() {
+        switch (this.player2) {
+            case "rock":
+                this.roundResult = this.SPOCK_VAPORIZES_ROCK;
+                this.winner = this.PLAYER_1;
+                break;
+            case "lizard":
+                this.roundResult = this.LIZARD_POISONS_SPOCK;
+                this.winner = this.PLAYER_2;
+                break;
+            case "scissors":
+                this.roundResult = this.SPOCK_BENDS_SCISSORS;
+                this.winner = this.PLAYER_1;
+                break;
+            case "paper":
+                this.roundResult = this.PAPER_DISPROVES_SPOCK;
+                this.winner = this.PLAYER_2;
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
+
+    lizard() {
+        switch (this.player2) {
+            case "rock":
+                this.roundResult = this.ROCK_CRUSHES_LIZARD;
+                this.winner = this.PLAYER_2;
+                break;
+            case "spock":
+                this.roundResult = this.LIZARD_POISONS_SPOCK;
+                this.winner = this.PLAYER_1;
+                break;
+            case "scissors":
+                this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
+                this.winner = this.PLAYER_2;
+                break;
+            case "paper":
+                this.roundResult = this.LIZARD_EATS_PAPER;
+                this.winner = this.PLAYER_1;
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
+
+    scissors() {
+        switch (this.player2) {
+            case "rock":
+                this.roundResult = this.ROCK_SMASHES_SCISSORS;
+                this.winner = this.PLAYER_2;
+                break;
+            case "spock":
+                this.roundResult = this.SPOCK_BENDS_SCISSORS;
+                this.winner = this.PLAYER_2;
+                break;
+            case "lizard":
+                this.roundResult = this.SCISSORS_DECAPITATE_LIZARD;
+                this.winner = this.PLAYER_1;
+                break;
+            case "paper":
+                this.roundResult = this.SCISSORS_CUT_PAPER;
+                this.winner = this.PLAYER_1;
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
+
+    takeTurn() {
+        this.winner = "Draw";
+        this.roundResult = "No winner. Please try again.";
+        switch (this.player1) {
+            case "spock":
+                this.spock();
+                break;
+            case "rock":
+                this.rock();
+                break;
+            case "paper":
+                this.paper();
+                break;
+            case "lizard":
+                this.lizard();
+                break;
+            case "scissors":
+                this.scissors();
+                break;
+            default:
+                throw new Error("error with choice");
+        }
+    }
+
+    getPick() {
+        this.randomPick();
+        return this.pick;
+    }
+
+    randomPick() {
+        var picks = ["spock", "lizard", "scissors", "paper", "rock"];
+        var randomNumber = Math.floor((Math.random() * 5));
+        this.pick = picks[randomNumber];
+    }
 }
 
 export default GameService;
