@@ -9,6 +9,7 @@ import morgan from "morgan";
 import bodyParser from "body-parser";
 import AWS from "aws-sdk";
 import historyApiFallback from "connect-history-api-fallback";
+import http from "http";
 
 AWS.config.update({
     region: "us-west-2",
@@ -101,6 +102,36 @@ app.post("/saveABC", (req, res) => {
 app.post("/mail.php", (req, res) => {
     console.log(req.body);
     res.send("Email Success!");
+});
+
+app.post("/stock", (request, response) => {
+
+    var options = {
+        hostname: "dev.markitondemand.com",
+        port: 80,
+        path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
+        method: "GET",
+    };
+
+    var proxyRequest = http.request(options, (proxyResponse) => {
+        console.log(`STATUS: ${proxyResponse.statusCode}`);
+        console.log(`HEADERS: ${JSON.stringify(proxyResponse.headers)}`);
+        proxyResponse.setEncoding('utf8');
+        proxyResponse.on('data', (chunk) => {
+            console.log(`BODY: ${chunk}`);
+            response.set("Content-Type", "application/json");
+            response.send(chunk);
+        });
+        proxyResponse.on('end', () => {
+            console.log('No more data in response.');
+        });
+    });
+
+    proxyRequest.on('error', (e) => {
+        console.log(`problem with request: ${e}`);
+        response.sendStatus(404);
+    });
+    proxyRequest.end();
 });
 
 app.listen(port, "localhost", (err) => {

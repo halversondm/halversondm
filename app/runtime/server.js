@@ -11,6 +11,7 @@ var morgan = require("morgan");
 var port = 3000;
 var app = express();
 var AWS = require("aws-sdk");
+var http = require("http");
 
 AWS.config.update({
     region: "us-east-1",
@@ -54,6 +55,31 @@ app.post("/saveABC", function response(req, res) {
 app.post("/mail.php", function response(req, res) {
     console.log(req.body);
     res.send("Email Success!");
+});
+
+app.post("/stock", (request, response) => {
+    var options = {
+        hostname: "dev.markitondemand.com",
+        port: 80,
+        path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
+        method: "GET"
+    };
+    var proxyRequest = http.request(options, proxyResponse => {
+        proxyResponse.setEncoding("utf8");
+        proxyResponse.on("data", chunk => {
+            response.set("Content-Type", "application/json");
+            response.send(chunk);
+        });
+        proxyResponse.on("end", () => {
+            console.log("No more data in response.");
+        });
+    });
+
+    proxyRequest.on("error", e => {
+        console.log(`problem with request: ${e}`);
+        response.sendStatus(404);
+    });
+    proxyRequest.end();
 });
 
 app.listen(port);

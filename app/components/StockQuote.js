@@ -4,7 +4,6 @@
 "use strict";
 
 import React, {Component} from "react";
-import jsonp from "./JSONP";
 
 class StockQuote extends Component {
     constructor(props) {
@@ -35,18 +34,23 @@ class StockQuote extends Component {
     }
 
     callService(stockSymbol) {
-        var url = "http://dev.markitondemand.com/Api/v2/Quote/jsonp?&symbol=" + stockSymbol;
-        jsonp(url, response => {
-                var stocks = this.state.stocks;
-                stocks.push(response);
-                this.setState({stocks: stocks});
-            }, () => {
-                var stocks = this.state.stocks;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/stock?stockSymbol=" + stockSymbol);
+        xhr.onload = () => {
+            var stocks = this.state.stocks;
+            if (xhr.status >= 200 && xhr.status < 400) {
+                stocks.push(JSON.parse(xhr.responseText));
+            } else {
+                console.log("unsucc ", xhr.responseText);
                 var stock = {Symbol: stockSymbol, Name: "Not Found"};
                 stocks.push(stock);
-                this.setState({stocks: stocks});
             }
-        );
+            this.setState({stocks: stocks});
+        };
+        xhr.onerror = () => {
+            console.log(xhr);
+        };
+        xhr.send();
     }
 
     render() {
