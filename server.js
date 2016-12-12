@@ -10,13 +10,14 @@ import bodyParser from "body-parser";
 import AWS from "aws-sdk";
 import historyApiFallback from "connect-history-api-fallback";
 import http from "http";
+import https from "https";
 
 AWS.config.update({
     region: "us-west-2",
     endpoint: "http://localhost:8000"
 });
 
-var docClient = new AWS.DynamoDB.DocumentClient();
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 const isDeveloping = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 3000;
@@ -75,7 +76,7 @@ app.post("/saveABC", (req, res) => {
     //     consequenceOther: String
     // }
 
-    var abc = req.body;
+    let abc = req.body;
     Object.keys(abc).forEach(key => {
         if (abc[key] === "") {
             delete abc[key];
@@ -83,7 +84,7 @@ app.post("/saveABC", (req, res) => {
     });
     console.log(abc);
 
-    var params = {
+    const params = {
         TableName: "ABC",
         Item: abc
     };
@@ -105,15 +106,13 @@ app.post("/mail.php", (req, res) => {
 });
 
 app.post("/stock", (request, response) => {
-
-    var options = {
+    let options = {
         hostname: "dev.markitondemand.com",
         port: 80,
         path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
         method: "GET",
     };
-
-    var proxyRequest = http.request(options, (proxyResponse) => {
+    let proxyRequest = http.request(options, (proxyResponse) => {
         console.log(`STATUS: ${proxyResponse.statusCode}`);
         console.log(`HEADERS: ${JSON.stringify(proxyResponse.headers)}`);
         proxyResponse.setEncoding('utf8');
@@ -126,8 +125,32 @@ app.post("/stock", (request, response) => {
             console.log('No more data in response.');
         });
     });
-
     proxyRequest.on('error', (e) => {
+        console.log(`problem with request: ${e}`);
+        response.sendStatus(404);
+    });
+    proxyRequest.end();
+});
+
+app.post("/blogService", (request, response) => {
+    const options = {
+        hostname: "www.googleapis.com",
+        port: 443,
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyCO1_3ksPj3HRGRTP0vKPWALbaMqMGuN9I&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        method: "GET"
+    };
+    let proxyRequest = https.request(options, (proxyResponse) => {
+        let data = "";
+        proxyResponse.setEncoding("utf8");
+        proxyResponse.on("data", (chunk) => {
+            data += chunk;
+        });
+        proxyResponse.on("end", () => {
+            response.set("Content-Type", "application/json");
+            response.send(data);
+        });
+    });
+    proxyRequest.on("error", (e) => {
         console.log(`problem with request: ${e}`);
         response.sendStatus(404);
     });

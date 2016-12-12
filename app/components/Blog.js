@@ -4,27 +4,33 @@
 "use strict";
 
 import React, {Component} from "react";
-import jsonp from "./JSONP";
-
-const service = "//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&q=";
-const myBlog = "http://tech-dan.blogspot.com/feeds/posts/default";
 
 class Blog extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {feeds: [], filteredData: []};
+        this.state = {items: [], filteredData: []};
         this.filterData = this.filterData.bind(this);
     }
 
     componentDidMount() {
-        const url = service + encodeURIComponent(myBlog);
-        jsonp(url, response => {
-            this.setState({
-                feeds: response.responseData.feed.entries,
-                filteredData: response.responseData.feed.entries
-            });
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/blogService");
+        xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 400) {
+                const data = JSON.parse(xhr.responseText);
+                this.setState({
+                    items: data.items,
+                    filteredData: data.items
+                });
+            } else {
+                console.log("unsucc ", xhr.responseText);
+            }
+        };
+        xhr.onerror = () => {
+            console.log(xhr);
+        };
+        xhr.send();
     }
 
     createMarkup(html) {
@@ -33,7 +39,7 @@ class Blog extends Component {
 
     filterData(event) {
         const regex = new RegExp(event.target.value, "i");
-        const filtered = this.state.feeds.filter(data => {
+        const filtered = this.state.items.filter(data => {
             return data.content.search(regex) > -1;
         });
         this.setState({filteredData: filtered});
@@ -50,22 +56,22 @@ class Blog extends Component {
                     <input className="span12" type="text" placeholder="Search"
                            onChange={this.filterData}/>
                     <span className="badge badge-warning"
-                          hidden={this.state.filteredData.length === this.state.feeds.length}>
+                          hidden={this.state.filteredData.length === this.state.items.length}>
             {this.state.filteredData.length} Items</span>
                 </div>
                 <div style={{height: "20px"}}></div>
                 {
-                    this.state.filteredData.map((feed, i) => {
+                    this.state.filteredData.map((item, i) => {
                         return <div className="panel panel-info" key={i}>
                             <div className="panel-heading">
-                                <h3 className="panel-title"><a href={feed.link}
-                                                               target="_blank">{feed.title}</a>
+                                <h3 className="panel-title"><a href={item.url}
+                                                               target="_blank">{item.title}</a>
                                 </h3>
                             </div>
                             <div className="panel-body">
                                 <p className="text-left"
-                                   dangerouslySetInnerHTML={this.createMarkup(feed.content)}/>
-                                <span className="small">{feed.publishedDate}</span>
+                                   dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
+                                <span className="small">{item.published}</span>
                             </div>
                         </div>;
                     })

@@ -133,15 +133,15 @@ class Grades extends Component {
                 {
                     this.state.studentList.map((student, i) => {
                         return <tr key={i}>
-                            <td>{student.studentNumber}</td>
-                            <td>{student.quiz1}</td>
-                            <td>{student.quiz2}</td>
-                            <td>{student.midterm}</td>
-                            <td>{student.final}</td>
-                            <td>{student.classAverage}</td>
-                            <td>{student.letterGrade}</td>
+                            <td id={"studentNumber" + i}>{student.studentNumber}</td>
+                            <td id={"quiz1" + i}>{student.quiz1}</td>
+                            <td id={"quiz2" + i}>{student.quiz2}</td>
+                            <td id={"midterm" + i}>{student.midterm}</td>
+                            <td id={"final" + i}>{student.final}</td>
+                            <td id={"classAverage" + i}>{student.classAverage}</td>
+                            <td id={"letterGrade" + i}>{student.letterGrade}</td>
                             <td>
-                                <button className="btn btn-danger btn-sm"
+                                <button id={"removeStudent" + i} className="btn btn-danger btn-sm"
                                         onClick={this.removeStudent} data-key={i}> - Remove
                                     Student
                                 </button>

@@ -1,6 +1,6 @@
 "use strict";
 
-const until = require('selenium-webdriver').until;
+const until = require("selenium-webdriver").until;
 
 const utils = function (driver) {
     return {
@@ -18,8 +18,11 @@ const utils = function (driver) {
         },
         click: function (selector) {
             return driver.findElement(selector).click();
+        },
+        emptyCheck: function (text, assert) {
+            return assert.equal(text, "");
         }
-    }
+    };
 };
 
 module.exports = utils;

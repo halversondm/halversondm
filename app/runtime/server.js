@@ -1,24 +1,27 @@
+/* eslint-disable */
+
 /*
  Main production server configuration using NodeJS and ExpressJS
  */
 "use strict";
 
 console.log("halversondm personal site");
-var path = require("path");
-var express = require("express");
-var bodyParser = require("body-parser");
-var morgan = require("morgan");
-var port = 3000;
-var app = express();
-var AWS = require("aws-sdk");
-var http = require("http");
+const path = require("path");
+const express = require("express");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const port = 3000;
+const app = express();
+const AWS = require("aws-sdk");
+const http = require("http");
+const https = require("https");
 
 AWS.config.update({
     region: "us-east-1",
     endpoint: "https://dynamodb.us-east-1.amazonaws.com"
 });
 
-var docClient = new AWS.DynamoDB.DocumentClient();
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,7 +32,7 @@ app.get("*", function response(req, res) {
 });
 
 app.post("/saveABC", function response(req, res) {
-    var abc = req.body;
+    const abc = req.body;
     Object.keys(abc).forEach(key => {
         if (abc[key] === "") {
             delete abc[key];
@@ -37,7 +40,7 @@ app.post("/saveABC", function response(req, res) {
     });
     console.log(abc);
 
-    var params = {
+    const params = {
         TableName: "ABC",
         Item: abc
     };
@@ -58,13 +61,13 @@ app.post("/mail.php", function response(req, res) {
 });
 
 app.post("/stock", (request, response) => {
-    var options = {
+    const options = {
         hostname: "dev.markitondemand.com",
         port: 80,
         path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
         method: "GET"
     };
-    var proxyRequest = http.request(options, proxyResponse => {
+    const proxyRequest = http.request(options, proxyResponse => {
         proxyResponse.setEncoding("utf8");
         proxyResponse.on("data", chunk => {
             response.set("Content-Type", "application/json");
@@ -75,6 +78,31 @@ app.post("/stock", (request, response) => {
         });
     });
 
+    proxyRequest.on("error", e => {
+        console.log(`problem with request: ${e}`);
+        response.sendStatus(404);
+    });
+    proxyRequest.end();
+});
+
+app.post("/blogService", (request, response) => {
+    const options = {
+        hostname: "www.googleapis.com",
+        port: 443,
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyCO1_3ksPj3HRGRTP0vKPWALbaMqMGuN9I&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        method: "GET"
+    };
+    const proxyRequest = https.request(options, proxyResponse => {
+        let data = "";
+        proxyResponse.setEncoding("utf8");
+        proxyResponse.on("data", chunk => {
+            data += chunk;
+        });
+        proxyResponse.on("end", () => {
+            response.set("Content-Type", "application/json");
+            response.send(data);
+        });
+    });
     proxyRequest.on("error", e => {
         console.log(`problem with request: ${e}`);
         response.sendStatus(404);
