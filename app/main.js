@@ -1,8 +1,9 @@
 "use strict";
+require("./bootswatch/dist/bootstrap.css");
+require("./main.css");
+
 import React from "react";
 import {render} from "react-dom";
-import "bootswatch/dist/bootstrap.css";
-import "main.css";
 import {Router, Route, browserHistory, IndexRoute} from "react-router";
 import App from "./components/App";
 import Home from "./components/Home";
