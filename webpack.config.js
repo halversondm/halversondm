@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== "development" && process.env.NODE_ENV !== "producti
 }
 
 var config = {
+  bail: true,
   plugins: [
     new HtmlWebpackPlugin({
       template: "app/index.tpl.html",

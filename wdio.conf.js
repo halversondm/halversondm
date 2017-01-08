@@ -38,13 +38,17 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
+    // user and key for SauceLabs.  It auto detects the host based on user and key.
+    user: "halversondm",
+    key: "e4f68846-25d4-49f0-8507-4d36dc44fb0a",
     capabilities: [{
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
         maxInstances: 5,
-        //
-        browserName: 'firefox'
+        browserName: 'internet explorer',
+        platform: "Windows 7",
+        version: "11.0"
     }],
     //
     // ===================
