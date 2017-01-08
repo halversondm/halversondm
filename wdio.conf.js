@@ -1,5 +1,5 @@
 exports.config = {
-    
+
     //
     // ==================
     // Specify Test Files
@@ -41,15 +41,23 @@ exports.config = {
     // user and key for SauceLabs.  It auto detects the host based on user and key.
     user: "halversondm",
     key: "e4f68846-25d4-49f0-8507-4d36dc44fb0a",
-    capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        browserName: 'internet explorer',
-        platform: "Windows 7",
-        version: "11.0"
-    }],
+    // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+    // grid with only 5 firefox instances available you can make sure that not more than
+    // 5 instances get started at a time.
+    capabilities: [
+        {
+            maxInstances: 2,
+            browserName: "chrome",
+            platform: "Windows 10",
+            version: "54.0"
+        },
+        {
+            maxInstances: 2,
+            browserName: "safari",
+            platform: "OS X 10.11",
+            version: "10.0"
+        }
+    ],
     //
     // ===================
     // Test Configurations
@@ -127,7 +135,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: 20000
     },
     //
     // =====
