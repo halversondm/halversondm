@@ -1,5 +1,5 @@
 "use strict";
-require("./bootswatch/dist/bootstrap.css");
+require("./bootswatch/css/bootstrap.css");
 require("./main.css");
 
 import React from "react";
