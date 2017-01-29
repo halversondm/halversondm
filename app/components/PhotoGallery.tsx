@@ -3,12 +3,30 @@
  */
 "use strict";
 
-import React, {Component} from "react";
-import Modal from "react-bootstrap/lib/Modal";
+import * as React from "react";
+import {Modal} from "react-bootstrap";
 
-class PhotoGallery extends Component {
+export interface PhotoGalleryProps {
+    perPage: number,
+    totalPhotos: number,
+    filePrefix: string,
+    fileSuffix: string
+}
 
-    constructor(props) {
+interface PhotoGalleryState {
+    photoArray: Array<string>,
+    pages: Array<string>,
+    firstPhoto: Array<number>,
+    lastPhoto: Array<number>,
+    hidePrevious: boolean,
+    hideNext: boolean,
+    showModal: boolean,
+    photoIndex: number
+}
+
+export default class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState> {
+
+    constructor(props: PhotoGalleryProps) {
         super(props);
         this.state = {
             photoArray: [],
@@ -17,7 +35,8 @@ class PhotoGallery extends Component {
             lastPhoto: [],
             hidePrevious: false,
             hideNext: false,
-            showModal: false
+            showModal: false,
+            photoIndex: 0
         };
         this.init = this.init.bind(this);
         this.buildArray = this.buildArray.bind(this);
@@ -34,18 +53,18 @@ class PhotoGallery extends Component {
     }
 
     init() {
-        var go = true;
-        var page = 0;
-        var firstPhoto = [];
-        var lastPhoto = [];
-        var pages = [];
+        let go = true;
+        let page = 0;
+        let firstPhoto = [];
+        let lastPhoto = [];
+        let pages = [];
         while (go) {
             if (page === 0) {
                 firstPhoto.push(1);
                 lastPhoto.push(this.props.perPage);
             } else {
-                var nextFirst = lastPhoto[page - 1] + 1;
-                var nextLast = nextFirst + this.props.perPage;
+                let nextFirst = lastPhoto[page - 1] + 1;
+                let nextLast = nextFirst + this.props.perPage;
                 if (nextLast > this.props.totalPhotos) {
                     nextLast = this.props.totalPhotos;
                 }
@@ -69,16 +88,16 @@ class PhotoGallery extends Component {
     }
 
     buildArray(pageNumber, firstPhoto, lastPhoto) {
-        var photoArray = [];
-        for (var i = firstPhoto[pageNumber - 1]; i <= lastPhoto[pageNumber - 1]; i += 1) {
-            var source = this.props.filePrefix + i + this.props.fileSuffix;
+        let photoArray = [];
+        for (let i = firstPhoto[pageNumber - 1]; i <= lastPhoto[pageNumber - 1]; i += 1) {
+            let source = this.props.filePrefix + i + this.props.fileSuffix;
             photoArray.push(source);
         }
         this.setState({photoArray: photoArray});
     }
 
     imageClick(event) {
-        var photoIndex = Number(event.currentTarget.dataset.i);
+        let photoIndex = Number(event.currentTarget.dataset.i);
         this.showHideButtons(photoIndex);
         this.setState({showModal: true});
     }
@@ -88,18 +107,18 @@ class PhotoGallery extends Component {
     }
 
     prev() {
-        var photoIndex = this.state.photoIndex - 1;
+        let photoIndex = this.state.photoIndex - 1;
         this.showHideButtons(photoIndex);
     }
 
     next() {
-        var photoIndex = this.state.photoIndex + 1;
+        let photoIndex = this.state.photoIndex + 1;
         this.showHideButtons(photoIndex);
     }
 
     showHideButtons(photoIndex) {
-        var hideNext = photoIndex === (this.state.photoArray.length - 1);
-        var hidePrevious = photoIndex === 0;
+        let hideNext = photoIndex === (this.state.photoArray.length - 1);
+        let hidePrevious = photoIndex === 0;
         this.setState({
             hideNext: hideNext,
             hidePrevious: hidePrevious,
@@ -108,7 +127,7 @@ class PhotoGallery extends Component {
     }
 
     pageClick(event) {
-        var page = Number(event.currentTarget.dataset.id);
+        let page = Number(event.currentTarget.dataset.id);
         this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto);
     }
 
@@ -155,19 +174,3 @@ class PhotoGallery extends Component {
         </div>;
     }
 }
-
-PhotoGallery.propTypes = {
-    perPage: React.PropTypes.number,
-    totalPhotos: React.PropTypes.number,
-    filePrefix: React.PropTypes.string,
-    fileSuffix: React.PropTypes.string
-};
-
-PhotoGallery.defaultProps = {
-    perPage: 0,
-    totalPhotos: 0,
-    filePrefix: "",
-    fileSuffix: ""
-};
-
-export default PhotoGallery;

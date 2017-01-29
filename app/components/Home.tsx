@@ -3,10 +3,10 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import {Link} from "react-router";
 
-class Home extends Component {
+class Home extends React.Component<undefined, undefined> {
     render() {
         return (
             <div>

@@ -3,9 +3,9 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Contact extends Component {
+export default class Contact extends React.Component<undefined, undefined> {
 
     render() {
         return <div>
@@ -58,12 +58,10 @@ class Contact extends Component {
                        name="subject" placeholder="Subject"/>
                 <br/>
                 <textarea id="message" name="message" className="form-control"
-                          rows="3" placeholder="Message"/>
+                          rows={3} placeholder="Message"/>
                 <br/>
                 <button type="submit" className="btn btn-success">Send</button>
             </form>
         </div>;
     }
 }
-
-export default Contact;

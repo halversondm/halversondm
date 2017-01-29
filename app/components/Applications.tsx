@@ -3,10 +3,10 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import {Link} from "react-router";
 
-class Applications extends Component {
+class Applications extends React.Component<undefined, undefined> {
     render() {
         return <div>
             <h2 className="text-primary">Apps</h2>
@@ -27,7 +27,7 @@ class Applications extends Component {
                     <p>Rock, Paper, Scissors, Lizard, Spock. Play against the computer!
                     </p>
                     <p>
-                        <Link className="btn btn-info" to="/rpsls" role="button">View
+                        <Link className="btn btn-info" to="/game" role="button">View
                             details &raquo;</Link>
                     </p>
                     <hr/>

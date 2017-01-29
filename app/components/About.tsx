@@ -3,9 +3,9 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class About extends Component {
+class About extends React.Component<undefined, undefined> {
 
     render() {
         return (
@@ -15,7 +15,7 @@ class About extends Component {
                     mind. It's true.</h4>
                 <p>I received my first computer when I was seven years old. It was a
                     Tandy 1000 with dual floppy drives and 128KB of
-                    RAM. We eventually upgraded to 640 KB of RAM, the maximum, and a 20 GB
+                    RAM. We eventually upgraded to 640 KB of RAM, the maximum, and a 20 MB
                     hard drive. A modem was a must. In those
                     days, you could code, play games and check out BBS, but not much else.
                     It's been said before, and it will be said

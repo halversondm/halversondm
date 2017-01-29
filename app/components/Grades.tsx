@@ -3,21 +3,38 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Grades extends Component {
+interface GradesState {
+    studentList : Array<Student>,
+    student: Student
+}
+
+interface Student {
+    studentNumber: number,
+    quiz1: number,
+    quiz2: number,
+    midterm: number,
+    final: number,
+    classAverage: number,
+    letterGrade: string
+}
+
+export default class Grades extends React.Component<undefined, GradesState> {
+
+    state : GradesState;
 
     constructor(props) {
         super(props);
         this.state = {
             studentList: [],
             student: {
-                studentNumber: "",
-                quiz1: "",
-                quiz2: "",
-                midterm: "",
-                final: "",
-                classAverage: "",
+                studentNumber: 0,
+                quiz1: 0,
+                quiz2: 0,
+                midterm: 0,
+                final: 0,
+                classAverage: 0,
                 letterGrade: ""
             }
         };
@@ -34,32 +51,32 @@ class Grades extends Component {
 
     removeStudent(event) {
         event.preventDefault();
-        var studentList = this.state.studentList;
+        let studentList = this.state.studentList;
         studentList.splice(event.currentTarget.dataset.key, 1);
         this.setState({studentList: studentList});
     }
 
     addStudent(event) {
         event.preventDefault();
-        var student = this.state.student;
-        var quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200;
-        var midterm = student.midterm / 100;
-        var final = student.final / 100;
-        var finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
+        let student = this.state.student;
+        let quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200;
+        let midterm = student.midterm / 100;
+        let final = student.final / 100;
+        let finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
             (final * 0.5)) * 100;
         student.classAverage = Math.round(finalGrade);
         student = this.determineLetterGrade(finalGrade, student);
-        var studentList = this.state.studentList;
+        let studentList = this.state.studentList;
         studentList.push(student);
         this.setState({
             studentList: studentList,
             student: {
-                studentNumber: "",
-                quiz1: "",
-                quiz2: "",
-                midterm: "",
-                final: "",
-                classAverage: "",
+                studentNumber: 0,
+                quiz1: 0,
+                quiz2: 0,
+                midterm: 0,
+                final: 0,
+                classAverage: 0,
                 letterGrade: ""
             }
         });
@@ -81,31 +98,31 @@ class Grades extends Component {
     }
 
     studentNumberChange(event) {
-        var student = this.state.student;
+        let student = this.state.student;
         student.studentNumber = event.target.value;
         this.setState({student: student});
     }
 
     quiz1Change(event) {
-        var student = this.state.student;
+        let student = this.state.student;
         student.quiz1 = event.target.value;
         this.setState({student: student});
     }
 
     quiz2Change(event) {
-        var student = this.state.student;
+        let student = this.state.student;
         student.quiz2 = event.target.value;
         this.setState({student: student});
     }
 
     midtermChange(event) {
-        var student = this.state.student;
+        let student = this.state.student;
         student.midterm = event.target.value;
         this.setState({student: student});
     }
 
     finalChange(event) {
-        var student = this.state.student;
+        let student = this.state.student;
         student.final = event.target.value;
         this.setState({student: student});
     }
@@ -202,5 +219,3 @@ class Grades extends Component {
         </div>;
     }
 }
-
-export default Grades;

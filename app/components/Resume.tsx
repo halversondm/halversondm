@@ -3,9 +3,9 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Resume extends Component {
+class Resume extends React.Component<undefined, undefined> {
 
     render() {
         return <div className="resume">

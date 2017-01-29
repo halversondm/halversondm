@@ -3,9 +3,29 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class StockQuote extends Component {
+interface StockQuoteState {
+    stockInput: string,
+    stocks: Array<Stock>
+}
+
+interface Stock {
+    Symbol : string,
+    Name: string,
+    LastPrice?: string,
+    Timestamp?: string,
+    MarketCap?: string,
+    ChangeYTD?: string,
+    High?: string,
+    Open?: string,
+    Low?: string
+}
+
+class StockQuote extends React.Component<undefined, StockQuoteState> {
+
+    state : StockQuoteState;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,15 +54,15 @@ class StockQuote extends Component {
     }
 
     callService(stockSymbol) {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open("POST", "/stock?stockSymbol=" + stockSymbol);
         xhr.onload = () => {
-            var stocks = this.state.stocks;
+            let stocks = this.state.stocks;
             if (xhr.status >= 200 && xhr.status < 400) {
                 stocks.push(JSON.parse(xhr.responseText));
             } else {
                 console.log("unsucc ", xhr.responseText);
-                var stock = {Symbol: stockSymbol, Name: "Not Found"};
+                let stock : Stock = {Symbol: stockSymbol, Name: "Not Found"};
                 stocks.push(stock);
             }
             this.setState({stocks: stocks});

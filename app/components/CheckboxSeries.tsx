@@ -3,11 +3,33 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class CheckboxSeries extends Component {
+export interface CheckboxSeriesProps {
+    labels: Array<string>,
+    selected: Array<string>,
+    otherLabelPlaceholder: string,
+    otherLabelText: string
+}
 
-    constructor(props) {
+interface CheckboxSeriesState {
+    otherLabelText: string,
+    otherLabelDisabled: boolean,
+    selected: Array<string>
+}
+
+export class CheckboxSeries extends React.Component<CheckboxSeriesProps, CheckboxSeriesState> {
+
+    public state: CheckboxSeriesState;
+
+    public static defaultProps: CheckboxSeriesProps = {
+        labels: [],
+        selected: [],
+        otherLabelPlaceholder: "",
+        otherLabelText: ""
+    };
+
+    constructor(props : CheckboxSeriesProps) {
         super(props);
         this.state = {
             otherLabelText: this.props.otherLabelText,
@@ -18,13 +40,12 @@ class CheckboxSeries extends Component {
         this.otherLabelText = this.otherLabelText.bind(this);
         this.otherLabelChange = this.otherLabelChange.bind(this);
         this.pullCurrentState = this.pullCurrentState.bind(this);
-        this.reset = this.reset.bind(this);
     }
 
-    toggleSelected(event) {
-        var label = event.target.value;
-        var selected = this.state.selected;
-        var index = selected.indexOf(label);
+    toggleSelected(event : any) {
+        let label = event.target.value;
+        let selected = this.state.selected;
+        let index = selected.indexOf(label);
         if (index > -1) {
             selected.splice(index, 1);
         } else {
@@ -37,7 +58,7 @@ class CheckboxSeries extends Component {
     }
 
     otherLabelText() {
-        var otherLabelDisabled = this.state.otherLabelDisabled;
+        let otherLabelDisabled = this.state.otherLabelDisabled;
         if (otherLabelDisabled) {
             otherLabelDisabled = false;
         } else {
@@ -46,8 +67,8 @@ class CheckboxSeries extends Component {
         this.setState({otherLabelDisabled: otherLabelDisabled});
     }
 
-    otherLabelChange(event) {
-        var otherLabelText = event.target.value;
+    otherLabelChange(event : any) {
+        let otherLabelText = event.target.value;
         this.setState({otherLabelText: otherLabelText});
     }
 
@@ -91,21 +112,3 @@ class CheckboxSeries extends Component {
         </div>;
     }
 }
-
-CheckboxSeries.propTypes = {
-    labels: React.PropTypes.array,
-    selected: React.PropTypes.array,
-    otherLabelPlaceholder: React.PropTypes.string,
-    otherLabelText: React.PropTypes.string,
-    reset: React.PropTypes.bool
-};
-
-CheckboxSeries.defaultProps = {
-    labels: [],
-    selected: [],
-    otherLabelPlaceholder: "",
-    otherLabelText: "",
-    reset: false
-};
-
-export default CheckboxSeries;

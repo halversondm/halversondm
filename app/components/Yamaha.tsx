@@ -3,10 +3,10 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import PhotoGallery from "./PhotoGallery";
 
-class Yamaha extends Component {
+export default class Yamaha extends React.Component<undefined, undefined> {
 
     render() {
         return <div>
@@ -18,5 +18,3 @@ class Yamaha extends Component {
         </div>;
     }
 }
-
-export default Yamaha;

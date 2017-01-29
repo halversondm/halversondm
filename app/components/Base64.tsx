@@ -3,11 +3,21 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Base64 extends Component {
-    constructor(props) {
-        super(props);
+interface Base64State {
+    encodeInput: string,
+    encodeOutput: string,
+    decodeInput: string,
+    decodeOutput: string
+}
+
+export default class Base64 extends React.Component<undefined, Base64State> {
+
+    state: Base64State;
+
+    constructor() {
+        super();
         this.state = {
             encodeInput: "",
             encodeOutput: "",
@@ -22,7 +32,7 @@ class Base64 extends Component {
         this.clearEncode = this.clearEncode.bind(this);
     }
 
-    setEncodeInput(event) {
+    setEncodeInput(event: any) {
         this.setState({encodeInput: event.target.value});
     }
 
@@ -35,7 +45,7 @@ class Base64 extends Component {
         this.setState({encodeInput: "", encodeOutput: ""});
     }
 
-    setDecodeInput(event) {
+    setDecodeInput(event: any) {
         this.setState({decodeInput: event.target.value});
     }
 
@@ -54,12 +64,12 @@ class Base64 extends Component {
                 converting your data to and from Base64 encoding. No tracking of
                 your data is done. No calls to other services. It's all in your
                 browser.</h4>
-            <tabset>
-                <tab heading="Encode" id="encodeTab">
+            <div>
+                <div title="Encode" id="encodeTab">
                     <form className="form-horizontal" role="form">
                         <h2>Encode Data to Base64</h2>
                         <div className="form-group">
-                            <label forHtml="encodeInput" className="col-sm-2 control-label">Un-encoded</label>
+                            <label htmlFor="encodeInput" className="col-sm-2 control-label">Un-encoded</label>
                             <div className="col-sm-10">
                 <textarea className="form-control" id="encodeInput"
                           value={this.state.encodeInput}
@@ -67,7 +77,7 @@ class Base64 extends Component {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label forHtml="encodeOutput" className="col-sm-2 control-label">Encoded</label>
+                            <label htmlFor="encodeOutput" className="col-sm-2 control-label">Encoded</label>
                             <div className="col-sm-10">
                 <textarea className="form-control" id="encodeOutput"
                           value={this.state.encodeOutput} readOnly/>
@@ -84,12 +94,12 @@ class Base64 extends Component {
                             </div>
                         </div>
                     </form>
-                </tab>
-                <tab heading="Decode" id="decodeTab">
+                </div>
+                <div title="Decode" id="decodeTab">
                     <form className="form-horizontal" role="form">
                         <h2>Decode Base 64 to Data</h2>
                         <div className="form-group">
-                            <label forHtml="decodeInput" className="col-sm-2 control-label">Encoded</label>
+                            <label htmlFor="decodeInput" className="col-sm-2 control-label">Encoded</label>
                             <div className="col-sm-10">
                 <textarea className="form-control" id="decodeInput"
                           value={this.state.decodeInput}
@@ -97,7 +107,7 @@ class Base64 extends Component {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label forHtml="decodeOutput" className="col-sm-2 control-label">Un-encoded</label>
+                            <label htmlFor="decodeOutput" className="col-sm-2 control-label">Un-encoded</label>
                             <div className="col-sm-10">
                 <textarea className="form-control" id="decodeOutput"
                           value={this.state.decodeOutput} readOnly/>
@@ -114,10 +124,8 @@ class Base64 extends Component {
                             </div>
                         </div>
                     </form>
-                </tab>
-            </tabset>
+                </div>
+            </div>
         </div>;
     }
 }
-
-export default Base64;

@@ -3,10 +3,14 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import {Link} from "react-router";
 
-class App extends Component {
+export interface AppProps {
+    children: Object
+}
+
+export default class App extends React.Component<AppProps, undefined> {
     render() {
         return (
             <div>
@@ -48,9 +52,3 @@ class App extends Component {
             </div>);
     }
 }
-
-App.propTypes = {
-    children: React.PropTypes.object
-};
-
-export default App;

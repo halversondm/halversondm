@@ -3,9 +3,9 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Charger extends Component {
+export default class Charger extends React.Component<undefined, undefined> {
 
     render() {
         return <div>
@@ -223,5 +223,3 @@ class Charger extends Component {
         </div>;
     }
 }
-
-export default Charger;

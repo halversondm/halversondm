@@ -3,10 +3,10 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import PhotoGallery from "./PhotoGallery";
 
-class Honda extends Component {
+class Honda extends React.Component<undefined, undefined> {
 
     render() {
         return <div>

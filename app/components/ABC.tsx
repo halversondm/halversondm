@@ -3,36 +3,63 @@
  */
 "use strict";
 
-import React, {Component} from "react";
-import CheckboxSeries from "./CheckboxSeries";
-import Modal from "react-bootstrap/lib/Modal";
+import * as React from "react";
+import {CheckboxSeries} from "./CheckboxSeries";
+import {Modal} from "react-bootstrap";
 
-const antecedents = ["Given Direction/task, asked to do something",
+const antecedents: Array<string> = ["Given Direction/task, asked to do something",
     "Asked to wait", "Difficulty with task/activity",
     "Preferred activity interrupted", "Activity/Item denied (\"told no\")",
     "Loud, noisy environment", "Given assistance / correction",
     "Transition between locations", "Attention given to others",
     "Attention not given when wanted", "Left alone (no indiv. attention)"];
-const locations = ["Home", "School", "Other"];
-const people = ["Mom", "Dad", "Sibling", "Grandparents", "Alone", "Peers"];
-const behaviors = ["Refuse to follow directions", "Makes verbal threats",
+const locations: Array<string> = ["Home", "School", "Other"];
+const people: Array<string> = ["Mom", "Dad", "Sibling", "Grandparents", "Alone", "Peers"];
+const behaviors: Array<string> = ["Refuse to follow directions", "Makes verbal threats",
     "Grabbing/pulling", "Crying/Whining", "Screaming/Yelling", "Scratching",
     "Biting", "Spitting", "Kicking", "Flopping", "Running Away",
     "Destroying property", "Hitting Self", "Hitting Others",
     "Verbal Refusal"];
-const durations = ["< 1 min", "1 - 5 min", "5 - 10 min", "10 - 30 min",
+const durations: Array<string> = ["< 1 min", "1 - 5 min", "5 - 10 min", "10 - 30 min",
     "30 min - 1 hr", "1 - 2 hrs", "2 - 3 hrs", "3+ hrs"];
-const intensities = ["Low", "Medium", "High"];
-const consequences = ["Verbal Redirection", "Physical assist/prompt",
+const intensities: Array<string> = ["Low", "Medium", "High"];
+const consequences: Array<string> = ["Verbal Redirection", "Physical assist/prompt",
     "Ignored problem behavior", "Kept on demand",
     "Verbal reprimand", "Removed from activity",
     "Given a different activity/task", "Lost Privilege", "Sent to room",
     "Given a time out", "Left alone"];
 
-class ABC extends Component {
+export interface ABCState {
+    antecedentOtherDisabled: boolean,
+    messages: Array<string>,
+    showModal: boolean,
+    user: UserState
+}
 
-    constructor(props) {
-        super(props);
+interface UserState {
+    when: string,
+    antecedent: string,
+    antecedentOther: string,
+    location: string,
+    people: Array<string>,
+    peopleOther: string,
+    behavior: Array<string>,
+    behaviorOther: string,
+    duration: string,
+    intensity: string,
+    consequence: Array<string>,
+    consequenceOther: string
+}
+
+class ABC extends React.Component<undefined, ABCState> {
+
+    public state: ABCState;
+    private people: CheckboxSeries;
+    private behaviors: CheckboxSeries;
+    private consequences: CheckboxSeries;
+
+    constructor() {
+        super();
         this.state = this.initialState();
         this.close = this.close.bind(this);
         this.getTime = this.getTime.bind(this);
@@ -47,7 +74,7 @@ class ABC extends Component {
         this.reset = this.reset.bind(this);
     }
 
-    initialState() {
+    initialState(): ABCState {
         return {
             antecedentOtherDisabled: true,
             messages: [],
@@ -74,17 +101,17 @@ class ABC extends Component {
     }
 
     getTime() {
-        var user = this.state.user;
-        var time = new Date();
+        const user = this.state.user;
+        const time = new Date();
         user.when = time.toLocaleString();
         this.setState({user: user});
     }
 
-    antecedentRadios(event) {
-        var antecedent = event.target.value;
-        var user = this.state.user;
+    antecedentRadios(event: any) {
+        const antecedent = event.target.value;
+        const user = this.state.user;
         user.antecedent = antecedent;
-        var antecedentOtherDisabled = this.state.antecedentOtherDisabled;
+        let antecedentOtherDisabled = this.state.antecedentOtherDisabled;
         if (antecedent === "Other") {
             antecedentOtherDisabled = false;
         } else {
@@ -97,43 +124,43 @@ class ABC extends Component {
         });
     }
 
-    antecedentOtherText(event) {
-        var antecedentOtherText = event.target.value;
-        var user = this.state.user;
+    antecedentOtherText(event: any) {
+        let antecedentOtherText = event.target.value;
+        let user = this.state.user;
         user.antecedentOther = antecedentOtherText;
         this.setState({user: user});
     }
 
-    locationRadios(event) {
-        var location = event.target.value;
-        var user = this.state.user;
+    locationRadios(event: any) {
+        let location = event.target.value;
+        let user = this.state.user;
         user.location = location;
         this.setState({user: user});
     }
 
-    durationRadios(event) {
-        var duration = event.target.value;
-        var user = this.state.user;
+    durationRadios(event: any) {
+        let duration = event.target.value;
+        let user = this.state.user;
         user.duration = duration;
         this.setState({user: user});
     }
 
-    intensityRadios(event) {
-        var intensity = event.target.value;
-        var user = this.state.user;
+    intensityRadios(event: any) {
+        let intensity = event.target.value;
+        let user = this.state.user;
         user.intensity = intensity;
         this.setState({user: user});
     }
 
     save() {
-        var user = this.state.user;
-        var peoplePull = this.refs.people.pullCurrentState();
+        let user = this.state.user;
+        let peoplePull = this.people.pullCurrentState();
         user.people = peoplePull.selected;
         user.peopleOther = peoplePull.otherLabelText;
-        var behaviorPull = this.refs.behaviors.pullCurrentState();
+        let behaviorPull = this.behaviors.pullCurrentState();
         user.behavior = behaviorPull.selected;
         user.behaviorOther = behaviorPull.otherLabelText;
-        var consequencePull = this.refs.consequences.pullCurrentState();
+        let consequencePull = this.consequences.pullCurrentState();
         user.consequence = consequencePull.selected;
         user.consequenceOther = consequencePull.otherLabelText;
         this.setState({user: user, showModal: true});
@@ -143,13 +170,13 @@ class ABC extends Component {
     }
 
     postToServer() {
-        var data = JSON.stringify(this.state.user);
+        let data: string = JSON.stringify(this.state.user);
         console.log("ABC data sent ", data);
-        var xhr = new XMLHttpRequest();
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("POST", "/saveABC");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = () => {
-            var messages = [];
+            let messages: Array<string> = [];
             if (xhr.status >= 200 && xhr.status < 400) {
                 console.log("succ ", xhr.responseText);
                 messages.push(xhr.responseText);
@@ -166,7 +193,7 @@ class ABC extends Component {
     }
 
     validSave() {
-        var messages = [];
+        let messages: Array<string> = [];
         if (this.state.user.people.length === 0) {
             messages.push("At least one Person is required to save.");
         } else if (this.state.user.people.indexOf("Other") === 0) {
@@ -217,9 +244,9 @@ class ABC extends Component {
 
     reset() {
         this.setState(this.initialState());
-        this.refs.people.reset();
-        this.refs.behaviors.reset();
-        this.refs.consequences.reset();
+        this.people.reset();
+        this.behaviors.reset();
+        this.consequences.reset();
     }
 
     render() {
@@ -280,7 +307,7 @@ class ABC extends Component {
                         <br/> <b>People Present</b>
                         <br/>
                         <CheckboxSeries labels={people} selected={this.state.user.people}
-                                        ref="people"
+                                        ref={(ref) => this.people = ref}
                                         otherLabelPlaceholder="Enter Another Person Present"
                                         otherLabelText={this.state.user.peopleOther}/>
                     </div>
@@ -289,7 +316,8 @@ class ABC extends Component {
                         <hr/>
                         <b>Select all that apply</b>
                         <CheckboxSeries labels={behaviors}
-                                        selected={this.state.user.behavior} ref="behaviors"
+                                        ref={(ref) => this.behaviors = ref}
+                                        selected={this.state.user.behavior}
                                         otherLabelPlaceholder="Enter Description"
                                         otherLabelText={this.state.user.behaviorOther}/>
                         <br/> <b>Duration</b>
@@ -326,7 +354,7 @@ class ABC extends Component {
                         <br/>
                         <CheckboxSeries labels={consequences}
                                         selected={this.state.user.consequence}
-                                        ref="consequences"
+                                        ref={(ref) => this.consequences = ref}
                                         otherLabelPlaceholder="Enter Description"
                                         otherLabelText={this.state.user.consequenceOther}/>
                     </div>

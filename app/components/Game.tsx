@@ -3,18 +3,39 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import GameService from "./GameService";
 
-const gameService = new GameService();
+interface GameState {
+    gameSuccess: boolean,
+    gameDraw: boolean,
+    gameLose: boolean,
+    explanation: string,
+    winner: string,
+    rock: string,
+    paper: string,
+    scissors: string,
+    lizard: string,
+    spock: string,
+    rock2: string,
+    paper2: string,
+    scissors2: string,
+    lizard2: string,
+    spock2: string
+}
 
-class RPSLS extends Component {
-    constructor(props) {
-        super(props);
+export default class Game extends React.Component<undefined, GameState> {
+
+    state: GameState;
+    gameService : GameService;
+
+    constructor() {
+        super();
         this.state = this.initialState();
         this.human = this.human.bind(this);
         this.setPlayer1Class = this.setPlayer1Class.bind(this);
         this.setPlayer2Class = this.setPlayer2Class.bind(this);
+        this.gameService = new GameService();
     }
 
     initialState() {
@@ -40,39 +61,39 @@ class RPSLS extends Component {
     human(event) {
         this.setState(this.initialState());
         const choice = event.currentTarget.dataset.choice;
-        const player2 = gameService.getPick();
+        const player2 = this.gameService.getPick();
         this.setPlayer1Class(choice);
         this.setPlayer2Class(player2);
-        gameService.setPlayer1(choice);
-        gameService.setPlayer2(player2);
+        this.gameService.setPlayer1(choice);
+        this.gameService.setPlayer2(player2);
         try {
-            gameService.takeTurn();
+            this.gameService.takeTurn();
         } catch (Error) {
             // no winner
         }
-        if (gameService.getWinner() === "Player 1") {
+        if (this.gameService.getWinner() === "Player 1") {
             this.setState({
                 winner: "You win!",
                 gameSuccess: false,
                 gameDraw: true,
                 gameLose: true,
-                explanation: gameService.getResult()
+                explanation: this.gameService.getResult()
             });
-        } else if (gameService.getWinner() === "Player 2") {
+        } else if (this.gameService.getWinner() === "Player 2") {
             this.setState({
                 winner: "The computer wins!",
                 gameLose: false,
                 gameSuccess: true,
                 gameDraw: true,
-                explanation: gameService.getResult()
+                explanation: this.gameService.getResult()
             });
         } else {
             this.setState({
-                winner: gameService.getWinner(),
+                winner: this.gameService.getWinner(),
                 gameDraw: false,
                 gameLose: true,
                 gameSuccess: true,
-                explanation: gameService.getResult()
+                explanation: this.gameService.getResult()
             });
         }
     }
@@ -122,7 +143,7 @@ class RPSLS extends Component {
     }
 
     render() {
-        return <div>
+        return (<div>
             <h2 className="text-primary">Rock, Paper, Scissors, Lizard, Spock</h2>
             <p>Play the popular game with your computer! In this version, you'll be
                 playing with Lizard and Spock too.</p>
@@ -170,7 +191,7 @@ class RPSLS extends Component {
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
                      role="group" id="computer">
-                    <p>Computer's Pick</p>
+                    <p>Computers Pick</p>
                     <button id="Rock2" type="button" className={this.state.rock2}
                             disabled>
                         <img src="../images/rock.jpg"/>
@@ -193,8 +214,6 @@ class RPSLS extends Component {
                     </button>
                 </div>
             </div>
-        </div>;
+        </div>);
     }
 }
-
-export default RPSLS;

@@ -3,15 +3,26 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 import DiscountCalculatorService from "./DiscountCalculatorService";
 
-const discountCalculatorService = new DiscountCalculatorService();
+interface DiscountCalculatorState {
+    labelPrice: string,
+    discount1: string,
+    discount2: string,
+    errorMessage: string[],
+    successMessage: string
+}
 
-class DiscountCalculator extends Component {
-    constructor(props) {
-        super(props);
+export default class DiscountCalculator extends React.Component<undefined,DiscountCalculatorState> {
+
+    discountCalculatorService: DiscountCalculatorService;
+    state: DiscountCalculatorState;
+
+    constructor() {
+        super();
         this.state = this.initialState();
+        this.discountCalculatorService = new DiscountCalculatorService();
         this.calculate = this.calculate.bind(this);
         this.clear = this.clear.bind(this);
         this.labelPriceChange = this.labelPriceChange.bind(this);
@@ -19,7 +30,7 @@ class DiscountCalculator extends Component {
         this.discount2Change = this.discount2Change.bind(this);
     }
 
-    initialState() {
+    private initialState() {
         return {
             labelPrice: "",
             discount1: "",
@@ -30,16 +41,16 @@ class DiscountCalculator extends Component {
     }
 
     calculate() {
-        discountCalculatorService.validate(this.state.discount1, this.state.discount2, this.state.labelPrice);
-        if (discountCalculatorService.isError()) {
+        this.discountCalculatorService.validate(this.state.discount1, this.state.discount2, this.state.labelPrice);
+        if (this.discountCalculatorService.isError()) {
             this.setState({
-                errorMessage: discountCalculatorService.getMessage(),
+                errorMessage: this.discountCalculatorService.getMessage(),
                 successMessage: ""
             });
         } else {
-            discountCalculatorService.calculate();
+            this.discountCalculatorService.calculate();
             this.setState({
-                successMessage: discountCalculatorService.getMessage()[0],
+                successMessage: this.discountCalculatorService.getMessage()[0],
                 errorMessage: []
             });
         }
@@ -49,15 +60,15 @@ class DiscountCalculator extends Component {
         this.setState(this.initialState());
     }
 
-    labelPriceChange(event) {
+    labelPriceChange(event: any) {
         this.setState({labelPrice: event.target.value});
     }
 
-    discount1Change(event) {
+    discount1Change(event: any) {
         this.setState({discount1: event.target.value});
     }
 
-    discount2Change(event) {
+    discount2Change(event: any) {
         this.setState({discount2: event.target.value});
     }
 
@@ -144,6 +155,3 @@ class DiscountCalculator extends Component {
         </div>;
     }
 }
-
-export default DiscountCalculator;
-

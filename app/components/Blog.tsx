@@ -3,18 +3,32 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class Blog extends Component {
+interface BlogState {
+    items: Array<BlogItem>,
+    filteredData: Array<BlogItem>
+}
 
-    constructor(props) {
-        super(props);
+interface BlogItem {
+    url : string,
+    title: string,
+    content: string,
+    published : string
+}
+
+export default class Blog extends React.Component<undefined, BlogState> {
+
+    state : BlogState;
+
+    constructor() {
+        super();
         this.state = {items: [], filteredData: []};
         this.filterData = this.filterData.bind(this);
     }
 
     componentDidMount() {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open("POST", "/blogService");
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 400) {
@@ -33,13 +47,13 @@ class Blog extends Component {
         xhr.send();
     }
 
-    createMarkup(html) {
+    createMarkup(html : any) {
         return {__html: html};
     }
 
-    filterData(event) {
+    filterData(event : any) {
         const regex = new RegExp(event.target.value, "i");
-        const filtered = this.state.items.filter(data => {
+        const filtered = this.state.items.filter((data : any) => {
             return data.content.search(regex) > -1;
         });
         this.setState({filteredData: filtered});
@@ -79,7 +93,4 @@ class Blog extends Component {
             </div>
         );
     }
-
 }
-
-export default Blog;

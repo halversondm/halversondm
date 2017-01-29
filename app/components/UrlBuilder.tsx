@@ -3,9 +3,24 @@
  */
 "use strict";
 
-import React, {Component} from "react";
+import * as React from "react";
 
-class UrlBuilder extends Component {
+interface UrlBuilderState {
+    queries: Array<Query>,
+    query: Query,
+    baseUrl: string,
+    assembledUrl: string
+}
+
+interface Query {
+    key: string,
+    value: string
+}
+
+export default class UrlBuilder extends React.Component<undefined, UrlBuilderState> {
+
+    state : UrlBuilderState;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +40,7 @@ class UrlBuilder extends Component {
 
     addQuery(event) {
         event.preventDefault();
-        var queries = this.state.queries;
+        let queries = this.state.queries;
         queries.push(this.state.query);
         this.setState({queries: queries, query: {key: "", value: ""}});
     }
@@ -154,7 +169,7 @@ class UrlBuilder extends Component {
                         <label htmlFor="assembledUrl" className="col-sm-2 control-label">Assembled
                             URL</label>
                         <div className="col-sm-10">
-              <textarea id="assembledUrl" rows="4"
+              <textarea id="assembledUrl" rows={4}
                         value={this.state.assembledUrl}
                         className="form-control"/>
                         </div>
@@ -171,5 +186,3 @@ class UrlBuilder extends Component {
         </div>;
     }
 }
-
-export default UrlBuilder;
