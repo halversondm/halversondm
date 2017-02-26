@@ -23,7 +23,7 @@ const jsonp = function (url, successCallback, errorCallback) {
             errorCallback();
         }
     };
-    window[callbackName] = data => {
+    window[callbackName] = (data) => {
         cleanUp();
         if (typeof successCallback === "function") {
             successCallback(data);

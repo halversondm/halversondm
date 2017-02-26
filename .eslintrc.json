@@ -84,7 +84,13 @@
     "keyword-spacing": "error",
     "lines-around-comment": "error",
     "max-depth": "error",
-    "max-len": ["error", {"code": 150, "ignoreUrls": true }],
+    "max-len": [
+      "error",
+      {
+        "code": 150,
+        "ignoreStrings": true
+      }
+    ],
     "max-nested-callbacks": "error",
     "max-params": "error",
     "max-statements-per-line": "error",
