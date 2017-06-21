@@ -24,7 +24,7 @@ AWS.config.update({
 });
 
 const docClient = new AWS.DynamoDB.DocumentClient();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(bodyParser.json());
@@ -109,7 +109,7 @@ app.post("/blogService", (request, response) => {
     const options = {
         hostname: "www.googleapis.com",
         port: 443,
-        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyCO1_3ksPj3HRGRTP0vKPWALbaMqMGuN9I&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyDiuZzPpXkejEWKjtACQ3QmxIwKBWDHgUM&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
         method: "GET",
     };
     const proxyRequest = https.request(options, (proxyResponse) => {

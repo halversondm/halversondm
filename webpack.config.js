@@ -26,8 +26,7 @@ let config = {
             filename: "index.html"
         }),
         new ExtractTextPlugin("[name]-[hash].min.css"),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
@@ -35,25 +34,36 @@ let config = {
             {from: "app/images/", to: "images/"}, {
                 from: "app/extras"
             }, {from: "app/runtime"}
-        ])
+        ]),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function (module) {
+                // this assumes your vendor imports exist in the node_modules directory
+                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
     ],
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.tsx?$/,
-            loader: "awesome-typescript-loader"
+            use: {loader:"awesome-typescript-loader"}
         }, {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style", "css")
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader",
+                publicPath: "/dist"
+            })
         }, {
             test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
-            loader: "file-loader?name=assets/[name].[ext]"
+            use: {loader: "file-loader?name=assets/[name].[ext]"}
         }, {
             test: /\.(jpg|jpeg)$/,
-            loader: "file-loader?name=images/[name].[ext]"
+            use: {loader: "file-loader?name=images/[name].[ext]"}
         }]
     }
 };
@@ -63,7 +73,7 @@ if (process.env.NODE_ENV === "development") {
 } else {
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
+            compress: {
                 warnings: false,
                 screw_ie8: true
             }
