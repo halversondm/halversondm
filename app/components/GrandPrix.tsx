@@ -1,15 +1,14 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
-import PhotoGallery from "./PhotoGallery";
+import {PhotoGallery} from "./PhotoGallery";
 
-class GrandPrix extends React.Component<undefined, undefined> {
+export class GrandPrix extends React.Component<undefined, undefined> {
 
     render() {
-        return <div>
+        return (
+            <div>
             <h2 className="text-primary">2001 Pontiac Grand Prix GTP Coupe</h2>
             <h3>Galaxy Silver Metallic / Granite Leather</h3>
             <ul>
@@ -59,8 +58,7 @@ class GrandPrix extends React.Component<undefined, undefined> {
                 </li>
             </ul>
             <PhotoGallery perPage={9} totalPhotos={38} filePrefix="images/grandPrixPhotos/photo" fileSuffix=".jpg"/>
-        </div>;
+            </div>
+        );
     }
 }
-
-export default GrandPrix;

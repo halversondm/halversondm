@@ -1,15 +1,13 @@
 /**
  * Created by Daniel on 1/26/2016.
  */
-"use strict";
-
-export default class DiscountCalculatorService {
-    discount1 : any;
-    discount2 : any;
-    labelPrice : any;
-    error : boolean;
-    finalPrice : any;
-    message : Array<string>;
+export class DiscountCalculatorService {
+    discount1: any;
+    discount2: any;
+    labelPrice: any;
+    error: boolean;
+    finalPrice: any;
+    message: string[];
 
     constructor() {
         this.discount1 = 0;
@@ -29,19 +27,14 @@ export default class DiscountCalculatorService {
     }
 
     public calculate() {
-        let firstCalc = this.labelPrice -
+        const firstCalc = this.labelPrice -
             (this.labelPrice * (this.discount1 / 100));
-        let newPrice = 0;
-        if (this.discount2 === 0) {
-            newPrice = firstCalc;
-        } else {
-            newPrice = firstCalc - (firstCalc * (this.discount2 / 100));
-        }
+        const newPrice = this.discount2 === 0 ? firstCalc : firstCalc - (firstCalc * (this.discount2 / 100));
         this.finalPrice = newPrice.toFixed(2);
         this.message.push("Your final price is $" + this.finalPrice + " plus tax");
     }
 
-    public validate(firstDiscount : any, secondDiscount : any, labelPriceVal: any) {
+    public validate(firstDiscount: any, secondDiscount: any, labelPriceVal: any) {
         this.message = [];
         this.error = false;
         this.validateLabelPrice(labelPriceVal);
@@ -49,7 +42,7 @@ export default class DiscountCalculatorService {
         this.validateSecondDiscount(secondDiscount);
     }
 
-    validateLabelPrice(labelPriceVal : any) {
+    validateLabelPrice(labelPriceVal: any) {
         if (labelPriceVal.length === 0 || isNaN(labelPriceVal)) {
             this.message.push("Label price is required and must be a number");
             this.error = true;
@@ -58,7 +51,7 @@ export default class DiscountCalculatorService {
         }
     }
 
-    validateFirstDiscount(firstDiscount : any) {
+    validateFirstDiscount(firstDiscount: any) {
         if (firstDiscount.length === 0 || isNaN(firstDiscount)) {
             this.message.push("Discount #1 is required and must be a number");
             this.error = true;
@@ -67,7 +60,7 @@ export default class DiscountCalculatorService {
         }
     }
 
-    validateSecondDiscount(secondDiscount : any) {
+    validateSecondDiscount(secondDiscount: any) {
         if (isNaN(secondDiscount)) {
             this.message.push("Discount #2 must be a number, if provided");
             this.error = true;

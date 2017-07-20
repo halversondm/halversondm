@@ -1,36 +1,34 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
 
-interface StockQuoteState {
-    stockInput: string,
-    stocks: Array<Stock>
+export interface StockQuoteState {
+    stockInput: string;
+    stocks: Stock[];
 }
 
-interface Stock {
-    Symbol : string,
-    Name: string,
-    LastPrice?: string,
-    Timestamp?: string,
-    MarketCap?: string,
-    ChangeYTD?: string,
-    High?: string,
-    Open?: string,
-    Low?: string
+export interface Stock {
+    Symbol: string;
+    Name: string;
+    LastPrice?: string;
+    Timestamp?: string;
+    MarketCap?: string;
+    ChangeYTD?: string;
+    High?: string;
+    Open?: string;
+    Low?: string;
 }
 
-class StockQuote extends React.Component<undefined, StockQuoteState> {
+export class StockQuote extends React.Component<undefined, StockQuoteState> {
 
-    state : StockQuoteState;
+    state: StockQuoteState;
 
     constructor(props) {
         super(props);
         this.state = {
             stockInput: "",
-            stocks: []
+            stocks: [],
         };
         this.inputStock = this.inputStock.bind(this);
         this.submit = this.submit.bind(this);
@@ -39,7 +37,7 @@ class StockQuote extends React.Component<undefined, StockQuoteState> {
 
     componentDidMount() {
         const stockList = ["MSFT", "AAPL", "JPM", "AMZN", "T", "F"];
-        stockList.forEach(stock => {
+        stockList.forEach((stock) => {
             setTimeout(this.callService(stock), 1000);
         });
     }
@@ -54,18 +52,18 @@ class StockQuote extends React.Component<undefined, StockQuoteState> {
     }
 
     callService(stockSymbol) {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open("POST", "/stock?stockSymbol=" + stockSymbol);
         xhr.onload = () => {
-            let stocks = this.state.stocks;
+            const stocks = this.state.stocks;
             if (xhr.status >= 200 && xhr.status < 400) {
                 stocks.push(JSON.parse(xhr.responseText));
             } else {
                 console.log("unsucc ", xhr.responseText);
-                let stock : Stock = {Symbol: stockSymbol, Name: "Not Found"};
+                const stock: Stock = {Symbol: stockSymbol, Name: "Not Found"};
                 stocks.push(stock);
             }
-            this.setState({stocks: stocks});
+            this.setState({stocks});
         };
         xhr.onerror = () => {
             console.log(xhr);
@@ -74,7 +72,8 @@ class StockQuote extends React.Component<undefined, StockQuoteState> {
     }
 
     render() {
-        return <div>
+        return (
+            <div>
             <h2 className="text-primary">Stock Quotes</h2>
             <form className="form-inline">
                 <div className="form-group">
@@ -120,8 +119,7 @@ class StockQuote extends React.Component<undefined, StockQuoteState> {
                 }
                 </tbody>
             </table>
-        </div>;
+            </div>
+        );
     }
 }
-
-export default StockQuote;

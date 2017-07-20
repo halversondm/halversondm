@@ -1,12 +1,10 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 
-class Home extends React.Component<undefined, undefined> {
+export class Home extends React.Component<undefined, undefined> {
     render() {
         return (
             <div>
@@ -56,5 +54,3 @@ class Home extends React.Component<undefined, undefined> {
         );
     }
 }
-
-export default Home;

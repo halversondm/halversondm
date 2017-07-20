@@ -1,25 +1,23 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
 
-interface BlogState {
-    items: Array<BlogItem>,
-    filteredData: Array<BlogItem>
+export interface BlogState {
+    items: BlogItem[];
+    filteredData: BlogItem[];
 }
 
-interface BlogItem {
-    url : string,
-    title: string,
-    content: string,
-    published : string
+export interface BlogItem {
+    url: string;
+    title: string;
+    content: string;
+    published: string;
 }
 
-export default class Blog extends React.Component<undefined, BlogState> {
+export class Blog extends React.Component<undefined, BlogState> {
 
-    state : BlogState;
+    state: BlogState;
 
     constructor() {
         super();
@@ -28,14 +26,14 @@ export default class Blog extends React.Component<undefined, BlogState> {
     }
 
     componentDidMount() {
-        let xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open("POST", "/blogService");
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 400) {
                 const data = JSON.parse(xhr.responseText);
                 this.setState({
                     items: data.items,
-                    filteredData: data.items
+                    filteredData: data.items,
                 });
             } else {
                 console.log("unsucc ", xhr.responseText);
@@ -47,13 +45,13 @@ export default class Blog extends React.Component<undefined, BlogState> {
         xhr.send();
     }
 
-    createMarkup(html : any) {
+    createMarkup(html: any) {
         return {__html: html};
     }
 
-    filterData(event : any) {
+    filterData(event: any) {
         const regex = new RegExp(event.target.value, "i");
-        const filtered = this.state.items.filter((data : any) => {
+        const filtered = this.state.items.filter((data: any) => {
             return data.content.search(regex) > -1;
         });
         this.setState({filteredData: filtered});
@@ -73,21 +71,23 @@ export default class Blog extends React.Component<undefined, BlogState> {
                           hidden={this.state.filteredData.length === this.state.items.length}>
             {this.state.filteredData.length} Items</span>
                 </div>
-                <div style={{height: "20px"}}></div>
+                <div style={{height: "20px"}}/>
                 {
                     this.state.filteredData.map((item, i) => {
-                        return <div className="panel panel-info" key={i}>
-                            <div className="panel-heading">
-                                <h3 className="panel-title"><a href={item.url}
-                                                               target="_blank">{item.title}</a>
-                                </h3>
+                        return (
+                            <div className="panel panel-info" key={i}>
+                                <div className="panel-heading">
+                                    <h3 className="panel-title"><a href={item.url}
+                                                                   target="_blank">{item.title}</a>
+                                    </h3>
+                                </div>
+                                <div className="panel-body">
+                                    <p className="text-left"
+                                       dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
+                                    <span className="small">{item.published}</span>
+                                </div>
                             </div>
-                            <div className="panel-body">
-                                <p className="text-left"
-                                   dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
-                                <span className="small">{item.published}</span>
-                            </div>
-                        </div>;
+                        );
                     })
                 }
             </div>

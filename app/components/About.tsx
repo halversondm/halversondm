@@ -1,11 +1,9 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
 
-class About extends React.Component<undefined, undefined> {
+export class About extends React.Component<undefined, undefined> {
 
     render() {
         return (
@@ -68,5 +66,3 @@ class About extends React.Component<undefined, undefined> {
         );
     }
 }
-
-export default About;

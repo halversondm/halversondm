@@ -1,33 +1,31 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
-import GameService from "./GameService";
+import {GameService} from "./GameService";
 
-interface GameState {
-    gameSuccess: boolean,
-    gameDraw: boolean,
-    gameLose: boolean,
-    explanation: string,
-    winner: string,
-    rock: string,
-    paper: string,
-    scissors: string,
-    lizard: string,
-    spock: string,
-    rock2: string,
-    paper2: string,
-    scissors2: string,
-    lizard2: string,
-    spock2: string
+export interface IGameState {
+    gameSuccess: boolean;
+    gameDraw: boolean;
+    gameLose: boolean;
+    explanation: string;
+    winner: string;
+    rock: string;
+    paper: string;
+    scissors: string;
+    lizard: string;
+    spock: string;
+    rock2: string;
+    paper2: string;
+    scissors2: string;
+    lizard2: string;
+    spock2: string;
 }
 
-export default class Game extends React.Component<undefined, GameState> {
+export class Game extends React.Component<undefined, IGameState> {
 
-    state: GameState;
-    gameService : GameService;
+    public state: IGameState;
+    private gameService: GameService;
 
     constructor() {
         super();
@@ -38,27 +36,104 @@ export default class Game extends React.Component<undefined, GameState> {
         this.gameService = new GameService();
     }
 
-    initialState() {
+    public render() {
+        return (
+            <div>
+                <h2 className="text-primary">Rock, Paper, Scissors, Lizard, Spock</h2>
+                <p>Play the popular game with your computer! In this version, you'll be
+                    playing with Lizard and Spock too.</p>
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
+                         role="group" id="human">
+                        <p>Your Pick</p>
+                        <button id="rock" onClick={this.human} data-choice="rock"
+                                type="button" className={this.state.rock}>
+                            <img src="../images/rock.jpg"/>
+                        </button>
+                        <button id="paper" onClick={this.human} data-choice="paper"
+                                type="button" className={this.state.paper}>
+                            <img src="../images/paper.jpg"/>
+                        </button>
+                        <button id="scissors" onClick={this.human} data-choice="scissors"
+                                type="button" className={this.state.scissors}>
+                            <img src="../images/scissors.jpg"/>
+                        </button>
+                        <button id="lizard" onClick={this.human} data-choice="lizard"
+                                type="button" className={this.state.lizard}>
+                            <img src="../images/lizard.jpg"/>
+                        </button>
+                        <button id="spock" onClick={this.human} data-choice="spock"
+                                type="button" className={this.state.spock}>
+                            <img src="../images/spock.jpg"/>
+                        </button>
+                    </div>
+                    <div className="col-xs-6 col-md-4">
+                        <p>Who wins?</p>
+                        <div id="alert_placeholder">
+                            <div className="alert alert-success" role="alert"
+                                 hidden={this.state.gameSuccess}><b>{this.state.winner}</b>
+                                <br/>{this.state.explanation}
+                            </div>
+                            <div className="alert alert-warning" role="alert"
+                                 hidden={this.state.gameDraw}><b>{this.state.winner}</b>
+                                <br/>{this.state.explanation}
+                            </div>
+                            <div className="alert alert-danger" role="alert"
+                                 hidden={this.state.gameLose}><b>{this.state.winner}</b>
+                                <br/>{this.state.explanation}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
+                         role="group" id="computer">
+                        <p>Computers Pick</p>
+                        <button id="Rock2" type="button" className={this.state.rock2}
+                                disabled={true}>
+                            <img src="../images/rock.jpg"/>
+                        </button>
+                        <button id="Paper2" type="button" className={this.state.paper2}
+                                disabled={true}>
+                            <img src="../images/paper.jpg"/>
+                        </button>
+                        <button id="Scissors2" type="button" className={this.state.scissors2}
+                                disabled={true}>
+                            <img src="../images/scissors.jpg"/>
+                        </button>
+                        <button id="Lizard2" type="button" className={this.state.lizard2}
+                                disabled={true}>
+                            <img src="../images/lizard.jpg"/>
+                        </button>
+                        <button id="Spock2" type="button" className={this.state.spock2}
+                                disabled={true}>
+                            <img src="../images/spock.jpg"/>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    private initialState() {
         return {
-            gameSuccess: true,
+            explanation: "",
             gameDraw: true,
             gameLose: true,
-            explanation: "",
-            winner: "",
-            rock: "btn btn-default",
-            paper: "btn btn-default",
-            scissors: "btn btn-default",
+            gameSuccess: true,
             lizard: "btn btn-default",
-            spock: "btn btn-default",
-            rock2: "btn btn-default",
-            paper2: "btn btn-default",
-            scissors2: "btn btn-default",
             lizard2: "btn btn-default",
-            spock2: "btn btn-default"
+            paper: "btn btn-default",
+            paper2: "btn btn-default",
+            rock: "btn btn-default",
+            rock2: "btn btn-default",
+            scissors: "btn btn-default",
+            scissors2: "btn btn-default",
+            spock: "btn btn-default",
+            spock2: "btn btn-default",
+            winner: "",
         };
     }
 
-    human(event) {
+    private human(event) {
         this.setState(this.initialState());
         const choice = event.currentTarget.dataset.choice;
         const player2 = this.gameService.getPick();
@@ -77,7 +152,7 @@ export default class Game extends React.Component<undefined, GameState> {
                 gameSuccess: false,
                 gameDraw: true,
                 gameLose: true,
-                explanation: this.gameService.getResult()
+                explanation: this.gameService.getResult(),
             });
         } else if (this.gameService.getWinner() === "Player 2") {
             this.setState({
@@ -85,7 +160,7 @@ export default class Game extends React.Component<undefined, GameState> {
                 gameLose: false,
                 gameSuccess: true,
                 gameDraw: true,
-                explanation: this.gameService.getResult()
+                explanation: this.gameService.getResult(),
             });
         } else {
             this.setState({
@@ -93,12 +168,12 @@ export default class Game extends React.Component<undefined, GameState> {
                 gameDraw: false,
                 gameLose: true,
                 gameSuccess: true,
-                explanation: this.gameService.getResult()
+                explanation: this.gameService.getResult(),
             });
         }
     }
 
-    setPlayer1Class(choice) {
+    private setPlayer1Class(choice) {
         switch (choice) {
             case "rock":
                 this.setState({rock: "btn btn-default btn-success"});
@@ -120,7 +195,7 @@ export default class Game extends React.Component<undefined, GameState> {
         }
     }
 
-    setPlayer2Class(choice) {
+    private setPlayer2Class(choice) {
         switch (choice) {
             case "rock":
                 this.setState({rock2: "btn btn-default btn-danger"});
@@ -140,80 +215,5 @@ export default class Game extends React.Component<undefined, GameState> {
             default:
                 throw new Error("error with choice");
         }
-    }
-
-    render() {
-        return (<div>
-            <h2 className="text-primary">Rock, Paper, Scissors, Lizard, Spock</h2>
-            <p>Play the popular game with your computer! In this version, you'll be
-                playing with Lizard and Spock too.</p>
-            <div className="row">
-                <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
-                     role="group" id="human">
-                    <p>Your Pick</p>
-                    <button id="rock" onClick={this.human} data-choice="rock"
-                            type="button" className={this.state.rock}>
-                        <img src="../images/rock.jpg"/>
-                    </button>
-                    <button id="paper" onClick={this.human} data-choice="paper"
-                            type="button" className={this.state.paper}>
-                        <img src="../images/paper.jpg"/>
-                    </button>
-                    <button id="scissors" onClick={this.human} data-choice="scissors"
-                            type="button" className={this.state.scissors}>
-                        <img src="../images/scissors.jpg"/>
-                    </button>
-                    <button id="lizard" onClick={this.human} data-choice="lizard"
-                            type="button" className={this.state.lizard}>
-                        <img src="../images/lizard.jpg"/>
-                    </button>
-                    <button id="spock" onClick={this.human} data-choice="spock"
-                            type="button" className={this.state.spock}>
-                        <img src="../images/spock.jpg"/>
-                    </button>
-                </div>
-                <div className="col-xs-6 col-md-4">
-                    <p>Who wins?</p>
-                    <div id="alert_placeholder">
-                        <div className="alert alert-success" role="alert"
-                             hidden={this.state.gameSuccess}><b>{this.state.winner}</b>
-                            <br/>{this.state.explanation}
-                        </div>
-                        <div className="alert alert-warning" role="alert"
-                             hidden={this.state.gameDraw}><b>{this.state.winner}</b>
-                            <br/>{this.state.explanation}
-                        </div>
-                        <div className="alert alert-danger" role="alert"
-                             hidden={this.state.gameLose}><b>{this.state.winner}</b>
-                            <br/>{this.state.explanation}
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
-                     role="group" id="computer">
-                    <p>Computers Pick</p>
-                    <button id="Rock2" type="button" className={this.state.rock2}
-                            disabled>
-                        <img src="../images/rock.jpg"/>
-                    </button>
-                    <button id="Paper2" type="button" className={this.state.paper2}
-                            disabled>
-                        <img src="../images/paper.jpg"/>
-                    </button>
-                    <button id="Scissors2" type="button" className={this.state.scissors2}
-                            disabled>
-                        <img src="../images/scissors.jpg"/>
-                    </button>
-                    <button id="Lizard2" type="button" className={this.state.lizard2}
-                            disabled>
-                        <img src="../images/lizard.jpg"/>
-                    </button>
-                    <button id="Spock2" type="button" className={this.state.spock2}
-                            disabled>
-                        <img src="../images/spock.jpg"/>
-                    </button>
-                </div>
-            </div>
-        </div>);
     }
 }

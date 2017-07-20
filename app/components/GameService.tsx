@@ -1,49 +1,43 @@
 /**
  * Created by Daniel on 1/26/2016.
  */
-"use strict";
+export class GameService {
 
-export default class GameService {
-    
-    pick : string = "";
-    player1 : string = "";
-    player2 : string = "";
-    roundResult : string = "";
-    winner : string = "";
-    static SPOCK_VAPORIZES_ROCK : string = "Spock Vaporizes Rock";
-    static ROCK_CRUSHES_LIZARD : string = "Rock Crushes Lizard";
-    static ROCK_SMASHES_SCISSORS : string = "Rock Crushes Scissors";
-    static LIZARD_POISONS_SPOCK : string = "Lizard Poisons Spock";
-    static SPOCK_BENDS_SCISSORS : string = "Spock Smashes Scissors";
-    static SCISSORS_DECAPITATE_LIZARD : string = "Scissors Decapitate Lizard";
-    static PLAYER_1 : string = "Player 1";
-    static PLAYER_2 : string = "Player 2";
-    static PAPER_DISPROVES_SPOCK : string = "Paper Disproves Spock";
-    static LIZARD_EATS_PAPER : string = "Lizard Eats Paper";
-    static SCISSORS_CUT_PAPER : string = "Scissors Cuts Paper";
-    static PAPER_COVERS_ROCK : string = "Paper Covers Rock";
-    
+    static SPOCK_VAPORIZES_ROCK: string = "Spock Vaporizes Rock";
+    static ROCK_CRUSHES_LIZARD: string = "Rock Crushes Lizard";
+    static ROCK_SMASHES_SCISSORS: string = "Rock Crushes Scissors";
+    static LIZARD_POISONS_SPOCK: string = "Lizard Poisons Spock";
+    static SPOCK_BENDS_SCISSORS: string = "Spock Smashes Scissors";
+    static SCISSORS_DECAPITATE_LIZARD: string = "Scissors Decapitate Lizard";
+    static PLAYER_1: string = "Player 1";
+    static PLAYER_2: string = "Player 2";
+    static PAPER_DISPROVES_SPOCK: string = "Paper Disproves Spock";
+    static LIZARD_EATS_PAPER: string = "Lizard Eats Paper";
+    static SCISSORS_CUT_PAPER: string = "Scissors Cuts Paper";
+    static PAPER_COVERS_ROCK: string = "Paper Covers Rock";
+    pick: string = "";
+    player1: string = "";
+    player2: string = "";
+    roundResult: string = "";
+    winner: string = "";
 
-    constructor() {
-    }
-
-    public setPlayer1(val : string) {
+    public setPlayer1(val: string) {
         this.player1 = val;
     }
 
-    public setPlayer2(val : string) {
+    public setPlayer2(val: string) {
         this.player2 = val;
     }
 
-    public getWinner() : string {
+    public getWinner(): string {
         return this.winner;
     }
 
-    public getResult() : string {
+    public getResult(): string {
         return this.roundResult;
     }
 
-    private paper() : void {
+    private paper(): void {
         switch (this.player2) {
             case "spock":
                 this.roundResult = GameService.PAPER_DISPROVES_SPOCK;
@@ -188,8 +182,8 @@ export default class GameService {
     }
 
     private randomPick() {
-        let picks = ["spock", "lizard", "scissors", "paper", "rock"];
-        let randomNumber = Math.floor((Math.random() * 5));
+        const picks = ["spock", "lizard", "scissors", "paper", "rock"];
+        const randomNumber = Math.floor((Math.random() * 5));
         this.pick = picks[randomNumber];
     }
 }

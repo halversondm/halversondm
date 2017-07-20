@@ -1,62 +1,66 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-"use strict";
-
 import * as React from "react";
-import {CheckboxSeries} from "./CheckboxSeries";
 import {Modal} from "react-bootstrap";
+import {CheckboxSeries} from "./CheckboxSeries";
 
-const antecedents: Array<string> = ["Given Direction/task, asked to do something",
+const antecedents: string[] = ["Given Direction/task, asked to do something",
     "Asked to wait", "Difficulty with task/activity",
     "Preferred activity interrupted", "Activity/Item denied (\"told no\")",
     "Loud, noisy environment", "Given assistance / correction",
     "Transition between locations", "Attention given to others",
     "Attention not given when wanted", "Left alone (no indiv. attention)"];
-const locations: Array<string> = ["Home", "School", "Other"];
-const people: Array<string> = ["Mom", "Dad", "Sibling", "Grandparents", "Alone", "Peers"];
-const behaviors: Array<string> = ["Refuse to follow directions", "Makes verbal threats",
+const locations: string[] = ["Home", "School", "Other"];
+const people: string[] = ["Mom", "Dad", "Sibling", "Grandparents", "Alone", "Peers"];
+const behaviors: string[] = ["Refuse to follow directions", "Makes verbal threats",
     "Grabbing/pulling", "Crying/Whining", "Screaming/Yelling", "Scratching",
     "Biting", "Spitting", "Kicking", "Flopping", "Running Away",
     "Destroying property", "Hitting Self", "Hitting Others",
     "Verbal Refusal"];
-const durations: Array<string> = ["< 1 min", "1 - 5 min", "5 - 10 min", "10 - 30 min",
+const durations: string[] = ["< 1 min", "1 - 5 min", "5 - 10 min", "10 - 30 min",
     "30 min - 1 hr", "1 - 2 hrs", "2 - 3 hrs", "3+ hrs"];
-const intensities: Array<string> = ["Low", "Medium", "High"];
-const consequences: Array<string> = ["Verbal Redirection", "Physical assist/prompt",
+const intensities: string[] = ["Low", "Medium", "High"];
+const consequences: string[] = ["Verbal Redirection", "Physical assist/prompt",
     "Ignored problem behavior", "Kept on demand",
     "Verbal reprimand", "Removed from activity",
     "Given a different activity/task", "Lost Privilege", "Sent to room",
     "Given a time out", "Left alone"];
 
 export interface ABCState {
-    antecedentOtherDisabled: boolean,
-    messages: Array<string>,
-    showModal: boolean,
-    user: UserState
+    antecedentOtherDisabled: boolean;
+    messages: string[];
+    showModal: boolean;
+    user: UserState;
 }
 
-interface UserState {
-    when: string,
-    antecedent: string,
-    antecedentOther: string,
-    location: string,
-    people: Array<string>,
-    peopleOther: string,
-    behavior: Array<string>,
-    behaviorOther: string,
-    duration: string,
-    intensity: string,
-    consequence: Array<string>,
-    consequenceOther: string
+export interface UserState {
+    when: string;
+    antecedent: string;
+    antecedentOther: string;
+    location: string;
+    people: string[];
+    peopleOther: string;
+    behavior: string[];
+    behaviorOther: string;
+    duration: string;
+    intensity: string;
+    consequence: string[];
+    consequenceOther: string;
 }
 
-class ABC extends React.Component<undefined, ABCState> {
+export class ABC extends React.Component<undefined, ABCState> {
 
     public state: ABCState;
     private people: CheckboxSeries;
     private behaviors: CheckboxSeries;
     private consequences: CheckboxSeries;
+
+    private refHandlers = {
+        peopleRef: (ref) => this.people = ref,
+        behaviorsRef: (ref) => this.behaviors = ref,
+        consequencesRef: (ref) => this.consequences = ref,
+    };
 
     constructor() {
         super();
@@ -91,8 +95,8 @@ class ABC extends React.Component<undefined, ABCState> {
                 duration: "",
                 intensity: "",
                 consequence: [],
-                consequenceOther: ""
-            }
+                consequenceOther: "",
+            },
         };
     }
 
@@ -104,7 +108,7 @@ class ABC extends React.Component<undefined, ABCState> {
         const user = this.state.user;
         const time = new Date();
         user.when = time.toLocaleString();
-        this.setState({user: user});
+        this.setState({user});
     }
 
     antecedentRadios(event: any) {
@@ -119,64 +123,64 @@ class ABC extends React.Component<undefined, ABCState> {
             user.antecedentOther = "";
         }
         this.setState({
-            user: user,
-            antecedentOtherDisabled: antecedentOtherDisabled
+            user,
+            antecedentOtherDisabled,
         });
     }
 
     antecedentOtherText(event: any) {
-        let antecedentOtherText = event.target.value;
-        let user = this.state.user;
+        const antecedentOtherText = event.target.value;
+        const user = this.state.user;
         user.antecedentOther = antecedentOtherText;
-        this.setState({user: user});
+        this.setState({user});
     }
 
     locationRadios(event: any) {
-        let location = event.target.value;
-        let user = this.state.user;
+        const location = event.target.value;
+        const user = this.state.user;
         user.location = location;
-        this.setState({user: user});
+        this.setState({user});
     }
 
     durationRadios(event: any) {
-        let duration = event.target.value;
-        let user = this.state.user;
+        const duration = event.target.value;
+        const user = this.state.user;
         user.duration = duration;
-        this.setState({user: user});
+        this.setState({user});
     }
 
     intensityRadios(event: any) {
-        let intensity = event.target.value;
-        let user = this.state.user;
+        const intensity = event.target.value;
+        const user = this.state.user;
         user.intensity = intensity;
-        this.setState({user: user});
+        this.setState({user});
     }
 
     save() {
-        let user = this.state.user;
-        let peoplePull = this.people.pullCurrentState();
+        const user = this.state.user;
+        const peoplePull = this.people.pullCurrentState();
         user.people = peoplePull.selected;
         user.peopleOther = peoplePull.otherLabelText;
-        let behaviorPull = this.behaviors.pullCurrentState();
+        const behaviorPull = this.behaviors.pullCurrentState();
         user.behavior = behaviorPull.selected;
         user.behaviorOther = behaviorPull.otherLabelText;
-        let consequencePull = this.consequences.pullCurrentState();
+        const consequencePull = this.consequences.pullCurrentState();
         user.consequence = consequencePull.selected;
         user.consequenceOther = consequencePull.otherLabelText;
-        this.setState({user: user, showModal: true});
+        this.setState({user, showModal: true});
         if (this.validSave()) {
             this.postToServer();
         }
     }
 
     postToServer() {
-        let data: string = JSON.stringify(this.state.user);
+        const data: string = JSON.stringify(this.state.user);
         console.log("ABC data sent ", data);
-        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        const xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("POST", "/saveABC");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = () => {
-            let messages: Array<string> = [];
+            const messages: string[] = [];
             if (xhr.status >= 200 && xhr.status < 400) {
                 console.log("succ ", xhr.responseText);
                 messages.push(xhr.responseText);
@@ -184,7 +188,7 @@ class ABC extends React.Component<undefined, ABCState> {
                 console.log("unsucc ", xhr.responseText);
                 messages.push(xhr.status + " " + xhr.statusText);
             }
-            this.setState({messages: messages});
+            this.setState({messages});
         };
         xhr.onerror = () => {
             console.log(xhr);
@@ -193,7 +197,7 @@ class ABC extends React.Component<undefined, ABCState> {
     }
 
     validSave() {
-        let messages: Array<string> = [];
+        const messages: string[] = [];
         if (this.state.user.people.length === 0) {
             messages.push("At least one Person is required to save.");
         } else if (this.state.user.people.indexOf("Other") === 0) {
@@ -238,7 +242,7 @@ class ABC extends React.Component<undefined, ABCState> {
         if (this.state.user.when.length === 0) {
             messages.push("The date and time of the ABC is required to save.");
         }
-        this.setState({messages: messages});
+        this.setState({messages});
         return messages.length === 0;
     }
 
@@ -250,168 +254,168 @@ class ABC extends React.Component<undefined, ABCState> {
     }
 
     render() {
-        return <div>
-            <h2 className="text-primary">ABC Checklist</h2>
-            <div id="abcChecklist">
-                <div className="row">
-                    <div className="col-md-1">
-                        <h4>When?</h4>
-                        <hr/>
-                        <input className="btn btn-primary" onClick={this.getTime}
-                               type="button" value="Now" id="now"/>
-                        <div id="dateTime">{this.state.user.when}</div>
-                    </div>
-                    <div className="col-md-4">
-                        <h4>Antecedent</h4>
-                        <hr/>
-                        <b>What happened before the behavior?</b>
-                        <br/>
-                        {
-                            antecedents.map((antecedent, i) => {
-                                return <div className="radio" key={i}>
-                                    <label>
-                                        <input type="radio" value={antecedent}
-                                               onClick={this.antecedentRadios}
-                                               checked={this.state.user.antecedent === antecedent}/>{antecedent}
-                                    </label>
-                                </div>;
-                            })
-                        }
-                        <div className="radio">
-                            <label>
-                                <input type="radio"
-                                       checked={this.state.user.antecedent === "Other"}
-                                       value="Other"
-                                       onClick={this.antecedentRadios}/> Other
-                            </label>
+        return (
+            <div>
+                <h2 className="text-primary">ABC Checklist</h2>
+                <div id="abcChecklist">
+                    <div className="row">
+                        <div className="col-md-1">
+                            <h4>When?</h4>
+                            <hr/>
+                            <input className="btn btn-primary" onClick={this.getTime}
+                                   type="button" value="Now" id="now"/>
+                            <div id="dateTime">{this.state.user.when}</div>
                         </div>
-                        <input type="text" className="form-control" id="antecedentOther"
-                               value={this.state.user.antecedentOther}
-                               placeholder="Enter Description"
-                               onChange={this.antecedentOtherText}
-                               disabled={this.state.antecedentOtherDisabled}/>
-                        <br/> <b>Location</b>
-                        <br/>
-                        {
-                            locations.map((location, i) => {
-                                return <div className="radio-inline"
-                                            key={i}>
-                                    <label>
-                                        <input type="radio" onClick={this.locationRadios}
-                                               checked={this.state.user.location === location}
-                                               value={location}/>{location}
-                                    </label>
-                                </div>;
-                            })
-                        }
-                        <br/> <b>People Present</b>
-                        <br/>
-                        <CheckboxSeries labels={people} selected={this.state.user.people}
-                                        ref={(ref) => this.people = ref}
-                                        otherLabelPlaceholder="Enter Another Person Present"
-                                        otherLabelText={this.state.user.peopleOther}/>
+                        <div className="col-md-4">
+                            <h4>Antecedent</h4>
+                            <hr/>
+                            <b>What happened before the behavior?</b>
+                            <br/>
+                            {
+                                antecedents.map((antecedent, i) => {
+                                    return <div className="radio" key={i}>
+                                        <label>
+                                            <input type="radio" value={antecedent}
+                                                   onClick={this.antecedentRadios}
+                                                   checked={this.state.user.antecedent === antecedent}/>{antecedent}
+                                        </label>
+                                    </div>;
+                                })
+                            }
+                            <div className="radio">
+                                <label>
+                                    <input type="radio"
+                                           checked={this.state.user.antecedent === "Other"}
+                                           value="Other"
+                                           onClick={this.antecedentRadios}/> Other
+                                </label>
+                            </div>
+                            <input type="text" className="form-control" id="antecedentOther"
+                                   value={this.state.user.antecedentOther}
+                                   placeholder="Enter Description"
+                                   onChange={this.antecedentOtherText}
+                                   disabled={this.state.antecedentOtherDisabled}/>
+                            <br/> <b>Location</b>
+                            <br/>
+                            {
+                                locations.map((location, i) => {
+                                    return <div className="radio-inline"
+                                                key={i}>
+                                        <label>
+                                            <input type="radio" onClick={this.locationRadios}
+                                                   checked={this.state.user.location === location}
+                                                   value={location}/>{location}
+                                        </label>
+                                    </div>;
+                                })
+                            }
+                            <br/> <b>People Present</b>
+                            <br/>
+                            <CheckboxSeries labels={people} selected={this.state.user.people}
+                                            ref={this.refHandlers.peopleRef}
+                                            otherLabelPlaceholder="Enter Another Person Present"
+                                            otherLabelText={this.state.user.peopleOther}/>
+                        </div>
+                        <div className="col-md-3">
+                            <h4>Behavior</h4>
+                            <hr/>
+                            <b>Select all that apply</b>
+                            <CheckboxSeries labels={behaviors}
+                                            ref={this.refHandlers.behaviorsRef}
+                                            selected={this.state.user.behavior}
+                                            otherLabelPlaceholder="Enter Description"
+                                            otherLabelText={this.state.user.behaviorOther}/>
+                            <br/> <b>Duration</b>
+                            <br/>
+                            {
+                                durations.map((duration, i) => {
+                                    return <div className="radio-inline" key={i}>
+                                        <label>
+                                            <input type="radio" onClick={this.durationRadios}
+                                                   checked={this.state.user.duration === duration}
+                                                   value={duration}/>{duration}
+                                        </label>
+                                    </div>;
+                                })
+                            }
+                            <br/> <b>Intensity</b>
+                            <br/>
+                            {
+                                intensities.map((intensity, i) => {
+                                    return <div className="radio-inline" key={i}>
+                                        <label>
+                                            <input type="radio" onClick={this.intensityRadios}
+                                                   checked={this.state.user.intensity === intensity}
+                                                   value={intensity}/>{intensity}
+                                        </label>
+                                    </div>;
+                                })
+                            }
+                        </div>
+                        <div className="col-md-4">
+                            <h4>Consequence</h4>
+                            <hr/>
+                            <b>What happened after?</b>
+                            <br/>
+                            <CheckboxSeries labels={consequences}
+                                            selected={this.state.user.consequence}
+                                            ref={this.refHandlers.consequencesRef}
+                                            otherLabelPlaceholder="Enter Description"
+                                            otherLabelText={this.state.user.consequenceOther}/>
+                        </div>
                     </div>
-                    <div className="col-md-3">
-                        <h4>Behavior</h4>
-                        <hr/>
-                        <b>Select all that apply</b>
-                        <CheckboxSeries labels={behaviors}
-                                        ref={(ref) => this.behaviors = ref}
-                                        selected={this.state.user.behavior}
-                                        otherLabelPlaceholder="Enter Description"
-                                        otherLabelText={this.state.user.behaviorOther}/>
-                        <br/> <b>Duration</b>
-                        <br/>
-                        {
-                            durations.map((duration, i) => {
-                                return <div className="radio-inline" key={i}>
-                                    <label>
-                                        <input type="radio" onClick={this.durationRadios}
-                                               checked={this.state.user.duration === duration}
-                                               value={duration}/>{duration}
-                                    </label>
-                                </div>;
-                            })
-                        }
-                        <br/> <b>Intensity</b>
-                        <br/>
-                        {
-                            intensities.map((intensity, i) => {
-                                return <div className="radio-inline" key={i}>
-                                    <label>
-                                        <input type="radio" onClick={this.intensityRadios}
-                                               checked={this.state.user.intensity === intensity}
-                                               value={intensity}/>{intensity}
-                                    </label>
-                                </div>;
-                            })
-                        }
-                    </div>
-                    <div className="col-md-4">
-                        <h4>Consequence</h4>
-                        <hr/>
-                        <b>What happened after?</b>
-                        <br/>
-                        <CheckboxSeries labels={consequences}
-                                        selected={this.state.user.consequence}
-                                        ref={(ref) => this.consequences = ref}
-                                        otherLabelPlaceholder="Enter Description"
-                                        otherLabelText={this.state.user.consequenceOther}/>
+                    <br/>
+                    <div className="form-inline">
+                        <div className="form-group">
+                            <input className="btn btn-success form-control" type="submit"
+                                   onClick={this.save} value="Save" id="save"/>
+                        </div>
+                        <div className="form-group">
+                            <input className="btn btn-danger form-control" type="reset"
+                                   onClick={this.reset}
+                                   value="Reset" id="reset"/>
+                        </div>
                     </div>
                 </div>
-                <br/>
-                <div className="form-inline">
-                    <div className="form-group">
-                        <input className="btn btn-success form-control" type="submit"
-                               onClick={this.save} value="Save" id="save"/>
-                    </div>
-                    <div className="form-group">
-                        <input className="btn btn-danger form-control" type="reset"
-                               onClick={this.reset}
-                               value="Reset" id="reset"/>
+                <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal.Header>
+                        <p>ABC Save Results</p>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ul>
+                            {
+                                this.state.messages.map((message, i) => {
+                                    return <li key={i}>{message}</li>;
+                                })
+                            }
+                        </ul>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <p style={{right: "auto"}}>Click anywhere to continue</p>
+                    </Modal.Footer>
+                </Modal>
+                <div id="abcModal" className="modal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <p>ABC Save Results</p>
+                            </div>
+                            <div className="modal-body">
+                                <ul>
+                                    {
+                                        this.state.messages.map((message, i) => {
+                                            return <li key={i}>{message}</li>;
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                            <div className="modal-footer">
+                                <p style={{right: "auto"}}>Click anywhere to continue</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <Modal show={this.state.showModal} onHide={this.close}>
-                <Modal.Header>
-                    <p>ABC Save Results</p>
-                </Modal.Header>
-                <Modal.Body>
-                    <ul>
-                        {
-                            this.state.messages.map((message, i) => {
-                                return <li key={i}>{message}</li>;
-                            })
-                        }
-                    </ul>
-                </Modal.Body>
-                <Modal.Footer>
-                    <p style={{right: "auto"}}>Click anywhere to continue</p>
-                </Modal.Footer>
-            </Modal>
-            <div id="abcModal" className="modal">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <p>ABC Save Results</p>
-                        </div>
-                        <div className="modal-body">
-                            <ul>
-                                {
-                                    this.state.messages.map((message, i) => {
-                                        return <li key={i}>{message}</li>;
-                                    })
-                                }
-                            </ul>
-                        </div>
-                        <div className="modal-footer">
-                            <p style={{right: "auto"}}>Click anywhere to continue</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>;
+        );
     }
 }
-
-export default ABC;
