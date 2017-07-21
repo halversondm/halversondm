@@ -28,7 +28,7 @@ export class App extends React.Component<undefined, undefined> {
         return (
             <BrowserRouter>
                 <div>
-                    <Navbar fixedTop>
+                    <Navbar fixedTop={true}>
                         <Navbar.Header>
                             <Navbar.Brand>@halversondm</Navbar.Brand>
                             <Navbar.Toggle/>
