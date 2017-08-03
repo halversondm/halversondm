@@ -42,7 +42,7 @@ export class DiscountCalculatorService {
         this.validateSecondDiscount(secondDiscount);
     }
 
-    validateLabelPrice(labelPriceVal: any) {
+    private validateLabelPrice(labelPriceVal: any) {
         if (labelPriceVal.length === 0 || isNaN(labelPriceVal)) {
             this.message.push("Label price is required and must be a number");
             this.error = true;
@@ -51,7 +51,7 @@ export class DiscountCalculatorService {
         }
     }
 
-    validateFirstDiscount(firstDiscount: any) {
+    private validateFirstDiscount(firstDiscount: any) {
         if (firstDiscount.length === 0 || isNaN(firstDiscount)) {
             this.message.push("Discount #1 is required and must be a number");
             this.error = true;
@@ -60,7 +60,7 @@ export class DiscountCalculatorService {
         }
     }
 
-    validateSecondDiscount(secondDiscount: any) {
+    private validateSecondDiscount(secondDiscount: any) {
         if (isNaN(secondDiscount)) {
             this.message.push("Discount #2 must be a number, if provided");
             this.error = true;

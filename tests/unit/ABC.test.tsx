@@ -1,11 +1,10 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { CheckboxSeries } from "../../app/components/CheckboxSeries";
+import { ABC } from "../../app/components/ABC";
 
 test("Checkbox Series to match", () => {
     const unit = (
-        <CheckboxSeries labels={["one", "two"]} selected={["one"]}
-            otherLabelPlaceholder="test" otherLabelText="anotherTest" />
+        <ABC />
     );
     const component = renderer.create(unit);
     const tree = component.toJSON();
