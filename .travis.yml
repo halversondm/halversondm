@@ -3,3 +3,5 @@ node_js:
   - "7"
 script:
   - npm run build
+notifications:
+  slack: $SLACK_TOKEN
