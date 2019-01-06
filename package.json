@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "The personal website of Dan Halverson - @halversondm",
   "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/halversondm/halversondm.git"
+  },
   "scripts": {
     "clean": "rimraf dist && mkdir dist",
     "prestart": "npm run clean && cp -R app/runtime/* dist && cd dist && npm install",
