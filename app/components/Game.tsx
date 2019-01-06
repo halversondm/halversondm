@@ -22,13 +22,13 @@ export interface IGameState {
     spock2: string;
 }
 
-export class Game extends React.Component<undefined, IGameState> {
+export class Game extends React.Component<{}, IGameState> {
 
     public state: IGameState;
     private gameService: GameService;
 
     constructor() {
-        super();
+        super({});
         this.state = this.initialState();
         this.human = this.human.bind(this);
         this.setPlayer1Class = this.setPlayer1Class.bind(this);

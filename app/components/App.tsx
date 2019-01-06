@@ -23,7 +23,7 @@ import {StockQuote} from "./StockQuote";
 import {UrlBuilder} from "./UrlBuilder";
 import {Yamaha} from "./Yamaha";
 
-export class App extends React.Component<undefined, undefined> {
+export class App extends React.Component<{}, {}> {
     render() {
         return (
             <BrowserRouter>

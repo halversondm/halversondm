@@ -12,13 +12,13 @@ export interface DiscountCalculatorState {
     successMessage: string;
 }
 
-export class DiscountCalculator extends React.Component<undefined, DiscountCalculatorState> {
+export class DiscountCalculator extends React.Component<{}, DiscountCalculatorState> {
 
     discountCalculatorService: DiscountCalculatorService;
     state: DiscountCalculatorState;
 
     constructor() {
-        super();
+        super({});
         this.state = this.initialState();
         this.discountCalculatorService = new DiscountCalculatorService();
         this.calculate = this.calculate.bind(this);

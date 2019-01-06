@@ -3,16 +3,18 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 console.log("Node environment", process.env.NODE_ENV);
+const devMode = process.env.NODE_ENV !== 'production';
 
 if (process.env.NODE_ENV !== "development" && process.env.NODE_ENV !== "production") {
     throw new Error("NODE_ENV is required, values are 'development' or 'production'");
 }
 
 let config = {
+    mode: 'production',
     entry: path.resolve(__dirname, "app/main.tsx"),
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -25,8 +27,9 @@ let config = {
             inject: "body",
             filename: "index.html"
         }),
-        new ExtractTextPlugin("[name]-[hash].min.css"),
-        new webpack.NoEmitOnErrorsPlugin(),
+        new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
@@ -34,14 +37,7 @@ let config = {
             {from: "app/images/", to: "images/"}, {
                 from: "app/extras"
             }, {from: "app/runtime"}
-        ]),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function (module) {
-                // this assumes your vendor imports exist in the node_modules directory
-                return module.context && module.context.indexOf('node_modules') !== -1;
-            }
-        }),
+        ])
     ],
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -53,11 +49,21 @@ let config = {
             use: {loader:"awesome-typescript-loader"}
         }, {
             test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-                fallback: "style-loader",
-                use: "css-loader",
-                publicPath: "/dist"
-            })
+            // use: MiniCssExtractPlugin.loader{
+            //     fallback: "style-loader",
+            //     use: "css-loader",
+            //     publicPath: "/dist"
+            // })
+            use: [
+                devMode ? 'style-loader' :
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: 'dist'
+                    }
+                },
+                'css-loader'
+            ]
         }, {
             test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
             use: {loader: "file-loader?name=assets/[name].[ext]"}
@@ -70,14 +76,6 @@ let config = {
 
 if (process.env.NODE_ENV === "development") {
     config.devtool = "source-map";
-} else {
-    config.plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true
-            }
-        }));
 }
 
 module.exports = config;

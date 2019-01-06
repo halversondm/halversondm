@@ -51,7 +51,7 @@ export class StockQuote extends React.Component<undefined, StockQuoteState> {
         this.setState({stockInput: ""});
     }
 
-    callService(stockSymbol) {
+    callService(stockSymbol): any {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "/stock?stockSymbol=" + stockSymbol);
         xhr.onload = () => {

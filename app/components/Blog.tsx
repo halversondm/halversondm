@@ -15,12 +15,12 @@ export interface BlogItem {
     published: string;
 }
 
-export class Blog extends React.Component<undefined, BlogState> {
+export class Blog extends React.Component<{}, BlogState> {
 
     state: BlogState;
 
     constructor() {
-        super();
+        super({});
         this.state = {items: [], filteredData: []};
         this.filterData = this.filterData.bind(this);
     }

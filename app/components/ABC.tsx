@@ -27,7 +27,7 @@ export interface UserState {
     consequenceOther: string;
 }
 
-export class ABC extends React.Component<undefined, ABCState> {
+export class ABC extends React.Component<{}, ABCState> {
 
     public state: ABCState;
     private people: CheckboxSeries;
@@ -63,7 +63,7 @@ export class ABC extends React.Component<undefined, ABCState> {
     };
 
     constructor() {
-        super();
+        super({});
         this.state = this.initialState();
         this.close = this.close.bind(this);
         this.getTime = this.getTime.bind(this);

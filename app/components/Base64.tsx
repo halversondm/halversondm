@@ -10,12 +10,12 @@ export interface Base64State {
     decodeOutput: string;
 }
 
-export class Base64 extends React.Component<undefined, Base64State> {
+export class Base64 extends React.Component<{}, Base64State> {
 
     state: Base64State;
 
     constructor() {
-        super();
+        super({});
         this.state = {
             encodeInput: "",
             encodeOutput: "",

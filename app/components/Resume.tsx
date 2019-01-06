@@ -272,8 +272,8 @@ export class Resume extends React.Component<undefined, undefined> {
                                     <div className="list-group-item inactive-link">
                                         <div className="progress">
                                             <div data-placement="top" style={{width: "80%"}}
-                                                 aria-valuemax="100" aria-valuemin="0"
-                                                 aria-valuenow="80" role="progressbar"
+                                                 aria-valuemax={100} aria-valuemin={0}
+                                                 aria-valuenow={80} role="progressbar"
                                                  className="progress-bar progress-bar-success">
                                                 <span className="sr-only">80%</span> <span
                                                 className="progress-type">Java/
@@ -282,7 +282,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                         </div>
                                         <div className="progress">
                                             <div data-placement="top" style={{width: "70%"}}
-                                                 aria-valuemax="100" aria-valuemin="0" aria-valuenow="1"
+                                                 aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar progress-bar-success">
                                                 <span className="sr-only">80%</span> <span
@@ -292,7 +292,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                         </div>
                                         <div className="progress">
                                             <div data-placement="top" style={{width: "70%"}}
-                                                 aria-valuemax="100" aria-valuemin="0" aria-valuenow="1"
+                                                 aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar progress-bar-success">
                                                 <span className="sr-only">70%</span> <span
@@ -302,7 +302,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                         </div>
                                         <div className="progress">
                                             <div data-placement="top" style={{width: "65%"}}
-                                                 aria-valuemax="100" aria-valuemin="0" aria-valuenow="1"
+                                                 aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar progress-bar-warning">
                                                 <span className="sr-only">50%</span> <span
