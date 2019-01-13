@@ -1,10 +1,9 @@
-"use strict";
-
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 console.log("Node environment", process.env.NODE_ENV);
 const devMode = process.env.NODE_ENV !== 'production';
@@ -14,12 +13,26 @@ if (process.env.NODE_ENV !== "development" && process.env.NODE_ENV !== "producti
 }
 
 let config = {
-    mode: 'production',
+    mode: devMode ? 'development' : 'production',
     entry: path.resolve(__dirname, "app/main.tsx"),
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "[name]-[hash].min.js",
+        filename: devMode ? "[name].js" : "[name]-[hash].min.js",
         publicPath: "/"
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        },
+        minimizer: [
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -49,11 +62,6 @@ let config = {
             use: {loader:"awesome-typescript-loader"}
         }, {
             test: /\.css$/,
-            // use: MiniCssExtractPlugin.loader{
-            //     fallback: "style-loader",
-            //     use: "css-loader",
-            //     publicPath: "/dist"
-            // })
             use: [
                 devMode ? 'style-loader' :
                 {
@@ -66,15 +74,21 @@ let config = {
             ]
         }, {
             test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
-            use: {loader: "file-loader?name=assets/[name].[ext]"}
+            use: {
+                loader: "file-loader",
+                options: {outputPath: 'assets', publicPath: '/assets', name: '[name].[ext]'}
+            }
         }, {
             test: /\.(jpg|jpeg)$/,
-            use: {loader: "file-loader?name=images/[name].[ext]"}
+            use: {
+                loader: "file-loader",
+                options: {outputPath: 'images', publicPath: '/images', name: '[name].[ext]'}
+            }
         }]
     }
 };
 
-if (process.env.NODE_ENV === "development") {
+if (devMode) {
     config.devtool = "source-map";
 }
 

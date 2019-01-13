@@ -69,7 +69,7 @@ export class App extends React.Component<{}, {}> {
                         </div>
                         <hr/>
                         <footer>
-                            <p>&copy; 2017 halversondm.com</p>
+                            <p>&copy; 2019 halversondm.com</p>
                         </footer>
                     </div>
                 </div>
