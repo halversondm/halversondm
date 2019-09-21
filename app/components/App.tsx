@@ -12,6 +12,7 @@ import {Base64} from "./Base64";
 import {Blog} from "./Blog";
 import {Charger} from "./Charger";
 import {Contact} from "./Contact";
+import {Corvette} from "./Corvette";
 import {DiscountCalculator} from "./DiscountCalculator";
 import {Game} from "./Game";
 import {Grades} from "./Grades";
@@ -66,6 +67,7 @@ export class App extends React.Component<{}, {}> {
                             <Route path="/game" component={Game}/>
                             <Route path="/stockQuote" component={StockQuote}/>
                             <Route path="/urlBuilder" component={UrlBuilder}/>
+                            <Route path="/corvette" component={Corvette}/>
                         </div>
                         <hr/>
                         <footer>
