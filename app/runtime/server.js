@@ -1,7 +1,5 @@
-/* eslint-disable */
-
 /*
- Main production server configuration using NodeJS and ExpressJS
+ Main server configuration using NodeJS and ExpressJS
  */
 "use strict";
 
@@ -10,30 +8,53 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const port = 3000;
-const app = express();
 const AWS = require("aws-sdk");
 const http = require("http");
 const https = require("https");
 
+let endpoint = "https://dynamodb.us-east-1.amazonaws.com";
+
+if (process.env.NODE_ENV === "development") {
+    endpoint = "http://localhost:8000";
+}
+
 AWS.config.update({
     region: "us-east-1",
-    endpoint: "https://dynamodb.us-east-1.amazonaws.com"
+    endpoint: endpoint,
 });
 
 const docClient = new AWS.DynamoDB.DocumentClient();
+const port = process.env.PORT || 3000;
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("common"));
 app.use(express.static(__dirname));
-app.get("*", function response(req, res) {
+app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/saveABC", function response(req, res) {
+app.post("/saveABC", (req, res) => {
+
+    // Potential fields incoming on the request.
+    // {
+    //   when: String,
+    //       antecedent: String,
+    //     antecedentOther: String,
+    //     location: String,
+    //     people: [String],
+    //     peopleOther: String,
+    //     behavior: [String],
+    //     behaviorOther: String,
+    //     duration: String,
+    //     intensity: String,
+    //     consequence: [String],
+    //     consequenceOther: String
+    // }
+
     const abc = req.body;
-    Object.keys(abc).forEach(key => {
+    Object.keys(abc).forEach((key) => {
         if (abc[key] === "") {
             delete abc[key];
         }
@@ -42,7 +63,7 @@ app.post("/saveABC", function response(req, res) {
 
     const params = {
         TableName: "ABC",
-        Item: abc
+        Item: abc,
     };
 
     docClient.put(params, function (err, data) {
@@ -55,7 +76,7 @@ app.post("/saveABC", function response(req, res) {
         }
     });
 });
-app.post("/mail.php", function response(req, res) {
+app.post("/mail.php", (req, res) => {
     console.log(req.body);
     res.send("Email Success!");
 });
@@ -65,11 +86,11 @@ app.post("/stock", (request, response) => {
         hostname: "dev.markitondemand.com",
         port: 80,
         path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
-        method: "GET"
+        method: "GET",
     };
-    const proxyRequest = http.request(options, proxyResponse => {
+    const proxyRequest = http.request(options, (proxyResponse) => {
         proxyResponse.setEncoding("utf8");
-        proxyResponse.on("data", chunk => {
+        proxyResponse.on("data", (chunk) => {
             response.set("Content-Type", "application/json");
             response.send(chunk);
         });
@@ -77,8 +98,7 @@ app.post("/stock", (request, response) => {
             console.log("No more data in response.");
         });
     });
-
-    proxyRequest.on("error", e => {
+    proxyRequest.on("error", (e) => {
         console.log(`problem with request: ${e}`);
         response.sendStatus(404);
     });
@@ -89,13 +109,13 @@ app.post("/blogService", (request, response) => {
     const options = {
         hostname: "www.googleapis.com",
         port: 443,
-        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyCO1_3ksPj3HRGRTP0vKPWALbaMqMGuN9I&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
-        method: "GET"
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyDiuZzPpXkejEWKjtACQ3QmxIwKBWDHgUM&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        method: "GET",
     };
-    const proxyRequest = https.request(options, proxyResponse => {
+    const proxyRequest = https.request(options, (proxyResponse) => {
         let data = "";
         proxyResponse.setEncoding("utf8");
-        proxyResponse.on("data", chunk => {
+        proxyResponse.on("data", (chunk) => {
             data += chunk;
         });
         proxyResponse.on("end", () => {
@@ -103,12 +123,16 @@ app.post("/blogService", (request, response) => {
             response.send(data);
         });
     });
-    proxyRequest.on("error", e => {
+    proxyRequest.on("error", (e) => {
         console.log(`problem with request: ${e}`);
         response.sendStatus(404);
     });
     proxyRequest.end();
 });
 
-app.listen(port);
-console.info("==> Listening on port %s.", port);
+app.listen(port, "0.0.0.0", (err) => {
+    if (err) {
+        console.log(err);
+    }
+    console.info("==> Listening on port %s.", port);
+});

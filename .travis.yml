@@ -1,0 +1,20 @@
+sudo: required
+language: node_js
+services:
+- docker
+node_js:
+- '8'
+script:
+- npm run build
+after_success:
+- cd dist
+- docker --version  # document the version travis is using
+- pip install --user awscli # install aws cli w/o sudo
+- export PATH=$PATH:$HOME/.local/bin # put aws in the path
+- eval $(aws ecr get-login --no-include-email --region us-east-1) #needs AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY envvars
+- docker build -t halversondm .
+- docker tag halversondm:latest 442620099008.dkr.ecr.us-east-1.amazonaws.com/halversondm:latest
+- docker push 442620099008.dkr.ecr.us-east-1.amazonaws.com/halversondm:latest
+notifications:
+  slack:
+    secure: knkecPsTXNRHe1iDl8tgWcZEu/hbjJSkKvpvW/z7pVQ4rZk4D0HnSLkchQAYkg3ElRVH4AV5ZiewrzJqZp1BSRVjBIXAfOKvAkuI8QQd3Vs0ebBqEZJtVqB0pMSDep2mWv3LbVkQuIjMm7yVL5saQ0rZm2BIaFlM417Qs0RRMvz4kET1DZms89LTwc90tWWE3yPzBsGWkLy9rndgymrXCw9moVfq6vS8+fyThZTzYqM9CloZEyRApN3iq9mN+fg5xXvxKoT2eoFp3z1D7mxYFEGM8+vqmW+YnxMQtONTZAnl6aBxeHCXNWZ+Wj4OoxJFHcXvvDfbWvobBdTh7RWkF2gKQtClaS0zZa0LLHBmJy1bj10cbvPlL0dQQNamxofHCp5Oc/HrgMYvGtrqMKGFrFtJ/NvIvzn+OOaP8d+q+AixTAItVrYNqZOGWEIiUG+iRJ1dwikSMrlYPGhzRrO1R3ldgcEijoWdZcKpb3BUzadNBfhGgkOKVqdBDAMFOeSnu3yBGw7hzQNUz9NZrSg6P1ESDPqfiqPodHm784wMwk9hiYZgJFAUTCWHhLt9BvQSJpP+p8RHW6Xd7rSSAP3X+i07K3lgrqkFDZCNSRvbMkri3cXUnXxCq1wHJcHMisfRibS9gqSkxXdopDuWISTMXHc5v1Iy8VDiySQtNjWCO4s=

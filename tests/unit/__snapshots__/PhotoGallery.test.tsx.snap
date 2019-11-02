@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Photo Gallery to match 1`] = `
+<div
+  id="photoGallery"
+>
+  <ul
+    className="row"
+  >
+    <li
+      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+    >
+      <img
+        className="img-responsive"
+        data-i={0}
+        onClick={[Function]}
+        src="photo1.jpg"
+      />
+    </li>
+    <li
+      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+    >
+      <img
+        className="img-responsive"
+        data-i={1}
+        onClick={[Function]}
+        src="photo2.jpg"
+      />
+    </li>
+    <li
+      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+    >
+      <img
+        className="img-responsive"
+        data-i={2}
+        onClick={[Function]}
+        src="photo3.jpg"
+      />
+    </li>
+    <li
+      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+    >
+      <img
+        className="img-responsive"
+        data-i={3}
+        onClick={[Function]}
+        src="photo4.jpg"
+      />
+    </li>
+    <li
+      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+    >
+      <img
+        className="img-responsive"
+        data-i={4}
+        onClick={[Function]}
+        src="photo5.jpg"
+      />
+    </li>
+  </ul>
+  <div
+    className="row"
+  >
+    <button
+      className="btn btn-sm btn-default"
+      data-id={1}
+      onClick={[Function]}
+    >
+      Page 1
+    </button>
+    <button
+      className="btn btn-sm btn-default"
+      data-id={2}
+      onClick={[Function]}
+    >
+      Page 2
+    </button>
+  </div>
+</div>
+`;

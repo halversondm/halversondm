@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Series to match 1`] = `
+<div>
+  <div
+    className="checkbox"
+  >
+    <label>
+      <input
+        checked={true}
+        id="one"
+        name="selectedLabel[]"
+        onClick={[Function]}
+        type="checkbox"
+        value="one"
+      />
+       
+      one
+    </label>
+  </div>
+  <div
+    className="checkbox"
+  >
+    <label>
+      <input
+        checked={false}
+        id="two"
+        name="selectedLabel[]"
+        onClick={[Function]}
+        type="checkbox"
+        value="two"
+      />
+       
+      two
+    </label>
+  </div>
+  <div
+    className="checkbox"
+  >
+    <label>
+      <input
+        checked={false}
+        id="otherLabel"
+        name="selectedLabel[]"
+        onClick={[Function]}
+        type="checkbox"
+        value="Other"
+      />
+       Other
+    </label>
+  </div>
+  <input
+    className="form-control"
+    disabled={true}
+    id="labelOther"
+    onChange={[Function]}
+    placeholder="test"
+    type="text"
+    value="anotherTest"
+  />
+</div>
+`;
