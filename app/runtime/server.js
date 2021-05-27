@@ -1,8 +1,6 @@
 /*
  Main server configuration using NodeJS and ExpressJS
  */
-"use strict";
-
 console.log("halversondm personal site");
 const path = require("path");
 const express = require("express");
