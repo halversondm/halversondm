@@ -2,7 +2,6 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
-import { GooglePlusFollow } from "./GooglePlusFollow";
 import { LinkedInButton } from "./LinkedInButton";
 import { TwitterFollowButton } from "./TwitterFollowButton";
 
@@ -58,12 +57,6 @@ export class Contact extends React.Component<undefined, OwnState> {
                                 <tr>
                                     <td>Twitter</td>
                                     <td><TwitterFollowButton />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Google+</td>
-                                    <td>
-                                        <GooglePlusFollow />
                                     </td>
                                 </tr>
                                 <tr>

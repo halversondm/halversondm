@@ -52,7 +52,7 @@
     "react-router-dom": "4.3.1"
   },
   "devDependencies": {
-    "@types/es6-shim": "0.31.39",
+    "@types/es6-shim": "0.31.41",
     "@types/jest": "23.3.11",
     "assert": "1.4.1",
     "awesome-typescript-loader": "5.2.1",
