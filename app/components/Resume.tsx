@@ -2,6 +2,7 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
+import {Card, Col, Row} from "react-bootstrap";
 
 export class Resume extends React.Component<undefined, undefined> {
 
@@ -14,70 +15,19 @@ export class Resume extends React.Component<undefined, undefined> {
                         February 01, 2015
                     </small>
                 </header>
-                <div className="row">
-                    <div
-                        className="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                        <div className="panel panel-default">
-                            <div className="panel-heading resume-heading">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="col-xs-12 col-sm-4">
+                <Row>
+                    <Col>
+                        <Card>
+                            <Card.Header>
+                                <div className="resume-heading">
+                                    <Row>
+                                        <Col>
                                             <figure>
-                                                <img className="img-circle img-responsive" alt=""
+                                                <img className="rounded-circle img-fluid" alt=""
                                                      src="images/dan_glasses.jpeg"/>
                                             </figure>
-                                            <div className="row">
-                                                <div className="col-xs-12 social-btns">
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a
-                                                            href="https://plus.google.com/u/0/114718071449100470041"
-                                                            className="btn btn-social btn-block btn-google"> <i
-                                                            className="fa fa-google"/>
-                                                        </a>
-                                                    </div>
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a href="https://www.facebook.com/daniel.m.halverson"
-                                                           className="btn btn-social btn-block btn-facebook">
-                                                            <i
-                                                                className="fa fa-facebook"/>
-                                                        </a>
-                                                    </div>
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a href="https://twitter.com/halversondm"
-                                                           className="btn btn-social btn-block btn-twitter">
-                                                            <i
-                                                                className="fa fa-twitter"/>
-                                                        </a>
-                                                    </div>
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a href="http://www.linkedin.com/in/dmhalverson"
-                                                           className="btn btn-social btn-block btn-linkedin">
-                                                            <i
-                                                                className="fa fa-linkedin"/>
-                                                        </a>
-                                                    </div>
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a href="https://github.com/halversondm"
-                                                           className="btn btn-social btn-block btn-github"> <i
-                                                            className="fa fa-github"/>
-                                                        </a>
-                                                    </div>
-                                                    <div
-                                                        className="col-xs-3 col-md-1 col-lg-1 social-btn-holder">
-                                                        <a href="http://stackoverflow.com/users/975640/dan"
-                                                           className="btn btn-social btn-block btn-stackoverflow">
-                                                            <i className="fa fa-stack-overflow"/>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xs-12 col-sm-8">
+                                        </Col>
+                                        <Col>
                                             <ul className="list-group">
                                                 <li className="list-group-item">Daniel M. Halverson</li>
                                                 <li className="list-group-item">Application Developer Lead
@@ -92,10 +42,52 @@ export class Resume extends React.Component<undefined, undefined> {
                                                     daniel.m.halverson@gmail.com
                                                 </li>
                                             </ul>
-                                        </div>
-                                    </div>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <div className="social-btn-holder">
+                                                <a href="https://www.facebook.com/daniel.m.halverson"
+                                                   className="btn btn-social btn-block btn-facebook">
+                                                    <i className="fa fa-facebook"/>
+                                                </a>
+                                            </div>
+                                        </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <div className="social-btn-holder">
+                                                <a href="https://twitter.com/halversondm"
+                                                   className="btn btn-social btn-block btn-twitter">
+                                                    <i className="fa fa-twitter"/>
+                                                </a>
+                                            </div>
+                                        </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <div className="social-btn-holder">
+                                                <a href="http://www.linkedin.com/in/dmhalverson"
+                                                   className="btn btn-social btn-block btn-linkedin">
+                                                    <i className="fa fa-linkedin"/>
+                                                </a>
+                                            </div>
+                                        </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <div className="social-btn-holder">
+                                                <a href="https://github.com/halversondm"
+                                                   className="btn btn-social btn-block btn-github">
+                                                    <i className="fa fa-github"/>
+                                                </a>
+                                            </div>
+                                        </Col>
+                                        <Col xs={1} sm={1} md={1} lg={1} xl={1}>
+                                            <div className="social-btn-holder">
+                                                <a href="http://stackoverflow.com/users/975640/dan"
+                                                   className="btn btn-social btn-block btn-stackoverflow">
+                                                    <i className="fa fa-stack-overflow"/>
+                                                </a>
+                                            </div>
+                                        </Col>
+                                    </Row>
                                 </div>
-                            </div>
+                            </Card.Header>
                             <div className="bs-callout bs-callout-danger">
                                 <h4>Summary</h4>
                                 <p>14 years of experience in Information Technology. Extensive
@@ -274,7 +266,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                             <div data-placement="top" style={{width: "80%"}}
                                                  aria-valuemax={100} aria-valuemin={0}
                                                  aria-valuenow={80} role="progressbar"
-                                                 className="progress-bar progress-bar-success">
+                                                 className="progress-bar bg-success">
                                                 <span className="sr-only">80%</span> <span
                                                 className="progress-type">Java/
                                                 JavaEE/ Spring Framework </span>
@@ -284,7 +276,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                             <div data-placement="top" style={{width: "70%"}}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
-                                                 className="progress-bar progress-bar-success">
+                                                 className="progress-bar bg-success">
                                                 <span className="sr-only">80%</span> <span
                                                 className="progress-type">COBOL
                                                 /CICS /JCL</span>
@@ -294,7 +286,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                             <div data-placement="top" style={{width: "70%"}}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
-                                                 className="progress-bar progress-bar-success">
+                                                 className="progress-bar bg-success">
                                                 <span className="sr-only">70%</span> <span
                                                 className="progress-type">SQL
                                             </span>
@@ -304,7 +296,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                             <div data-placement="top" style={{width: "65%"}}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
-                                                 className="progress-bar progress-bar-warning">
+                                                 className="progress-bar bg-warning">
                                                 <span className="sr-only">50%</span> <span
                                                 className="progress-type">JavaScript
                                                 /HTML</span>
@@ -321,7 +313,7 @@ export class Resume extends React.Component<undefined, undefined> {
                                                 <span className="meter-text">I'm a guru</span>
                                             </div>
                                             <div style={{width: "20%"}} className="meter meter-right">
-                                                <span className="meter-text">I''m good</span>
+                                                <span className="meter-text">I'm good</span>
                                             </div>
                                         </div>
                                     </div>
@@ -346,9 +338,9 @@ export class Resume extends React.Component<undefined, undefined> {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </Card>
+                    </Col>
+                </Row>
             </div>
         );
     }

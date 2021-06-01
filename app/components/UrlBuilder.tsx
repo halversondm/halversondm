@@ -2,6 +2,7 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
+import {Button} from "react-bootstrap";
 
 export interface UrlBuilderState {
     queries: Query[];
@@ -139,9 +140,9 @@ export class UrlBuilder extends React.Component<undefined, UrlBuilderState> {
                         </div>
                         <div className="form-group">
                             <div className="col-sm-offset-10 col-sm-2">
-                                <button className="btn btn-primary btn-sm" id="addQuery"
+                                <Button variant="primary" id="addQuery"
                                         onClick={this.addQuery}> + Add Query Parameter
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </form>
@@ -159,9 +160,9 @@ export class UrlBuilder extends React.Component<undefined, UrlBuilderState> {
                         </div>
                         <div className="form-group">
                             <div className="col-sm-offset-10 col-sm-2">
-                                <button className="btn btn-primary btn-sm" id="assemble"
+                                <Button variant="primary" id="assemble"
                                         onClick={this.assemble}>Assemble URL
-                                </button>
+                                </Button>
                             </div>
                         </div>
                         <div className="form-group">
@@ -175,9 +176,9 @@ export class UrlBuilder extends React.Component<undefined, UrlBuilderState> {
                         </div>
                         <div className="form-group">
                             <div className="col-sm-offset-10 col-sm-2">
-                                <button className="btn btn-danger btn-sm" id="launch"
+                                <Button variant="danger" id="launch"
                                         onClick={this.launch}>Launch
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </form>

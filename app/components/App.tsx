@@ -2,8 +2,9 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
-import {Nav, Navbar, NavItem} from "react-bootstrap";
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {Container, Nav, Navbar} from "react-bootstrap";
+import {BrowserRouter, Route} from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
 import {ABC} from "./ABC";
 import {About} from "./About";
 import {Applications} from "./Applications";
@@ -29,24 +30,22 @@ export class App extends React.Component<{}, {}> {
         return (
             <BrowserRouter>
                 <div>
-                    <Navbar fixedTop={true}>
-                        <Navbar.Header>
-                            <Navbar.Brand>@halversondm</Navbar.Brand>
-                            <Navbar.Toggle/>
-                        </Navbar.Header>
-                        <Navbar.Collapse>
+                    <Navbar fixed={"top"} bg="primary" expand="lg">
+                        <LinkContainer to="/home"><Navbar.Brand>@halversondm</Navbar.Brand></LinkContainer>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                        <Navbar.Collapse id="basic-navbar-nav">
                             <Nav>
-                                <NavItem eventKey={1}><Link to="/home">Home</Link></NavItem>
-                                <NavItem eventKey={2}><Link to="/apps">Apps</Link></NavItem>
-                                <NavItem eventKey={3}><Link to="/auto">Auto</Link></NavItem>
-                                <NavItem eventKey={4}><Link to="/blog">Blog</Link></NavItem>
-                                <NavItem eventKey={5}><Link to="/resume">Resume</Link></NavItem>
-                                <NavItem eventKey={6}><Link to="/contact">Contact</Link></NavItem>
-                                <NavItem eventKey={7}><Link to="/about">About</Link></NavItem>
+                                <LinkContainer to="/home"><Nav.Link>Home</Nav.Link></LinkContainer>
+                                <LinkContainer to="/apps"><Nav.Link>Apps</Nav.Link></LinkContainer>
+                                <LinkContainer to="/auto"><Nav.Link>Auto</Nav.Link></LinkContainer>
+                                <LinkContainer to="/blog"><Nav.Link>Blog</Nav.Link></LinkContainer>
+                                <LinkContainer to="/resume"><Nav.Link>Resume</Nav.Link></LinkContainer>
+                                <LinkContainer to="/contact"><Nav.Link>Contact</Nav.Link></LinkContainer>
+                                <LinkContainer to="/about"><Nav.Link>About</Nav.Link></LinkContainer>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
-                    <div className="theme-showcase container">
+                    <Container>
                         <div>
                             <Route exact={true} path="/" component={Home}/>
                             <Route path="/home" component={Home}/>
@@ -73,7 +72,7 @@ export class App extends React.Component<{}, {}> {
                         <footer>
                             <p>&copy; 2021 halversondm.com</p>
                         </footer>
-                    </div>
+                    </Container>
                 </div>
             </BrowserRouter>
         );

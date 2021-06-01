@@ -8,50 +8,50 @@ exports[`Photo Gallery to match 1`] = `
     className="row"
   >
     <li
-      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+      className="col-md-2 col-lg-2 col-sm-3 col-xs-4"
     >
       <img
-        className="img-responsive"
+        className="img-fluid"
         data-i={0}
         onClick={[Function]}
         src="photo1.jpg"
       />
     </li>
     <li
-      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+      className="col-md-2 col-lg-2 col-sm-3 col-xs-4"
     >
       <img
-        className="img-responsive"
+        className="img-fluid"
         data-i={1}
         onClick={[Function]}
         src="photo2.jpg"
       />
     </li>
     <li
-      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+      className="col-md-2 col-lg-2 col-sm-3 col-xs-4"
     >
       <img
-        className="img-responsive"
+        className="img-fluid"
         data-i={2}
         onClick={[Function]}
         src="photo3.jpg"
       />
     </li>
     <li
-      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+      className="col-md-2 col-lg-2 col-sm-3 col-xs-4"
     >
       <img
-        className="img-responsive"
+        className="img-fluid"
         data-i={3}
         onClick={[Function]}
         src="photo4.jpg"
       />
     </li>
     <li
-      className="col-lg-2 col-md-2 col-sm-3 col-xs-4"
+      className="col-md-2 col-lg-2 col-sm-3 col-xs-4"
     >
       <img
-        className="img-responsive"
+        className="img-fluid"
         data-i={4}
         onClick={[Function]}
         src="photo5.jpg"
@@ -61,20 +61,28 @@ exports[`Photo Gallery to match 1`] = `
   <div
     className="row"
   >
-    <button
-      className="btn btn-sm btn-default"
-      data-id={1}
-      onClick={[Function]}
-    >
-      Page 1
-    </button>
-    <button
-      className="btn btn-sm btn-default"
-      data-id={2}
-      onClick={[Function]}
-    >
-      Page 2
-    </button>
+    <div>
+      <button
+        className="btn btn-primary"
+        data-id={1}
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Page 1
+      </button>
+    </div>
+    <div>
+      <button
+        className="btn btn-primary"
+        data-id={2}
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Page 2
+      </button>
+    </div>
   </div>
 </div>
 `;

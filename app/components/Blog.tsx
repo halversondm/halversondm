@@ -2,6 +2,7 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
+import {Card} from "react-bootstrap";
 
 export interface BlogState {
     items: BlogItem[];
@@ -75,18 +76,15 @@ export class Blog extends React.Component<{}, BlogState> {
                 {
                     this.state.filteredData.map((item, i) => {
                         return (
-                            <div className="panel panel-info" key={i}>
-                                <div className="panel-heading">
-                                    <h3 className="panel-title"><a href={item.url}
-                                                                   target="_blank">{item.title}</a>
-                                    </h3>
-                                </div>
-                                <div className="panel-body">
-                                    <p className="text-left"
-                                       dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
-                                    <span className="small">{item.published}</span>
-                                </div>
-                            </div>
+                            <Card bg="secondary" key={i}>
+                                <Card.Header>
+                                    <a href={item.url} target="_blank">{item.title}</a>
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Subtitle className="small">{item.published}</Card.Subtitle>
+                                    <Card.Text dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
+                                </Card.Body>
+                            </Card>
                         );
                     })
                 }

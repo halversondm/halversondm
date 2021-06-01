@@ -76,11 +76,6 @@ body {
   opacity: 0.9;
 }
 
-.btn-google {
-  background-color: #c32f10;
-  opacity: 0.9;
-}
-
 .btn-stackoverflow {
   background-color: #D38B28;
   opacity: 0.9;
@@ -150,17 +145,9 @@ body {
 
 /* skill meter in resume. copy pasted from http://bootsnipp.com/snippets/featured/progress-bar-meter */
 
-.progress-bar {
-  text-align: left;
-  white-space: nowrap;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-
 .progress-bar > .progress-type {
   padding-left: 10px;
+  text-align: left;
 }
 
 .progress-meter {

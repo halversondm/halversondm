@@ -2,7 +2,7 @@
  * Created by Daniel on 6/28/2016.
  */
 import * as React from "react";
-import {Modal} from "react-bootstrap";
+import {Button, Modal, Row} from "react-bootstrap";
 
 export interface PhotoGalleryProps {
     perPage: number;
@@ -135,37 +135,36 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                 <ul className="row">
                     {
                         this.state.photoArray.map((photo, i) => {
-                            return <li key={i} className="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                            return <li key={i} className="col-md-2 col-lg-2 col-sm-3 col-xs-4">
                                 <img onClick={this.imageClick} data-i={i}
-                                     className="img-responsive"
+                                     className="img-fluid"
                                      src={photo}/>
                             </li>;
                         })
                     }
                 </ul>
-                <div className="row">
+                <Row>
                     {
                         this.state.pages.map((page, i) => {
-                            return <button data-id={page} className="btn btn-sm btn-default"
-                                           key={i}
-                                           onClick={this.pageClick}>{"Page " + page}</button>;
+                            return <div key={i}><Button data-id={page} variant="primary"
+                                                        onClick={this.pageClick}>{"Page " + page}</Button></div>;
                         })
                     }
-                </div>
+                </Row>
                 <Modal show={this.state.showModal} onHide={this.close}>
                     <Modal.Body>
                         <img src={this.state.photoArray[this.state.photoIndex]}
-                             className="img-responsive"/>
+                             className="img-fluid"/>
                     </Modal.Body>
                     <Modal.Footer>
                         <ul className="pager">
                             <li className="previous">
-                                <input type="button" hidden={this.state.hidePrevious}
-                                       onClick={this.prev} value="&larr; Previous"/>
+                                <Button variant="primary" hidden={this.state.hidePrevious}
+                                        onClick={this.prev}>&larr; Previous</Button>
                             </li>
                             <li className="next">
-                                <input type="button" hidden={this.state.hideNext}
-                                       onClick={this.next} value="Next &rarr;"/>
+                                <Button variant="primary" hidden={this.state.hideNext}
+                                        onClick={this.next}>Next &rarr;</Button>
                             </li>
                         </ul>
                     </Modal.Footer>

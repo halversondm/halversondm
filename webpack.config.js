@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 console.log("Node environment", process.env.NODE_ENV);
 const devMode = process.env.NODE_ENV !== 'production';
@@ -31,7 +31,7 @@ let config = {
             }
         },
         minimizer: [
-            new OptimizeCSSAssetsPlugin({})
+            new CssMinimizerPlugin()
         ]
     },
     plugins: [
@@ -46,11 +46,13 @@ let config = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         }),
-        new CopyWebpackPlugin([
-            {from: "app/images/", to: "images/"}, {
-                from: "app/extras"
-            }, {from: "app/runtime"}
-        ])
+        new CopyWebpackPlugin({
+            patterns: [
+                {from: "app/images/", to: "images/"}, {
+                    from: "app/extras"
+                }, {from: "app/runtime"}
+            ]
+        })
     ],
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
