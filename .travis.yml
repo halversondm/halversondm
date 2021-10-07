@@ -17,7 +17,7 @@ deploy:
   app: "web"
   env: "web-env"
   bucket_name: "elasticbeanstalk-us-east-1-442620099008"
-  zip_file: dist/halversondm.zip
+  zip_file: halversondm.zip
   skip_cleanup: true
 notifications:
   slack:
