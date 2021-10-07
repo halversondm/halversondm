@@ -1,27 +1,18 @@
 /*
  Main server configuration using NodeJS and ExpressJS
  */
+
+import path from "path";
+import express from "express";
+import bodyParser from "body-parser";
+import morgan from "morgan";
+import http from "http";
+import https from "https";
+import dyna from "./dyna.js";
+
 console.log("halversondm personal site");
-const path = require("path");
-const express = require("express");
-const bodyParser = require("body-parser");
-const morgan = require("morgan");
-const AWS = require("aws-sdk");
-const http = require("http");
-const https = require("https");
 
-let endpoint = "https://dynamodb.us-east-1.amazonaws.com";
-
-if (process.env.NODE_ENV === "development") {
-    endpoint = "http://localhost:8000";
-}
-
-AWS.config.update({
-    region: "us-east-1",
-    endpoint: endpoint,
-});
-
-const docClient = new AWS.DynamoDB.DocumentClient();
+const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -33,7 +24,7 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/saveABC", (req, res) => {
+app.post("/saveABC", async (req, res) => {
 
     // Potential fields incoming on the request.
     // {
@@ -52,28 +43,35 @@ app.post("/saveABC", (req, res) => {
     // }
 
     const abc = req.body;
-    Object.keys(abc).forEach((key) => {
-        if (abc[key] === "") {
-            delete abc[key];
-        }
-    });
-    console.log(abc);
 
     const params = {
-        TableName: "ABC",
-        Item: abc,
+        TableName: process.env.ABC_TABLE,
+        Item: {
+            when: {S: abc.when},
+            antecedent: {S: abc.antecedent},
+            antecedentOther: {S: abc.antecedentOther},
+            location: {S: abc.location},
+            people: {SS: abc.people},
+            peopleOther: {S: abc.peopleOther},
+            behavior: {SS: abc.behavior},
+            behaviorOther: {S: abc.behaviorOther},
+            duration: {S: abc.duration},
+            intensity: {S: abc.intensity},
+            consequence: {SS: abc.consequence},
+            consequenceOther: {S: abc.consequenceOther}
+        }
     };
 
-    docClient.put(params, function (err, data) {
-        if (err) {
-            console.log(err);
-            res.send(err);
-        } else {
-            console.log(data);
-            res.send("ABC Saved!");
-        }
-    });
+    try {
+        console.log(params);
+        const result = await dyna.run(params);
+        res.status(200).send('ABC Saved!');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(JSON.stringify(error));
+    }
 });
+
 app.post("/mail.php", (req, res) => {
     console.log(req.body);
     res.send("Email Success!");

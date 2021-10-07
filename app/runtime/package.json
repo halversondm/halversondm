@@ -12,6 +12,10 @@
     "webpack",
     "node"
   ],
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
   "author": "Dan Halverson",
   "license": "MIT",
   "homepage": "https://github.com/halversondm/halversondm.git",
@@ -19,10 +23,10 @@
     "start": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.35.0",
+    "body-parser": "1.18.3",
     "cross-env": "5.2.0",
     "express": "4.16.4",
-    "body-parser": "1.18.3",
-    "morgan": "1.9.1",
-    "aws-sdk": "2.384.0"
+    "morgan": "1.9.1"
   }
 }

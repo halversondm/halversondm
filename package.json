@@ -39,10 +39,10 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.35.0",
     "@types/react": "17.0.6",
     "@types/react-dom": "*",
     "@types/react-router": "*",
-    "aws-sdk": "*",
     "connect-history-api-fallback": "*",
     "font-awesome": "*",
     "react": "*",
