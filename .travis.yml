@@ -6,19 +6,20 @@ node_js:
 script:
 - npm run build
 before_deploy:
-  - cd dist && zip -r halversondm.zip .
-deploy:
-  provider: elasticbeanstalk
-  access_key_id:
-    secure: "$AWS_ACCESS_KEY_ID"
-  secret_access_key:
-    secure: "$AWS_SECRET_ACCESS_KEY"
-  region: "us-east-1"
-  app: "web"
-  env: "web-env"
-  bucket_name: "elasticbeanstalk-us-east-1-442620099008"
-  zip_file: halversondm.zip
-  skip_cleanup: true
+- cd dist && zip -r halversondm.zip .
 notifications:
   slack:
     secure: knkecPsTXNRHe1iDl8tgWcZEu/hbjJSkKvpvW/z7pVQ4rZk4D0HnSLkchQAYkg3ElRVH4AV5ZiewrzJqZp1BSRVjBIXAfOKvAkuI8QQd3Vs0ebBqEZJtVqB0pMSDep2mWv3LbVkQuIjMm7yVL5saQ0rZm2BIaFlM417Qs0RRMvz4kET1DZms89LTwc90tWWE3yPzBsGWkLy9rndgymrXCw9moVfq6vS8+fyThZTzYqM9CloZEyRApN3iq9mN+fg5xXvxKoT2eoFp3z1D7mxYFEGM8+vqmW+YnxMQtONTZAnl6aBxeHCXNWZ+Wj4OoxJFHcXvvDfbWvobBdTh7RWkF2gKQtClaS0zZa0LLHBmJy1bj10cbvPlL0dQQNamxofHCp5Oc/HrgMYvGtrqMKGFrFtJ/NvIvzn+OOaP8d+q+AixTAItVrYNqZOGWEIiUG+iRJ1dwikSMrlYPGhzRrO1R3ldgcEijoWdZcKpb3BUzadNBfhGgkOKVqdBDAMFOeSnu3yBGw7hzQNUz9NZrSg6P1ESDPqfiqPodHm784wMwk9hiYZgJFAUTCWHhLt9BvQSJpP+p8RHW6Xd7rSSAP3X+i07K3lgrqkFDZCNSRvbMkri3cXUnXxCq1wHJcHMisfRibS9gqSkxXdopDuWISTMXHc5v1Iy8VDiySQtNjWCO4s=
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAJXAKVAY575PL7AGQ
+  secret_access_key:
+    secure: BYoKvFBdLjRhfNwLmQ9U0giN351Hln8jbKxL20kewboqpPYb6XrnEJH2AtuGCWCVVHJXeHxchifIUPUu+RnWn8tbqNIWfNZaoBQ02nwxB4VHDER2g1UtWC1Aawcp3UztdFWyTvuCHvgkgegVty/ePWNZW8RTkwnjsdpaBvRRP2pjEtPZ8hQBFWU0DdNnCPwNQH2dXXtgpTdtQtYVqkzUPQr3/BfzP87YcYwdeyC8kgd++6QdXl7zhgLUJpt5eyWQnzxc+wAyOyBzmKNGSY7Tb4rVUPrelhhLM7nb4NBiEIpPL3tASMYqRMe09y470tI/662IlQxr6hc24RtLBuUuWErIhA1J1skL9KmHnfXENFDiR1k875PODRKFyxDksetqjZcMQy5TkviH9iIZdnafC9GJ0Zo7wtsCabcYhc4LBPP4ZGUV2jpCGe1mgykrKpk8hpHMMHMT7/dNtDNMMwAOvhCyQk1clbODu9qeCxrlk1BxjVLHb+kuhncy4FTjUV62D5bQb+EeVKoUl1wDY4eS+nKo01UkAeac/1SHg53isDpLq/2SxpyK8R53IML5oWB4y6Fb/Xsp1BFTdU0puAoZiN2pzI4UwPHPAZOy/OwYdkeBYoMnhsGn6G0ywC6dzIlGZmBS7dOyW5ACAenUXGXO2Ir/pszPA0MAu1D8prcNU88=
+  region: us-east-1
+  app: web
+  env: web-env
+  bucket_name: elasticbeanstalk-us-east-1-442620099008
+  zip_file: halversondm.zip
+  on:
+    repo: halversondm/halversondm
+  skip_cleanup: 'true'
