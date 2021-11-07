@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-node@v2.4.1
         with:
           node-version: '14'
+      - name: Install Dependencies
+        run: npm install
       - name: Build Code
         run: npm run build
       - name: Compress dist
