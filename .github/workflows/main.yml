@@ -23,3 +23,15 @@ jobs:
       - name: Compress dist
         if: ${{ success() }}
         run: cd dist && zip -r halversondm.zip .
+      - name: Deploy to EB
+        if: ${{ success() }}
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: web
+          environment_name: web-env
+          version_label: 100
+          region: us-east-1
+          deployment_package: halversondm.zip
+          existing_bucket_name: elasticbeanstalk-us-east-1-442620099008
