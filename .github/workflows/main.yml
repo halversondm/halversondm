@@ -33,5 +33,5 @@ jobs:
           environment_name: web-env
           version_label: 100
           region: us-east-1
-          deployment_package: halversondm.zip
+          deployment_package: dist/halversondm.zip
           existing_bucket_name: elasticbeanstalk-us-east-1-442620099008
