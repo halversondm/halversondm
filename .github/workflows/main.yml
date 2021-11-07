@@ -31,7 +31,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: web
           environment_name: web-env
-          version_label: 100
+          version_label: ${{github.run_number}}
           region: us-east-1
           deployment_package: dist/halversondm.zip
           existing_bucket_name: elasticbeanstalk-us-east-1-442620099008
