@@ -20,7 +20,7 @@ export interface Stock {
     Low?: string;
 }
 
-export class StockQuote extends React.Component<undefined, StockQuoteState> {
+export class StockQuote extends React.Component<{}, StockQuoteState> {
 
     state: StockQuoteState;
 
@@ -74,51 +74,51 @@ export class StockQuote extends React.Component<undefined, StockQuoteState> {
     render() {
         return (
             <div>
-            <h2 className="text-primary">Stock Quotes</h2>
-            <form className="form-inline">
-                <div className="form-group">
-                    <label className="sr-only" htmlFor="symbol">Stock Symbol</label>
-                    <input type="text" name="stock" id="symbol"
-                           className="form-control input-sm" placeholder="Symbol"
-                           value={this.state.stockInput}
-                           onChange={this.inputStock}/>
-                    <input type="button" className="btn-sm btn-default" value="Go!"
-                           onClick={this.submit}/>
-                </div>
-            </form>
-            <h4 className="text-primary">Stock List</h4>
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Name</th>
-                    <th>Last Price</th>
-                    <th>Time</th>
-                    <th>Market Cap</th>
-                    <th>Change YTD</th>
-                    <th>High</th>
-                    <th>Low</th>
-                    <th>Open</th>
-                </tr>
-                </thead>
-                <tbody>
-                {
-                    this.state.stocks.map((stock, i) => {
-                        return <tr key={i}>
-                            <td>{stock.Symbol}</td>
-                            <td>{stock.Name}</td>
-                            <td>{stock.LastPrice}</td>
-                            <td>{stock.Timestamp}</td>
-                            <td>{stock.MarketCap}</td>
-                            <td>{stock.ChangeYTD}</td>
-                            <td>{stock.High}</td>
-                            <td>{stock.Low}</td>
-                            <td>{stock.Open}</td>
-                        </tr>;
-                    })
-                }
-                </tbody>
-            </table>
+                <h2 className="text-primary">Stock Quotes</h2>
+                <form className="form-inline">
+                    <div className="form-group">
+                        <label className="sr-only" htmlFor="symbol">Stock Symbol</label>
+                        <input type="text" name="stock" id="symbol"
+                               className="form-control input-sm" placeholder="Symbol"
+                               value={this.state.stockInput}
+                               onChange={this.inputStock}/>
+                        <input type="button" className="btn-sm btn-default" value="Go!"
+                               onClick={this.submit}/>
+                    </div>
+                </form>
+                <h4 className="text-primary">Stock List</h4>
+                <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Last Price</th>
+                        <th>Time</th>
+                        <th>Market Cap</th>
+                        <th>Change YTD</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Open</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.state.stocks.map((stock, i) => {
+                            return <tr key={i}>
+                                <td>{stock.Symbol}</td>
+                                <td>{stock.Name}</td>
+                                <td>{stock.LastPrice}</td>
+                                <td>{stock.Timestamp}</td>
+                                <td>{stock.MarketCap}</td>
+                                <td>{stock.ChangeYTD}</td>
+                                <td>{stock.High}</td>
+                                <td>{stock.Low}</td>
+                                <td>{stock.Open}</td>
+                            </tr>;
+                        })
+                    }
+                    </tbody>
+                </table>
             </div>
         );
     }

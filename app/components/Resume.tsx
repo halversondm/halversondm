@@ -4,7 +4,7 @@
 import * as React from "react";
 import {Card, Col, Row} from "react-bootstrap";
 
-export class Resume extends React.Component<undefined, undefined> {
+export class Resume extends React.Component<{}, {}> {
 
     render() {
         return (

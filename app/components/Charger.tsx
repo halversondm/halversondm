@@ -3,7 +3,7 @@
  */
 import * as React from "react";
 
-export class Charger extends React.Component<undefined, undefined> {
+export class Charger extends React.Component<{}, {}> {
 
     render() {
         return (

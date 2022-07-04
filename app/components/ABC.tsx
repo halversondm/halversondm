@@ -2,8 +2,8 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from "react";
-import { Modal } from "react-bootstrap";
-import { CheckboxSeries } from "./CheckboxSeries";
+import {Modal} from "react-bootstrap";
+import {CheckboxSeries} from "./CheckboxSeries";
 
 export interface ABCState {
     antecedentOtherDisabled: boolean;
@@ -101,14 +101,14 @@ export class ABC extends React.Component<{}, ABCState> {
     }
 
     close() {
-        this.setState({ showModal: false });
+        this.setState({showModal: false});
     }
 
     getTime() {
         const user = this.state.user;
         const time = new Date();
         user.when = time.toLocaleString();
-        this.setState({ user });
+        this.setState({user});
     }
 
     antecedentRadios(event: any) {
@@ -132,28 +132,28 @@ export class ABC extends React.Component<{}, ABCState> {
         const antecedentOtherText = event.target.value;
         const user = this.state.user;
         user.antecedentOther = antecedentOtherText;
-        this.setState({ user });
+        this.setState({user});
     }
 
     locationRadios(event: any) {
         const location = event.target.value;
         const user = this.state.user;
         user.location = location;
-        this.setState({ user });
+        this.setState({user});
     }
 
     durationRadios(event: any) {
         const duration = event.target.value;
         const user = this.state.user;
         user.duration = duration;
-        this.setState({ user });
+        this.setState({user});
     }
 
     intensityRadios(event: any) {
         const intensity = event.target.value;
         const user = this.state.user;
         user.intensity = intensity;
-        this.setState({ user });
+        this.setState({user});
     }
 
     save() {
@@ -167,7 +167,7 @@ export class ABC extends React.Component<{}, ABCState> {
         const consequencePull = this.consequences.pullCurrentState();
         user.consequence = consequencePull.selected;
         user.consequenceOther = consequencePull.otherLabelText;
-        this.setState({ user, showModal: true });
+        this.setState({user, showModal: true});
         if (this.validSave()) {
             this.postToServer();
         }
@@ -188,7 +188,7 @@ export class ABC extends React.Component<{}, ABCState> {
                 console.log("unsucc ", xhr.responseText);
                 messages.push(xhr.status + " " + xhr.statusText);
             }
-            this.setState({ messages });
+            this.setState({messages});
         };
         xhr.onerror = () => {
             console.log(xhr);
@@ -242,7 +242,7 @@ export class ABC extends React.Component<{}, ABCState> {
         if (this.state.user.when.length === 0) {
             messages.push("The date and time of the ABC is required to save.");
         }
-        this.setState({ messages });
+        this.setState({messages});
         return messages.length === 0;
     }
 
@@ -261,23 +261,23 @@ export class ABC extends React.Component<{}, ABCState> {
                     <div className="row">
                         <div className="col-md-1">
                             <h4>When?</h4>
-                            <hr />
+                            <hr/>
                             <input className="btn btn-primary" onClick={this.getTime}
-                                type="button" value="Now" id="now" />
+                                   type="button" value="Now" id="now"/>
                             <div id="dateTime">{this.state.user.when}</div>
                         </div>
                         <div className="col-md-4">
                             <h4>Antecedent</h4>
-                            <hr />
+                            <hr/>
                             <b>What happened before the behavior?</b>
-                            <br />
+                            <br/>
                             {
                                 this.antecedentValues.map((antecedent, i) => {
                                     return <div className="radio" key={i}>
                                         <label>
                                             <input type="radio" value={antecedent}
-                                                onClick={this.antecedentRadios}
-                                                checked={this.state.user.antecedent === antecedent} />{antecedent}
+                                                   onClick={this.antecedentRadios}
+                                                   checked={this.state.user.antecedent === antecedent}/>{antecedent}
                                         </label>
                                     </div>;
                                 })
@@ -285,68 +285,68 @@ export class ABC extends React.Component<{}, ABCState> {
                             <div className="radio">
                                 <label>
                                     <input type="radio"
-                                        checked={this.state.user.antecedent === "Other"}
-                                        value="Other"
-                                        onClick={this.antecedentRadios} /> Other
+                                           checked={this.state.user.antecedent === "Other"}
+                                           value="Other"
+                                           onClick={this.antecedentRadios}/> Other
                                 </label>
                             </div>
                             <input type="text" className="form-control" id="antecedentOther"
-                                value={this.state.user.antecedentOther}
-                                placeholder="Enter Description"
-                                onChange={this.antecedentOtherText}
-                                disabled={this.state.antecedentOtherDisabled} />
-                            <br /> <b>Location</b>
-                            <br />
+                                   value={this.state.user.antecedentOther}
+                                   placeholder="Enter Description"
+                                   onChange={this.antecedentOtherText}
+                                   disabled={this.state.antecedentOtherDisabled}/>
+                            <br/> <b>Location</b>
+                            <br/>
                             {
                                 this.locationValues.map((location, i) => {
                                     return <div className="radio-inline"
-                                        key={i}>
+                                                key={i}>
                                         <label>
                                             <input type="radio" onClick={this.locationRadios}
-                                                checked={this.state.user.location === location}
-                                                value={location} />{location}
+                                                   checked={this.state.user.location === location}
+                                                   value={location}/>{location}
                                         </label>
                                     </div>;
                                 })
                             }
-                            <br /> <b>People Present</b>
-                            <br />
+                            <br/> <b>People Present</b>
+                            <br/>
                             <CheckboxSeries labels={this.peopleValues} selected={this.state.user.people}
-                                ref={this.refHandlers.peopleRef}
-                                otherLabelPlaceholder="Enter Another Person Present"
-                                otherLabelText={this.state.user.peopleOther} />
+                                            ref={this.refHandlers.peopleRef}
+                                            otherLabelPlaceholder="Enter Another Person Present"
+                                            otherLabelText={this.state.user.peopleOther}/>
                         </div>
                         <div className="col-md-3">
                             <h4>Behavior</h4>
-                            <hr />
+                            <hr/>
                             <b>Select all that apply</b>
                             <CheckboxSeries labels={this.behaviorValues}
-                                ref={this.refHandlers.behaviorsRef}
-                                selected={this.state.user.behavior}
-                                otherLabelPlaceholder="Enter Description"
-                                otherLabelText={this.state.user.behaviorOther} />
-                            <br /> <b>Duration</b>
-                            <br />
+                                            ref={this.refHandlers.behaviorsRef}
+                                            selected={this.state.user.behavior}
+                                            otherLabelPlaceholder="Enter Description"
+                                            otherLabelText={this.state.user.behaviorOther}/>
+                            <br/> <b>Duration</b>
+                            <br/>
                             {
                                 this.durationValues.map((duration, i) => {
                                     return <div className="radio-inline" key={i}>
                                         <label>
                                             <input type="radio" onClick={this.durationRadios}
-                                                checked={this.state.user.duration === duration}
-                                                value={duration} />{duration}
+                                                   checked={this.state.user.duration === duration}
+                                                   value={duration}/>{duration}
                                         </label>
                                     </div>;
                                 })
                             }
-                            <br /> <b>Intensity</b>
-                            <br />
+                            <br/> <b>Intensity</b>
+                            <br/>
                             {
                                 this.intensityValues.map((intensity, i) => {
                                     return <div className="radio-inline" key={i}>
                                         <label>
                                             <input type="radio" onClick={this.intensityRadios}
-                                                checked={this.state.user.intensity === intensity}
-                                                value={intensity} />{intensity}
+                                                   checked={this.state.user.intensity === intensity}
+                                                   value={intensity}/>{intensity}
                                         </label>
                                     </div>;
                                 })
@@ -354,26 +354,26 @@ export class ABC extends React.Component<{}, ABCState> {
                         </div>
                         <div className="col-md-4">
                             <h4>Consequence</h4>
-                            <hr />
+                            <hr/>
                             <b>What happened after?</b>
-                            <br />
+                            <br/>
                             <CheckboxSeries labels={this.consequenceValues}
-                                selected={this.state.user.consequence}
-                                ref={this.refHandlers.consequencesRef}
-                                otherLabelPlaceholder="Enter Description"
-                                otherLabelText={this.state.user.consequenceOther} />
+                                            selected={this.state.user.consequence}
+                                            ref={this.refHandlers.consequencesRef}
+                                            otherLabelPlaceholder="Enter Description"
+                                            otherLabelText={this.state.user.consequenceOther}/>
                         </div>
                     </div>
-                    <br />
+                    <br/>
                     <div className="form-inline">
                         <div className="form-group">
                             <input className="btn btn-success form-control" type="submit"
-                                onClick={this.save} value="Save" id="save" />
+                                   onClick={this.save} value="Save" id="save"/>
                         </div>
                         <div className="form-group">
                             <input className="btn btn-danger form-control" type="reset"
-                                onClick={this.reset}
-                                value="Reset" id="reset" />
+                                   onClick={this.reset}
+                                   value="Reset" id="reset"/>
                         </div>
                     </div>
                 </div>
@@ -391,7 +391,7 @@ export class ABC extends React.Component<{}, ABCState> {
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
-                        <p style={{ right: "auto" }}>Click anywhere to continue</p>
+                        <p style={{right: "auto"}}>Click anywhere to continue</p>
                     </Modal.Footer>
                 </Modal>
                 <div id="abcModal" className="modal">
@@ -410,7 +410,7 @@ export class ABC extends React.Component<{}, ABCState> {
                                 </ul>
                             </div>
                             <div className="modal-footer">
-                                <p style={{ right: "auto" }}>Click anywhere to continue</p>
+                                <p style={{right: "auto"}}>Click anywhere to continue</p>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
  */
 import * as React from "react";
 import {Container, Nav, Navbar} from "react-bootstrap";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
 import {ABC} from "./ABC";
 import {About} from "./About";
@@ -46,28 +46,28 @@ export class App extends React.Component<{}, {}> {
                         </Navbar.Collapse>
                     </Navbar>
                     <Container>
-                        <div>
-                            <Route exact={true} path="/" component={Home}/>
-                            <Route path="/home" component={Home}/>
-                            <Route path="/about" component={About}/>
-                            <Route path="/blog" component={Blog}/>
-                            <Route path="/resume" component={Resume}/>
-                            <Route path="/contact" component={Contact}/>
-                            <Route path="/auto" component={Auto}/>
-                            <Route path="/honda" component={Honda}/>
-                            <Route path="/yamaha" component={Yamaha}/>
-                            <Route path="/charger" component={Charger}/>
-                            <Route path="/grandprix" component={GrandPrix}/>
-                            <Route path="/apps" component={Applications}/>
-                            <Route path="/abc" component={ABC}/>
-                            <Route path="/base64" component={Base64}/>
-                            <Route path="/discountCalculator" component={DiscountCalculator}/>
-                            <Route path="/grades" component={Grades}/>
-                            <Route path="/game" component={Game}/>
-                            <Route path="/stockQuote" component={StockQuote}/>
-                            <Route path="/urlBuilder" component={UrlBuilder}/>
-                            <Route path="/corvette" component={Corvette}/>
-                        </div>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/home" element={<Home/>}/>
+                            <Route path="/about" element={<About/>}/>
+                            <Route path="/blog" element={<Blog/>}/>
+                            <Route path="/resume" element={<Resume/>}/>
+                            <Route path="/contact" element={<Contact/>}/>
+                            <Route path="/auto" element={<Auto/>}/>
+                            <Route path="/honda" element={<Honda/>}/>
+                            <Route path="/yamaha" element={<Yamaha/>}/>
+                            <Route path="/charger" element={<Charger/>}/>
+                            <Route path="/grandprix" element={<GrandPrix/>}/>
+                            <Route path="/apps" element={<Applications/>}/>
+                            <Route path="/abc" element={<ABC/>}/>
+                            <Route path="/base64" element={<Base64/>}/>
+                            <Route path="/discountCalculator" element={<DiscountCalculator/>}/>
+                            <Route path="/grades" element={<Grades/>}/>
+                            <Route path="/game" element={<Game/>}/>
+                            <Route path="/stockQuote" element={<StockQuote/>}/>
+                            <Route path="/urlBuilder" element={<UrlBuilder/>}/>
+                            <Route path="/corvette" element={<Corvette/>}/>
+                        </Routes>
                         <hr/>
                         <footer>
                             <p>&copy; 2021 halversondm.com</p>

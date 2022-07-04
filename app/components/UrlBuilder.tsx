@@ -16,7 +16,7 @@ export interface Query {
     value: string;
 }
 
-export class UrlBuilder extends React.Component<undefined, UrlBuilderState> {
+export class UrlBuilder extends React.Component<{}, UrlBuilderState> {
 
     state: UrlBuilderState;
 

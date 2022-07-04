@@ -6,14 +6,14 @@ export interface OwnState {
 
 declare var IN;
 
-export class LinkedInButton extends React.Component<any, OwnState> {
+export class LinkedInButton extends React.Component<{}, OwnState> {
 
     state: OwnState;
     node: any;
 
     constructor(props) {
         super(props);
-        this.state = { initialized: false };
+        this.state = {initialized: false};
         this.nodeFunction = this.nodeFunction.bind(this);
     }
 
@@ -32,7 +32,7 @@ export class LinkedInButton extends React.Component<any, OwnState> {
             IN.init();
         }
 
-        this.setState({ initialized: true });
+        this.setState({initialized: true});
     }
 
     componentWillUnmount() {
@@ -46,9 +46,9 @@ export class LinkedInButton extends React.Component<any, OwnState> {
     render() {
         return (
             <script ref={this.nodeFunction} type="IN/MemberProfile"
-                data-id="https://www.linkedin.com/in/dmhalverson"
-                data-format="hover" data-related="false"
-                data-text="Daniel Halverson" />
+                    data-id="https://www.linkedin.com/in/dmhalverson"
+                    data-format="hover" data-related="false"
+                    data-text="Daniel Halverson"/>
         );
     }
 }

@@ -17,7 +17,7 @@ let config = {
     entry: path.resolve(__dirname, "app/main.tsx"),
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: devMode ? "[name].js" : "[name]-[hash].min.js",
+        filename: devMode ? "[name].js" : "[name]-[fullhash].min.js",
         publicPath: "/"
     },
     optimization: {
@@ -61,7 +61,7 @@ let config = {
     module: {
         rules: [{
             test: /\.tsx?$/,
-            use: {loader:"awesome-typescript-loader"}
+            use: {loader:"ts-loader"}
         }, {
             test: /\.css$/,
             use: [

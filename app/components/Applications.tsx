@@ -4,7 +4,7 @@
 import * as React from "react";
 import {Link} from "react-router-dom";
 
-export class Applications extends React.Component<undefined, undefined> {
+export class Applications extends React.Component<{}, {}> {
     render() {
         return (
             <div>

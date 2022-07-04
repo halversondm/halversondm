@@ -6,13 +6,14 @@ export interface OwnState {
 
 declare var twttr;
 
-export class TwitterFollowButton extends React.Component<any, OwnState> {
+export class TwitterFollowButton extends React.Component<{}, OwnState> {
 
     state: OwnState;
     node: any;
+
     constructor(props) {
         super(props);
-        this.state = { initialized: false };
+        this.state = {initialized: false};
         this.nodeFunction = this.nodeFunction.bind(this);
     }
 
@@ -32,7 +33,7 @@ export class TwitterFollowButton extends React.Component<any, OwnState> {
             twttr.widgets.load();
         }
 
-        this.setState({ initialized: true });
+        this.setState({initialized: true});
     }
 
     nodeFunction(node) {
@@ -42,9 +43,9 @@ export class TwitterFollowButton extends React.Component<any, OwnState> {
     render() {
         return (
             <a ref={this.nodeFunction}
-                href="https://twitter.com/halversondm"
-                className="twitter-follow-button"
-                data-show-count={true}>
+               href="https://twitter.com/halversondm"
+               className="twitter-follow-button"
+               data-show-count={true}>
                 Follow @halversondm
             </a>
         );

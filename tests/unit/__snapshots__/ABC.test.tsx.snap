@@ -29,9 +29,7 @@ exports[`Checkbox Series to match 1`] = `
         />
         <div
           id="dateTime"
-        >
-          
-        </div>
+        />
       </div>
       <div
         className="col-md-4"

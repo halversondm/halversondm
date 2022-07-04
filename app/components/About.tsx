@@ -3,8 +3,7 @@
  */
 import * as React from "react";
 
-export class About extends React.Component<undefined, undefined> {
-
+export class About extends React.Component<{}, {}> {
     render() {
         return (
             <div>

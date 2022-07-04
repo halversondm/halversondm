@@ -18,7 +18,7 @@ export interface Student {
     letterGrade: string;
 }
 
-export class Grades extends React.Component<undefined, GradesState> {
+export class Grades extends React.Component<{}, GradesState> {
 
     state: GradesState;
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {PhotoGallery} from "./PhotoGallery";
 
-export class Corvette extends React.Component<undefined, undefined> {
+export class Corvette extends React.Component<{}, {}> {
 
     render() {
         return (
