@@ -132,7 +132,7 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
     render() {
         return (
             <div id="photoGallery">
-                <ul className="row">
+                <ul className="row photo-gallery">
                     {
                         this.state.photoArray.map((photo, i) => {
                             return <li key={i} className="col-md-2 col-lg-2 col-sm-3 col-xs-4">
@@ -157,7 +157,7 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                              className="img-fluid"/>
                     </Modal.Body>
                     <Modal.Footer>
-                        <ul className="pager">
+                        <ul className="pager photo-gallery">
                             <li className="previous">
                                 <Button variant="primary" hidden={this.state.hidePrevious}
                                         onClick={this.prev}>&larr; Previous</Button>

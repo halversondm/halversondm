@@ -196,11 +196,12 @@ body {
 
 /* Photo Gallery CSS */
 
-ul li {
+ul.photo-gallery {
   list-style: none;
+  cursor: pointer;
 }
 
-ul li img {
+li img {
   cursor: pointer;
 }
 
@@ -233,4 +234,9 @@ ul li img {
 .modal-dialog img {
   text-align: center;
   margin: 0 auto;
+}
+
+ul.c5 {
+  list-style-type: square;
+  margin: 5px;
 }

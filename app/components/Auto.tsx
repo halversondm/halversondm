@@ -17,6 +17,7 @@ export class Auto extends React.Component<{}, {}> {
                     <li><Link to="/honda">1997 Honda Shadow 750 ACE</Link></li>
                     <li><Link to="/yamaha">2004 Yamaha VStar 1100 Classic</Link></li>
                     <li><Link to="/corvette">2001 Chevrolet Corvette</Link></li>
+                    <li><Link to="/C5Secrets">C5 Corvette Tips and Secrets</Link></li>
                 </ul>
             </div>
         );
