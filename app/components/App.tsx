@@ -24,6 +24,7 @@ import {Resume} from "./Resume";
 import {StockQuote} from "./StockQuote";
 import {UrlBuilder} from "./UrlBuilder";
 import {Yamaha} from "./Yamaha";
+import {C5CorvetteSecrets} from "./C5CorvetteSecrets";
 
 export class App extends React.Component<{}, {}> {
     render() {
@@ -67,10 +68,11 @@ export class App extends React.Component<{}, {}> {
                             <Route path="/stockQuote" element={<StockQuote/>}/>
                             <Route path="/urlBuilder" element={<UrlBuilder/>}/>
                             <Route path="/corvette" element={<Corvette/>}/>
+                            <Route path="/c5secrets" element={<C5CorvetteSecrets/>}/>
                         </Routes>
                         <hr/>
                         <footer>
-                            <p>&copy; 2021 halversondm.com</p>
+                            <p>&copy; 2022 halversondm.com</p>
                         </footer>
                     </Container>
                 </div>
