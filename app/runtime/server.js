@@ -6,7 +6,6 @@ import path from "path";
 import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
-import http from "http";
 import https from "https";
 import dyna from "./dyna.js";
 
@@ -79,19 +78,27 @@ app.post("/mail.php", (req, res) => {
 
 app.post("/stock", (request, response) => {
     const options = {
-        hostname: "dev.markitondemand.com",
-        port: 80,
-        path: "/MODApis/Api/v2/Quote/json?&symbol=" + request.query.stockSymbol,
+        hostname: "api.polygon.io",
+        port: 443,
+        path: "/v2/aggs/ticker/" + request.query.stockSymbol + "/prev?adjusted=true&apiKey=l4e1fn55I5rfoHeUgIBspvThIpGSEkf_",
         method: "GET",
     };
-    const proxyRequest = http.request(options, (proxyResponse) => {
+    const proxyRequest = https.request(options, (proxyResponse) => {
         proxyResponse.setEncoding("utf8");
         proxyResponse.on("data", (chunk) => {
             response.set("Content-Type", "application/json");
-            response.send(chunk);
-        });
-        proxyResponse.on("end", () => {
-            console.log("No more data in response.");
+            let source = JSON.parse(chunk);
+            let stock = {};
+            stock.Symbol = source.ticker;
+            stock.Name = "";
+            stock.LastPrice = source.results[0].c;
+            stock.Timestamp = source.results[0].t;
+            stock.MarketCap = "";
+            stock.ChangeYTD = "";
+            stock.High = source.results[0].h;
+            stock.Open = source.results[0].o;
+            stock.Low = source.results[0].l;
+            response.send(stock);
         });
     });
     proxyRequest.on("error", (e) => {
