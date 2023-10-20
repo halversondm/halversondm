@@ -8,12 +8,15 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import https from "https";
 import dyna from "./dyna.js";
+import secretsManager from "./secretsManager.js";
 
 console.log("halversondm personal site");
 
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 const app = express();
+
+const googleApiKey = secretsManager.run("prod/google/api-key");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -112,7 +115,7 @@ app.post("/blogService", (request, response) => {
     const options = {
         hostname: "www.googleapis.com",
         port: 443,
-        path: "/blogger/v3/blogs/2815390959079070088/posts?key=AIzaSyDiuZzPpXkejEWKjtACQ3QmxIwKBWDHgUM&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=" + googleApiKey + "&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
         method: "GET",
     };
     const proxyRequest = https.request(options, (proxyResponse) => {
