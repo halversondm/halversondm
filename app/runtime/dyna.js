@@ -1,4 +1,4 @@
-import {BatchGetItemCommand, DynamoDBClient, PutItemCommand} from "@aws-sdk/client-dynamodb";
+import {DynamoDBClient, PutItemCommand, ScanCommand} from "@aws-sdk/client-dynamodb";
 
 const client = new DynamoDBClient({});
 
@@ -13,7 +13,7 @@ const put = async (params) => {
 
 const get = async (params) => {
     try {
-        const data = await client.send(new BatchGetItemCommand(params));
+        const data = await client.send(new ScanCommand(params));
         return data;
     } catch (err) {
         throw Error(err);

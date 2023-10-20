@@ -23,18 +23,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("common"));
 app.use(express.static(__dirname));
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
 
 app.get("/abc", async (req, res) => {
     const params = {
-        RequestItems: {
-            '${process.env.ABC_TABLE}': {
-                Keys: [],
-                ProjectionExpression: ""
-            }
-        }
+        TableName: process.env.ABC_TABLE
     }
 
     try {
@@ -44,6 +36,10 @@ app.get("/abc", async (req, res) => {
         console.log(error);
         res.status(500).send(JSON.stringify(error));
     }
+});
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.post("/saveABC", async (req, res) => {
