@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:18-alpine
 MAINTAINER Dan Halverson
 RUN npm install -g nodemon
 WORKDIR /src

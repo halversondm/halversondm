@@ -102,7 +102,7 @@ exports[`Checkbox Series to match 1`] = `
               checked={false}
               onClick={[Function]}
               type="radio"
-              value="Activity/Item denied (\\"told no\\")"
+              value="Activity/Item denied ("told no")"
             />
             Activity/Item denied ("told no")
           </label>
@@ -1084,7 +1084,7 @@ exports[`Checkbox Series to match 1`] = `
         >
           <p
             style={
-              Object {
+              {
                 "right": "auto",
               }
             }
