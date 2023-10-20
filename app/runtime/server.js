@@ -16,7 +16,8 @@ const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 const app = express();
 
-const googleApiKey = secretsManager.run("prod/google/api-key");
+const secrets = await secretsManager.run("prod/google/api-key");
+let apiKeys = JSON.parse(secrets.SecretString);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -83,7 +84,7 @@ app.post("/stock", (request, response) => {
     const options = {
         hostname: "api.polygon.io",
         port: 443,
-        path: "/v2/aggs/ticker/" + request.query.stockSymbol + "/prev?adjusted=true&apiKey=l4e1fn55I5rfoHeUgIBspvThIpGSEkf_",
+        path: "/v2/aggs/ticker/" + request.query.stockSymbol + "/prev?adjusted=true&apiKey=" + apiKeys.polygonApiKey,
         method: "GET",
     };
     const proxyRequest = https.request(options, (proxyResponse) => {
@@ -115,7 +116,7 @@ app.post("/blogService", (request, response) => {
     const options = {
         hostname: "www.googleapis.com",
         port: 443,
-        path: "/blogger/v3/blogs/2815390959079070088/posts?key=" + googleApiKey + "&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+        path: "/blogger/v3/blogs/2815390959079070088/posts?key=" + apiKeys.googleApiKey + "&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
         method: "GET",
     };
     const proxyRequest = https.request(options, (proxyResponse) => {
