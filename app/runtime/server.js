@@ -16,7 +16,7 @@ const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 const app = express();
 
-const secrets = await secretsManager.run("prod/google/api-key");
+const secrets = await secretsManager.run("prod/halversondm");
 let apiKeys = JSON.parse(secrets.SecretString);
 
 app.use(bodyParser.json());
