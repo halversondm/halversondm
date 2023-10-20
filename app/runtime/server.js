@@ -27,6 +27,25 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
+app.get("/abc", async (req, res) => {
+    const params = {
+        RequestItems: {
+            '${process.env.ABC_TABLE}': {
+                Keys: [],
+                ProjectionExpression: ""
+            }
+        }
+    }
+
+    try {
+        const data = await dyna.get(params);
+        res.status(200).send(data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(JSON.stringify(error));
+    }
+});
+
 app.post("/saveABC", async (req, res) => {
 
     // Potential fields incoming on the request.
@@ -67,7 +86,7 @@ app.post("/saveABC", async (req, res) => {
 
     try {
         console.log(params);
-        const result = await dyna.run(params);
+        const result = await dyna.put(params);
         res.status(200).send('ABC Saved!');
     } catch (error) {
         console.log(error);
