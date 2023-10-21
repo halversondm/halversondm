@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("common"));
 app.use(express.static(__dirname));
 
-app.get("/abc", async (req, res) => {
+app.get("/api/abc", async (req, res) => {
     const params = {
         TableName: process.env.ABC_TABLE
     }
