@@ -1,14 +1,23 @@
-import {DynamoDBClient, PutItemCommand} from "@aws-sdk/client-dynamodb";
+import {DynamoDBClient, PutItemCommand, ScanCommand} from "@aws-sdk/client-dynamodb";
 
-const ddbClient = new DynamoDBClient({region: process.env.AWS_REGION});
+const client = new DynamoDBClient({});
 
-const run = async (params) => {
+const put = async (params) => {
     try {
-        const data = await ddbClient.send(new PutItemCommand(params));
+        const data = await client.send(new PutItemCommand(params));
         return data;
     } catch (err) {
         throw Error(err);
     }
 };
 
-export default {run}
+const get = async (params) => {
+    try {
+        const data = await client.send(new ScanCommand(params));
+        return data;
+    } catch (err) {
+        throw Error(err);
+    }
+};
+
+export default {put, get}

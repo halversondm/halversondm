@@ -1,124 +1,128 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
+import * as React from 'react'
+import { type ReactNode } from 'react'
 
 export interface GradesState {
-    studentList: Student[];
-    student: Student;
+  studentList: Student[]
+  student: Student
 }
 
 export interface Student {
-    studentNumber: number;
-    quiz1: number;
-    quiz2: number;
-    midterm: number;
-    final: number;
-    classAverage: number;
-    letterGrade: string;
+  studentNumber: number
+  quiz1: number
+  quiz2: number
+  midterm: number
+  final: number
+  classAverage: number
+  letterGrade: string
 }
 
-export class Grades extends React.Component<{}, GradesState> {
+export class Grades extends React.Component<unknown, GradesState> {
+  state: GradesState
 
-    state: GradesState;
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            studentList: [],
-            student: {
-                studentNumber: 0,
-                quiz1: 0,
-                quiz2: 0,
-                midterm: 0,
-                final: 0,
-                classAverage: 0,
-                letterGrade: "",
-            },
-        };
-        this.removeStudent = this.removeStudent.bind(this);
-        this.addStudent = this.addStudent.bind(this);
-        this.determineLetterGrade = this.determineLetterGrade.bind(this);
-        this.finalChange = this.finalChange.bind(this);
-        this.midtermChange = this.midtermChange.bind(this);
-        this.quiz1Change = this.quiz1Change.bind(this);
-        this.quiz2Change = this.quiz2Change.bind(this);
-        this.removeStudent = this.removeStudent.bind(this);
-        this.studentNumberChange = this.studentNumberChange.bind(this);
+  constructor (props) {
+    super(props)
+    this.state = {
+      studentList: [],
+      student: {
+        studentNumber: 0,
+        quiz1: 0,
+        quiz2: 0,
+        midterm: 0,
+        final: 0,
+        classAverage: 0,
+        letterGrade: ''
+      }
     }
+    this.removeStudent = this.removeStudent.bind(this)
+    this.addStudent = this.addStudent.bind(this)
+    this.determineLetterGrade = this.determineLetterGrade.bind(this)
+    this.finalChange = this.finalChange.bind(this)
+    this.midtermChange = this.midtermChange.bind(this)
+    this.quiz1Change = this.quiz1Change.bind(this)
+    this.quiz2Change = this.quiz2Change.bind(this)
+    this.removeStudent = this.removeStudent.bind(this)
+    this.studentNumberChange = this.studentNumberChange.bind(this)
+  }
 
-    removeStudent(event) {
-        event.preventDefault();
-        const studentList = this.state.studentList;
-        studentList.splice(event.currentTarget.dataset.key, 1);
-        this.setState({studentList});
-    }
+  removeStudent (event): void {
+    event.preventDefault()
+    const studentList = this.state.studentList
+    studentList.splice(event.currentTarget.dataset.key, 1)
+    this.setState({ studentList })
+  }
 
-    addStudent(event) {
-        event.preventDefault();
-        let student = this.state.student;
-        const quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200;
-        const midterm = student.midterm / 100;
-        const final = student.final / 100;
-        const finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
-            (final * 0.5)) * 100;
-        student.classAverage = Math.round(finalGrade);
-        student = this.determineLetterGrade(finalGrade, student);
-        const studentList = this.state.studentList;
-        studentList.push(student);
-        this.setState({
-            studentList,
-            student: {
-                studentNumber: 0,
-                quiz1: 0,
-                quiz2: 0,
-                midterm: 0,
-                final: 0,
-                classAverage: 0,
-                letterGrade: "",
-            },
-        });
-    }
+  addStudent (event): void {
+    event.preventDefault()
+    let student = this.state.student
+    const quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200
+    const midterm = student.midterm / 100
+    const final = student.final / 100
+    const finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
+            (final * 0.5)) * 100
+    student.classAverage = Math.round(finalGrade)
+    student = this.determineLetterGrade(finalGrade, student)
+    const studentList = this.state.studentList
+    studentList.push(student)
+    this.setState({
+      studentList,
+      student: {
+        studentNumber: 0,
+        quiz1: 0,
+        quiz2: 0,
+        midterm: 0,
+        final: 0,
+        classAverage: 0,
+        letterGrade: ''
+      }
+    })
+  }
 
-    determineLetterGrade(finalGrade, student) {
-        student.letterGrade = finalGrade >= 90 ? "A" : (finalGrade >= 80 && finalGrade <= 89) ? "B" :
-            (finalGrade >= 70 && finalGrade <= 79) ? "C" :
-                (finalGrade >= 60 && finalGrade <= 69) ? "D" : "F";
-        return student;
-    }
+  determineLetterGrade (finalGrade, student): Student {
+    student.letterGrade = finalGrade >= 90
+      ? 'A'
+      : (finalGrade >= 80 && finalGrade <= 89)
+          ? 'B'
+          : (finalGrade >= 70 && finalGrade <= 79)
+              ? 'C'
+              : (finalGrade >= 60 && finalGrade <= 69) ? 'D' : 'F'
+    return student
+  }
 
-    studentNumberChange(event) {
-        const student = this.state.student;
-        student.studentNumber = event.target.value;
-        this.setState({student});
-    }
+  studentNumberChange (event): void {
+    const student = this.state.student
+    student.studentNumber = event.target.value
+    this.setState({ student })
+  }
 
-    quiz1Change(event) {
-        const student = this.state.student;
-        student.quiz1 = event.target.value;
-        this.setState({student});
-    }
+  quiz1Change (event): void {
+    const student = this.state.student
+    student.quiz1 = event.target.value
+    this.setState({ student })
+  }
 
-    quiz2Change(event) {
-        const student = this.state.student;
-        student.quiz2 = event.target.value;
-        this.setState({student});
-    }
+  quiz2Change (event): void {
+    const student = this.state.student
+    student.quiz2 = event.target.value
+    this.setState({ student })
+  }
 
-    midtermChange(event) {
-        const student = this.state.student;
-        student.midterm = event.target.value;
-        this.setState({student});
-    }
+  midtermChange (event): void {
+    const student = this.state.student
+    student.midterm = event.target.value
+    this.setState({ student })
+  }
 
-    finalChange(event) {
-        const student = this.state.student;
-        student.final = event.target.value;
-        this.setState({student});
-    }
+  finalChange (event): void {
+    const student = this.state.student
+    student.final = event.target.value
+    this.setState({ student })
+  }
 
-    render() {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">Grade Book</h2>
                 <p>Quizzes are on a 10 point basis. Exams are on a 100 point basis.
@@ -140,21 +144,21 @@ export class Grades extends React.Component<{}, GradesState> {
                     <tbody>
                     {
                         this.state.studentList.map((student, i) => {
-                            return <tr key={i}>
-                                <td id={"studentNumber" + i}>{student.studentNumber}</td>
-                                <td id={"quiz1" + i}>{student.quiz1}</td>
-                                <td id={"quiz2" + i}>{student.quiz2}</td>
-                                <td id={"midterm" + i}>{student.midterm}</td>
-                                <td id={"final" + i}>{student.final}</td>
-                                <td id={"classAverage" + i}>{student.classAverage}</td>
-                                <td id={"letterGrade" + i}>{student.letterGrade}</td>
+                          return <tr key={i}>
+                                <td id={'studentNumber' + i}>{student.studentNumber}</td>
+                                <td id={'quiz1' + i}>{student.quiz1}</td>
+                                <td id={'quiz2' + i}>{student.quiz2}</td>
+                                <td id={'midterm' + i}>{student.midterm}</td>
+                                <td id={'final' + i}>{student.final}</td>
+                                <td id={'classAverage' + i}>{student.classAverage}</td>
+                                <td id={'letterGrade' + i}>{student.letterGrade}</td>
                                 <td>
-                                    <button id={"removeStudent" + i} className="btn btn-danger btn-sm"
+                                    <button id={'removeStudent' + i} className="btn btn-danger btn-sm"
                                             onClick={this.removeStudent} data-key={i}> - Remove
                                         Student
                                     </button>
                                 </td>
-                            </tr>;
+                            </tr>
                         })
                     }
                     </tbody>
@@ -208,6 +212,6 @@ export class Grades extends React.Component<{}, GradesState> {
                     </button>
                 </form>
             </div>
-        );
-    }
+    )
+  }
 }

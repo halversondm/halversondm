@@ -1,51 +1,51 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
-import {DiscountCalculatorService} from "./DiscountCalculatorService";
+import * as React from 'react'
+import { DiscountCalculatorService } from './DiscountCalculatorService'
+import { type ReactNode } from 'react'
 
 export interface DiscountCalculatorState {
-    labelPrice: string;
-    discount1: string;
-    discount2: string;
-    errorMessage: string[];
-    successMessage: string;
+  labelPrice: string
+  discount1: string
+  discount2: string
+  errorMessage: string[]
+  successMessage: string
 }
 
-export class DiscountCalculator extends React.Component<{}, DiscountCalculatorState> {
+export class DiscountCalculator extends React.Component<unknown, DiscountCalculatorState> {
+  discountCalculatorService: DiscountCalculatorService
+  state: DiscountCalculatorState
 
-    discountCalculatorService: DiscountCalculatorService;
-    state: DiscountCalculatorState;
+  constructor () {
+    super({})
+    this.state = this.initialState()
+    this.discountCalculatorService = new DiscountCalculatorService()
+    this.calculate = this.calculate.bind(this)
+    this.clear = this.clear.bind(this)
+    this.labelPriceChange = this.labelPriceChange.bind(this)
+    this.discount1Change = this.discount1Change.bind(this)
+    this.discount2Change = this.discount2Change.bind(this)
+  }
 
-    constructor() {
-        super({});
-        this.state = this.initialState();
-        this.discountCalculatorService = new DiscountCalculatorService();
-        this.calculate = this.calculate.bind(this);
-        this.clear = this.clear.bind(this);
-        this.labelPriceChange = this.labelPriceChange.bind(this);
-        this.discount1Change = this.discount1Change.bind(this);
-        this.discount2Change = this.discount2Change.bind(this);
+  calculate (): void {
+    this.discountCalculatorService.validate(this.state.discount1, this.state.discount2, this.state.labelPrice)
+    if (this.discountCalculatorService.isError()) {
+      this.setState({
+        errorMessage: this.discountCalculatorService.getMessage(),
+        successMessage: ''
+      })
+    } else {
+      this.discountCalculatorService.calculate()
+      this.setState({
+        successMessage: this.discountCalculatorService.getMessage()[0],
+        errorMessage: []
+      })
     }
+  }
 
-    calculate() {
-        this.discountCalculatorService.validate(this.state.discount1, this.state.discount2, this.state.labelPrice);
-        if (this.discountCalculatorService.isError()) {
-            this.setState({
-                errorMessage: this.discountCalculatorService.getMessage(),
-                successMessage: "",
-            });
-        } else {
-            this.discountCalculatorService.calculate();
-            this.setState({
-                successMessage: this.discountCalculatorService.getMessage()[0],
-                errorMessage: [],
-            });
-        }
-    }
-
-    render() {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">Discount Calculator</h2>
                 <p>Calculate your final price where the retailer is offering separate
@@ -111,13 +111,13 @@ export class DiscountCalculator extends React.Component<{}, DiscountCalculatorSt
                             <ul>
                                 {
                                     this.state.errorMessage.map((message, i) => {
-                                        return <li key={i}>{message}</li>;
+                                      return <li key={i}>{message}</li>
                                     })
                                 }
                             </ul>
                         </div>
                         <div className="alert alert-success alert-dismissible" role="alert"
-                             hidden={this.state.successMessage === ""}>
+                             hidden={this.state.successMessage === ''}>
                             <button type="button" className="close" data-dismiss="alert"><span
                                 aria-hidden="true">&times;</span></button>
                             {this.state.successMessage}
@@ -126,32 +126,32 @@ export class DiscountCalculator extends React.Component<{}, DiscountCalculatorSt
                 </fieldset>
 
             </div>
-        );
-    }
+    )
+  }
 
-    clear() {
-        this.setState(this.initialState());
-    }
+  clear (): void {
+    this.setState(this.initialState())
+  }
 
-    labelPriceChange(event: any) {
-        this.setState({labelPrice: event.target.value});
-    }
+  labelPriceChange (event): void {
+    this.setState({ labelPrice: event.target.value })
+  }
 
-    discount1Change(event: any) {
-        this.setState({discount1: event.target.value});
-    }
+  discount1Change (event): void {
+    this.setState({ discount1: event.target.value })
+  }
 
-    discount2Change(event: any) {
-        this.setState({discount2: event.target.value});
-    }
+  discount2Change (event): void {
+    this.setState({ discount2: event.target.value })
+  }
 
-    private initialState() {
-        return {
-            labelPrice: "",
-            discount1: "",
-            discount2: "",
-            errorMessage: [],
-            successMessage: "",
-        };
+  private initialState (): DiscountCalculatorState {
+    return {
+      labelPrice: '',
+      discount1: '',
+      discount2: '',
+      errorMessage: [],
+      successMessage: ''
     }
+  }
 }

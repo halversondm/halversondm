@@ -1,15 +1,16 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
-import {Link} from "react-router-dom";
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import { type ReactNode } from 'react'
 
-export class Auto extends React.Component<{}, {}> {
-    render() {
-        return (
+export class Auto extends React.Component<unknown, unknown> {
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">Autos</h2>
-                <p>I've had three cars and two motorcycles that I've really enjoyed since I
+                <p>I&apos;ve had three cars and two motorcycles that I&apos;ve really enjoyed since I
                     have been able to buy.</p>
                 <ul>
                     <li><Link to="/grandPrix">2001 Grand Prix GTP</Link></li>
@@ -20,6 +21,6 @@ export class Auto extends React.Component<{}, {}> {
                     <li><Link to="/C5Secrets">C5 Corvette Tips and Secrets</Link></li>
                 </ul>
             </div>
-        );
-    }
+    )
+  }
 }

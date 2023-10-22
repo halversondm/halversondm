@@ -23,6 +23,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan("common"));
 app.use(express.static(__dirname));
+
+app.get("/api/abc", async (req, res) => {
+    const params = {
+        TableName: process.env.ABC_TABLE
+    }
+
+    try {
+        const data = await dyna.get(params);
+        res.status(200).send(data);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(JSON.stringify(error));
+    }
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
@@ -67,7 +82,7 @@ app.post("/saveABC", async (req, res) => {
 
     try {
         console.log(params);
-        const result = await dyna.run(params);
+        const result = await dyna.put(params);
         res.status(200).send('ABC Saved!');
     } catch (error) {
         console.log(error);
@@ -93,15 +108,19 @@ app.post("/stock", (request, response) => {
             response.set("Content-Type", "application/json");
             let source = JSON.parse(chunk);
             let stock = {};
-            stock.Symbol = source.ticker;
-            stock.Name = "";
-            stock.LastPrice = source.results[0].c;
-            stock.Timestamp = source.results[0].t;
-            stock.MarketCap = "";
-            stock.ChangeYTD = "";
-            stock.High = source.results[0].h;
-            stock.Open = source.results[0].o;
-            stock.Low = source.results[0].l;
+            if (source) {
+                stock.Symbol = source.ticker;
+                stock.Name = "";
+                stock.MarketCap = "";
+                stock.ChangeYTD = "";
+                    if (source.results) {
+                        stock.LastPrice = source.results[0].c;
+                        stock.Timestamp = source.results[0].t;
+                        stock.High = source.results[0].h;
+                        stock.Open = source.results[0].o;
+                        stock.Low = source.results[0].l;
+                    }
+            }
             response.send(stock);
         });
     });
