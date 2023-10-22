@@ -52,25 +52,24 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
   }
 
   callService (stockSymbol: string): void {
-    setTimeout(function (stockSymbol: string, stocks: Stock[]) {
-      const xhr = new XMLHttpRequest()
-      const url = `/stock?stockSymbol=${stockSymbol}`
-      xhr.open('POST', url)
-      xhr.onload = () => {
-        if (xhr.status >= 200 && xhr.status < 400) {
-          stocks.push(JSON.parse(xhr.responseText))
-        } else {
-          console.log('unsucc ', xhr.responseText)
-          const stock: Stock = { Symbol: stockSymbol, Name: 'Not Found' }
-          stocks.push(stock)
-        }
-        this.setState({ stocks })
+    const stocks = this.state.stocks
+    const xhr = new XMLHttpRequest()
+    const url = `/stock?stockSymbol=${stockSymbol}`
+    xhr.open('POST', url)
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        stocks.push(JSON.parse(xhr.responseText))
+      } else {
+        console.log('unsucc ', xhr.responseText)
+        const stock: Stock = { Symbol: stockSymbol, Name: 'Not Found' }
+        stocks.push(stock)
       }
-      xhr.onerror = () => {
-        console.log(xhr)
-      }
-      xhr.send()
-    }, 1000, [stockSymbol, this.state.stocks])
+      this.setState({ stocks })
+    }
+    xhr.onerror = () => {
+      console.log(xhr)
+    }
+    xhr.send()
   }
 
   render (): ReactNode {
