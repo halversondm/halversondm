@@ -1,31 +1,31 @@
 /**
  * Created by Daniel on 6/28/2016.
  */
-import * as React from "react";
-import {Button, Modal, Row} from "react-bootstrap";
+import * as React from 'react'
+import {type ReactNode} from 'react'
+import {Button, Modal, Row} from 'react-bootstrap'
 
 export interface PhotoGalleryProps {
-    perPage: number;
-    totalPhotos: number;
-    filePrefix: string;
-    fileSuffix: string;
+    perPage: number
+    totalPhotos: number
+    filePrefix: string
+    fileSuffix: string
 }
 
 export interface PhotoGalleryState {
-    photoArray: string[];
-    pages: string[];
-    firstPhoto: number[];
-    lastPhoto: number[];
-    hidePrevious: boolean;
-    hideNext: boolean;
-    showModal: boolean;
-    photoIndex: number;
+    photoArray: string[]
+    pages: number[]
+    firstPhoto: number[]
+    lastPhoto: number[]
+    hidePrevious: boolean
+    hideNext: boolean
+    showModal: boolean
+    photoIndex: number
 }
 
 export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState> {
-
     constructor(props: PhotoGalleryProps) {
-        super(props);
+        super(props)
         this.state = {
             photoArray: [],
             pages: [],
@@ -34,102 +34,102 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
             hidePrevious: false,
             hideNext: false,
             showModal: false,
-            photoIndex: 0,
-        };
-        this.init = this.init.bind(this);
-        this.buildArray = this.buildArray.bind(this);
-        this.imageClick = this.imageClick.bind(this);
-        this.close = this.close.bind(this);
-        this.next = this.next.bind(this);
-        this.prev = this.prev.bind(this);
-        this.pageClick = this.pageClick.bind(this);
-        this.showHideButtons = this.showHideButtons.bind(this);
+            photoIndex: 0
+        }
+        this.init = this.init.bind(this)
+        this.buildArray = this.buildArray.bind(this)
+        this.imageClick = this.imageClick.bind(this)
+        this.close = this.close.bind(this)
+        this.next = this.next.bind(this)
+        this.prev = this.prev.bind(this)
+        this.pageClick = this.pageClick.bind(this)
+        this.showHideButtons = this.showHideButtons.bind(this)
     }
 
-    componentDidMount() {
-        this.init();
+    componentDidMount(): void {
+        this.init()
     }
 
-    init() {
-        let go = true;
-        let page = 0;
-        const firstPhoto = [];
-        const lastPhoto = [];
-        const pages = [];
+    init(): void {
+        let go = true
+        let page = 0
+        const firstPhoto: number[] = []
+        const lastPhoto: number[] = []
+        const pages: number[] = []
         while (go) {
             if (page === 0) {
-                firstPhoto.push(1);
-                lastPhoto.push(this.props.perPage);
+                firstPhoto.push(1)
+                lastPhoto.push(this.props.perPage)
             } else {
-                const nextFirst = lastPhoto[page - 1] + 1;
-                let nextLast = nextFirst + this.props.perPage;
+                const nextFirst = lastPhoto[page - 1] + 1
+                let nextLast = nextFirst + this.props.perPage
                 if (nextLast > this.props.totalPhotos) {
-                    nextLast = this.props.totalPhotos;
+                    nextLast = this.props.totalPhotos
                 }
-                firstPhoto.push(nextFirst);
-                lastPhoto.push(nextLast);
+                firstPhoto.push(nextFirst)
+                lastPhoto.push(nextLast)
             }
 
-            pages.push(page + 1);
+            pages.push(page + 1)
             if (lastPhoto[page] === this.props.totalPhotos) {
-                go = false;
+                go = false
             } else {
-                page += 1;
+                page += 1
             }
         }
         this.setState({
             pages,
             firstPhoto,
-            lastPhoto,
-        });
-        this.buildArray(1, firstPhoto, lastPhoto);
+            lastPhoto
+        })
+        this.buildArray(1, firstPhoto, lastPhoto)
     }
 
-    buildArray(pageNumber, firstPhoto, lastPhoto) {
-        const photoArray = [];
+    buildArray(pageNumber, firstPhoto, lastPhoto): void {
+        const photoArray: string[] = []
         for (let i = firstPhoto[pageNumber - 1]; i <= lastPhoto[pageNumber - 1]; i += 1) {
-            const source = this.props.filePrefix + i + this.props.fileSuffix;
-            photoArray.push(source);
+            const source = this.props.filePrefix + i + this.props.fileSuffix
+            photoArray.push(source)
         }
-        this.setState({photoArray});
+        this.setState({photoArray})
     }
 
-    imageClick(event) {
-        const photoIndex = Number(event.currentTarget.dataset.i);
-        this.showHideButtons(photoIndex);
-        this.setState({showModal: true});
+    imageClick(event): void {
+        const photoIndex = Number(event.currentTarget.dataset.i)
+        this.showHideButtons(photoIndex)
+        this.setState({showModal: true})
     }
 
-    close() {
-        this.setState({showModal: false});
+    close(): void {
+        this.setState({showModal: false})
     }
 
-    prev() {
-        const photoIndex = this.state.photoIndex - 1;
-        this.showHideButtons(photoIndex);
+    prev(): void {
+        const photoIndex = this.state.photoIndex - 1
+        this.showHideButtons(photoIndex)
     }
 
-    next() {
-        const photoIndex = this.state.photoIndex + 1;
-        this.showHideButtons(photoIndex);
+    next(): void {
+        const photoIndex = this.state.photoIndex + 1
+        this.showHideButtons(photoIndex)
     }
 
-    showHideButtons(photoIndex) {
-        const hideNext = photoIndex === (this.state.photoArray.length - 1);
-        const hidePrevious = photoIndex === 0;
+    showHideButtons(photoIndex): void {
+        const hideNext = photoIndex === (this.state.photoArray.length - 1)
+        const hidePrevious = photoIndex === 0
         this.setState({
             hideNext,
             hidePrevious,
-            photoIndex,
-        });
+            photoIndex
+        })
     }
 
-    pageClick(event) {
-        const page = Number(event.currentTarget.dataset.id);
-        this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto);
+    pageClick(event): void {
+        const page = Number(event.currentTarget.dataset.id)
+        this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto)
     }
 
-    render() {
+    render(): ReactNode {
         return (
             <div id="photoGallery">
                 <ul className="row photo-gallery">
@@ -139,7 +139,7 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                                 <img onClick={this.imageClick} data-i={i}
                                      className="img-fluid"
                                      src={photo}/>
-                            </li>;
+                            </li>
                         })
                     }
                 </ul>
@@ -147,7 +147,7 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                     {
                         this.state.pages.map((page, i) => {
                             return <div key={i}><Button data-id={page} variant="primary"
-                                                        onClick={this.pageClick}>{"Page " + page}</Button></div>;
+                                                        onClick={this.pageClick}>{'Page ' + page}</Button></div>
                         })
                     }
                 </Row>
@@ -170,6 +170,6 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                     </Modal.Footer>
                 </Modal>
             </div>
-        );
+        )
     }
 }

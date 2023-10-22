@@ -1,16 +1,17 @@
-import * as React from "react";
+import * as React from 'react'
+import {type ReactNode} from 'react'
 
-export class C5CorvetteSecrets extends React.Component<{}, {}> {
-
-    render() {
+export class C5CorvetteSecrets extends React.Component<unknown, unknown> {
+    render(): ReactNode {
         return (
             <div>
                 <h2 className="text-primary">C5 Corvette Tips and Secrets</h2>
                 <ul className="c5">
-                    <li>The little yellow "helper light" on the bottom of the rear-view mirror is to illuminate the
+                    <li>The little yellow &quot;helper light&quot; on the bottom of the rear-view mirror is to
+                        illuminate the
                         shifter area
                     </li>
-                    <li>You can put your key in the driver's door and turn it twice toward the front to unlock the
+                    <li>You can put your key in the driver&apos;s door and turn it twice toward the front to unlock the
                         passenger door and a third time to pop the trunk
                     </li>
                     <li>You can pop the trunk and also pop the gas cap cover by pulling on metal lines hidden in the
@@ -30,12 +31,14 @@ export class C5CorvetteSecrets extends React.Component<{}, {}> {
                     </li>
                     <li>You can reset the oil life by pumping the gas pedal three times with the engine off</li>
                     <li>Hold down the reset button while on one of the trip odometers and it changes that reading to the
-                        mils you've traveled since last starting the engine
+                        mils you&apos;ve traveled since last starting the engine
                     </li>
-                    <li>Hold down the Active Handling button for 5 seconds to engage 'Competitive Driving' if so
+                    <li>Hold down the Active Handling button for 5 seconds to engage &apos;Competitive Driving&apos; if
+                        so
                         equipped
                     </li>
-                    <li>If you pull the seatbelts all the way out while you're buckled in, they ratchet back in to hold
+                    <li>If you pull the seatbelts all the way out while you&apos;re buckled in, they ratchet back in to
+                        hold
                         you tighter into the seat
                     </li>
                     <li>Simply remove fuse #2 under the hood and your Daytime Running Lights will be out permanently.
@@ -70,7 +73,8 @@ export class C5CorvetteSecrets extends React.Component<{}, {}> {
                     <li>You can easily shift the 6 speed transmission up or down without the clutch if you match revs.
                         However, not generally a good idea.
                     </li>
-                    <li>You can eject the CD from the in-dash player without turning on any power. You don't even need
+                    <li>You can eject the CD from the in-dash player without turning on any power. You don&apos;t even
+                        need
                         the key in the ignition.
                     </li>
                     <li>The cruise will disengage if you purposely make sharp side to side turns while cruising at say
@@ -83,6 +87,6 @@ export class C5CorvetteSecrets extends React.Component<{}, {}> {
                     </li>
                 </ul>
             </div>
-        );
+        )
     }
 }

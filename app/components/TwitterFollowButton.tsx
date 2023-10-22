@@ -1,46 +1,46 @@
-import * as React from "react";
+import * as React from 'react'
+import {type ReactNode} from 'react'
 
 export interface OwnState {
-    initialized: boolean;
+    initialized: boolean
 }
 
-declare var twttr;
+declare let twttr
 
-export class TwitterFollowButton extends React.Component<{}, OwnState> {
-
-    state: OwnState;
-    node: any;
+export class TwitterFollowButton extends React.Component<unknown, OwnState> {
+    state: OwnState
+    node
 
     constructor(props) {
-        super(props);
-        this.state = {initialized: false};
-        this.nodeFunction = this.nodeFunction.bind(this);
+        super(props)
+        this.state = {initialized: false}
+        this.nodeFunction = this.nodeFunction.bind(this)
     }
 
-    componentDidMount() {
+    componentDidMount(): void {
         if (this.state.initialized) {
-            return;
+            return
         }
 
-        if (typeof twttr === "undefined") {
-            const twitterbutton = this.node;
-            const twitterscript = document.createElement("script");
-            twitterscript.src = "//platform.twitter.com/widgets.js";
-            twitterscript.async = true;
-            twitterscript.id = "twitter-wjs";
-            twitterbutton.parentNode.appendChild(twitterscript);
+        if (typeof twttr === 'undefined') {
+            const twitterbutton = this.node
+            const twitterscript = document.createElement('script')
+            twitterscript.src = '//platform.twitter.com/widgets.js'
+            twitterscript.async = true
+            twitterscript.id = 'twitter-wjs'
+            twitterbutton.parentNode.appendChild(twitterscript)
         } else {
-            twttr.widgets.load();
+            twttr.widgets.load()
         }
 
-        this.setState({initialized: true});
+        this.setState({initialized: true})
     }
 
-    nodeFunction(node) {
-        this.node = node;
+    nodeFunction(node): void {
+        this.node = node
     }
 
-    render() {
+    render(): ReactNode {
         return (
             <a ref={this.nodeFunction}
                href="https://twitter.com/halversondm"
@@ -48,6 +48,6 @@ export class TwitterFollowButton extends React.Component<{}, OwnState> {
                data-show-count={true}>
                 Follow @halversondm
             </a>
-        );
+        )
     }
 }

@@ -1,11 +1,11 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
+import * as React from 'react'
+import {type ReactNode} from 'react'
 
-export class Charger extends React.Component<{}, {}> {
-
-    render() {
+export class Charger extends React.Component<unknown, unknown> {
+    render(): ReactNode {
         return (
             <div>
                 <h2 className="text-primary">2012 Dodge Charger R/T Road &amp; Track with Super Track Pak</h2>
@@ -180,7 +180,7 @@ export class Charger extends React.Component<{}, {}> {
                             <li>Uconnect 8.4N CD/DVD/MP3/NAV</li>
                             <li>9 Amplified Speakers w/Subwoofer</li>
                             <li>506 Watt Amplifier</li>
-                            <li>8.4" Touchscreen Display</li>
+                            <li>8.4&quot; Touchscreen Display</li>
                             <li>SIRIUS Satellite Radio</li>
                             <li>Bluetooth Streaming Audio</li>
                             <li>SiriusXM Travel Link</li>
@@ -220,6 +220,6 @@ export class Charger extends React.Component<{}, {}> {
                 </div>
                 <img src="images/2012_charger.jpeg" className="img-responsive"/>
             </div>
-        );
+        )
     }
 }

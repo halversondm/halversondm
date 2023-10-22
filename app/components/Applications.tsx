@@ -1,11 +1,12 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
-import {Link} from "react-router-dom";
+import * as React from 'react'
+import {Link} from 'react-router-dom'
+import {type ReactNode} from 'react'
 
-export class Applications extends React.Component<{}, {}> {
-    render() {
+export class Applications extends React.Component<unknown, unknown> {
+    render(): ReactNode {
         return (
             <div>
                 <h2 className="text-primary">Apps</h2>
@@ -13,7 +14,7 @@ export class Applications extends React.Component<{}, {}> {
                     <div className="col-sm-6">
                         <h2 className="text-success">Discount Calculator</h2>
                         <p>I originally wrote this as a Sencha Touch app. However, I lost the
-                            code and I can't seem to recover it from the 'compiled' code that
+                            code and I can&apos;t seem to recover it from the &apos;compiled&apos; code that
                             Sencha helps you to put together. Anyway, I wrote it for Courtney in
                             2013 because she was working at an outlet store that offered this
                             style of discounts.</p>
@@ -72,6 +73,6 @@ export class Applications extends React.Component<{}, {}> {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }

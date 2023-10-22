@@ -1,46 +1,46 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
-import {GameService} from "./GameService";
+import * as React from 'react'
+import {GameService} from './GameService'
+import {type ReactNode} from 'react'
 
 export interface IGameState {
-    gameSuccess: boolean;
-    gameDraw: boolean;
-    gameLose: boolean;
-    explanation: string;
-    winner: string;
-    rock: string;
-    paper: string;
-    scissors: string;
-    lizard: string;
-    spock: string;
-    rock2: string;
-    paper2: string;
-    scissors2: string;
-    lizard2: string;
-    spock2: string;
+    gameSuccess: boolean
+    gameDraw: boolean
+    gameLose: boolean
+    explanation: string
+    winner: string
+    rock: string
+    paper: string
+    scissors: string
+    lizard: string
+    spock: string
+    rock2: string
+    paper2: string
+    scissors2: string
+    lizard2: string
+    spock2: string
 }
 
-export class Game extends React.Component<{}, IGameState> {
-
-    public state: IGameState;
-    private gameService: GameService;
+export class Game extends React.Component<unknown, IGameState> {
+    public state: IGameState
+    private readonly gameService: GameService
 
     constructor() {
-        super({});
-        this.state = this.initialState();
-        this.human = this.human.bind(this);
-        this.setPlayer1Class = this.setPlayer1Class.bind(this);
-        this.setPlayer2Class = this.setPlayer2Class.bind(this);
-        this.gameService = new GameService();
+        super({})
+        this.state = this.initialState()
+        this.human = this.human.bind(this)
+        this.setPlayer1Class = this.setPlayer1Class.bind(this)
+        this.setPlayer2Class = this.setPlayer2Class.bind(this)
+        this.gameService = new GameService()
     }
 
-    public render() {
+    render(): ReactNode {
         return (
             <div>
                 <h2 className="text-primary">Rock, Paper, Scissors, Lizard, Spock</h2>
-                <p>Play the popular game with your computer! In this version, you'll be
+                <p>Play the popular game with your computer! In this version, you&apos;ll be
                     playing with Lizard and Spock too.</p>
                 <div className="row">
                     <div className="col-xs-12 col-sm-6 col-md-8 btn-group img-responsive"
@@ -110,110 +110,110 @@ export class Game extends React.Component<{}, IGameState> {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 
-    private initialState() {
+    private initialState(): IGameState {
         return {
-            explanation: "",
+            explanation: '',
             gameDraw: true,
             gameLose: true,
             gameSuccess: true,
-            lizard: "btn btn-default",
-            lizard2: "btn btn-default",
-            paper: "btn btn-default",
-            paper2: "btn btn-default",
-            rock: "btn btn-default",
-            rock2: "btn btn-default",
-            scissors: "btn btn-default",
-            scissors2: "btn btn-default",
-            spock: "btn btn-default",
-            spock2: "btn btn-default",
-            winner: "",
-        };
+            lizard: 'btn btn-default',
+            lizard2: 'btn btn-default',
+            paper: 'btn btn-default',
+            paper2: 'btn btn-default',
+            rock: 'btn btn-default',
+            rock2: 'btn btn-default',
+            scissors: 'btn btn-default',
+            scissors2: 'btn btn-default',
+            spock: 'btn btn-default',
+            spock2: 'btn btn-default',
+            winner: ''
+        }
     }
 
-    private human(event) {
-        this.setState(this.initialState());
-        const choice = event.currentTarget.dataset.choice;
-        const player2 = this.gameService.getPick();
-        this.setPlayer1Class(choice);
-        this.setPlayer2Class(player2);
-        this.gameService.setPlayer1(choice);
-        this.gameService.setPlayer2(player2);
+    private human(event): void {
+        this.setState(this.initialState())
+        const choice = event.currentTarget.dataset.choice
+        const player2 = this.gameService.getPick()
+        this.setPlayer1Class(choice)
+        this.setPlayer2Class(player2)
+        this.gameService.setPlayer1(choice)
+        this.gameService.setPlayer2(player2)
         try {
-            this.gameService.takeTurn();
+            this.gameService.takeTurn()
         } catch (Error) {
             // no winner
         }
-        if (this.gameService.getWinner() === "Player 1") {
+        if (this.gameService.getWinner() === 'Player 1') {
             this.setState({
-                winner: "You win!",
+                winner: 'You win!',
                 gameSuccess: false,
                 gameDraw: true,
                 gameLose: true,
-                explanation: this.gameService.getResult(),
-            });
-        } else if (this.gameService.getWinner() === "Player 2") {
+                explanation: this.gameService.getResult()
+            })
+        } else if (this.gameService.getWinner() === 'Player 2') {
             this.setState({
-                winner: "The computer wins!",
+                winner: 'The computer wins!',
                 gameLose: false,
                 gameSuccess: true,
                 gameDraw: true,
-                explanation: this.gameService.getResult(),
-            });
+                explanation: this.gameService.getResult()
+            })
         } else {
             this.setState({
                 winner: this.gameService.getWinner(),
                 gameDraw: false,
                 gameLose: true,
                 gameSuccess: true,
-                explanation: this.gameService.getResult(),
-            });
+                explanation: this.gameService.getResult()
+            })
         }
     }
 
-    private setPlayer1Class(choice) {
+    private setPlayer1Class(choice): void {
         switch (choice) {
-            case "rock":
-                this.setState({rock: "btn btn-default btn-success"});
-                break;
-            case "spock":
-                this.setState({spock: "btn btn-default btn-success"});
-                break;
-            case "lizard":
-                this.setState({lizard: "btn btn-default btn-success"});
-                break;
-            case "scissors":
-                this.setState({scissors: "btn btn-default btn-success"});
-                break;
-            case "paper":
-                this.setState({paper: "btn btn-default btn-success"});
-                break;
+            case 'rock':
+                this.setState({rock: 'btn btn-default btn-success'})
+                break
+            case 'spock':
+                this.setState({spock: 'btn btn-default btn-success'})
+                break
+            case 'lizard':
+                this.setState({lizard: 'btn btn-default btn-success'})
+                break
+            case 'scissors':
+                this.setState({scissors: 'btn btn-default btn-success'})
+                break
+            case 'paper':
+                this.setState({paper: 'btn btn-default btn-success'})
+                break
             default:
-                throw new Error("error with choice");
+                throw new Error('error with choice')
         }
     }
 
-    private setPlayer2Class(choice) {
+    private setPlayer2Class(choice): void {
         switch (choice) {
-            case "rock":
-                this.setState({rock2: "btn btn-default btn-danger"});
-                break;
-            case "spock":
-                this.setState({spock2: "btn btn-default btn-danger"});
-                break;
-            case "lizard":
-                this.setState({lizard2: "btn btn-default btn-danger"});
-                break;
-            case "scissors":
-                this.setState({scissors2: "btn btn-default btn-danger"});
-                break;
-            case "paper":
-                this.setState({paper2: "btn btn-default btn-danger"});
-                break;
+            case 'rock':
+                this.setState({rock2: 'btn btn-default btn-danger'})
+                break
+            case 'spock':
+                this.setState({spock2: 'btn btn-default btn-danger'})
+                break
+            case 'lizard':
+                this.setState({lizard2: 'btn btn-default btn-danger'})
+                break
+            case 'scissors':
+                this.setState({scissors2: 'btn btn-default btn-danger'})
+                break
+            case 'paper':
+                this.setState({paper2: 'btn btn-default btn-danger'})
+                break
             default:
-                throw new Error("error with choice");
+                throw new Error('error with choice')
         }
     }
 }

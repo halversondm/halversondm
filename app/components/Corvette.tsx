@@ -1,9 +1,9 @@
-import * as React from "react";
-import {PhotoGallery} from "./PhotoGallery";
+import * as React from 'react'
+import {PhotoGallery} from './PhotoGallery'
+import {type ReactNode} from 'react'
 
-export class Corvette extends React.Component<{}, {}> {
-
-    render() {
+export class Corvette extends React.Component<unknown, unknown> {
+    render(): ReactNode {
         return (
             <div>
                 <h2 className="text-primary">2001 Chevrolet Corvette Coupe</h2>
@@ -11,6 +11,6 @@ export class Corvette extends React.Component<{}, {}> {
                     air intake, short throw shifter and black logoed interior mats.</p>
                 <PhotoGallery perPage={9} totalPhotos={9} filePrefix="images/corvettePhotos/photo" fileSuffix=".jpg"/>
             </div>
-        );
+        )
     }
 }

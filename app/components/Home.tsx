@@ -1,11 +1,12 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
-import {Link} from "react-router-dom";
+import * as React from 'react'
+import {Link} from 'react-router-dom'
+import {type ReactNode} from 'react'
 
-export class Home extends React.Component<{}, {}> {
-    render() {
+export class Home extends React.Component<unknown, unknown> {
+    render(): ReactNode {
         return (
             <div>
                 <div className="jumbotron">
@@ -35,7 +36,7 @@ export class Home extends React.Component<{}, {}> {
                     </div>
                     <div className="col-md-3">
                         <h2 className="text-primary">Resume</h2>
-                        <p>Who I've worked for and my education details</p>
+                        <p>Who I&apos;ve worked for and my education details</p>
                         <p>
                             <Link className="btn btn-info" to="/resume" role="button">View
                                 details &raquo;</Link>
@@ -51,6 +52,6 @@ export class Home extends React.Component<{}, {}> {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }

@@ -1,67 +1,67 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from "react";
+import * as React from 'react'
+import {type ReactNode} from 'react'
 
 export interface Base64State {
-    encodeInput: string;
-    encodeOutput: string;
-    decodeInput: string;
-    decodeOutput: string;
+    encodeInput: string
+    encodeOutput: string
+    decodeInput: string
+    decodeOutput: string
 }
 
-export class Base64 extends React.Component<{}, Base64State> {
-
-    state: Base64State;
+export class Base64 extends React.Component<unknown, Base64State> {
+    state: Base64State
 
     constructor() {
-        super({});
+        super({})
         this.state = {
-            encodeInput: "",
-            encodeOutput: "",
-            decodeInput: "",
-            decodeOutput: "",
-        };
-        this.setDecodeInput = this.setDecodeInput.bind(this);
-        this.setEncodeInput = this.setEncodeInput.bind(this);
-        this.goDecode = this.goDecode.bind(this);
-        this.goEncode = this.goEncode.bind(this);
-        this.clearDecode = this.clearDecode.bind(this);
-        this.clearEncode = this.clearEncode.bind(this);
+            encodeInput: '',
+            encodeOutput: '',
+            decodeInput: '',
+            decodeOutput: ''
+        }
+        this.setDecodeInput = this.setDecodeInput.bind(this)
+        this.setEncodeInput = this.setEncodeInput.bind(this)
+        this.goDecode = this.goDecode.bind(this)
+        this.goEncode = this.goEncode.bind(this)
+        this.clearDecode = this.clearDecode.bind(this)
+        this.clearEncode = this.clearEncode.bind(this)
     }
 
-    setEncodeInput(event: any) {
-        this.setState({encodeInput: event.target.value});
+    setEncodeInput(event): void {
+        this.setState({encodeInput: event.target.value})
     }
 
-    goEncode() {
-        const encodeOutput = window.btoa(this.state.encodeInput);
-        this.setState({encodeOutput});
+    goEncode(): void {
+        const encodeOutput = window.btoa(this.state.encodeInput)
+        this.setState({encodeOutput})
     }
 
-    clearEncode() {
-        this.setState({encodeInput: "", encodeOutput: ""});
+    clearEncode(): void {
+        this.setState({encodeInput: '', encodeOutput: ''})
     }
 
-    setDecodeInput(event: any) {
-        this.setState({decodeInput: event.target.value});
+    setDecodeInput(event): void {
+        this.setState({decodeInput: event.target.value})
     }
 
-    goDecode() {
-        const decodeOutput = window.atob(this.state.decodeInput);
-        this.setState({decodeOutput});
+    goDecode(): void {
+        const decodeOutput = window.atob(this.state.decodeInput)
+        this.setState({decodeOutput})
     }
 
-    clearDecode() {
-        this.setState({decodeInput: "", decodeOutput: ""});
+    clearDecode(): void {
+        this.setState({decodeInput: '', decodeOutput: ''})
     }
 
-    render() {
+    render(): ReactNode {
         return (
             <div>
                 <h4 className="text-success">An all Bootstrap and React implementation of
                     converting your data to and from Base64 encoding. No tracking of
-                    your data is done. No calls to other services. It"s all in your
+                    your data is done. No calls to other services. It&quot;s all in your
                     browser.</h4>
                 <div>
                     <div title="Encode" id="encodeTab">
@@ -126,6 +126,6 @@ export class Base64 extends React.Component<{}, Base64State> {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }

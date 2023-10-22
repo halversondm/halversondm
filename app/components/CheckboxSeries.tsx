@@ -1,82 +1,79 @@
 /**
  * Created by Daniel on 6/30/2016.
  */
-import * as React from "react";
+import * as React from 'react'
+import {type ReactNode} from 'react'
 
 export interface CheckboxSeriesProps {
-    labels: string[];
-    selected: string[];
-    otherLabelPlaceholder: string;
-    otherLabelText: string;
+    labels: string[]
+    selected: string[]
+    otherLabelPlaceholder: string
+    otherLabelText: string
 }
 
 export interface CheckboxSeriesState {
-    otherLabelText: string;
-    otherLabelDisabled: boolean;
-    selected: string[];
+    otherLabelText: string
+    otherLabelDisabled: boolean
+    selected: string[]
 }
 
 export class CheckboxSeries extends React.Component<CheckboxSeriesProps, CheckboxSeriesState> {
-
-    public state: CheckboxSeriesState;
+    public state: CheckboxSeriesState
 
     public static defaultProps: CheckboxSeriesProps = {
         labels: [],
         selected: [],
-        otherLabelPlaceholder: "",
-        otherLabelText: "",
-    };
+        otherLabelPlaceholder: '',
+        otherLabelText: ''
+    }
 
     constructor(props: CheckboxSeriesProps) {
-        super(props);
+        super(props)
         this.state = {
             otherLabelText: this.props.otherLabelText,
             otherLabelDisabled: true,
-            selected: this.props.selected,
-        };
-        this.toggleSelected = this.toggleSelected.bind(this);
-        this.otherLabelText = this.otherLabelText.bind(this);
-        this.otherLabelChange = this.otherLabelChange.bind(this);
-        this.pullCurrentState = this.pullCurrentState.bind(this);
+            selected: this.props.selected
+        }
+        this.toggleSelected = this.toggleSelected.bind(this)
+        this.otherLabelText = this.otherLabelText.bind(this)
+        this.otherLabelChange = this.otherLabelChange.bind(this)
+        this.pullCurrentState = this.pullCurrentState.bind(this)
     }
 
-    toggleSelected(event: any) {
-        const label = event.target.value;
-        const selected = this.state.selected;
-        const index = selected.indexOf(label);
+    toggleSelected(event): void {
+        const label = event.target.value
+        const selected = this.state.selected
+        const index = selected.indexOf(label)
         if (index > -1) {
-            selected.splice(index, 1);
+            selected.splice(index, 1)
         } else {
-            selected.push(label);
+            selected.push(label)
         }
-        if (label === "Other") {
-            this.otherLabelText();
+        if (label === 'Other') {
+            this.otherLabelText()
         }
-        this.setState({selected});
+        this.setState({selected})
     }
 
-    otherLabelText() {
-        const otherLabelDisabled = !this.state.otherLabelDisabled;
-        this.setState({otherLabelDisabled});
+    otherLabelText(): void {
+        const otherLabelDisabled = !this.state.otherLabelDisabled
+        this.setState({otherLabelDisabled})
     }
 
-    otherLabelChange(event: any) {
-        const otherLabelText = event.target.value;
-        this.setState({otherLabelText});
+    otherLabelChange(event): void {
+        const otherLabelText = event.target.value
+        this.setState({otherLabelText})
     }
 
-    pullCurrentState() {
-        return {
-            selected: this.state.selected,
-            otherLabelText: this.state.otherLabelText,
-        };
+    pullCurrentState(): CheckboxSeriesState {
+        return this.state
     }
 
-    reset() {
-        this.setState({otherLabelText: "", selected: [], otherLabelDisabled: true});
+    reset(): void {
+        this.setState({otherLabelText: '', selected: [], otherLabelDisabled: true})
     }
 
-    render() {
+    render(): ReactNode {
         return (
             <div>
                 {
@@ -85,16 +82,16 @@ export class CheckboxSeries extends React.Component<CheckboxSeriesProps, Checkbo
                             <label>
                                 <input id={label} name="selectedLabel[]" type="checkbox"
                                        value={label}
-                                       checked={this.state.selected.indexOf(label) > -1}
+                                       checked={this.state.selected.includes(label)}
                                        onClick={this.toggleSelected}/> {label}
                             </label>
-                        </div>;
+                        </div>
                     })
                 }
                 <div className="checkbox">
                     <label>
                         <input id="otherLabel" type="checkbox" name="selectedLabel[]"
-                               checked={this.state.selected.indexOf("Other") > -1}
+                               checked={this.state.selected.includes('Other')}
                                value="Other"
                                onClick={this.toggleSelected}/> Other
                     </label>
@@ -104,6 +101,6 @@ export class CheckboxSeries extends React.Component<CheckboxSeriesProps, Checkbo
                        placeholder={this.props.otherLabelPlaceholder}
                        disabled={this.state.otherLabelDisabled}/>
             </div>
-        );
+        )
     }
 }
