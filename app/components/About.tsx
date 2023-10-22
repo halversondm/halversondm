@@ -2,11 +2,11 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {type ReactNode} from 'react'
+import { type ReactNode } from 'react'
 
 export class About extends React.Component<unknown, unknown> {
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">About Dan</h2>
                 <h4 className="text-success">My wife calls me a &apos;computer geek&apos;. I don&apos;t
@@ -63,6 +63,6 @@ export class About extends React.Component<unknown, unknown> {
                 <h4 className="text-success">Yard Work</h4>
                 <p>I hate it.</p>
             </div>
-        )
-    }
+    )
+  }
 }

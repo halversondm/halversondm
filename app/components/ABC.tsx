@@ -2,262 +2,262 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {Modal} from 'react-bootstrap'
-import {CheckboxSeries} from './CheckboxSeries'
-import {type ReactNode} from 'react'
+import { Modal } from 'react-bootstrap'
+import { CheckboxSeries } from './CheckboxSeries'
+import { type ReactNode } from 'react'
 
 export interface ABCState {
-    antecedentOtherDisabled: boolean
-    messages: string[]
-    showModal: boolean
-    user: UserState
+  antecedentOtherDisabled: boolean
+  messages: string[]
+  showModal: boolean
+  user: UserState
 }
 
 export interface UserState {
-    when: string
-    antecedent: string
-    antecedentOther: string
-    location: string
-    people: string[]
-    peopleOther: string
-    behavior: string[]
-    behaviorOther: string
-    duration: string
-    intensity: string
-    consequence: string[]
-    consequenceOther: string
+  when: string
+  antecedent: string
+  antecedentOther: string
+  location: string
+  people: string[]
+  peopleOther: string
+  behavior: string[]
+  behaviorOther: string
+  duration: string
+  intensity: string
+  consequence: string[]
+  consequenceOther: string
 }
 
 export class ABC extends React.Component<unknown, ABCState> {
-    public state: ABCState
-    private people: CheckboxSeries
-    private behaviors: CheckboxSeries
-    private consequences: CheckboxSeries
+  public state: ABCState
+  private people: CheckboxSeries
+  private behaviors: CheckboxSeries
+  private consequences: CheckboxSeries
 
-    private readonly antecedentValues: string[] = ['Given Direction/task, asked to do something',
-        'Asked to wait', 'Difficulty with task/activity',
-        'Preferred activity interrupted', 'Activity/Item denied ("told no")',
-        'Loud, noisy environment', 'Given assistance / correction',
-        'Transition between locations', 'Attention given to others',
-        'Attention not given when wanted', 'Left alone (no indiv. attention)']
+  private readonly antecedentValues: string[] = ['Given Direction/task, asked to do something',
+    'Asked to wait', 'Difficulty with task/activity',
+    'Preferred activity interrupted', 'Activity/Item denied ("told no")',
+    'Loud, noisy environment', 'Given assistance / correction',
+    'Transition between locations', 'Attention given to others',
+    'Attention not given when wanted', 'Left alone (no indiv. attention)']
 
-    private readonly locationValues: string[] = ['Home', 'School', 'Other']
-    private readonly peopleValues: string[] = ['Mom', 'Dad', 'Sibling', 'Grandparents', 'Alone', 'Peers']
-    private readonly behaviorValues: string[] = ['Refuse to follow directions', 'Makes verbal threats',
-        'Grabbing/pulling', 'Crying/Whining', 'Screaming/Yelling', 'Scratching',
-        'Biting', 'Spitting', 'Kicking', 'Flopping', 'Running Away',
-        'Destroying property', 'Hitting Self', 'Hitting Others',
-        'Verbal Refusal']
+  private readonly locationValues: string[] = ['Home', 'School', 'Other']
+  private readonly peopleValues: string[] = ['Mom', 'Dad', 'Sibling', 'Grandparents', 'Alone', 'Peers']
+  private readonly behaviorValues: string[] = ['Refuse to follow directions', 'Makes verbal threats',
+    'Grabbing/pulling', 'Crying/Whining', 'Screaming/Yelling', 'Scratching',
+    'Biting', 'Spitting', 'Kicking', 'Flopping', 'Running Away',
+    'Destroying property', 'Hitting Self', 'Hitting Others',
+    'Verbal Refusal']
 
-    private readonly durationValues: string[] = ['< 1 min', '1 - 5 min', '5 - 10 min', '10 - 30 min',
-        '30 min - 1 hr', '1 - 2 hrs', '2 - 3 hrs', '3+ hrs']
+  private readonly durationValues: string[] = ['< 1 min', '1 - 5 min', '5 - 10 min', '10 - 30 min',
+    '30 min - 1 hr', '1 - 2 hrs', '2 - 3 hrs', '3+ hrs']
 
-    private readonly intensityValues: string[] = ['Low', 'Medium', 'High']
-    private readonly consequenceValues: string[] = ['Verbal Redirection', 'Physical assist/prompt',
-        'Ignored problem behavior', 'Kept on demand',
-        'Verbal reprimand', 'Removed from activity',
-        'Given a different activity/task', 'Lost Privilege', 'Sent to room',
-        'Given a time out', 'Left alone']
+  private readonly intensityValues: string[] = ['Low', 'Medium', 'High']
+  private readonly consequenceValues: string[] = ['Verbal Redirection', 'Physical assist/prompt',
+    'Ignored problem behavior', 'Kept on demand',
+    'Verbal reprimand', 'Removed from activity',
+    'Given a different activity/task', 'Lost Privilege', 'Sent to room',
+    'Given a time out', 'Left alone']
 
-    private readonly refHandlers = {
-        peopleRef: (ref) => (this.people = ref),
-        behaviorsRef: (ref) => (this.behaviors = ref),
-        consequencesRef: (ref) => (this.consequences = ref)
+  private readonly refHandlers = {
+    peopleRef: (ref) => (this.people = ref),
+    behaviorsRef: (ref) => (this.behaviors = ref),
+    consequencesRef: (ref) => (this.consequences = ref)
+  }
+
+  constructor () {
+    super({})
+    this.state = this.initialState()
+    this.close = this.close.bind(this)
+    this.getTime = this.getTime.bind(this)
+    this.antecedentRadios = this.antecedentRadios.bind(this)
+    this.antecedentOtherText = this.antecedentOtherText.bind(this)
+    this.locationRadios = this.locationRadios.bind(this)
+    this.durationRadios = this.durationRadios.bind(this)
+    this.intensityRadios = this.intensityRadios.bind(this)
+    this.save = this.save.bind(this)
+    this.postToServer = this.postToServer.bind(this)
+    this.validSave = this.validSave.bind(this)
+    this.reset = this.reset.bind(this)
+  }
+
+  initialState (): ABCState {
+    return {
+      antecedentOtherDisabled: true,
+      messages: [],
+      showModal: false,
+      user: {
+        when: '',
+        antecedent: '',
+        antecedentOther: '',
+        location: '',
+        people: [],
+        peopleOther: '',
+        behavior: [],
+        behaviorOther: '',
+        duration: '',
+        intensity: '',
+        consequence: [],
+        consequenceOther: ''
+      }
     }
+  }
 
-    constructor() {
-        super({})
-        this.state = this.initialState()
-        this.close = this.close.bind(this)
-        this.getTime = this.getTime.bind(this)
-        this.antecedentRadios = this.antecedentRadios.bind(this)
-        this.antecedentOtherText = this.antecedentOtherText.bind(this)
-        this.locationRadios = this.locationRadios.bind(this)
-        this.durationRadios = this.durationRadios.bind(this)
-        this.intensityRadios = this.intensityRadios.bind(this)
-        this.save = this.save.bind(this)
-        this.postToServer = this.postToServer.bind(this)
-        this.validSave = this.validSave.bind(this)
-        this.reset = this.reset.bind(this)
+  close (): void {
+    this.setState({ showModal: false })
+  }
+
+  getTime (): void {
+    const user = this.state.user
+    const time = new Date()
+    user.when = time.toLocaleString()
+    this.setState({ user })
+  }
+
+  antecedentRadios (event): void {
+    const antecedent = event.target.value
+    const user = this.state.user
+    user.antecedent = antecedent
+    let antecedentOtherDisabled = this.state.antecedentOtherDisabled
+    if (antecedent === 'Other') {
+      antecedentOtherDisabled = false
+    } else {
+      antecedentOtherDisabled = true
+      user.antecedentOther = ''
     }
+    this.setState({
+      user,
+      antecedentOtherDisabled
+    })
+  }
 
-    initialState(): ABCState {
-        return {
-            antecedentOtherDisabled: true,
-            messages: [],
-            showModal: false,
-            user: {
-                when: '',
-                antecedent: '',
-                antecedentOther: '',
-                location: '',
-                people: [],
-                peopleOther: '',
-                behavior: [],
-                behaviorOther: '',
-                duration: '',
-                intensity: '',
-                consequence: [],
-                consequenceOther: ''
-            }
-        }
+  antecedentOtherText (event): void {
+    const antecedentOtherText = event.target.value
+    const user = this.state.user
+    user.antecedentOther = antecedentOtherText
+    this.setState({ user })
+  }
+
+  locationRadios (event): void {
+    const location = event.target.value
+    const user = this.state.user
+    user.location = location
+    this.setState({ user })
+  }
+
+  durationRadios (event): void {
+    const duration = event.target.value
+    const user = this.state.user
+    user.duration = duration
+    this.setState({ user })
+  }
+
+  intensityRadios (event): void {
+    const intensity = event.target.value
+    const user = this.state.user
+    user.intensity = intensity
+    this.setState({ user })
+  }
+
+  save (): void {
+    const user = this.state.user
+    const peoplePull = this.people.pullCurrentState()
+    user.people = peoplePull.selected
+    user.peopleOther = peoplePull.otherLabelText
+    const behaviorPull = this.behaviors.pullCurrentState()
+    user.behavior = behaviorPull.selected
+    user.behaviorOther = behaviorPull.otherLabelText
+    const consequencePull = this.consequences.pullCurrentState()
+    user.consequence = consequencePull.selected
+    user.consequenceOther = consequencePull.otherLabelText
+    this.setState({ user, showModal: true })
+    if (this.validSave()) {
+      this.postToServer()
     }
+  }
 
-    close(): void {
-        this.setState({showModal: false})
+  postToServer (): void {
+    const data: string = JSON.stringify(this.state.user)
+    console.log('ABC data sent ', data)
+    const xhr: XMLHttpRequest = new XMLHttpRequest()
+    xhr.open('POST', '/saveABC')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onload = () => {
+      const messages: string[] = []
+      if (xhr.status >= 200 && xhr.status < 400) {
+        console.log('succ ', xhr.responseText)
+        messages.push(xhr.responseText)
+      } else {
+        console.log('unsucc ', xhr.responseText)
+        messages.push(xhr.status + ' ' + xhr.statusText)
+      }
+      this.setState({ messages })
     }
-
-    getTime(): void {
-        const user = this.state.user
-        const time = new Date()
-        user.when = time.toLocaleString()
-        this.setState({user})
+    xhr.onerror = () => {
+      console.log(xhr)
     }
+    xhr.send(data)
+  }
 
-    antecedentRadios(event): void {
-        const antecedent = event.target.value
-        const user = this.state.user
-        user.antecedent = antecedent
-        let antecedentOtherDisabled = this.state.antecedentOtherDisabled
-        if (antecedent === 'Other') {
-            antecedentOtherDisabled = false
-        } else {
-            antecedentOtherDisabled = true
-            user.antecedentOther = ''
-        }
-        this.setState({
-            user,
-            antecedentOtherDisabled
-        })
+  validSave (): boolean {
+    const messages: string[] = []
+    if (this.state.user.people.length === 0) {
+      messages.push('At least one Person is required to save.')
+    } else if (this.state.user.people.indexOf('Other') === 0) {
+      if (this.state.user.peopleOther === '') {
+        messages.push(
+          'For People - Other, the text description of Other must be entered.')
+      }
     }
-
-    antecedentOtherText(event): void {
-        const antecedentOtherText = event.target.value
-        const user = this.state.user
-        user.antecedentOther = antecedentOtherText
-        this.setState({user})
+    if (this.state.user.behavior.length === 0) {
+      messages.push('At least one Behavior is required to save.')
+    } else if (this.state.user.behavior.indexOf('Other') === 0) {
+      if (this.state.user.behaviorOther === '') {
+        messages.push(
+          'For Behavior - Other, the text description of Other must be entered.')
+      }
     }
-
-    locationRadios(event): void {
-        const location = event.target.value
-        const user = this.state.user
-        user.location = location
-        this.setState({user})
+    if (this.state.user.consequence.length === 0) {
+      messages.push('At least one Consequence is required to save.')
+    } else if (this.state.user.consequence.indexOf('Other') === 0) {
+      if (this.state.user.consequenceOther === '') {
+        messages.push(
+          'For Consequence - Other, the text description of Other must be entered.')
+      }
     }
-
-    durationRadios(event): void {
-        const duration = event.target.value
-        const user = this.state.user
-        user.duration = duration
-        this.setState({user})
+    if (this.state.user.antecedent.length === 0) {
+      messages.push('An Antecedent is required to save.')
+    } else if (this.state.user.antecedent === 'Other') {
+      if (this.state.user.antecedentOther === '') {
+        messages.push(
+          'For Antecedent - Other, the text description of Other must be entered.')
+      }
     }
-
-    intensityRadios(event): void {
-        const intensity = event.target.value
-        const user = this.state.user
-        user.intensity = intensity
-        this.setState({user})
+    if (this.state.user.location.length === 0) {
+      messages.push('A Location is required to save.')
     }
-
-    save(): void {
-        const user = this.state.user
-        const peoplePull = this.people.pullCurrentState()
-        user.people = peoplePull.selected
-        user.peopleOther = peoplePull.otherLabelText
-        const behaviorPull = this.behaviors.pullCurrentState()
-        user.behavior = behaviorPull.selected
-        user.behaviorOther = behaviorPull.otherLabelText
-        const consequencePull = this.consequences.pullCurrentState()
-        user.consequence = consequencePull.selected
-        user.consequenceOther = consequencePull.otherLabelText
-        this.setState({user, showModal: true})
-        if (this.validSave()) {
-            this.postToServer()
-        }
+    if (this.state.user.duration.length === 0) {
+      messages.push('A Duration is required to save.')
     }
-
-    postToServer(): void {
-        const data: string = JSON.stringify(this.state.user)
-        console.log('ABC data sent ', data)
-        const xhr: XMLHttpRequest = new XMLHttpRequest()
-        xhr.open('POST', '/saveABC')
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.onload = () => {
-            const messages: string[] = []
-            if (xhr.status >= 200 && xhr.status < 400) {
-                console.log('succ ', xhr.responseText)
-                messages.push(xhr.responseText)
-            } else {
-                console.log('unsucc ', xhr.responseText)
-                messages.push(xhr.status + ' ' + xhr.statusText)
-            }
-            this.setState({messages})
-        }
-        xhr.onerror = () => {
-            console.log(xhr)
-        }
-        xhr.send(data)
+    if (this.state.user.intensity.length === 0) {
+      messages.push('An Intensity is required to save.')
     }
-
-    validSave(): boolean {
-        const messages: string[] = []
-        if (this.state.user.people.length === 0) {
-            messages.push('At least one Person is required to save.')
-        } else if (this.state.user.people.indexOf('Other') === 0) {
-            if (this.state.user.peopleOther === '') {
-                messages.push(
-                    'For People - Other, the text description of Other must be entered.')
-            }
-        }
-        if (this.state.user.behavior.length === 0) {
-            messages.push('At least one Behavior is required to save.')
-        } else if (this.state.user.behavior.indexOf('Other') === 0) {
-            if (this.state.user.behaviorOther === '') {
-                messages.push(
-                    'For Behavior - Other, the text description of Other must be entered.')
-            }
-        }
-        if (this.state.user.consequence.length === 0) {
-            messages.push('At least one Consequence is required to save.')
-        } else if (this.state.user.consequence.indexOf('Other') === 0) {
-            if (this.state.user.consequenceOther === '') {
-                messages.push(
-                    'For Consequence - Other, the text description of Other must be entered.')
-            }
-        }
-        if (this.state.user.antecedent.length === 0) {
-            messages.push('An Antecedent is required to save.')
-        } else if (this.state.user.antecedent === 'Other') {
-            if (this.state.user.antecedentOther === '') {
-                messages.push(
-                    'For Antecedent - Other, the text description of Other must be entered.')
-            }
-        }
-        if (this.state.user.location.length === 0) {
-            messages.push('A Location is required to save.')
-        }
-        if (this.state.user.duration.length === 0) {
-            messages.push('A Duration is required to save.')
-        }
-        if (this.state.user.intensity.length === 0) {
-            messages.push('An Intensity is required to save.')
-        }
-        if (this.state.user.when.length === 0) {
-            messages.push('The date and time of the ABC is required to save.')
-        }
-        this.setState({messages})
-        return messages.length === 0
+    if (this.state.user.when.length === 0) {
+      messages.push('The date and time of the ABC is required to save.')
     }
+    this.setState({ messages })
+    return messages.length === 0
+  }
 
-    reset(): void {
-        this.setState(this.initialState())
-        this.people.reset()
-        this.behaviors.reset()
-        this.consequences.reset()
-    }
+  reset (): void {
+    this.setState(this.initialState())
+    this.people.reset()
+    this.behaviors.reset()
+    this.consequences.reset()
+  }
 
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">ABC Checklist</h2>
                 <div id="abcChecklist">
@@ -276,7 +276,7 @@ export class ABC extends React.Component<unknown, ABCState> {
                             <br/>
                             {
                                 this.antecedentValues.map((antecedent, i) => {
-                                    return <div className="radio" key={i}>
+                                  return <div className="radio" key={i}>
                                         <label>
                                             <input type="radio" value={antecedent}
                                                    onClick={this.antecedentRadios}
@@ -302,7 +302,7 @@ export class ABC extends React.Component<unknown, ABCState> {
                             <br/>
                             {
                                 this.locationValues.map((location, i) => {
-                                    return <div className="radio-inline"
+                                  return <div className="radio-inline"
                                                 key={i}>
                                         <label>
                                             <input type="radio" onClick={this.locationRadios}
@@ -332,7 +332,7 @@ export class ABC extends React.Component<unknown, ABCState> {
                             <br/>
                             {
                                 this.durationValues.map((duration, i) => {
-                                    return <div className="radio-inline" key={i}>
+                                  return <div className="radio-inline" key={i}>
                                         <label>
                                             <input type="radio" onClick={this.durationRadios}
                                                    checked={this.state.user.duration === duration}
@@ -345,7 +345,7 @@ export class ABC extends React.Component<unknown, ABCState> {
                             <br/>
                             {
                                 this.intensityValues.map((intensity, i) => {
-                                    return <div className="radio-inline" key={i}>
+                                  return <div className="radio-inline" key={i}>
                                         <label>
                                             <input type="radio" onClick={this.intensityRadios}
                                                    checked={this.state.user.intensity === intensity}
@@ -388,13 +388,13 @@ export class ABC extends React.Component<unknown, ABCState> {
                         <ul>
                             {
                                 this.state.messages.map((message, i) => {
-                                    return <li key={i}>{message}</li>
+                                  return <li key={i}>{message}</li>
                                 })
                             }
                         </ul>
                     </Modal.Body>
                     <Modal.Footer>
-                        <p style={{right: 'auto'}}>Click anywhere to continue</p>
+                        <p style={{ right: 'auto' }}>Click anywhere to continue</p>
                     </Modal.Footer>
                 </Modal>
                 <div id="abcModal" className="modal">
@@ -407,18 +407,18 @@ export class ABC extends React.Component<unknown, ABCState> {
                                 <ul>
                                     {
                                         this.state.messages.map((message, i) => {
-                                            return <li key={i}>{message}</li>
+                                          return <li key={i}>{message}</li>
                                         })
                                     }
                                 </ul>
                             </div>
                             <div className="modal-footer">
-                                <p style={{right: 'auto'}}>Click anywhere to continue</p>
+                                <p style={{ right: 'auto' }}>Click anywhere to continue</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        )
-    }
+    )
+  }
 }

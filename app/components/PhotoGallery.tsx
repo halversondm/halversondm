@@ -2,140 +2,140 @@
  * Created by Daniel on 6/28/2016.
  */
 import * as React from 'react'
-import {type ReactNode} from 'react'
-import {Button, Modal, Row} from 'react-bootstrap'
+import { type ReactNode } from 'react'
+import { Button, Modal, Row } from 'react-bootstrap'
 
 export interface PhotoGalleryProps {
-    perPage: number
-    totalPhotos: number
-    filePrefix: string
-    fileSuffix: string
+  perPage: number
+  totalPhotos: number
+  filePrefix: string
+  fileSuffix: string
 }
 
 export interface PhotoGalleryState {
-    photoArray: string[]
-    pages: number[]
-    firstPhoto: number[]
-    lastPhoto: number[]
-    hidePrevious: boolean
-    hideNext: boolean
-    showModal: boolean
-    photoIndex: number
+  photoArray: string[]
+  pages: number[]
+  firstPhoto: number[]
+  lastPhoto: number[]
+  hidePrevious: boolean
+  hideNext: boolean
+  showModal: boolean
+  photoIndex: number
 }
 
 export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGalleryState> {
-    constructor(props: PhotoGalleryProps) {
-        super(props)
-        this.state = {
-            photoArray: [],
-            pages: [],
-            firstPhoto: [],
-            lastPhoto: [],
-            hidePrevious: false,
-            hideNext: false,
-            showModal: false,
-            photoIndex: 0
+  constructor (props: PhotoGalleryProps) {
+    super(props)
+    this.state = {
+      photoArray: [],
+      pages: [],
+      firstPhoto: [],
+      lastPhoto: [],
+      hidePrevious: false,
+      hideNext: false,
+      showModal: false,
+      photoIndex: 0
+    }
+    this.init = this.init.bind(this)
+    this.buildArray = this.buildArray.bind(this)
+    this.imageClick = this.imageClick.bind(this)
+    this.close = this.close.bind(this)
+    this.next = this.next.bind(this)
+    this.prev = this.prev.bind(this)
+    this.pageClick = this.pageClick.bind(this)
+    this.showHideButtons = this.showHideButtons.bind(this)
+  }
+
+  componentDidMount (): void {
+    this.init()
+  }
+
+  init (): void {
+    let go = true
+    let page = 0
+    const firstPhoto: number[] = []
+    const lastPhoto: number[] = []
+    const pages: number[] = []
+    while (go) {
+      if (page === 0) {
+        firstPhoto.push(1)
+        lastPhoto.push(this.props.perPage)
+      } else {
+        const nextFirst = lastPhoto[page - 1] + 1
+        let nextLast = nextFirst + this.props.perPage
+        if (nextLast > this.props.totalPhotos) {
+          nextLast = this.props.totalPhotos
         }
-        this.init = this.init.bind(this)
-        this.buildArray = this.buildArray.bind(this)
-        this.imageClick = this.imageClick.bind(this)
-        this.close = this.close.bind(this)
-        this.next = this.next.bind(this)
-        this.prev = this.prev.bind(this)
-        this.pageClick = this.pageClick.bind(this)
-        this.showHideButtons = this.showHideButtons.bind(this)
+        firstPhoto.push(nextFirst)
+        lastPhoto.push(nextLast)
+      }
+
+      pages.push(page + 1)
+      if (lastPhoto[page] === this.props.totalPhotos) {
+        go = false
+      } else {
+        page += 1
+      }
     }
+    this.setState({
+      pages,
+      firstPhoto,
+      lastPhoto
+    })
+    this.buildArray(1, firstPhoto, lastPhoto)
+  }
 
-    componentDidMount(): void {
-        this.init()
+  buildArray (pageNumber, firstPhoto, lastPhoto): void {
+    const photoArray: string[] = []
+    for (let i = firstPhoto[pageNumber - 1]; i <= lastPhoto[pageNumber - 1]; i += 1) {
+      const source = this.props.filePrefix + i + this.props.fileSuffix
+      photoArray.push(source)
     }
+    this.setState({ photoArray })
+  }
 
-    init(): void {
-        let go = true
-        let page = 0
-        const firstPhoto: number[] = []
-        const lastPhoto: number[] = []
-        const pages: number[] = []
-        while (go) {
-            if (page === 0) {
-                firstPhoto.push(1)
-                lastPhoto.push(this.props.perPage)
-            } else {
-                const nextFirst = lastPhoto[page - 1] + 1
-                let nextLast = nextFirst + this.props.perPage
-                if (nextLast > this.props.totalPhotos) {
-                    nextLast = this.props.totalPhotos
-                }
-                firstPhoto.push(nextFirst)
-                lastPhoto.push(nextLast)
-            }
+  imageClick (event): void {
+    const photoIndex = Number(event.currentTarget.dataset.i)
+    this.showHideButtons(photoIndex)
+    this.setState({ showModal: true })
+  }
 
-            pages.push(page + 1)
-            if (lastPhoto[page] === this.props.totalPhotos) {
-                go = false
-            } else {
-                page += 1
-            }
-        }
-        this.setState({
-            pages,
-            firstPhoto,
-            lastPhoto
-        })
-        this.buildArray(1, firstPhoto, lastPhoto)
-    }
+  close (): void {
+    this.setState({ showModal: false })
+  }
 
-    buildArray(pageNumber, firstPhoto, lastPhoto): void {
-        const photoArray: string[] = []
-        for (let i = firstPhoto[pageNumber - 1]; i <= lastPhoto[pageNumber - 1]; i += 1) {
-            const source = this.props.filePrefix + i + this.props.fileSuffix
-            photoArray.push(source)
-        }
-        this.setState({photoArray})
-    }
+  prev (): void {
+    const photoIndex = this.state.photoIndex - 1
+    this.showHideButtons(photoIndex)
+  }
 
-    imageClick(event): void {
-        const photoIndex = Number(event.currentTarget.dataset.i)
-        this.showHideButtons(photoIndex)
-        this.setState({showModal: true})
-    }
+  next (): void {
+    const photoIndex = this.state.photoIndex + 1
+    this.showHideButtons(photoIndex)
+  }
 
-    close(): void {
-        this.setState({showModal: false})
-    }
+  showHideButtons (photoIndex): void {
+    const hideNext = photoIndex === (this.state.photoArray.length - 1)
+    const hidePrevious = photoIndex === 0
+    this.setState({
+      hideNext,
+      hidePrevious,
+      photoIndex
+    })
+  }
 
-    prev(): void {
-        const photoIndex = this.state.photoIndex - 1
-        this.showHideButtons(photoIndex)
-    }
+  pageClick (event): void {
+    const page = Number(event.currentTarget.dataset.id)
+    this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto)
+  }
 
-    next(): void {
-        const photoIndex = this.state.photoIndex + 1
-        this.showHideButtons(photoIndex)
-    }
-
-    showHideButtons(photoIndex): void {
-        const hideNext = photoIndex === (this.state.photoArray.length - 1)
-        const hidePrevious = photoIndex === 0
-        this.setState({
-            hideNext,
-            hidePrevious,
-            photoIndex
-        })
-    }
-
-    pageClick(event): void {
-        const page = Number(event.currentTarget.dataset.id)
-        this.buildArray(page, this.state.firstPhoto, this.state.lastPhoto)
-    }
-
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div id="photoGallery">
                 <ul className="row photo-gallery">
                     {
                         this.state.photoArray.map((photo, i) => {
-                            return <li key={i} className="col-md-2 col-lg-2 col-sm-3 col-xs-4">
+                          return <li key={i} className="col-md-2 col-lg-2 col-sm-3 col-xs-4">
                                 <img onClick={this.imageClick} data-i={i}
                                      className="img-fluid"
                                      src={photo}/>
@@ -146,7 +146,7 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                 <Row>
                     {
                         this.state.pages.map((page, i) => {
-                            return <div key={i}><Button data-id={page} variant="primary"
+                          return <div key={i}><Button data-id={page} variant="primary"
                                                         onClick={this.pageClick}>{'Page ' + page}</Button></div>
                         })
                     }
@@ -170,6 +170,6 @@ export class PhotoGallery extends React.Component<PhotoGalleryProps, PhotoGaller
                     </Modal.Footer>
                 </Modal>
             </div>
-        )
-    }
+    )
+  }
 }

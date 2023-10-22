@@ -23,7 +23,7 @@
   "keywords": [
     "react"
   ],
-  "author": "Dan Halverson <daniel.m.halverson@gmail.com> (http://halversondm.com/)",
+  "author": "Dan Halverson <daniel.m.halverson@gmail.com> (https://halversondm.com/)",
   "license": "MIT",
   "jest": {
     "transform": {

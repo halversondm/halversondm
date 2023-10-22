@@ -2,47 +2,47 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {type ReactNode} from 'react'
-import {LinkedInButton} from './LinkedInButton'
-import {TwitterFollowButton} from './TwitterFollowButton'
+import { type ReactNode } from 'react'
+import { LinkedInButton } from './LinkedInButton'
+import { TwitterFollowButton } from './TwitterFollowButton'
 
 export interface OwnState {
-    subject: string
-    message: string
+  subject: string
+  message: string
 }
 
 export class Contact extends React.Component<unknown, OwnState> {
-    state: OwnState
+  state: OwnState
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            subject: '',
-            message: ''
-        }
-        this.captureSubject = this.captureSubject.bind(this)
-        this.captureMessage = this.captureMessage.bind(this)
-        this.clear = this.clear.bind(this)
+  constructor (props) {
+    super(props)
+    this.state = {
+      subject: '',
+      message: ''
     }
+    this.captureSubject = this.captureSubject.bind(this)
+    this.captureMessage = this.captureMessage.bind(this)
+    this.clear = this.clear.bind(this)
+  }
 
-    clear(event): void {
-        this.setState({subject: '', message: ''})
-    }
+  clear (event): void {
+    this.setState({ subject: '', message: '' })
+  }
 
-    captureSubject(event): void {
-        const subject: string = event.target.value
-        this.setState({subject})
-    }
+  captureSubject (event): void {
+    const subject: string = event.target.value
+    this.setState({ subject })
+  }
 
-    captureMessage(event): void {
-        const message: string = event.target.value
-        this.setState({message})
-    }
+  captureMessage (event): void {
+    const message: string = event.target.value
+    this.setState({ message })
+  }
 
-    render(): ReactNode {
-        const href = 'mailto:daniel.m.halverson@gmail.com' +
+  render (): ReactNode {
+    const href = 'mailto:daniel.m.halverson@gmail.com' +
             '?subject=' + this.state.subject + '&body=' + this.state.message
-        return (
+    return (
             <div>
                 <h2 className="text-primary">Contact Information</h2>
                 <div className="row">
@@ -81,6 +81,6 @@ export class Contact extends React.Component<unknown, OwnState> {
                     <a className="btn btn-success" href={href}>Send</a>
                 </form>
             </div>
-        )
-    }
+    )
+  }
 }

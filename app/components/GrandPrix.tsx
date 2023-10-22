@@ -2,12 +2,12 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {PhotoGallery} from './PhotoGallery'
-import {type ReactNode} from 'react'
+import { PhotoGallery } from './PhotoGallery'
+import { type ReactNode } from 'react'
 
 export class GrandPrix extends React.Component<unknown, unknown> {
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">2001 Pontiac Grand Prix GTP Coupe</h2>
                 <h3>Galaxy Silver Metallic / Granite Leather</h3>
@@ -59,6 +59,6 @@ export class GrandPrix extends React.Component<unknown, unknown> {
                 </ul>
                 <PhotoGallery perPage={9} totalPhotos={38} filePrefix="images/grandPrixPhotos/photo" fileSuffix=".jpg"/>
             </div>
-        )
-    }
+    )
+  }
 }

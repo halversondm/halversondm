@@ -2,8 +2,8 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {Card} from 'react-bootstrap'
-import {type ReactNode} from 'react'
+import { Card } from 'react-bootstrap'
+import { type ReactNode } from 'react'
 
 export interface BlogState {
   items: BlogItem[]
@@ -20,13 +20,13 @@ export interface BlogItem {
 export class Blog extends React.Component<unknown, BlogState> {
   state: BlogState
 
-  constructor() {
+  constructor () {
     super({})
-    this.state = {items: [], filteredData: []}
+    this.state = { items: [], filteredData: [] }
     this.filterData = this.filterData.bind(this)
   }
 
-  componentDidMount(): void {
+  componentDidMount (): void {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', '/blogService')
     xhr.onload = () => {
@@ -46,19 +46,19 @@ export class Blog extends React.Component<unknown, BlogState> {
     xhr.send()
   }
 
-  createMarkup(html): { __html: string } {
-    return {__html: html}
+  createMarkup (html): { __html: string } {
+    return { __html: html }
   }
 
-  filterData(event): void {
+  filterData (event): void {
     const regex = new RegExp(event.target.value, 'i')
     const filtered = this.state.items.filter((data) => {
       return data.content.search(regex) > -1
     })
-    this.setState({filteredData: filtered})
+    this.setState({ filteredData: filtered })
   }
 
-  render(): ReactNode {
+  render (): ReactNode {
     return (
             <div>
                 <h2 className="text-primary">Dan Tech</h2>
@@ -72,7 +72,7 @@ export class Blog extends React.Component<unknown, BlogState> {
                           hidden={this.state.filteredData.length === this.state.items.length}>
             {this.state.filteredData.length} Items</span>
                 </div>
-              <div style={{height: '20px'}}/>
+              <div style={{ height: '20px' }}/>
                 {
                     this.state.filteredData.map((item, i) => {
                       return (

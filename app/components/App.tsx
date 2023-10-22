@@ -2,34 +2,34 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {Container, Nav, Navbar} from 'react-bootstrap'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import {LinkContainer} from 'react-router-bootstrap'
-import {ABC} from './ABC'
-import {About} from './About'
-import {Applications} from './Applications'
-import {Auto} from './Auto'
-import {Base64} from './Base64'
-import {Blog} from './Blog'
-import {Charger} from './Charger'
-import {Contact} from './Contact'
-import {Corvette} from './Corvette'
-import {DiscountCalculator} from './DiscountCalculator'
-import {Game} from './Game'
-import {Grades} from './Grades'
-import {GrandPrix} from './GrandPrix'
-import {Home} from './Home'
-import {Honda} from './Honda'
-import {Resume} from './Resume'
-import {StockQuote} from './StockQuote'
-import {UrlBuilder} from './UrlBuilder'
-import {Yamaha} from './Yamaha'
-import {C5CorvetteSecrets} from './C5CorvetteSecrets'
-import {type ReactNode} from 'react'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import { ABC } from './ABC'
+import { About } from './About'
+import { Applications } from './Applications'
+import { Auto } from './Auto'
+import { Base64 } from './Base64'
+import { Blog } from './Blog'
+import { Charger } from './Charger'
+import { Contact } from './Contact'
+import { Corvette } from './Corvette'
+import { DiscountCalculator } from './DiscountCalculator'
+import { Game } from './Game'
+import { Grades } from './Grades'
+import { GrandPrix } from './GrandPrix'
+import { Home } from './Home'
+import { Honda } from './Honda'
+import { Resume } from './Resume'
+import { StockQuote } from './StockQuote'
+import { UrlBuilder } from './UrlBuilder'
+import { Yamaha } from './Yamaha'
+import { C5CorvetteSecrets } from './C5CorvetteSecrets'
+import { type ReactNode } from 'react'
 
 export class App extends React.Component<unknown, unknown> {
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <BrowserRouter>
                 <div>
                     <Navbar fixed={'top'} bg="primary" expand="lg">
@@ -78,6 +78,6 @@ export class App extends React.Component<unknown, unknown> {
                     </Container>
                 </div>
             </BrowserRouter>
-        )
-    }
+    )
+  }
 }

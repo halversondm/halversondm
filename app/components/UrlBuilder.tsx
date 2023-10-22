@@ -2,102 +2,102 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {Button} from 'react-bootstrap'
-import {type ReactNode} from 'react'
+import { Button } from 'react-bootstrap'
+import { type ReactNode } from 'react'
 
 export interface UrlBuilderState {
-    queries: Query[]
-    query: Query
-    baseUrl: string
-    assembledUrl: string
+  queries: Query[]
+  query: Query
+  baseUrl: string
+  assembledUrl: string
 }
 
 export interface Query {
-    key: string
-    value: string
+  key: string
+  value: string
 }
 
 export class UrlBuilder extends React.Component<unknown, UrlBuilderState> {
-    state: UrlBuilderState
+  state: UrlBuilderState
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            queries: [],
-            query: {key: '', value: ''},
-            baseUrl: '',
-            assembledUrl: ''
-        }
-        this.addQuery = this.addQuery.bind(this)
-        this.assemble = this.assemble.bind(this)
-        this.setCookie = this.setCookie.bind(this)
-        this.baseUrlChange = this.baseUrlChange.bind(this)
-        this.keyChange = this.keyChange.bind(this)
-        this.valueChange = this.valueChange.bind(this)
-        this.launch = this.launch.bind(this)
+  constructor (props) {
+    super(props)
+    this.state = {
+      queries: [],
+      query: { key: '', value: '' },
+      baseUrl: '',
+      assembledUrl: ''
     }
+    this.addQuery = this.addQuery.bind(this)
+    this.assemble = this.assemble.bind(this)
+    this.setCookie = this.setCookie.bind(this)
+    this.baseUrlChange = this.baseUrlChange.bind(this)
+    this.keyChange = this.keyChange.bind(this)
+    this.valueChange = this.valueChange.bind(this)
+    this.launch = this.launch.bind(this)
+  }
 
-    addQuery(event): void {
-        event.preventDefault()
-        const queries = this.state.queries
-        queries.push(this.state.query)
-        this.setState({queries, query: {key: '', value: ''}})
-    }
+  addQuery (event): void {
+    event.preventDefault()
+    const queries = this.state.queries
+    queries.push(this.state.query)
+    this.setState({ queries, query: { key: '', value: '' } })
+  }
 
-    assemble(event): void {
-        event.preventDefault()
-        let assembled = this.state.baseUrl + '?'
-        const queries = this.state.queries
-        let count = 0
+  assemble (event): void {
+    event.preventDefault()
+    let assembled = this.state.baseUrl + '?'
+    const queries = this.state.queries
+    let count = 0
 
-        queries.forEach((query) => {
-            count += 1
-            assembled += query.key + '=' + query.value
-            this.setCookie(query.key, query.value)
-            if (count < queries.length) {
-                assembled += '&'
-            }
-        })
-        this.setCookie('baseUrl', this.state.baseUrl)
-        this.setState({assembledUrl: assembled})
-    }
+    queries.forEach((query) => {
+      count += 1
+      assembled += query.key + '=' + query.value
+      this.setCookie(query.key, query.value)
+      if (count < queries.length) {
+        assembled += '&'
+      }
+    })
+    this.setCookie('baseUrl', this.state.baseUrl)
+    this.setState({ assembledUrl: assembled })
+  }
 
-    setCookie(cname, value): void {
-        const d = new Date()
-        d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000))
-        const expires = 'expires=' + d.toUTCString()
-        document.cookie = cname + '=' + value + '; ' + expires
-    }
+  setCookie (cname, value): void {
+    const d = new Date()
+    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000))
+    const expires = 'expires=' + d.toUTCString()
+    document.cookie = cname + '=' + value + '; ' + expires
+  }
 
-    launch(event): void {
-        event.preventDefault()
-        const myWindow = window.open('', 'MsgWindow', 'toolbar=yes, scrollbars=yes, ' +
+  launch (event): void {
+    event.preventDefault()
+    const myWindow = window.open('', 'MsgWindow', 'toolbar=yes, scrollbars=yes, ' +
             'resizable=yes, width=1024, height=768')
-        if (myWindow != null) {
-            myWindow.document.write('<html><head><meta http-equiv="X-UA-Compatible"' +
+    if (myWindow != null) {
+      myWindow.document.write('<html><head><meta http-equiv="X-UA-Compatible"' +
                 ' content="IE=edge"></head></head><body><iframe src="' + this.state.assembledUrl + '" width="100%"' +
                 ' height="100%" /></body></html>"')
-        }
     }
+  }
 
-    keyChange(event): void {
-        const query = this.state.query
-        query.key = event.target.value
-        this.setState({query})
-    }
+  keyChange (event): void {
+    const query = this.state.query
+    query.key = event.target.value
+    this.setState({ query })
+  }
 
-    valueChange(event): void {
-        const query = this.state.query
-        query.value = event.target.value
-        this.setState({query})
-    }
+  valueChange (event): void {
+    const query = this.state.query
+    query.value = event.target.value
+    this.setState({ query })
+  }
 
-    baseUrlChange(event): void {
-        this.setState({baseUrl: event.target.value})
-    }
+  baseUrlChange (event): void {
+    this.setState({ baseUrl: event.target.value })
+  }
 
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <h2 className="text-primary">URL Builder</h2>
                 <h3>Build a URL with query parameters and launch it!</h3>
@@ -111,7 +111,7 @@ export class UrlBuilder extends React.Component<unknown, UrlBuilderState> {
                     <tbody>
                     {
                         this.state.queries.map((query, i) => {
-                            return <tr key={i}>
+                          return <tr key={i}>
                                 <td>{query.key}</td>
                                 <td>{query.value}</td>
                             </tr>
@@ -186,6 +186,6 @@ export class UrlBuilder extends React.Component<unknown, UrlBuilderState> {
                     </form>
                 </fieldset>
             </div>
-        )
-    }
+    )
+  }
 }

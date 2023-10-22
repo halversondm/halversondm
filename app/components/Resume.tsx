@@ -2,12 +2,12 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {type ReactNode} from 'react'
-import {Card, Col, Row} from 'react-bootstrap'
+import { type ReactNode } from 'react'
+import { Card, Col, Row } from 'react-bootstrap'
 
 export class Resume extends React.Component<unknown, unknown> {
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div className="resume">
                 <header className="page-header">
                     <h1 className="page-title">Resume of Daniel M. Halverson</h1>
@@ -263,7 +263,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                 <ul className="list-group">
                                     <div className="list-group-item inactive-link">
                                         <div className="progress">
-                                            <div data-placement="top" style={{width: '80%'}}
+                                            <div data-placement="top" style={{ width: '80%' }}
                                                  aria-valuemax={100} aria-valuemin={0}
                                                  aria-valuenow={80} role="progressbar"
                                                  className="progress-bar bg-success">
@@ -273,7 +273,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             </div>
                                         </div>
                                         <div className="progress">
-                                            <div data-placement="top" style={{width: '70%'}}
+                                            <div data-placement="top" style={{ width: '70%' }}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar bg-success">
@@ -283,7 +283,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             </div>
                                         </div>
                                         <div className="progress">
-                                            <div data-placement="top" style={{width: '70%'}}
+                                            <div data-placement="top" style={{ width: '70%' }}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar bg-success">
@@ -293,7 +293,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             </div>
                                         </div>
                                         <div className="progress">
-                                            <div data-placement="top" style={{width: '65%'}}
+                                            <div data-placement="top" style={{ width: '65%' }}
                                                  aria-valuemax={100} aria-valuemin={0} aria-valuenow={1}
                                                  role="progressbar"
                                                  className="progress-bar bg-warning">
@@ -303,16 +303,16 @@ export class Resume extends React.Component<unknown, unknown> {
                                             </div>
                                         </div>
                                         <div className="progress-meter">
-                                            <div style={{width: '25%'}} className="meter meter-left">
+                                            <div style={{ width: '25%' }} className="meter meter-left">
                                                 <span className="meter-text">I suck</span>
                                             </div>
-                                            <div style={{width: '25%'}} className="meter meter-left">
+                                            <div style={{ width: '25%' }} className="meter meter-left">
                                                 <span className="meter-text">I know little</span>
                                             </div>
-                                            <div style={{width: '30%'}} className="meter meter-right">
+                                            <div style={{ width: '30%' }} className="meter meter-right">
                                                 <span className="meter-text">I&apos;m a guru</span>
                                             </div>
-                                            <div style={{width: '20%'}} className="meter meter-right">
+                                            <div style={{ width: '20%' }} className="meter meter-right">
                                                 <span className="meter-text">I&apos;m good</span>
                                             </div>
                                         </div>
@@ -342,6 +342,6 @@ export class Resume extends React.Component<unknown, unknown> {
                     </Col>
                 </Row>
             </div>
-        )
-    }
+    )
+  }
 }

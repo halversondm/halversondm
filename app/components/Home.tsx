@@ -2,12 +2,12 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import {Link} from 'react-router-dom'
-import {type ReactNode} from 'react'
+import { Link } from 'react-router-dom'
+import { type ReactNode } from 'react'
 
 export class Home extends React.Component<unknown, unknown> {
-    render(): ReactNode {
-        return (
+  render (): ReactNode {
+    return (
             <div>
                 <div className="jumbotron">
                     <h1>@halversondm</h1>
@@ -52,6 +52,6 @@ export class Home extends React.Component<unknown, unknown> {
                     </div>
                 </div>
             </div>
-        )
-    }
+    )
+  }
 }
