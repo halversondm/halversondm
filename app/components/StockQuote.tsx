@@ -51,12 +51,12 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
     this.setState({ stockInput: '' })
   }
 
-  callService (stockSymbol): void {
-    setTimeout(function () {
+  callService (stockSymbol: string): void {
+    setTimeout(function (stockSymbol: string, stocks: Stock[]) {
       const xhr = new XMLHttpRequest()
-      xhr.open('POST', '/stock?stockSymbol=' + stockSymbol)
+      const url = `/stock?stockSymbol=${stockSymbol}`
+      xhr.open('POST', url)
       xhr.onload = () => {
-        const stocks = this.state.stocks
         if (xhr.status >= 200 && xhr.status < 400) {
           stocks.push(JSON.parse(xhr.responseText))
         } else {
@@ -70,7 +70,7 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
         console.log(xhr)
       }
       xhr.send()
-    }, 1000)
+    }, 1000, [stockSymbol, this.state.stocks])
   }
 
   render (): ReactNode {

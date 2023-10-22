@@ -108,15 +108,19 @@ app.post("/stock", (request, response) => {
             response.set("Content-Type", "application/json");
             let source = JSON.parse(chunk);
             let stock = {};
-            stock.Symbol = source.ticker;
-            stock.Name = "";
-            stock.LastPrice = source.results[0].c;
-            stock.Timestamp = source.results[0].t;
-            stock.MarketCap = "";
-            stock.ChangeYTD = "";
-            stock.High = source.results[0].h;
-            stock.Open = source.results[0].o;
-            stock.Low = source.results[0].l;
+            if (source) {
+                stock.Symbol = source.ticker;
+                stock.Name = "";
+                stock.MarketCap = "";
+                stock.ChangeYTD = "";
+                    if (source.results) {
+                        stock.LastPrice = source.results[0].c;
+                        stock.Timestamp = source.results[0].t;
+                        stock.High = source.results[0].h;
+                        stock.Open = source.results[0].o;
+                        stock.Low = source.results[0].l;
+                    }
+            }
             response.send(stock);
         });
     });
