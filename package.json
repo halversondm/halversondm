@@ -18,7 +18,8 @@
     "tsc": "tsc -w",
     "prebuild": "npm run clean",
     "build": "cross-env NODE_ENV=production npm run webpack",
-    "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save"
+    "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
+    "prepare": "husky install"
   },
   "keywords": [
     "react"
@@ -85,6 +86,7 @@
     "wdio-junit-reporter": "*",
     "webdriverio": "*",
     "webpack": "*",
-    "webpack-cli": "*"
+    "webpack-cli": "*",
+    "husky": "^8.0.0"
   }
 }
