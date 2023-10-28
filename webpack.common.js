@@ -1,25 +1,11 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-console.log("Node environment", process.env.NODE_ENV);
-const devMode = process.env.NODE_ENV !== 'production';
-
-if (process.env.NODE_ENV !== "development" && process.env.NODE_ENV !== "production") {
-    throw new Error("NODE_ENV is required, values are 'development' or 'production'");
-}
-
-let config = {
-    mode: devMode ? 'development' : 'production',
+module.exports = {
     entry: path.resolve(__dirname, "app/main.tsx"),
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: devMode ? "[name].js" : "[name]-[fullhash].min.js",
-        publicPath: "/"
-    },
     optimization: {
         splitChunks: {
             cacheGroups: {
@@ -40,17 +26,11 @@ let config = {
             inject: "body",
             filename: "index.html"
         }),
-        new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : '[name].[hash].css',
-        }),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-        }),
         new CopyWebpackPlugin({
             patterns: [
-                {from: "app/images/", to: "images/"}, {
-                    from: "app/extras"
-                }, {from: "app/runtime"}
+                {from: "app/images/", to: "images/"},
+                {from: "app/extras"},
+                {from: "app/runtime"}
             ]
         })
     ],
@@ -61,19 +41,10 @@ let config = {
     module: {
         rules: [{
             test: /\.tsx?$/,
-            use: {loader:"ts-loader"}
+            use: {loader: "ts-loader"}
         }, {
-            test: /\.css$/,
-            use: [
-                devMode ? 'style-loader' :
-                {
-                    loader: MiniCssExtractPlugin.loader,
-                    options: {
-                        publicPath: 'dist'
-                    }
-                },
-                'css-loader'
-            ]
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader']
         }, {
             test: /\.(ttf|eot|woff2|svg|png|woff|php)$/,
             use: {
@@ -90,8 +61,4 @@ let config = {
     }
 };
 
-if (devMode) {
-    config.devtool = "source-map";
-}
 
-module.exports = config;

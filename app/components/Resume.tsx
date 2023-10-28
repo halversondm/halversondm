@@ -4,6 +4,9 @@
 import * as React from 'react'
 import { type ReactNode } from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faPhone, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faTwitter, faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
 
 export class Resume extends React.Component<unknown, unknown> {
   render (): ReactNode {
@@ -11,8 +14,8 @@ export class Resume extends React.Component<unknown, unknown> {
             <div className="resume">
                 <header className="page-header">
                     <h1 className="page-title">Resume of Daniel M. Halverson</h1>
-                    <small><i className="fa fa-clock-o"/> Last Updated on: Sunday,
-                        February 01, 2015
+                    <small><FontAwesomeIcon icon={faClock}/> Last Updated on: Friday,
+                        October 27, 2023
                     </small>
                 </header>
                 <Row>
@@ -24,21 +27,21 @@ export class Resume extends React.Component<unknown, unknown> {
                                         <Col>
                                             <figure>
                                                 <img className="rounded-circle img-fluid" alt=""
-                                                     src="images/dan_glasses.jpeg"/>
+                                                     src="images/dan_suit.jpg"/>
                                             </figure>
                                         </Col>
                                         <Col>
                                             <ul className="list-group">
                                                 <li className="list-group-item">Daniel M. Halverson</li>
-                                                <li className="list-group-item">Application Developer Lead
+                                                <li className="list-group-item">Senior Director of Software Engineering
                                                 </li>
                                                 <li className="list-group-item">JPMorgan Chase & Co.</li>
-                                                <li className="list-group-item"><i
-                                                    className="fa fa-phone"/>
+                                                <li className="list-group-item"><FontAwesomeIcon
+                                                    icon={faPhone}/>
                                                     630-346-4822
                                                 </li>
-                                                <li className="list-group-item"><i
-                                                    className="fa fa-envelope"/>
+                                                <li className="list-group-item"><FontAwesomeIcon
+                                                    icon={faEnvelope}/>
                                                     daniel.m.halverson@gmail.com
                                                 </li>
                                             </ul>
@@ -49,7 +52,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             <div className="social-btn-holder">
                                                 <a href="https://www.facebook.com/daniel.m.halverson"
                                                    className="btn btn-social btn-block btn-facebook">
-                                                    <i className="fa fa-facebook"/>
+                                                    <FontAwesomeIcon icon={faFacebook}/>
                                                 </a>
                                             </div>
                                         </Col>
@@ -57,7 +60,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             <div className="social-btn-holder">
                                                 <a href="https://twitter.com/halversondm"
                                                    className="btn btn-social btn-block btn-twitter">
-                                                    <i className="fa fa-twitter"/>
+                                                    <FontAwesomeIcon icon={faTwitter}/>
                                                 </a>
                                             </div>
                                         </Col>
@@ -65,7 +68,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             <div className="social-btn-holder">
                                                 <a href="http://www.linkedin.com/in/dmhalverson"
                                                    className="btn btn-social btn-block btn-linkedin">
-                                                    <i className="fa fa-linkedin"/>
+                                                    <FontAwesomeIcon icon={faLinkedin}/>
                                                 </a>
                                             </div>
                                         </Col>
@@ -73,7 +76,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             <div className="social-btn-holder">
                                                 <a href="https://github.com/halversondm"
                                                    className="btn btn-social btn-block btn-github">
-                                                    <i className="fa fa-github"/>
+                                                    <FontAwesomeIcon icon={faGithub}/>
                                                 </a>
                                             </div>
                                         </Col>
@@ -81,7 +84,7 @@ export class Resume extends React.Component<unknown, unknown> {
                                             <div className="social-btn-holder">
                                                 <a href="http://stackoverflow.com/users/975640/dan"
                                                    className="btn btn-social btn-block btn-stackoverflow">
-                                                    <i className="fa fa-stack-overflow"/>
+                                                    <FontAwesomeIcon icon={faStackOverflow}/>
                                                 </a>
                                             </div>
                                         </Col>
@@ -90,120 +93,125 @@ export class Resume extends React.Component<unknown, unknown> {
                             </Card.Header>
                             <div className="bs-callout bs-callout-danger">
                                 <h4>Summary</h4>
-                                <p>14 years of experience in Information Technology. Extensive
-                                    experience in enterprise applications through the whole SDLC
-                                    lifecycle.</p>
-                                <p>Achieved Expert Engineer status at JPMorgan Chase in 2012.</p>
-                                <p>Experience in developing Java applications in a
-                                    service-oriented architecture.</p>
-                                <p>Experience in developing COBOL applications for batch and
-                                    online functions.</p>
-                                <p>Experience in SQL tuning with IBM DB2.</p>
-                                <p>Experience in Object Relational Mapping with Hibernate.</p>
-                                <p>Experience with data transportation in the form of IBM
-                                    WebSphere MQ and Apache CXF / SOAP messages.</p>
-                                <p>Provide on-call support with fast, well thought resolution to
-                                    in-the-moment problems.</p>
-                                <p>Have excellent analytical, problem solving, communication and
-                                    interpersonal skills, with ability to interact with individuals
-                                    at all levels and work as a part of a team, as well as
-                                    independently.</p>
+                                <p>Versatile Senior Director of Software Engineering committed to consistently finding
+                                    dynamic solutions for software issues, team building, and financial discipline.
+                                    Polished in finding innovative ways to efficiently build scalable, high-availability
+                                    online systems. Offering a 23-year background creating and implementing software
+                                    systems and leading teams.</p>
                             </div>
                             <div className="bs-callout bs-callout-danger">
-                                <h4>Prior Experiences</h4>
+                                <h4>Experiences</h4>
                                 <ul className="list-group">
                                     <div className="list-group-item inactive-link">
-                                        <h4 className="list-group-item-heading">Application Developer
-                                            Lead at JPMorgan Chase & Co.</h4>
-                                        <h5 className="list-group-item-heading">February 2013 -
-                                            Current</h5>
-                                        <p className="list-group-item-text">Development leader for
-                                            applications in the Retail and Investment Banks. Provide
-                                            direction for junior members of the team.</p>
+                                        <h4 className="list-group-item-heading">Executive Director / JPMorgan Chase & Co
+                                            - Chicago, IL </h4>
+                                        <h5 className="list-group-item-heading">02/2020 - Current </h5>
+                                        <p className="list-group-item-text"></p>
                                         <ul>
-                                            <li>Leadership of projects in an Agile methodology</li>
-                                            <li>Mentor and advise others on the best design and
-                                                standards for new code
+                                            <li>Currently leading a team of 25 engineers across three sites for an
+                                                internally developed product related to BPM / Workflow. The product has
+                                                a reach of 9,000 users across the word with multiple installation
+                                                patterns.
                                             </li>
-                                            <li>Develop the service code and unit tests.</li>
-                                            <li>Instruct others on the usage of tools and procedures
+                                            <li>Responsible for roadmap creation with my leadership team and
+                                                socialization with product owners and customers.
+                                            </li>
+                                            <li>Designing software with team leads and architects to continue to push
+                                                goals of the firm and my organization
+                                            </li>
+                                            <li>Partnered with internal design teams to achieve the best UX experience
+                                                while meeting business requirements
+                                            </li>
+                                            <li>Mentoring direct reports for promotion and career goals</li>
+                                            <li>Teaching developers about the application&apos;s finer points and why
+                                                decisions were made
+                                            </li>
+                                            <li>Interviewing and hiring candidates for roles on the team</li>
+                                            <li>Managing to budget for runtime compute, project and associate concerns
+                                            </li>
+                                            <li>Developing software as needed and usually in a pair programming
+                                                setting
+                                            </li>
+                                            <li>Research of products like click analytics solutions and presentation to
+                                                senior leadership
+                                            </li>
+                                            <li>Completed a modernization of a UI and API application by moving 40
+                                                microservices and 4 TB of data to the cloud
+                                            </li>
+                                            <li>Built an SRE team from the ground up with 3 engineers</li>
+                                            <li>Created a development team for a legacy application starting with 4
+                                                developers and ending with 15 developers and transitioned the team to
+                                                DevOps.
+                                            </li>
+                                            <li>Drastically improved system monitoring and alerting through the usage
+                                                AppDynamics, Apica, Geneos, Grafana, and Splunk
+                                            </li>
+                                            <li>Code for Good Project Judge; a multi-city hackathon to help non-profit
+                                                organizations with the technology needs via college students
                                             </li>
                                         </ul>
                                     </div>
                                     <div className="list-group-item inactive-link">
-                                        <h4 className="list-group-item-heading">Application Developer
-                                            at JPMorgan Chase & Co.</h4>
-                                        <h5 className="list-group-item-heading">January 2006 -
-                                            Current</h5>
-                                        <p className="list-group-item-text">The CIS application is the
-                                            data store for customer data across the entire JPMorgan
-                                            Chase bank. Data on every customer is stored in the CIS
-                                            application and every channel retrieves data from either
-                                            online and/or batch functions. The CIS application is
-                                            written in COBOL/CICS with JCL for batch execution.The CIS
-                                            Re-engineering project overall aims to replace the legacy
-                                            COBOL, platform specific application with an enterprise Java
-                                            application that is platform agnostic. In this phase of the
-                                            project, we implemented a pair of pilot services to test
-                                            feasibility and dependability. Then, we followed with a
-                                            section of ten services from our list of COBOL online
-                                            functions to convert into Java.</p>
+                                        <h4 className="list-group-item-heading">Vice President / JPMorgan Chase & Co -
+                                            Chicago, IL </h4>
+                                        <h5 className="list-group-item-heading">02/2013 - 01/2020</h5>
+                                        <p className="list-group-item-text"></p>
                                         <ul>
-                                            <li>Leadership of projects within an enterprise release.
+                                            <li>Design and develop application code using Java, JavaScript and SQL</li>
+                                            <li>Lead global teams up to 25 individuals through greenfield and brownfield
+                                                development efforts
                                             </li>
-                                            <li>Design and develop application code using COBOL, CICS,
-                                                JCL and DB2
+                                            <li>Experience with developing workflow applications from the ground up</li>
+                                            <li>Lead an effort to expand the application&apos;s infrastructure from 8 to 27
+                                                servers
                                             </li>
-                                            <li>Mentor and advise others on the best design and
-                                                standards for new code
+                                            <li>Implemented the teams CI / CD solution using Jenkins and available firm
+                                                tools
                                             </li>
-                                            <li>Developed tools to assist in the productivity of team
-                                                members
+                                            <li>Developed features and resolved defects as well as provided on-call
+                                                support
                                             </li>
+                                            <li>Lead team through code consolidation and decommission effort to reduce
+                                                3.5 MM lines of code to 2 MM
+                                            </li>
+                                            <li>Implement software solutions on cloud using micro services patterns</li>
+                                            <li>Implement user interfaces in React and Angular</li>
+                                            <li>Promote best practices for source code through code reviews</li>
+                                            <li>Mentor and coach employees in their current projects and career
+                                                direction
+                                            </li>
+                                            <li>Three-time winner of company-wide hackathons and participant in Tech for
+                                                Social Good
+                                            </li>
+                                            <li>Present new technologies to senior technology management for broad
+                                                understanding and inclusion
+                                            </li>
+                                            <li>Code for Good Team Mentor; a multi-city hackathon to help non-profit
+                                                organizations with the technology needs via college students
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="list-group-item inactive-link">
+                                        <h4 className="list-group-item-heading">Associate / JPMorgan Chase & Co - Chicago, IL </h4>
+                                        <h5 className="list-group-item-heading">01/2006 - 01/2013</h5>
+                                        <p className="list-group-item-text"></p>
+                                        <ul>
+                                            <li>Design and develop application code using COBOL, CICS, JCL and DB2</li>
+                                            <li>Leadership of projects within an enterprise release</li>
+                                            <li>Mentor and advise others on the best design and standards for new code</li>
+                                            <li>Developed tools to assist in the productivity of team members</li>
                                             <li>Provide on-call support</li>
                                             <li>Work with business analysts to test application</li>
                                             <li>Develop testing scenarios and scripts</li>
                                             <li>Working business knowledge of the Banking Industry</li>
                                             <li>Review code for cost-savings opportunities</li>
-                                            <li>Decompose existing COBOL functions to determine what
-                                                business logic and SQL needed to be recreated in Java and
-                                                Hibernate and deployed as a WebService.
-                                            </li>
-                                            <li>Develop the schema and WSDL for the Java services.</li>
-                                            <li>Develop the service code and unit tests.</li>
-                                            <li>Wrote technical design document with a test driven
-                                                development methodology.
-                                            </li>
-                                            <li>Understand the deployment process and work with the
-                                                configuration management team to resolve deployment
-                                                issues.
-                                            </li>
-                                            <li>Implemented synthetic transaction monitoring using HP
-                                                BPM and Nagios
-                                            </li>
-                                            <li>Instruct others on the usage of tools and procedures
-                                            </li>
-                                            <li>Worked across teams to develop JMeter scripts to test
-                                                SOAP messages.
-                                            </li>
-                                            <li>Developed a way to use Publish/Subscribe messaging
-                                                across the application server cluster to dynamically
-                                                change log4j logging levels at runtime
-                                            </li>
-                                            <li>Developed the design pattern that the team would use for
-                                                processing Point-to-Point messaging via JMS
-                                            </li>
-                                            <li>Developed a logging solution using Aspect Oriented
-                                                Programming to consistently log fixed-byte messages
-                                                entering and leaving a JMS solution
-                                            </li>
+                                            <li>Transitioned a key customer data application from COBOL to Java</li>
                                         </ul>
                                     </div>
                                     <div className="list-group-item inactive-link">
                                         <h4 className="list-group-item-heading">Software Project
-                                            Leader at DST Systems, Inc</h4>
-                                        <h5 className="list-group-item-heading">June 2000 - December
-                                            2005</h5>
+                                            Leader / DST Systems, Inc - Kansas City, MO</h4>
+                                        <h5 className="list-group-item-heading">06/2000 - 12/2005</h5>
                                         <p className="list-group-item-text">The TA2000 Subaccounting
                                             application was designed to provide services to
                                             broker/dealers to manage their Omnibus positions within a
@@ -237,25 +245,16 @@ export class Resume extends React.Component<unknown, unknown> {
                                 </ul>
                             </div>
                             <div className="bs-callout bs-callout-danger">
-                                <h4>Key Expertise</h4>
+                                <h4>Skills</h4>
                                 <ul className="list-group">
-                                    <li className="list-group-item">Legacy Platforms including COBOL
-                                        and
-                                        CICS
+                                    <li className="list-group-item">Java, JavaScript, SQL, Oracle, Kafka, MQ, Kubernetes, Docker, Unix
                                     </li>
-                                    <li className="list-group-item">Object-Oriented Analysis and
-                                        Design
+                                    <li className="list-group-item">Large system design with cloud technologies
                                     </li>
-                                    <li className="list-group-item">Agile Design Methodologies</li>
-                                    <li className="list-group-item">Legacy Platform to Object
-                                        Oriented
-                                        Migrations
-                                    </li>
-                                    <li className="list-group-item">Database Design and Performance
-                                        Tuning
-                                    </li>
-                                    <li className="list-group-item">Messaging Platforms</li>
-                                    <li className="list-group-item">Web Design</li>
+                                    <li className="list-group-item">Budgeting and financial management</li>
+                                    <li className="list-group-item">Agile program management</li>
+                                    <li className="list-group-item">Talent management and staffing</li>
+                                    <li className="list-group-item">Senior Management Presentations</li>
                                 </ul>
                             </div>
                             <div className="bs-callout bs-callout-danger">
