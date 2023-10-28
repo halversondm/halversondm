@@ -9,16 +9,13 @@
   },
   "scripts": {
     "clean": "rimraf dist && mkdir dist",
-    "prestart": "npm run clean && cp -R app/runtime/* dist && cd dist && npm install",
-    "start": "cross-env NODE_ENV=development concurrently \"npm run webpack -- --watch\" \"node dist/server.js\"",
+    "start": "webpack serve --config webpack.dev.js",
     "test": "jest",
     "eslint": "eslint --fix ./app/",
-    "prewebpack": "npm run eslint && npm run test",
-    "webpack": "webpack --config ./webpack.config.js --profile",
     "tsc": "tsc -w",
-    "prebuild": "npm run clean",
-    "build": "cross-env NODE_ENV=production npm run webpack",
-    "update:packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save"
+    "prebuild": "npm run clean && npm run eslint && npm run test",
+    "build": "webpack --config webpack.prod.js",
+    "prepare": "husky install"
   },
   "keywords": [
     "react"
@@ -41,6 +38,12 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "*",
     "@aws-sdk/client-secrets-manager": "*",
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/react-router": "*",
@@ -72,6 +75,7 @@
     "express": "*",
     "file-loader": "*",
     "html-webpack-plugin": "*",
+    "husky": "^8.0.0",
     "jest": "*",
     "mini-css-extract-plugin": "*",
     "mocha": "*",
@@ -85,6 +89,8 @@
     "wdio-junit-reporter": "*",
     "webdriverio": "*",
     "webpack": "*",
-    "webpack-cli": "*"
+    "webpack-cli": "*",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.10.0"
   }
 }
