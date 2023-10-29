@@ -28,7 +28,7 @@ import C5CorvetteSecrets from './C5CorvetteSecrets'
 import { type ReactNode } from 'react'
 
 export default function App (): ReactNode {
-    const year = new Date().getFullYear()
+  const year = new Date().getFullYear()
   return (
             <BrowserRouter>
                 <div>
