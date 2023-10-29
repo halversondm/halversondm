@@ -21,23 +21,11 @@ export default function Blog (): ReactNode {
   const [state, setState] = useState<BlogState>({ items: [], filteredData: [] })
 
   useEffect(() => {
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', '/blogService')
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 400) {
-        const data = JSON.parse(xhr.responseText)
-        return {
-          items: data.items,
-          filteredData: data.items
-        }
-      } else {
-        console.log('unsucc ', xhr.responseText)
-      }
-    }
-    xhr.onerror = () => {
-      console.log(xhr)
-    }
-    xhr.send()
+    fetch('/api/blog', {
+      method: 'POST'
+    }).then(async data => await data.json())
+      .then(data => { setState({ items: data.items, filteredData: data.items }) })
+      .catch(error => { console.log(error) })
   }, [])
 
   function createMarkup (html): { __html: string } {

@@ -28,6 +28,7 @@ import C5CorvetteSecrets from './C5CorvetteSecrets'
 import { type ReactNode } from 'react'
 
 export default function App (): ReactNode {
+    const year = new Date().getFullYear()
   return (
             <BrowserRouter>
                 <div>
@@ -72,7 +73,7 @@ export default function App (): ReactNode {
                         </Routes>
                         <hr/>
                         <footer>
-                            <p>&copy; 2022 halversondm.com</p>
+                            <p>&copy; {year} halversondm.com</p>
                         </footer>
                     </Container>
                 </div>

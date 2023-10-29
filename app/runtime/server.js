@@ -95,7 +95,7 @@ app.post("/mail.php", (req, res) => {
     res.send("Email Success!");
 });
 
-app.post("/stock", (request, response) => {
+app.post("/api/stock", (request, response) => {
     const options = {
         hostname: "api.polygon.io",
         port: 443,
@@ -131,7 +131,7 @@ app.post("/stock", (request, response) => {
     proxyRequest.end();
 });
 
-app.post("/blogService", (request, response) => {
+app.post("/api/blog", (request, response) => {
     const options = {
         hostname: "www.googleapis.com",
         port: 443,

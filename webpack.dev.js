@@ -10,9 +10,30 @@ module.exports = merge(common, {
         port: 3000,
         open: true,
         historyApiFallback: true,
-        headers: {
-            'Content-Security-Policy': 'frame-ancestors *.linkedin.com;'
-        }
+        proxy: [
+             {
+                 context: ['/api'],
+                target: 'localhost',
+                bypass: function (req, res, proxyOptions) {
+                     let response
+                     if (req.url.indexOf('stock') > -1) {
+                         response = {
+                             Symbol: req.query.stockSymbol,
+                             Name: "string2",
+                             LastPrice: "string3",
+                             Timestamp: "string4",
+                             MarketCap: "string5",
+                             ChangeYTD: "string6",
+                             High: "string7",
+                             Open: "string8",
+                             Low: "string9"}
+                     } else {
+                         response = {items: [{url: "one-url", title: "one-title", content: "one-content", published: new Date()}]}
+                     }
+                    res.send(response)
+                }
+            }
+        ]
     },
     devtool: 'source-map',
     output: {

@@ -33,8 +33,12 @@ export default function StockQuote (): ReactNode {
   }
 
   useEffect(() => {
+    const stocks = state.stocks.slice()
     stockList.forEach((stock) => {
-      callService(stock)
+      callService(stock).then(stock => {
+        stocks.push(stock)
+        setState({ ...state, stocks })
+      }).catch(error => { console.error(error) })
     })
   }, [])
 
@@ -44,28 +48,20 @@ export default function StockQuote (): ReactNode {
 
   function submit (): void {
     callService(state.stockInput)
-    setState({ ...state, stockInput: '' })
+      .then(stock => {
+        const stocks = state.stocks.slice()
+        stocks.push(stock)
+        setState({ ...state, stocks })
+      })
+      .catch(error => { console.error(error) })
   }
 
-  function callService (stockSymbol: string): void {
-    const stocks = state.stocks
-    const xhr = new XMLHttpRequest()
-    const url = `/stock?stockSymbol=${stockSymbol}`
-    xhr.open('POST', url)
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 400) {
-        stocks.push(JSON.parse(xhr.responseText))
-      } else {
-        console.log('unsucc ', xhr.responseText)
-        const stock: Stock = { Symbol: stockSymbol, Name: 'Not Found' }
-        stocks.push(stock)
-      }
-      return stocks
-    }
-    xhr.onerror = () => {
-      console.log(xhr)
-    }
-    xhr.send()
+  async function callService (stockSymbol: string): Promise<Stock> {
+    const url = `/api/stock?stockSymbol=${stockSymbol}`
+    return await fetch(url, {
+      method: 'POST'
+    }).then(async data => await data.json())
+      .catch(error => { console.error(error) })
   }
 
   return (
