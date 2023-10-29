@@ -5,9 +5,8 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { type ReactNode } from 'react'
 
-export class Applications extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function Applications (): ReactNode {
+  return (
             <div>
                 <h2 className="text-primary">Apps</h2>
                 <div className="row">
@@ -73,6 +72,5 @@ export class Applications extends React.Component<unknown, unknown> {
                     </div>
                 </div>
             </div>
-    )
-  }
+  )
 }

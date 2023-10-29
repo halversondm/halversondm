@@ -5,9 +5,8 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { type ReactNode } from 'react'
 
-export class Auto extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function Auto (): ReactNode {
+  return (
             <div>
                 <h2 className="text-primary">Autos</h2>
                 <p>I&apos;ve had three cars and two motorcycles that I&apos;ve really enjoyed since I
@@ -21,6 +20,5 @@ export class Auto extends React.Component<unknown, unknown> {
                     <li><Link to="/C5Secrets">C5 Corvette Tips and Secrets</Link></li>
                 </ul>
             </div>
-    )
-  }
+  )
 }

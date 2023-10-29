@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { PhotoGallery } from "../../app/components/PhotoGallery";
+import PhotoGallery from "../../app/components/PhotoGallery";
 
 test("Photo Gallery to match", () => {
     const unit = (

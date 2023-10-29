@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { type ReactNode } from 'react'
 
-export class C5CorvetteSecrets extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function C5CorvetteSecrets (): ReactNode {
+  return (
             <div>
                 <h2 className="text-primary">C5 Corvette Tips and Secrets</h2>
                 <ul className="c5">
@@ -87,6 +86,5 @@ export class C5CorvetteSecrets extends React.Component<unknown, unknown> {
                     </li>
                 </ul>
             </div>
-    )
-  }
+  )
 }

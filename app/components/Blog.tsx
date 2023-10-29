@@ -3,7 +3,7 @@
  */
 import * as React from 'react'
 import { Card } from 'react-bootstrap'
-import { type ReactNode } from 'react'
+import { type ReactNode, useState, useEffect } from 'react'
 
 export interface BlogState {
   items: BlogItem[]
@@ -17,25 +17,19 @@ export interface BlogItem {
   published: string
 }
 
-export class Blog extends React.Component<unknown, BlogState> {
-  state: BlogState
+export default function Blog (): ReactNode {
+  const [state, setState] = useState<BlogState>({ items: [], filteredData: [] })
 
-  constructor () {
-    super({})
-    this.state = { items: [], filteredData: [] }
-    this.filterData = this.filterData.bind(this)
-  }
-
-  componentDidMount (): void {
+  useEffect(() => {
     const xhr = new XMLHttpRequest()
     xhr.open('POST', '/blogService')
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 400) {
         const data = JSON.parse(xhr.responseText)
-        this.setState({
+        return {
           items: data.items,
           filteredData: data.items
-        })
+        }
       } else {
         console.log('unsucc ', xhr.responseText)
       }
@@ -44,22 +38,21 @@ export class Blog extends React.Component<unknown, BlogState> {
       console.log(xhr)
     }
     xhr.send()
-  }
+  }, [])
 
-  createMarkup (html): { __html: string } {
+  function createMarkup (html): { __html: string } {
     return { __html: html }
   }
 
-  filterData (event): void {
+  function filterData (event): void {
     const regex = new RegExp(event.target.value, 'i')
-    const filtered = this.state.items.filter((data) => {
+    const filtered = state.items.filter((data) => {
       return data.content.search(regex) > -1
     })
-    this.setState({ filteredData: filtered })
+    setState({ ...state, filteredData: filtered })
   }
 
-  render (): ReactNode {
-    return (
+  return (
             <div>
                 <h2 className="text-primary">Dan Tech</h2>
                 <p>A technology focused blog that I write on <a
@@ -67,14 +60,14 @@ export class Blog extends React.Component<unknown, BlogState> {
                 <div className="input-prepend">
                     <span className="add-on"><i className="icon-search"/></span>
                     <input className="span12" type="text" placeholder="Search"
-                           onChange={this.filterData}/>
+                           onChange={filterData}/>
                     <span className="badge badge-warning"
-                          hidden={this.state.filteredData.length === this.state.items.length}>
-            {this.state.filteredData.length} Items</span>
+                          hidden={state.filteredData.length === state.items.length}>
+            {state.filteredData.length} Items</span>
                 </div>
               <div style={{ height: '20px' }}/>
                 {
-                    this.state.filteredData.map((item, i) => {
+                    state.filteredData.map((item, i) => {
                       return (
                             <Card bg="secondary" key={i}>
                                 <Card.Header>
@@ -82,13 +75,12 @@ export class Blog extends React.Component<unknown, BlogState> {
                                 </Card.Header>
                                 <Card.Body>
                                     <Card.Subtitle className="small">{item.published}</Card.Subtitle>
-                                    <Card.Text dangerouslySetInnerHTML={this.createMarkup(item.content)}/>
+                                    <Card.Text dangerouslySetInnerHTML={createMarkup(item.content)}/>
                                 </Card.Body>
                             </Card>
                       )
                     })
                 }
             </div>
-    )
-  }
+  )
 }

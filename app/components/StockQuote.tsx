@@ -2,14 +2,14 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import { type ReactNode } from 'react'
+import { type ReactNode, useState, useEffect } from 'react'
 
-export interface StockQuoteState {
+interface StockQuoteState {
   stockInput: string
   stocks: Stock[]
 }
 
-export interface Stock {
+interface Stock {
   Symbol: string
   Name: string
   LastPrice?: string
@@ -21,38 +21,34 @@ export interface Stock {
   Low?: string
 }
 
-export class StockQuote extends React.Component<unknown, StockQuoteState> {
-  state: StockQuoteState
+export default function StockQuote (): ReactNode {
+  const stockList = ['MSFT', 'AAPL', 'JPM', 'AMZN', 'T', 'F']
+  const [state, setState] = useState<StockQuoteState>(initialState())
 
-  constructor (props) {
-    super(props)
-    this.state = {
+  function initialState (): StockQuoteState {
+    return {
       stockInput: '',
       stocks: []
     }
-    this.inputStock = this.inputStock.bind(this)
-    this.submit = this.submit.bind(this)
-    this.callService = this.callService.bind(this)
   }
 
-  componentDidMount (): void {
-    const stockList = ['MSFT', 'AAPL', 'JPM', 'AMZN', 'T', 'F']
+  useEffect(() => {
     stockList.forEach((stock) => {
-      this.callService(stock)
+      callService(stock)
     })
+  }, [])
+
+  function inputStock (event): void {
+    setState({ ...state, stockInput: event.target.value })
   }
 
-  inputStock (event): void {
-    this.setState({ stockInput: event.target.value })
+  function submit (): void {
+    callService(state.stockInput)
+    setState({ ...state, stockInput: '' })
   }
 
-  submit (): void {
-    this.callService(this.state.stockInput)
-    this.setState({ stockInput: '' })
-  }
-
-  callService (stockSymbol: string): void {
-    const stocks = this.state.stocks
+  function callService (stockSymbol: string): void {
+    const stocks = state.stocks
     const xhr = new XMLHttpRequest()
     const url = `/stock?stockSymbol=${stockSymbol}`
     xhr.open('POST', url)
@@ -64,7 +60,7 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
         const stock: Stock = { Symbol: stockSymbol, Name: 'Not Found' }
         stocks.push(stock)
       }
-      this.setState({ stocks })
+      return stocks
     }
     xhr.onerror = () => {
       console.log(xhr)
@@ -72,8 +68,7 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
     xhr.send()
   }
 
-  render (): ReactNode {
-    return (
+  return (
             <div>
                 <h2 className="text-primary">Stock Quotes</h2>
                 <form className="form-inline">
@@ -81,10 +76,10 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
                         <label className="sr-only" htmlFor="symbol">Stock Symbol</label>
                         <input type="text" name="stock" id="symbol"
                                className="form-control input-sm" placeholder="Symbol"
-                               value={this.state.stockInput}
-                               onChange={this.inputStock}/>
+                               value={state.stockInput}
+                               onChange={inputStock}/>
                         <input type="button" className="btn-sm btn-default" value="Go!"
-                               onClick={this.submit}/>
+                               onClick={submit}/>
                     </div>
                 </form>
                 <h4 className="text-primary">Stock List</h4>
@@ -104,7 +99,7 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
                     </thead>
                     <tbody>
                     {
-                        this.state.stocks.map((stock, i) => {
+                        state.stocks.map((stock, i) => {
                           return <tr key={i}>
                                 <td>{stock.Symbol}</td>
                                 <td>{stock.Name}</td>
@@ -121,6 +116,5 @@ export class StockQuote extends React.Component<unknown, StockQuoteState> {
                     </tbody>
                 </table>
             </div>
-    )
-  }
+  )
 }

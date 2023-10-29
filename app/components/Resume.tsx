@@ -8,9 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone, faClock } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin, faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
 
-export class Resume extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function Resume (): ReactNode {
+  return (
             <div className="resume">
                 <header className="page-header">
                     <h1 className="page-title">Resume of Daniel M. Halverson</h1>
@@ -341,6 +340,5 @@ export class Resume extends React.Component<unknown, unknown> {
                     </Col>
                 </Row>
             </div>
-    )
-  }
+  )
 }

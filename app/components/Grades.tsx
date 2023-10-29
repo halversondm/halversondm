@@ -2,14 +2,14 @@
  * Created by Daniel on 6/26/2016.
  */
 import * as React from 'react'
-import { type ReactNode } from 'react'
+import { type ReactNode, useState } from 'react'
 
-export interface GradesState {
+interface GradesState {
   studentList: Student[]
   student: Student
 }
 
-export interface Student {
+interface Student {
   studentNumber: number
   quiz1: number
   quiz2: number
@@ -19,12 +19,11 @@ export interface Student {
   letterGrade: string
 }
 
-export class Grades extends React.Component<unknown, GradesState> {
-  state: GradesState
+export default function Grades (): ReactNode {
+  const [state, setState] = useState<GradesState>(initialState())
 
-  constructor (props) {
-    super(props)
-    this.state = {
+  function initialState (): GradesState {
+    return {
       studentList: [],
       student: {
         studentNumber: 0,
@@ -36,37 +35,26 @@ export class Grades extends React.Component<unknown, GradesState> {
         letterGrade: ''
       }
     }
-    this.removeStudent = this.removeStudent.bind(this)
-    this.addStudent = this.addStudent.bind(this)
-    this.determineLetterGrade = this.determineLetterGrade.bind(this)
-    this.finalChange = this.finalChange.bind(this)
-    this.midtermChange = this.midtermChange.bind(this)
-    this.quiz1Change = this.quiz1Change.bind(this)
-    this.quiz2Change = this.quiz2Change.bind(this)
-    this.removeStudent = this.removeStudent.bind(this)
-    this.studentNumberChange = this.studentNumberChange.bind(this)
   }
 
-  removeStudent (event): void {
-    event.preventDefault()
-    const studentList = this.state.studentList
+  function removeStudent (event): void {
+    const studentList = state.studentList
     studentList.splice(event.currentTarget.dataset.key, 1)
-    this.setState({ studentList })
+    setState({ ...state, studentList })
   }
 
-  addStudent (event): void {
-    event.preventDefault()
-    let student = this.state.student
+  function addStudent (event): void {
+    let student = state.student
     const quizzes = ((student.quiz1 * 10) + (student.quiz2 * 10)) / 200
     const midterm = student.midterm / 100
     const final = student.final / 100
     const finalGrade = ((quizzes * 0.25) + (midterm * 0.25) +
             (final * 0.5)) * 100
     student.classAverage = Math.round(finalGrade)
-    student = this.determineLetterGrade(finalGrade, student)
-    const studentList = this.state.studentList
+    student = determineLetterGrade(finalGrade, student)
+    const studentList = state.studentList
     studentList.push(student)
-    this.setState({
+    setState({
       studentList,
       student: {
         studentNumber: 0,
@@ -80,7 +68,7 @@ export class Grades extends React.Component<unknown, GradesState> {
     })
   }
 
-  determineLetterGrade (finalGrade, student): Student {
+  function determineLetterGrade (finalGrade, student): Student {
     student.letterGrade = finalGrade >= 90
       ? 'A'
       : (finalGrade >= 80 && finalGrade <= 89)
@@ -91,38 +79,37 @@ export class Grades extends React.Component<unknown, GradesState> {
     return student
   }
 
-  studentNumberChange (event): void {
-    const student = this.state.student
+  function studentNumberChange (event): void {
+    const student = state.student
     student.studentNumber = event.target.value
-    this.setState({ student })
+    setState({ ...state, student })
   }
 
-  quiz1Change (event): void {
-    const student = this.state.student
+  function quiz1Change (event): void {
+    const student = state.student
     student.quiz1 = event.target.value
-    this.setState({ student })
+    setState({ ...state, student })
   }
 
-  quiz2Change (event): void {
-    const student = this.state.student
+  function quiz2Change (event): void {
+    const student = state.student
     student.quiz2 = event.target.value
-    this.setState({ student })
+    setState({ ...state, student })
   }
 
-  midtermChange (event): void {
-    const student = this.state.student
+  function midtermChange (event): void {
+    const student = state.student
     student.midterm = event.target.value
-    this.setState({ student })
+    setState({ ...state, student })
   }
 
-  finalChange (event): void {
-    const student = this.state.student
+  function finalChange (event): void {
+    const student = state.student
     student.final = event.target.value
-    this.setState({ student })
+    setState({ ...state, student })
   }
 
-  render (): ReactNode {
-    return (
+  return (
             <div>
                 <h2 className="text-primary">Grade Book</h2>
                 <p>Quizzes are on a 10 point basis. Exams are on a 100 point basis.
@@ -143,7 +130,7 @@ export class Grades extends React.Component<unknown, GradesState> {
                     </thead>
                     <tbody>
                     {
-                        this.state.studentList.map((student, i) => {
+                        state.studentList.map((student, i) => {
                           return <tr key={i}>
                                 <td id={'studentNumber' + i}>{student.studentNumber}</td>
                                 <td id={'quiz1' + i}>{student.quiz1}</td>
@@ -153,8 +140,8 @@ export class Grades extends React.Component<unknown, GradesState> {
                                 <td id={'classAverage' + i}>{student.classAverage}</td>
                                 <td id={'letterGrade' + i}>{student.letterGrade}</td>
                                 <td>
-                                    <button id={'removeStudent' + i} className="btn btn-danger btn-sm"
-                                            onClick={this.removeStudent} data-key={i}> - Remove
+                                    <button type="button" id={'removeStudent' + i} className="btn btn-danger btn-sm"
+                                            onClick={removeStudent} data-key={i}> - Remove
                                         Student
                                     </button>
                                 </td>
@@ -170,8 +157,8 @@ export class Grades extends React.Component<unknown, GradesState> {
                         <label htmlFor="studentNumber" className="col-sm-2 control-label">Student
                             Number</label>
                         <div className="col-sm-2">
-                            <input id="studentNumber" value={this.state.student.studentNumber}
-                                   onChange={this.studentNumberChange} type="number"
+                            <input id="studentNumber" value={state.student.studentNumber}
+                                   onChange={studentNumberChange} type="number"
                                    className="form-control"/>
                         </div>
                     </div>
@@ -179,39 +166,38 @@ export class Grades extends React.Component<unknown, GradesState> {
                         <label htmlFor="quiz1" className="col-sm-2 control-label">Quiz 1
                             Grade</label>
                         <div className="col-sm-2">
-                            <input id="quiz1" value={this.state.student.quiz1} type="number"
-                                   onChange={this.quiz1Change} className="form-control"/>
+                            <input id="quiz1" value={state.student.quiz1} type="number"
+                                   onChange={quiz1Change} className="form-control"/>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="quiz2" className="col-sm-2 control-label">Quiz 2
                             Grade</label>
                         <div className="col-sm-2">
-                            <input id="quiz2" value={this.state.student.quiz2} type="number"
-                                   onChange={this.quiz2Change} className="form-control"/>
+                            <input id="quiz2" value={state.student.quiz2} type="number"
+                                   onChange={quiz2Change} className="form-control"/>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="midterm" className="col-sm-2 control-label">Midterm
                             Exam Grade</label>
                         <div className="col-sm-2">
-                            <input id="midterm" value={this.state.student.midterm} type="number"
-                                   onChange={this.midtermChange} className="form-control"/>
+                            <input id="midterm" value={state.student.midterm} type="number"
+                                   onChange={midtermChange} className="form-control"/>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="final" className="col-sm-2 control-label">Final Exam
                             Grade</label>
                         <div className="col-sm-2">
-                            <input id="final" value={this.state.student.final} type="number"
-                                   onChange={this.finalChange} className="form-control"/>
+                            <input id="final" value={state.student.final} type="number"
+                                   onChange={finalChange} className="form-control"/>
                         </div>
                     </div>
-                    <button className="btn btn-primary btn-sm" id="addStudent"
-                            onClick={this.addStudent}> + Add Student
+                    <button type="button" className="btn btn-primary btn-sm" id="addStudent"
+                            onClick={addStudent}> + Add Student
                     </button>
                 </form>
             </div>
-    )
-  }
+  )
 }

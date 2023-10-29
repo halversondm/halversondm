@@ -4,9 +4,8 @@
 import * as React from 'react'
 import { type ReactNode } from 'react'
 
-export class Charger extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function Charger (): ReactNode {
+  return (
             <div>
                 <h2 className="text-primary">2012 Dodge Charger R/T Road &amp; Track with Super Track Pak</h2>
                 <h3>BUILD SHEET</h3>
@@ -220,6 +219,5 @@ export class Charger extends React.Component<unknown, unknown> {
                 </div>
                 <img src="images/2012_charger.jpeg" className="img-responsive"/>
             </div>
-    )
-  }
+  )
 }

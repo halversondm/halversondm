@@ -5,9 +5,8 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { type ReactNode } from 'react'
 
-export class Home extends React.Component<unknown, unknown> {
-  render (): ReactNode {
-    return (
+export default function Home (): ReactNode {
+  return (
             <div>
                 <div className="jumbotron">
                     <h1>@halversondm</h1>
@@ -52,6 +51,5 @@ export class Home extends React.Component<unknown, unknown> {
                     </div>
                 </div>
             </div>
-    )
-  }
+  )
 }

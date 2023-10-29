@@ -9,7 +9,10 @@ module.exports = merge(common, {
     devServer: {
         port: 3000,
         open: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        headers: {
+            'Content-Security-Policy': 'frame-ancestors *.linkedin.com;'
+        }
     },
     devtool: 'source-map',
     output: {

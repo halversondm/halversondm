@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
-import { ABC } from "../../app/components/ABC";
+import ABC from "../../app/components/ABC";
 
 test("Checkbox Series to match", () => {
     const unit = (
