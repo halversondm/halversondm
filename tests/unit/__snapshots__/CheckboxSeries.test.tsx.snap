@@ -46,7 +46,8 @@ exports[`Checkbox Series to match 1`] = `
         type="checkbox"
         value="Other"
       />
-       Other
+       
+      Other
     </label>
   </div>,
   <input

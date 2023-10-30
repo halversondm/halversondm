@@ -195,7 +195,8 @@ exports[`Checkbox Series to match 1`] = `
               type="radio"
               value="Other"
             />
-             Other
+             
+            Other
           </label>
         </div>
         <input
@@ -366,7 +367,8 @@ exports[`Checkbox Series to match 1`] = `
               type="checkbox"
               value="Other"
             />
-             Other
+             
+            Other
           </label>
         </div>
         <input
@@ -641,7 +643,8 @@ exports[`Checkbox Series to match 1`] = `
               type="checkbox"
               value="Other"
             />
-             Other
+             
+            Other
           </label>
         </div>
         <input
@@ -1008,7 +1011,8 @@ exports[`Checkbox Series to match 1`] = `
               type="checkbox"
               value="Other"
             />
-             Other
+             
+            Other
           </label>
         </div>
         <input

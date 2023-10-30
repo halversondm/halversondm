@@ -8,10 +8,6 @@
     "esModuleInterop": true,
     "strictNullChecks": true
   },
-  "include": [
-    "./app/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["app"],
+  "exclude": ["node_modules"]
 }
