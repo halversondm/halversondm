@@ -1,0 +1,13 @@
+.DS_Store
+node_modules/
+*.iml
+dist/
+*.log
+tests/errorShots/
+tests/results/
+certs/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

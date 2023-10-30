@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox Series to match 1`] = `
-<div>
+[
   <div
     className="checkbox"
   >
@@ -9,7 +9,7 @@ exports[`Checkbox Series to match 1`] = `
       <input
         checked={true}
         id="one"
-        name="selectedLabel[]"
+        name="selectedLabel"
         onClick={[Function]}
         type="checkbox"
         value="one"
@@ -17,7 +17,7 @@ exports[`Checkbox Series to match 1`] = `
        
       one
     </label>
-  </div>
+  </div>,
   <div
     className="checkbox"
   >
@@ -25,7 +25,7 @@ exports[`Checkbox Series to match 1`] = `
       <input
         checked={false}
         id="two"
-        name="selectedLabel[]"
+        name="selectedLabel"
         onClick={[Function]}
         type="checkbox"
         value="two"
@@ -33,7 +33,7 @@ exports[`Checkbox Series to match 1`] = `
        
       two
     </label>
-  </div>
+  </div>,
   <div
     className="checkbox"
   >
@@ -41,22 +41,23 @@ exports[`Checkbox Series to match 1`] = `
       <input
         checked={false}
         id="otherLabel"
-        name="selectedLabel[]"
+        name="otherLabelCheckbox"
         onClick={[Function]}
         type="checkbox"
         value="Other"
       />
-       Other
+       
+      Other
     </label>
-  </div>
+  </div>,
   <input
     className="form-control"
-    disabled={true}
+    disabled={false}
     id="labelOther"
     onChange={[Function]}
     placeholder="test"
     type="text"
     value="anotherTest"
-  />
-</div>
+  />,
+]
 `;

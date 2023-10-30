@@ -11,7 +11,6 @@
   padding: 0.2em 0;
 }
 
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 
 body {
@@ -33,16 +32,13 @@ body {
   width: auto;
 }
 
-
 /* resume */
-
 
 /* uses font awesome for social icons */
 
 .page-header {
   text-align: center;
 }
-
 
 /*social buttons*/
 
@@ -77,10 +73,9 @@ body {
 }
 
 .btn-stackoverflow {
-  background-color: #D38B28;
+  background-color: #d38b28;
   opacity: 0.9;
 }
-
 
 /* resume stuff */
 
@@ -120,7 +115,6 @@ body {
   border-radius: 0;
 }
 
-
 /*makes an anchor inactive(not clickable)*/
 
 .inactive-link {
@@ -141,7 +135,6 @@ body {
     padding: 5px;
   }
 }
-
 
 /* skill meter in resume. copy pasted from http://bootsnipp.com/snippets/featured/progress-bar-meter */
 
@@ -192,7 +185,6 @@ body {
 .progress-meter > .meter.meter-right > .meter-text {
   text-align: right;
 }
-
 
 /* Photo Gallery CSS */
 

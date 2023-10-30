@@ -195,7 +195,8 @@ exports[`Checkbox Series to match 1`] = `
               type="radio"
               value="Other"
             />
-             Other
+             
+            Other
           </label>
         </div>
         <input
@@ -258,128 +259,127 @@ exports[`Checkbox Series to match 1`] = `
           People Present
         </b>
         <br />
-        <div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Mom"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Mom"
-              />
-               
-              Mom
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Dad"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Dad"
-              />
-               
-              Dad
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Sibling"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Sibling"
-              />
-               
-              Sibling
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Grandparents"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Grandparents"
-              />
-               
-              Grandparents
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Alone"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Alone"
-              />
-               
-              Alone
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Peers"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Peers"
-              />
-               
-              Peers
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="otherLabel"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Other"
-              />
-               Other
-            </label>
-          </div>
-          <input
-            className="form-control"
-            disabled={true}
-            id="labelOther"
-            onChange={[Function]}
-            placeholder="Enter Another Person Present"
-            type="text"
-            value=""
-          />
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Mom"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Mom"
+            />
+             
+            Mom
+          </label>
         </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Dad"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Dad"
+            />
+             
+            Dad
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Sibling"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Sibling"
+            />
+             
+            Sibling
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Grandparents"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Grandparents"
+            />
+             
+            Grandparents
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Alone"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Alone"
+            />
+             
+            Alone
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Peers"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Peers"
+            />
+             
+            Peers
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="otherLabel"
+              name="otherLabelCheckbox"
+              onClick={[Function]}
+              type="checkbox"
+              value="Other"
+            />
+             
+            Other
+          </label>
+        </div>
+        <input
+          className="form-control"
+          disabled={true}
+          id="labelOther"
+          onChange={[Function]}
+          placeholder="Enter Another Person Present"
+          type="text"
+          value=""
+        />
       </div>
       <div
         className="col-md-3"
@@ -391,272 +391,271 @@ exports[`Checkbox Series to match 1`] = `
         <b>
           Select all that apply
         </b>
-        <div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Refuse to follow directions"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Refuse to follow directions"
-              />
-               
-              Refuse to follow directions
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Makes verbal threats"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Makes verbal threats"
-              />
-               
-              Makes verbal threats
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Grabbing/pulling"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Grabbing/pulling"
-              />
-               
-              Grabbing/pulling
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Crying/Whining"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Crying/Whining"
-              />
-               
-              Crying/Whining
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Screaming/Yelling"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Screaming/Yelling"
-              />
-               
-              Screaming/Yelling
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Scratching"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Scratching"
-              />
-               
-              Scratching
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Biting"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Biting"
-              />
-               
-              Biting
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Spitting"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Spitting"
-              />
-               
-              Spitting
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Kicking"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Kicking"
-              />
-               
-              Kicking
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Flopping"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Flopping"
-              />
-               
-              Flopping
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Running Away"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Running Away"
-              />
-               
-              Running Away
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Destroying property"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Destroying property"
-              />
-               
-              Destroying property
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Hitting Self"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Hitting Self"
-              />
-               
-              Hitting Self
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Hitting Others"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Hitting Others"
-              />
-               
-              Hitting Others
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Verbal Refusal"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Verbal Refusal"
-              />
-               
-              Verbal Refusal
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="otherLabel"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Other"
-              />
-               Other
-            </label>
-          </div>
-          <input
-            className="form-control"
-            disabled={true}
-            id="labelOther"
-            onChange={[Function]}
-            placeholder="Enter Description"
-            type="text"
-            value=""
-          />
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Refuse to follow directions"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Refuse to follow directions"
+            />
+             
+            Refuse to follow directions
+          </label>
         </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Makes verbal threats"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Makes verbal threats"
+            />
+             
+            Makes verbal threats
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Grabbing/pulling"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Grabbing/pulling"
+            />
+             
+            Grabbing/pulling
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Crying/Whining"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Crying/Whining"
+            />
+             
+            Crying/Whining
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Screaming/Yelling"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Screaming/Yelling"
+            />
+             
+            Screaming/Yelling
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Scratching"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Scratching"
+            />
+             
+            Scratching
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Biting"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Biting"
+            />
+             
+            Biting
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Spitting"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Spitting"
+            />
+             
+            Spitting
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Kicking"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Kicking"
+            />
+             
+            Kicking
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Flopping"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Flopping"
+            />
+             
+            Flopping
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Running Away"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Running Away"
+            />
+             
+            Running Away
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Destroying property"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Destroying property"
+            />
+             
+            Destroying property
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Hitting Self"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Hitting Self"
+            />
+             
+            Hitting Self
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Hitting Others"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Hitting Others"
+            />
+             
+            Hitting Others
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Verbal Refusal"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Verbal Refusal"
+            />
+             
+            Verbal Refusal
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="otherLabel"
+              name="otherLabelCheckbox"
+              onClick={[Function]}
+              type="checkbox"
+              value="Other"
+            />
+             
+            Other
+          </label>
+        </div>
+        <input
+          className="form-control"
+          disabled={true}
+          id="labelOther"
+          onChange={[Function]}
+          placeholder="Enter Description"
+          type="text"
+          value=""
+        />
         <br />
          
         <b>
@@ -824,208 +823,207 @@ exports[`Checkbox Series to match 1`] = `
           What happened after?
         </b>
         <br />
-        <div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Verbal Redirection"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Verbal Redirection"
-              />
-               
-              Verbal Redirection
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Physical assist/prompt"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Physical assist/prompt"
-              />
-               
-              Physical assist/prompt
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Ignored problem behavior"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Ignored problem behavior"
-              />
-               
-              Ignored problem behavior
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Kept on demand"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Kept on demand"
-              />
-               
-              Kept on demand
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Verbal reprimand"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Verbal reprimand"
-              />
-               
-              Verbal reprimand
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Removed from activity"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Removed from activity"
-              />
-               
-              Removed from activity
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Given a different activity/task"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Given a different activity/task"
-              />
-               
-              Given a different activity/task
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Lost Privilege"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Lost Privilege"
-              />
-               
-              Lost Privilege
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Sent to room"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Sent to room"
-              />
-               
-              Sent to room
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Given a time out"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Given a time out"
-              />
-               
-              Given a time out
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="Left alone"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Left alone"
-              />
-               
-              Left alone
-            </label>
-          </div>
-          <div
-            className="checkbox"
-          >
-            <label>
-              <input
-                checked={false}
-                id="otherLabel"
-                name="selectedLabel[]"
-                onClick={[Function]}
-                type="checkbox"
-                value="Other"
-              />
-               Other
-            </label>
-          </div>
-          <input
-            className="form-control"
-            disabled={true}
-            id="labelOther"
-            onChange={[Function]}
-            placeholder="Enter Description"
-            type="text"
-            value=""
-          />
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Verbal Redirection"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Verbal Redirection"
+            />
+             
+            Verbal Redirection
+          </label>
         </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Physical assist/prompt"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Physical assist/prompt"
+            />
+             
+            Physical assist/prompt
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Ignored problem behavior"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Ignored problem behavior"
+            />
+             
+            Ignored problem behavior
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Kept on demand"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Kept on demand"
+            />
+             
+            Kept on demand
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Verbal reprimand"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Verbal reprimand"
+            />
+             
+            Verbal reprimand
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Removed from activity"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Removed from activity"
+            />
+             
+            Removed from activity
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Given a different activity/task"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Given a different activity/task"
+            />
+             
+            Given a different activity/task
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Lost Privilege"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Lost Privilege"
+            />
+             
+            Lost Privilege
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Sent to room"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Sent to room"
+            />
+             
+            Sent to room
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Given a time out"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Given a time out"
+            />
+             
+            Given a time out
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="Left alone"
+              name="selectedLabel"
+              onClick={[Function]}
+              type="checkbox"
+              value="Left alone"
+            />
+             
+            Left alone
+          </label>
+        </div>
+        <div
+          className="checkbox"
+        >
+          <label>
+            <input
+              checked={false}
+              id="otherLabel"
+              name="otherLabelCheckbox"
+              onClick={[Function]}
+              type="checkbox"
+              value="Other"
+            />
+             
+            Other
+          </label>
+        </div>
+        <input
+          className="form-control"
+          disabled={true}
+          id="labelOther"
+          onChange={[Function]}
+          placeholder="Enter Description"
+          type="text"
+          value=""
+        />
       </div>
     </div>
     <br />

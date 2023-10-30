@@ -1,126 +1,136 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from 'react'
-import { type ReactNode } from 'react'
+import * as React from "react";
+import { type ReactNode, useState, useEffect } from "react";
 
-export interface StockQuoteState {
-  stockInput: string
-  stocks: Stock[]
+interface StockQuoteState {
+  stockInput: string;
+  stocks: Stock[];
 }
 
-export interface Stock {
-  Symbol: string
-  Name: string
-  LastPrice?: string
-  Timestamp?: string
-  MarketCap?: string
-  ChangeYTD?: string
-  High?: string
-  Open?: string
-  Low?: string
+interface Stock {
+  Symbol: string;
+  Name: string;
+  LastPrice?: string;
+  Timestamp?: string;
+  MarketCap?: string;
+  ChangeYTD?: string;
+  High?: string;
+  Open?: string;
+  Low?: string;
 }
 
-export class StockQuote extends React.Component<unknown, StockQuoteState> {
-  state: StockQuoteState
+export default function StockQuote(): ReactNode {
+  const stockList = ["MSFT", "AAPL", "JPM", "AMZN", "T", "F"];
+  const [state, setState] = useState<StockQuoteState>(initialState());
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      stockInput: '',
-      stocks: []
-    }
-    this.inputStock = this.inputStock.bind(this)
-    this.submit = this.submit.bind(this)
-    this.callService = this.callService.bind(this)
+  function initialState(): StockQuoteState {
+    return {
+      stockInput: "",
+      stocks: [],
+    };
   }
 
-  componentDidMount (): void {
-    const stockList = ['MSFT', 'AAPL', 'JPM', 'AMZN', 'T', 'F']
+  useEffect(() => {
+    const stocks = state.stocks.slice();
     stockList.forEach((stock) => {
-      this.callService(stock)
+      callService(stock)
+        .then((stock) => {
+          stocks.push(stock);
+          setState({ ...state, stocks });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  }, []);
+
+  function inputStock(event): void {
+    setState({ ...state, stockInput: event.target.value });
+  }
+
+  function submit(): void {
+    callService(state.stockInput)
+      .then((stock) => {
+        const stocks = state.stocks.slice();
+        stocks.push(stock);
+        setState({ ...state, stocks });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  async function callService(stockSymbol: string): Promise<Stock> {
+    const url = `/api/stock?stockSymbol=${stockSymbol}`;
+    return await fetch(url, {
+      method: "POST",
     })
+      .then(async (data) => await data.json())
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
-  inputStock (event): void {
-    this.setState({ stockInput: event.target.value })
-  }
-
-  submit (): void {
-    this.callService(this.state.stockInput)
-    this.setState({ stockInput: '' })
-  }
-
-  callService (stockSymbol: string): void {
-    const stocks = this.state.stocks
-    const xhr = new XMLHttpRequest()
-    const url = `/stock?stockSymbol=${stockSymbol}`
-    xhr.open('POST', url)
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 400) {
-        stocks.push(JSON.parse(xhr.responseText))
-      } else {
-        console.log('unsucc ', xhr.responseText)
-        const stock: Stock = { Symbol: stockSymbol, Name: 'Not Found' }
-        stocks.push(stock)
-      }
-      this.setState({ stocks })
-    }
-    xhr.onerror = () => {
-      console.log(xhr)
-    }
-    xhr.send()
-  }
-
-  render (): ReactNode {
-    return (
-            <div>
-                <h2 className="text-primary">Stock Quotes</h2>
-                <form className="form-inline">
-                    <div className="form-group">
-                        <label className="sr-only" htmlFor="symbol">Stock Symbol</label>
-                        <input type="text" name="stock" id="symbol"
-                               className="form-control input-sm" placeholder="Symbol"
-                               value={this.state.stockInput}
-                               onChange={this.inputStock}/>
-                        <input type="button" className="btn-sm btn-default" value="Go!"
-                               onClick={this.submit}/>
-                    </div>
-                </form>
-                <h4 className="text-primary">Stock List</h4>
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Last Price</th>
-                        <th>Time</th>
-                        <th>Market Cap</th>
-                        <th>Change YTD</th>
-                        <th>High</th>
-                        <th>Low</th>
-                        <th>Open</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.stocks.map((stock, i) => {
-                          return <tr key={i}>
-                                <td>{stock.Symbol}</td>
-                                <td>{stock.Name}</td>
-                                <td>{stock.LastPrice}</td>
-                                <td>{stock.Timestamp}</td>
-                                <td>{stock.MarketCap}</td>
-                                <td>{stock.ChangeYTD}</td>
-                                <td>{stock.High}</td>
-                                <td>{stock.Low}</td>
-                                <td>{stock.Open}</td>
-                            </tr>
-                        })
-                    }
-                    </tbody>
-                </table>
-            </div>
-    )
-  }
+  return (
+    <div>
+      <h2 className="text-primary">Stock Quotes</h2>
+      <form className="form-inline">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="symbol">
+            Stock Symbol
+          </label>
+          <input
+            type="text"
+            name="stock"
+            id="symbol"
+            className="form-control input-sm"
+            placeholder="Symbol"
+            value={state.stockInput}
+            onChange={inputStock}
+          />
+          <input
+            type="button"
+            className="btn-sm btn-default"
+            value="Go!"
+            onClick={submit}
+          />
+        </div>
+      </form>
+      <h4 className="text-primary">Stock List</h4>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Last Price</th>
+            <th>Time</th>
+            <th>Market Cap</th>
+            <th>Change YTD</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          {state.stocks.map((stock, i) => {
+            return (
+              <tr key={i}>
+                <td>{stock.Symbol}</td>
+                <td>{stock.Name}</td>
+                <td>{stock.LastPrice}</td>
+                <td>{stock.Timestamp}</td>
+                <td>{stock.MarketCap}</td>
+                <td>{stock.ChangeYTD}</td>
+                <td>{stock.High}</td>
+                <td>{stock.Low}</td>
+                <td>{stock.Open}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }

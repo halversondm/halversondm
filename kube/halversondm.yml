@@ -6,12 +6,12 @@ metadata:
   name: halversondm
 spec:
   containers:
-  - image: halversondm:latest
-    name: halversondm
-    resources: {}
-    ports:
-      - containerPort: 3000
-    imagePullPolicy: Never
+    - image: halversondm:latest
+      name: halversondm
+      resources: {}
+      ports:
+        - containerPort: 3000
+      imagePullPolicy: Never
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 ---

@@ -1,191 +1,211 @@
 /**
  * Created by Daniel on 6/26/2016.
  */
-import * as React from 'react'
-import { Button } from 'react-bootstrap'
-import { type ReactNode } from 'react'
+import * as React from "react";
+import { Button } from "react-bootstrap";
+import { type ReactNode, useState } from "react";
 
-export interface UrlBuilderState {
-  queries: Query[]
-  query: Query
-  baseUrl: string
-  assembledUrl: string
+interface UrlBuilderState {
+  queries: Query[];
+  query: Query;
+  baseUrl: string;
+  assembledUrl: string;
 }
 
-export interface Query {
-  key: string
-  value: string
+interface Query {
+  key: string;
+  value: string;
 }
 
-export class UrlBuilder extends React.Component<unknown, UrlBuilderState> {
-  state: UrlBuilderState
+export default function UrlBuilder(): ReactNode {
+  const [state, setState] = useState<UrlBuilderState>(initialState());
 
-  constructor (props) {
-    super(props)
-    this.state = {
+  function initialState(): UrlBuilderState {
+    return {
       queries: [],
-      query: { key: '', value: '' },
-      baseUrl: '',
-      assembledUrl: ''
-    }
-    this.addQuery = this.addQuery.bind(this)
-    this.assemble = this.assemble.bind(this)
-    this.setCookie = this.setCookie.bind(this)
-    this.baseUrlChange = this.baseUrlChange.bind(this)
-    this.keyChange = this.keyChange.bind(this)
-    this.valueChange = this.valueChange.bind(this)
-    this.launch = this.launch.bind(this)
+      query: { key: "", value: "" },
+      baseUrl: "",
+      assembledUrl: "",
+    };
   }
 
-  addQuery (event): void {
-    event.preventDefault()
-    const queries = this.state.queries
-    queries.push(this.state.query)
-    this.setState({ queries, query: { key: '', value: '' } })
+  function addQuery(event): void {
+    event.preventDefault();
+    const queries = state.queries;
+    queries.push(state.query);
+    setState({ ...state, queries, query: { key: "", value: "" } });
   }
 
-  assemble (event): void {
-    event.preventDefault()
-    let assembled = this.state.baseUrl + '?'
-    const queries = this.state.queries
-    let count = 0
+  function assemble(event): void {
+    event.preventDefault();
+    let assembled = state.baseUrl + "?";
+    const queries = state.queries;
+    let count = 0;
 
     queries.forEach((query) => {
-      count += 1
-      assembled += query.key + '=' + query.value
-      this.setCookie(query.key, query.value)
+      count += 1;
+      assembled += query.key + "=" + query.value;
+      setCookie(query.key, query.value);
       if (count < queries.length) {
-        assembled += '&'
+        assembled += "&";
       }
-    })
-    this.setCookie('baseUrl', this.state.baseUrl)
-    this.setState({ assembledUrl: assembled })
+    });
+    setCookie("baseUrl", state.baseUrl);
+    setState({ ...state, assembledUrl: assembled });
   }
 
-  setCookie (cname, value): void {
-    const d = new Date()
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000))
-    const expires = 'expires=' + d.toUTCString()
-    document.cookie = cname + '=' + value + '; ' + expires
+  function setCookie(cname, value): void {
+    const d = new Date();
+    d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + value + "; " + expires;
   }
 
-  launch (event): void {
-    event.preventDefault()
-    const myWindow = window.open('', 'MsgWindow', 'toolbar=yes, scrollbars=yes, ' +
-            'resizable=yes, width=1024, height=768')
+  function launch(event): void {
+    event.preventDefault();
+    const myWindow = window.open(
+      "",
+      "MsgWindow",
+      "toolbar=yes, scrollbars=yes, " + "resizable=yes, width=1024, height=768",
+    );
     if (myWindow != null) {
-      myWindow.document.write('<html><head><meta http-equiv="X-UA-Compatible"' +
-                ' content="IE=edge"></head></head><body><iframe src="' + this.state.assembledUrl + '" width="100%"' +
-                ' height="100%" /></body></html>"')
+      myWindow.document.write(
+        '<html><head><meta http-equiv="X-UA-Compatible"' +
+          ' content="IE=edge"></head></head><body><iframe src="' +
+          state.assembledUrl +
+          '" width="100%"' +
+          ' height="100%" /></body></html>"',
+      );
     }
   }
 
-  keyChange (event): void {
-    const query = this.state.query
-    query.key = event.target.value
-    this.setState({ query })
+  function keyChange(event): void {
+    const query = state.query;
+    query.key = event.target.value;
+    setState({ ...state, query });
   }
 
-  valueChange (event): void {
-    const query = this.state.query
-    query.value = event.target.value
-    this.setState({ query })
+  function valueChange(event): void {
+    const query = state.query;
+    query.value = event.target.value;
+    setState({ ...state, query });
   }
 
-  baseUrlChange (event): void {
-    this.setState({ baseUrl: event.target.value })
+  function baseUrlChange(event): void {
+    setState({ ...state, baseUrl: event.target.value });
   }
 
-  render (): ReactNode {
-    return (
-            <div>
-                <h2 className="text-primary">URL Builder</h2>
-                <h3>Build a URL with query parameters and launch it!</h3>
-                <table className="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Key</th>
-                        <th>Value</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.queries.map((query, i) => {
-                          return <tr key={i}>
-                                <td>{query.key}</td>
-                                <td>{query.value}</td>
-                            </tr>
-                        })
-                    }
-                    </tbody>
-                </table>
-                <hr/>
-                <fieldset>
-                    <legend>Add a new query parameter</legend>
-                    <form className="form-horizontal">
-                        <div className="form-group">
-                            <label htmlFor="queryKey"
-                                   className="col-sm-2 control-label">Key</label>
-                            <div className="col-sm-10">
-                                <input id="queryKey" value={this.state.query.key} type="text"
-                                       onChange={this.keyChange} className="form-control"/>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="queryValue"
-                                   className="col-sm-2 control-label">Value</label>
-                            <div className="col-sm-10">
-                                <input id="queryValue" value={this.state.query.value}
-                                       onChange={this.valueChange}
-                                       type="text" className="form-control"/>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-offset-10 col-sm-2">
-                                <Button variant="primary" id="addQuery"
-                                        onClick={this.addQuery}> + Add Query Parameter
-                                </Button>
-                            </div>
-                        </div>
-                    </form>
-                </fieldset>
-                <fieldset>
-                    <legend>Assemble the URL and Launch it</legend>
-                    <form className="form-horizontal">
-                        <div className="form-group">
-                            <label htmlFor="baseUrl" className="col-sm-2 control-label">Base
-                                URL</label>
-                            <div className="col-sm-10">
-                                <input id="baseUrl" value={this.state.baseUrl} type="text"
-                                       className="form-control" onChange={this.baseUrlChange}/>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-offset-10 col-sm-2">
-                                <Button variant="primary" id="assemble"
-                                        onClick={this.assemble}>Assemble URL
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="assembledUrl" className="col-sm-2 control-label">Assembled
-                                URL</label>
-                            <div className="col-sm-10">
-              <textarea id="assembledUrl" rows={4}
-                        value={this.state.assembledUrl}
-                        className="form-control"/>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-sm-offset-10 col-sm-2">
-                                <Button variant="danger" id="launch"
-                                        onClick={this.launch}>Launch
-                                </Button>
-                            </div>
-                        </div>
-                    </form>
-                </fieldset>
+  return (
+    <div>
+      <h2 className="text-primary">URL Builder</h2>
+      <h3>Build a URL with query parameters and launch it!</h3>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {state.queries.map((query, i) => {
+            return (
+              <tr key={i}>
+                <td>{query.key}</td>
+                <td>{query.value}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <hr />
+      <fieldset>
+        <legend>Add a new query parameter</legend>
+        <form className="form-horizontal">
+          <div className="form-group">
+            <label htmlFor="queryKey" className="col-sm-2 control-label">
+              Key
+            </label>
+            <div className="col-sm-10">
+              <input
+                id="queryKey"
+                value={state.query.key}
+                type="text"
+                onChange={keyChange}
+                className="form-control"
+              />
             </div>
-    )
-  }
+          </div>
+          <div className="form-group">
+            <label htmlFor="queryValue" className="col-sm-2 control-label">
+              Value
+            </label>
+            <div className="col-sm-10">
+              <input
+                id="queryValue"
+                value={state.query.value}
+                onChange={valueChange}
+                type="text"
+                className="form-control"
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-offset-10 col-sm-2">
+              <Button variant="primary" id="addQuery" onClick={addQuery}>
+                {" "}
+                + Add Query Parameter
+              </Button>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+      <fieldset>
+        <legend>Assemble the URL and Launch it</legend>
+        <form className="form-horizontal">
+          <div className="form-group">
+            <label htmlFor="baseUrl" className="col-sm-2 control-label">
+              Base URL
+            </label>
+            <div className="col-sm-10">
+              <input
+                id="baseUrl"
+                value={state.baseUrl}
+                type="text"
+                className="form-control"
+                onChange={baseUrlChange}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-offset-10 col-sm-2">
+              <Button variant="primary" id="assemble" onClick={assemble}>
+                Assemble URL
+              </Button>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="assembledUrl" className="col-sm-2 control-label">
+              Assembled URL
+            </label>
+            <div className="col-sm-10">
+              <textarea
+                id="assembledUrl"
+                rows={4}
+                value={state.assembledUrl}
+                readOnly={true}
+                className="form-control"
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="col-sm-offset-10 col-sm-2">
+              <Button variant="danger" id="launch" onClick={launch}>
+                Launch
+              </Button>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  );
 }
