@@ -180,8 +180,7 @@ export default function ABC(): ReactNode {
   }
 
   function save(): void {
-    const user = state.user;
-    setState({ ...state, user, showModal: true });
+    setState({ ...state, showModal: true });
     if (validSave()) {
       postToServer();
     }
@@ -261,6 +260,7 @@ export default function ABC(): ReactNode {
       messages.push("The date and time of the ABC is required to save.");
     }
     setState({ ...state, messages });
+    console.log(messages);
     return messages.length === 0;
   }
 
@@ -359,7 +359,7 @@ export default function ABC(): ReactNode {
                     <input
                       type="radio"
                       value={antecedent}
-                      onClick={antecedentRadios}
+                      onChange={antecedentRadios}
                       checked={state.user.antecedent === antecedent}
                     />
                     {antecedent}
@@ -373,7 +373,7 @@ export default function ABC(): ReactNode {
                   type="radio"
                   checked={state.user.antecedent === "Other"}
                   value="Other"
-                  onClick={antecedentRadios}
+                  onChange={antecedentRadios}
                 />{" "}
                 Other
               </label>
@@ -395,7 +395,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={locationRadios}
+                      onChange={locationRadios}
                       checked={state.user.location === location}
                       value={location}
                     />
@@ -445,7 +445,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={durationRadios}
+                      onChange={durationRadios}
                       checked={state.user.duration === duration}
                       value={duration}
                     />
@@ -462,7 +462,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={intensityRadios}
+                      onChange={intensityRadios}
                       checked={state.user.intensity === intensity}
                       value={intensity}
                     />
@@ -529,25 +529,25 @@ export default function ABC(): ReactNode {
           <p style={{ right: "auto" }}>Click anywhere to continue</p>
         </Modal.Footer>
       </Modal>
-      <div id="abcModal" className="modal">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <p>ABC Save Results</p>
-            </div>
-            <div className="modal-body">
-              <ul>
-                {state.messages.map((message, i) => {
-                  return <li key={i}>{message}</li>;
-                })}
-              </ul>
-            </div>
-            <div className="modal-footer">
-              <p style={{ right: "auto" }}>Click anywhere to continue</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* <div id="abcModal" className="modal"> */}
+      {/*  <div className="modal-dialog" role="document"> */}
+      {/*    <div className="modal-content"> */}
+      {/*      <div className="modal-header"> */}
+      {/*        <p>ABC Save Results</p> */}
+      {/*      </div> */}
+      {/*      <div className="modal-body"> */}
+      {/*        <ul> */}
+      {/*          {state.messages.map((message, i) => { */}
+      {/*            return <li key={i}>{message}</li>; */}
+      {/*          })} */}
+      {/*        </ul> */}
+      {/*      </div> */}
+      {/*      <div className="modal-footer"> */}
+      {/*        <p style={{ right: "auto" }}>Click anywhere to continue</p> */}
+      {/*      </div> */}
+      {/*    </div> */}
+      {/*  </div> */}
+      {/* </div> */}
     </div>
   );
 }

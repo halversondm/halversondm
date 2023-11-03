@@ -35,7 +35,7 @@ export default function CheckboxSeries({
                 type="checkbox"
                 value={label}
                 checked={selected.includes(label)}
-                onClick={toggleSelected}
+                onChange={toggleSelected}
               />{" "}
               {label}
             </label>
@@ -50,7 +50,7 @@ export default function CheckboxSeries({
             name="otherLabelCheckbox"
             checked={selected.includes("Other")}
             value="Other"
-            onClick={toggleSelected}
+            onChange={toggleSelected}
           />{" "}
           Other
         </label>

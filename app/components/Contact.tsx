@@ -3,8 +3,8 @@
  */
 import * as React from "react";
 import { type ReactNode, useState } from "react";
-import { LinkedInButton } from "./LinkedInButton";
-import { TwitterFollowButton } from "./TwitterFollowButton";
+import LinkedInButton from "./LinkedInButton";
+import TwitterFollowButton from "./TwitterFollowButton";
 
 interface OwnState {
   subject: string;

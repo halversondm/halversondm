@@ -1,58 +1,27 @@
 import * as React from "react";
-import { type ReactNode } from "react";
+import {type ReactNode, useEffect} from "react";
 
-export interface OwnState {
-  initialized: boolean;
-}
+export default function LinkedInButton(): ReactNode {
 
-declare let IN;
+    useEffect(() => {
+        // <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 
-export class LinkedInButton extends React.Component<unknown, OwnState> {
-  state: OwnState;
-  node;
+        const linkedInScript = document.createElement("script");
+        linkedInScript.src = window.location.protocol + "//platform.linkedin.com/badges/js/profile.js";
+        linkedInScript.type = "text/javascript";
+        linkedInScript.async = true;
+        linkedInScript.defer = true;
+        linkedInScript.id = 'linkedin';
+        document.body.appendChild(linkedInScript);
+        return () => {
+            document.body.removeChild((linkedInScript));
+        }
+    }, [])
 
-  constructor(props) {
-    super(props);
-    this.state = { initialized: false };
-    this.nodeFunction = this.nodeFunction.bind(this);
-  }
-
-  componentDidMount(): void {
-    if (this.state.initialized) {
-      return;
-    }
-
-    if (typeof IN === "undefined") {
-      const linkedInButton = this.node;
-      const linkedInScript = document.createElement("script");
-      linkedInScript.type = "text/javascript";
-      linkedInScript.src = "https://platform.linkedin.com/in.js";
-      linkedInButton.parentNode.appendChild(linkedInScript);
-    } else {
-      IN.init();
-    }
-
-    this.setState({ initialized: true });
-  }
-
-  componentWillUnmount(): void {
-    Reflect.deleteProperty(window, "IN");
-  }
-
-  nodeFunction(node): void {
-    this.node = node;
-  }
-
-  render(): ReactNode {
     return (
-      <script
-        ref={this.nodeFunction}
-        type="IN/MemberProfile"
-        data-id="https://www.linkedin.com/in/dmhalverson"
-        data-format="hover"
-        data-related="false"
-        data-text="Daniel Halverson"
-      />
+        <div className="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light"
+             data-type="VERTICAL" data-vanity="dmhalverson" data-version="v1">
+            <a className="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/dmhalverson?trk=profile-badge">Daniel Halverson</a>
+        </div>
     );
-  }
 }

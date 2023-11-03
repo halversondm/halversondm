@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as renderer from "react-test-renderer";
+import React from "react";
+import { render } from '@testing-library/react';
 import PhotoGallery from "../../app/components/PhotoGallery";
 
 test("Photo Gallery to match", () => {
@@ -11,7 +11,7 @@ test("Photo Gallery to match", () => {
       totalPhotos={10}
     />
   );
-  const component = renderer.create(unit);
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  const component = render(unit);
+  const tree = component.container;
+  expect(tree.toString()).toMatchSnapshot();
 });

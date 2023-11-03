@@ -1,10 +1,10 @@
 import React from "react";
+import Blog from "../../app/components/Blog";
 import {render} from '@testing-library/react'
-import ABC from "../../app/components/ABC";
 
-test("Snapshot test", () => {
-    const unit = <ABC/>;
+test("Blog component", () => {
+    const unit = <Blog />;
     const component = render(unit);
-    const tree = component.container;
+    const tree = component.container
     expect(tree.toString()).toMatchSnapshot();
 });
