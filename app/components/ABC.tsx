@@ -370,6 +370,7 @@ export default function ABC(): ReactNode {
             <div className="radio">
               <label>
                 <input
+                    id="antecedentOtherRadio"
                   type="radio"
                   checked={state.user.antecedent === "Other"}
                   value="Other"
@@ -418,6 +419,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "people");
               }}
+              scope="people"
             />
           </div>
           <div className="col-md-3">
@@ -427,7 +429,7 @@ export default function ABC(): ReactNode {
             <CheckboxSeries
               labels={behaviorValues}
               selected={state.user.behavior}
-              otherLabelPlaceholder="Enter Description"
+              otherLabelPlaceholder="Enter Behavior Description"
               otherLabelText={state.user.behaviorOther}
               otherLabelDisabled={state.user.behaviorOtherLabelDisabled}
               setOtherLabelChange={(event) => {
@@ -436,6 +438,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "behavior");
               }}
+              scope="behavior"
             />
             <br /> <b>Duration</b>
             <br />
@@ -480,7 +483,7 @@ export default function ABC(): ReactNode {
             <CheckboxSeries
               labels={consequenceValues}
               selected={state.user.consequence}
-              otherLabelPlaceholder="Enter Description"
+              otherLabelPlaceholder="Enter Consequence Description"
               otherLabelText={state.user.consequenceOther}
               otherLabelDisabled={state.user.consequenceOtherLabelDisabled}
               setOtherLabelChange={(event) => {
@@ -489,6 +492,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "consequence");
               }}
+              scope="consequence"
             />
           </div>
         </div>

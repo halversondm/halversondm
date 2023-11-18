@@ -43,4 +43,18 @@ describe("Discount Calculator", () =>{
         expect(screen.getByText("Label price is required and must be a number")).not.toBeNull();
         expect(screen.getByText("Discount #1 is required and must be a number")).not.toBeNull();
     });
+
+    it("Will clear input", async () => {
+        render(<DiscountCalculator />);
+        await userEvent.type(document.getElementById("labelPrice"), '100');
+        await userEvent.type(document.getElementById("discount1"), '80');
+        await userEvent.type(document.getElementById("discount2"), '20');
+        await userEvent.click(document.getElementById("calculate"));
+
+        await userEvent.click(document.getElementById("reset"));
+
+        expect(document.getElementById("labelPrice").innerText).toEqual('');
+        expect(document.getElementById("discount1").innerText).toEqual('');
+        expect(document.getElementById("discount2").innerText).toEqual('');
+    });
 })

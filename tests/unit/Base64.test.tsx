@@ -13,14 +13,14 @@ describe("Base64", () => {
         render(<Base64 />);
         await userEvent.type(document.getElementById("encodeInput"), 'jpmc1234');
         await userEvent.click(document.getElementById("encode"));
-        expect(document.getElementById("encodeOutput").value).toEqual('anBtYzEyMzQ=');
+        expect(document.getElementById("encodeOutput").innerText).toEqual('anBtYzEyMzQ=');
     });
 
     it("Will test the Base64 component decode functionality", async() => {
         render(<Base64 />);
         await userEvent.type(document.getElementById("decodeInput"), 'anBtYzEyMzQ=');
         await userEvent.click(document.getElementById("decode"));
-        expect(document.getElementById("decodeOutput").value).toEqual('jpmc1234');
+        expect(document.getElementById("decodeOutput").innerText).toEqual('jpmc1234');
     });
 })
 

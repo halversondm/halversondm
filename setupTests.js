@@ -3,6 +3,9 @@ import { setupServer } from "msw/node";
 import { beforeAll, afterAll, afterEach } from "vitest";
 
 const server = setupServer(
+  http.post("/saveABC", () => {
+    return HttpResponse.text("ABC Saved!");
+  }),
   http.post("/api/stock*", () => {
     return HttpResponse.json({
       Symbol: "MSFT",

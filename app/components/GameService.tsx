@@ -64,8 +64,6 @@ export default function GameService(): IGameService {
         roundResult = PAPER_COVERS_ROCK;
         winner = PLAYER_1;
         break;
-      default:
-        throw new Error("error with choice");
     }
   }
 
@@ -87,8 +85,6 @@ export default function GameService(): IGameService {
         roundResult = PAPER_COVERS_ROCK;
         winner = PLAYER_2;
         break;
-      default:
-        throw new Error("error with choice");
     }
   }
 
@@ -110,8 +106,6 @@ export default function GameService(): IGameService {
         roundResult = PAPER_DISPROVES_SPOCK;
         winner = PLAYER_2;
         break;
-      default:
-        throw new Error("error with choice");
     }
   }
 
@@ -133,8 +127,6 @@ export default function GameService(): IGameService {
         roundResult = LIZARD_EATS_PAPER;
         winner = PLAYER_1;
         break;
-      default:
-        throw new Error("error with choice");
     }
   }
 
@@ -156,8 +148,6 @@ export default function GameService(): IGameService {
         roundResult = SCISSORS_CUT_PAPER;
         winner = PLAYER_1;
         break;
-      default:
-        throw new Error("error with choice");
     }
   }
 

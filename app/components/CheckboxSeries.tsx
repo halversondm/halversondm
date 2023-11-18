@@ -12,6 +12,7 @@ export interface CheckboxSeriesProps {
   otherLabelDisabled: boolean;
   toggleSelected: (event) => void;
   setOtherLabelChange: (event) => void;
+  scope: string;
 }
 
 export default function CheckboxSeries({
@@ -22,6 +23,7 @@ export default function CheckboxSeries({
   otherLabelDisabled,
   toggleSelected,
   setOtherLabelChange,
+    scope
 }: CheckboxSeriesProps): ReactNode {
   return (
     <>
@@ -45,9 +47,9 @@ export default function CheckboxSeries({
       <div className="checkbox">
         <label>
           <input
-            id="otherLabel"
+            id={scope + "OtherLabelCheckbox"}
             type="checkbox"
-            name="otherLabelCheckbox"
+            name={scope + "OtherLabelCheckbox"}
             checked={selected.includes("Other")}
             value="Other"
             onChange={toggleSelected}
@@ -58,7 +60,7 @@ export default function CheckboxSeries({
       <input
         type="text"
         className="form-control"
-        id="labelOther"
+        id={scope + "OtherLabelText"}
         value={otherLabelText}
         onChange={setOtherLabelChange}
         placeholder={otherLabelPlaceholder}
