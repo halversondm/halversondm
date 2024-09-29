@@ -180,8 +180,7 @@ export default function ABC(): ReactNode {
   }
 
   function save(): void {
-    const user = state.user;
-    setState({ ...state, user, showModal: true });
+    setState({ ...state, showModal: true });
     if (validSave()) {
       postToServer();
     }
@@ -261,6 +260,7 @@ export default function ABC(): ReactNode {
       messages.push("The date and time of the ABC is required to save.");
     }
     setState({ ...state, messages });
+    console.log(messages);
     return messages.length === 0;
   }
 
@@ -359,7 +359,7 @@ export default function ABC(): ReactNode {
                     <input
                       type="radio"
                       value={antecedent}
-                      onClick={antecedentRadios}
+                      onChange={antecedentRadios}
                       checked={state.user.antecedent === antecedent}
                     />
                     {antecedent}
@@ -370,10 +370,11 @@ export default function ABC(): ReactNode {
             <div className="radio">
               <label>
                 <input
+                    id="antecedentOtherRadio"
                   type="radio"
                   checked={state.user.antecedent === "Other"}
                   value="Other"
-                  onClick={antecedentRadios}
+                  onChange={antecedentRadios}
                 />{" "}
                 Other
               </label>
@@ -395,7 +396,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={locationRadios}
+                      onChange={locationRadios}
                       checked={state.user.location === location}
                       value={location}
                     />
@@ -418,6 +419,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "people");
               }}
+              scope="people"
             />
           </div>
           <div className="col-md-3">
@@ -427,7 +429,7 @@ export default function ABC(): ReactNode {
             <CheckboxSeries
               labels={behaviorValues}
               selected={state.user.behavior}
-              otherLabelPlaceholder="Enter Description"
+              otherLabelPlaceholder="Enter Behavior Description"
               otherLabelText={state.user.behaviorOther}
               otherLabelDisabled={state.user.behaviorOtherLabelDisabled}
               setOtherLabelChange={(event) => {
@@ -436,6 +438,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "behavior");
               }}
+              scope="behavior"
             />
             <br /> <b>Duration</b>
             <br />
@@ -445,7 +448,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={durationRadios}
+                      onChange={durationRadios}
                       checked={state.user.duration === duration}
                       value={duration}
                     />
@@ -462,7 +465,7 @@ export default function ABC(): ReactNode {
                   <label>
                     <input
                       type="radio"
-                      onClick={intensityRadios}
+                      onChange={intensityRadios}
                       checked={state.user.intensity === intensity}
                       value={intensity}
                     />
@@ -480,7 +483,7 @@ export default function ABC(): ReactNode {
             <CheckboxSeries
               labels={consequenceValues}
               selected={state.user.consequence}
-              otherLabelPlaceholder="Enter Description"
+              otherLabelPlaceholder="Enter Consequence Description"
               otherLabelText={state.user.consequenceOther}
               otherLabelDisabled={state.user.consequenceOtherLabelDisabled}
               setOtherLabelChange={(event) => {
@@ -489,6 +492,7 @@ export default function ABC(): ReactNode {
               toggleSelected={(event) => {
                 toggleSelected(event, "consequence");
               }}
+              scope="consequence"
             />
           </div>
         </div>
@@ -529,25 +533,25 @@ export default function ABC(): ReactNode {
           <p style={{ right: "auto" }}>Click anywhere to continue</p>
         </Modal.Footer>
       </Modal>
-      <div id="abcModal" className="modal">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <p>ABC Save Results</p>
-            </div>
-            <div className="modal-body">
-              <ul>
-                {state.messages.map((message, i) => {
-                  return <li key={i}>{message}</li>;
-                })}
-              </ul>
-            </div>
-            <div className="modal-footer">
-              <p style={{ right: "auto" }}>Click anywhere to continue</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* <div id="abcModal" className="modal"> */}
+      {/*  <div className="modal-dialog" role="document"> */}
+      {/*    <div className="modal-content"> */}
+      {/*      <div className="modal-header"> */}
+      {/*        <p>ABC Save Results</p> */}
+      {/*      </div> */}
+      {/*      <div className="modal-body"> */}
+      {/*        <ul> */}
+      {/*          {state.messages.map((message, i) => { */}
+      {/*            return <li key={i}>{message}</li>; */}
+      {/*          })} */}
+      {/*        </ul> */}
+      {/*      </div> */}
+      {/*      <div className="modal-footer"> */}
+      {/*        <p style={{ right: "auto" }}>Click anywhere to continue</p> */}
+      {/*      </div> */}
+      {/*    </div> */}
+      {/*  </div> */}
+      {/* </div> */}
     </div>
   );
 }

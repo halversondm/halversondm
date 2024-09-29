@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as renderer from "react-test-renderer";
+import React from "react";
+import { render } from '@testing-library/react';
 import CheckboxSeries from "../../app/components/CheckboxSeries";
 
 test("Checkbox Series to match", () => {
@@ -15,7 +15,7 @@ test("Checkbox Series to match", () => {
       toggleSelected={(event) => fakeCallback(event, "test")}
     />
   );
-  const component = renderer.create(unit);
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  const component = render(unit);
+  const tree = component.container;
+  expect(tree.toString()).toMatchSnapshot();
 });

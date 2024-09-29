@@ -63,7 +63,7 @@ export default function StockQuote(): ReactNode {
   }
 
   async function callService(stockSymbol: string): Promise<Stock> {
-    const url = `/api/stock?stockSymbol=${stockSymbol}`;
+    const url = window.location.origin + `/api/stock?stockSymbol=${stockSymbol}`;
     return await fetch(url, {
       method: "POST",
     })

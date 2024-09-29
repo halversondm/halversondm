@@ -50,7 +50,7 @@ export default function Base64(): ReactNode {
       <h4 className="text-success">
         An all Bootstrap and React implementation of converting your data to and
         from Base64 encoding. No tracking of your data is done. No calls to
-        other services. It&quot;s all in your browser.
+        other services. It&apos;s all in your browser.
       </h4>
       <div>
         <div title="Encode" id="encodeTab">

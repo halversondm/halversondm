@@ -147,7 +147,7 @@ export default function DiscountCalculator(): ReactNode {
           </div>
           <div
             className="alert alert-danger alert-dismissible"
-            role="alert"
+            role="alert" id="errorMessages"
             hidden={state.errorMessage.length === 0}
           >
             <button type="button" className="close" data-dismiss="alert">
@@ -162,7 +162,7 @@ export default function DiscountCalculator(): ReactNode {
           </div>
           <div
             className="alert alert-success alert-dismissible"
-            role="alert"
+            role="alert" id="successMessage"
             hidden={state.successMessage === ""}
           >
             <button type="button" className="close" data-dismiss="alert">

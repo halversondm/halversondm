@@ -6,6 +6,7 @@ dist/
 tests/errorShots/
 tests/results/
 certs/
+coverage/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

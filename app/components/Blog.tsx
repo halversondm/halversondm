@@ -24,7 +24,7 @@ export default function Blog(): ReactNode {
   });
 
   useEffect(() => {
-    fetch("/api/blog", {
+    fetch(window.location.origin + "/api/blog", {
       method: "POST",
     })
       .then(async (data) => await data.json())
