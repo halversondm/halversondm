@@ -13,7 +13,7 @@
     "node"
   ],
   "engines": {
-    "node": ">=14"
+    "node": ">=22.0.0"
   },
   "type": "module",
   "author": "Dan Halverson",
