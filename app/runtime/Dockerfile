@@ -1,8 +1,7 @@
 FROM node:22-alpine
-MAINTAINER Dan Halverson
-RUN npm install -g nodemon
-WORKDIR /src
-ADD . /src
+LABEL maintainer="Dan Halverson"
+WORKDIR /app
+ADD . /app
 EXPOSE 3000
-RUN cd /src && npm install
-CMD ["nodemon", "/src/server.js"]
+RUN npm install
+CMD ["node", "server.js"]

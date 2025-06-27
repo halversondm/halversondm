@@ -16,8 +16,11 @@ const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 const app = express();
 
-const secrets = await secretsManager.run("prod/halversondm");
-let apiKeys = JSON.parse(secrets.SecretString);
+let apiKeys = "";
+if (process.env.AWS_REGION) {
+  const secrets = await secretsManager.run("prod/halversondm");
+  apiKeys = JSON.parse(secrets.SecretString);
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
