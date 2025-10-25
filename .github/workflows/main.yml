@@ -8,29 +8,44 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      ECR_REPOSITORY: halversondm/halversondm
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.1
         with:
           node-version: "22"
+
       - name: Install Dependencies
         run: npm ci
+
       - name: Build Code
         run: npm run build
-      - name: Compress dist
-        if: ${{ success() }}
-        run: cd dist && zip -r halversondm.zip .
-      - name: Deploy to EB
-        if: ${{ success() }}
-        uses: einaregilsson/beanstalk-deploy@v18
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: web
-          environment_name: web-env
-          version_label: ${{github.run_number}}
-          region: us-east-1
-          deployment_package: dist/halversondm.zip
-          existing_bucket_name: elasticbeanstalk-us-east-1-442620099008
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Ensure ECR repository exists
+        run: |
+          aws ecr describe-repositories --repository-names "${{ env.ECR_REPOSITORY }}" || \
+            aws ecr create-repository --repository-name "${{ env.ECR_REPOSITORY }}"
+
+      - name: Build, tag and push Docker image to ECR
+        run: |
+          REGISTRY=${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME="${REGISTRY}/${{ env.ECR_REPOSITORY }}:latest"
+          cd dist
+          docker build -t "$IMAGE_NAME" .
+          docker push "$IMAGE_NAME"
