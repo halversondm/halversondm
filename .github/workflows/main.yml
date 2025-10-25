@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.4.1
@@ -26,8 +26,9 @@ jobs:
 
       - name: Build Code
         run: npm run build
+
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -35,17 +36,34 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Ensure ECR repository exists
         run: |
           aws ecr describe-repositories --repository-names "${{ env.ECR_REPOSITORY }}" || \
             aws ecr create-repository --repository-name "${{ env.ECR_REPOSITORY }}"
 
-      - name: Build, tag and push Docker image to ECR
+      - name: Build, tag, and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          REGISTRY=${{ steps.login-ecr.outputs.registry }}
-          IMAGE_NAME="${REGISTRY}/${{ env.ECR_REPOSITORY }}:latest"
           cd dist
-          docker build -t "$IMAGE_NAME" .
-          docker push "$IMAGE_NAME"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Fill in the new image ID in the task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: halversondm
+          image: ${{ steps.login-ecr.outputs.registry }}/halversondm:${{ github.sha }}
+
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: halversondm-service-1ch1gwik
+          cluster: fluffy-zebra-nlfv4i
+          wait-for-service-stability: true
