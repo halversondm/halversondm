@@ -49,21 +49,12 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           cd dist
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-      - name: Fill in the new image ID in the task definition
-        id: task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: task-definition.json
-          container-name: halversondm
-          image: ${{ steps.login-ecr.outputs.registry }}/halversondm:${{ github.sha }}
-
-      - name: Deploy to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
-        with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: halversondm-service-1ch1gwik
-          cluster: fluffy-zebra-nlfv4i
-          wait-for-service-stability: true
+      - name: Tell the ECS Service to update with the latest image
+        run: |
+          aws ecs update-service \
+            --cluster fluffy-zebra-nlfv4i \
+            --service halversondm-service-1ch1gwik \
+            --force-new-deployment
