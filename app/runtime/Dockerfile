@@ -1,6 +1,6 @@
 FROM node:22-alpine
 LABEL maintainer="Dan Halverson"
-RUN apk add --no-cache curl
+RUN apk update && apk add curl
 ENV TABLE_NAME=ABC
 ENV AWS_REGION=us-east-1
 WORKDIR /app
