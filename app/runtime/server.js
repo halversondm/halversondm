@@ -25,11 +25,10 @@ if (process.env.AWS_REGION) {
 
 if (process.env.GOOGLE_PROJECT_ID) {
   const projectId = process.env.GOOGLE_PROJECT_ID; // Ensure this environment variable is set
-  const secretName = "googleApiKey"; // Replace with your secret name
+  const secretName = "prod_halversondm"; // Replace with your secret name
   accessSecretVersion(projectId, secretName)
     .then((secretValue) => {
-      // Use the secretValue in your application
-      apiKeys = secretValue;
+      apiKeys = JSON.parse(secretValue);
     })
     .catch((error) => {
       console.error("Failed to retrieve secret:", error);
