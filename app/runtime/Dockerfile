@@ -2,7 +2,6 @@ FROM node:22-alpine
 LABEL maintainer="Dan Halverson"
 RUN apk update && apk add curl
 ENV TABLE_NAME=ABC
-ENV AWS_REGION=us-east-1
 WORKDIR /app
 ADD . /app
 EXPOSE 3000

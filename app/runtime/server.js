@@ -22,6 +22,19 @@ if (process.env.AWS_REGION) {
   apiKeys = JSON.parse(secrets.SecretString);
 }
 
+if (process.env.GOOGLE_PROJECT_ID) {
+  const projectId = process.env.GOOGLE_PROJECT_ID; // Ensure this environment variable is set
+  const secretName = "googleApiKey"; // Replace with your secret name
+  accessSecretVersion(projectId, secretName)
+    .then((secretValue) => {
+      // Use the secretValue in your application
+      apiKeys = secretValue;
+    })
+    .catch((error) => {
+      console.error("Failed to retrieve secret:", error);
+    });
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));

@@ -34,6 +34,7 @@
     "@fortawesome/free-regular-svg-icons": "*",
     "@fortawesome/free-solid-svg-icons": "*",
     "@fortawesome/react-fontawesome": "*",
+    "@google-cloud/secret-manager": "^6.1.1",
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/react-router": "*",
