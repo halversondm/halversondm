@@ -17,3 +17,5 @@ async function accessSecretVersion(
     throw err;
   }
 }
+
+export default accessSecretVersion;

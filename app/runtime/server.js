@@ -9,6 +9,7 @@ import morgan from "morgan";
 import https from "https";
 import dyna from "./dyna.js";
 import secretsManager from "./secretsManager.js";
+import accessSecretVersion from "./googleSecretManager.js";
 
 console.log("halversondm personal site");
 
