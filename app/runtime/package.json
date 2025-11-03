@@ -25,6 +25,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "*",
     "@aws-sdk/client-secrets-manager": "*",
+    "@google-cloud/secret-manager": "*",
     "body-parser": "*",
     "cross-env": "*",
     "express": "*",
