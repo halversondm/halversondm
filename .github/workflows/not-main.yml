@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - master
+      - feature/gcloud
   workflow_dispatch:
 
 jobs:
