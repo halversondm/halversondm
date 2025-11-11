@@ -54,9 +54,9 @@ app.get("/api/abc", async (req, res) => {
   }
 });
 
-app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// app.get(/(.*)/, (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 app.post("/saveABC", async (req, res) => {
   // Potential fields incoming on the request.
