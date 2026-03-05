@@ -88,5 +88,8 @@
   "lint-staged": {
     "*.tsx": "eslint --fix ./app/",
     "*.{js,css,md}": "prettier --write"
+  },
+  "overrides": {
+    "minimatch": ">=9.0.7"
   }
 }
