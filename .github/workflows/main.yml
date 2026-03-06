@@ -56,5 +56,5 @@ jobs:
         run: |
           aws ecs update-service \
             --cluster fluffy-zebra-nlfv4i \
-            --service halversondm-service-1ch1gwik \
+            --service halversondm-service-zcc7ugr9 \
             --force-new-deployment
