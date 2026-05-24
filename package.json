@@ -90,6 +90,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "overrides": {
-    "minimatch": ">=9.0.7"
+    "minimatch": ">=9.0.7",
+    "uuid": ">=11.1.1"
   }
 }
