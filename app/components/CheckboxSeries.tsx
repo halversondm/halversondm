@@ -10,8 +10,8 @@ export interface CheckboxSeriesProps {
   otherLabelPlaceholder: string;
   otherLabelText: string;
   otherLabelDisabled: boolean;
-  toggleSelected: (event) => void;
-  setOtherLabelChange: (event) => void;
+  toggleSelected: (event: React.ChangeEvent<HTMLInputElement>, scope: string) => void;
+  setOtherLabelChange: (event: React.ChangeEvent<HTMLInputElement>, scope: string) => void;
   scope: string;
 }
 
@@ -37,7 +37,7 @@ export default function CheckboxSeries({
                 type="checkbox"
                 value={label}
                 checked={selected.includes(label)}
-                onChange={toggleSelected}
+                onChange={(e) => { toggleSelected(e, scope); }}
               />{" "}
               {label}
             </label>
@@ -52,7 +52,7 @@ export default function CheckboxSeries({
             name={scope + "OtherLabelCheckbox"}
             checked={selected.includes("Other")}
             value="Other"
-            onChange={toggleSelected}
+            onChange={(e) => { toggleSelected(e, scope); }}
           />{" "}
           Other
         </label>
@@ -62,7 +62,7 @@ export default function CheckboxSeries({
         className="form-control"
         id={scope + "OtherLabelText"}
         value={otherLabelText}
-        onChange={setOtherLabelChange}
+        onChange={(e) => { setOtherLabelChange(e, scope); }}
         placeholder={otherLabelPlaceholder}
         disabled={otherLabelDisabled}
       />

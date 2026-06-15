@@ -73,7 +73,7 @@ export default function PhotoGallery({
     return localState;
   }
 
-  function buildArray(pageNumber, firstPhoto, lastPhoto): string[] {
+  function buildArray(pageNumber: number, firstPhoto: number[], lastPhoto: number[]): string[] {
     const photoArray: string[] = [];
     for (
       let i = firstPhoto[pageNumber - 1];
@@ -86,7 +86,7 @@ export default function PhotoGallery({
     return photoArray;
   }
 
-  function imageClick(event): void {
+  function imageClick(event: React.MouseEvent<HTMLElement>): void {
     const photoIndex = Number(event.currentTarget.dataset.i);
     showHideButtons(photoIndex);
     setState({ ...state, showModal: true });
@@ -106,13 +106,13 @@ export default function PhotoGallery({
     showHideButtons(photoIndex);
   }
 
-  function showHideButtons(photoIndex): void {
+  function showHideButtons(photoIndex: number): void {
     const hideNext = photoIndex === state.photoArray.length - 1;
     const hidePrevious = photoIndex === 0;
     setState({ ...state, hideNext, hidePrevious, photoIndex });
   }
 
-  function pageClick(event): void {
+  function pageClick(event: React.MouseEvent<HTMLElement>): void {
     const page = Number(event.currentTarget.dataset.id);
     setState({
       ...state,

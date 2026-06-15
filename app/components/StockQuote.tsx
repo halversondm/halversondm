@@ -46,7 +46,7 @@ export default function StockQuote(): ReactNode {
     });
   }, []);
 
-  function inputStock(event): void {
+  function inputStock(event: React.ChangeEvent<HTMLInputElement>): void {
     setState({ ...state, stockInput: event.target.value });
   }
 

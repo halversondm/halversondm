@@ -18,12 +18,12 @@ export default function Contact(): ReactNode {
     return { subject: "", message: "" };
   }
 
-  function captureSubject(event): void {
+  function captureSubject(event: React.ChangeEvent<HTMLInputElement>): void {
     const subject: string = event.target.value;
     setState({ ...state, subject });
   }
 
-  function captureMessage(event): void {
+  function captureMessage(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     const message: string = event.target.value;
     setState({ ...state, message });
   }

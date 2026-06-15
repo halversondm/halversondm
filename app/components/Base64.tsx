@@ -19,7 +19,7 @@ export default function Base64(): ReactNode {
     decodeOutput: "",
   });
 
-  function setEncodeInput(event): void {
+  function setEncodeInput(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setBase64State({ ...base64State, encodeInput: event.target.value });
   }
 
@@ -32,7 +32,7 @@ export default function Base64(): ReactNode {
     setBase64State({ ...base64State, encodeInput: "", encodeOutput: "" });
   }
 
-  function setDecodeInput(event): void {
+  function setDecodeInput(event: React.ChangeEvent<HTMLTextAreaElement>): void {
     setBase64State({ ...base64State, decodeInput: event.target.value });
   }
 

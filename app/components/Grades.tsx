@@ -37,13 +37,13 @@ export default function Grades(): ReactNode {
     };
   }
 
-  function removeStudent(event): void {
+  function removeStudent(event: React.MouseEvent<HTMLButtonElement>): void {
     const studentList = state.studentList;
-    studentList.splice(event.currentTarget.dataset.key, 1);
+    studentList.splice(Number(event.currentTarget.dataset.key), 1);
     setState({ ...state, studentList });
   }
 
-  function addStudent(event): void {
+  function addStudent(_event: React.MouseEvent<HTMLButtonElement>): void {
     let student = state.student;
     const quizzes = (student.quiz1 * 10 + student.quiz2 * 10) / 200;
     const midterm = student.midterm / 100;
@@ -67,7 +67,7 @@ export default function Grades(): ReactNode {
     });
   }
 
-  function determineLetterGrade(finalGrade, student): Student {
+  function determineLetterGrade(finalGrade: number, student: Student): Student {
     student.letterGrade =
       finalGrade >= 90
         ? "A"
@@ -81,33 +81,33 @@ export default function Grades(): ReactNode {
     return student;
   }
 
-  function studentNumberChange(event): void {
+  function studentNumberChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const student = state.student;
-    student.studentNumber = event.target.value;
+    student.studentNumber = Number(event.target.value);
     setState({ ...state, student });
   }
 
-  function quiz1Change(event): void {
+  function quiz1Change(event: React.ChangeEvent<HTMLInputElement>): void {
     const student = state.student;
-    student.quiz1 = event.target.value;
+    student.quiz1 = Number(event.target.value);
     setState({ ...state, student });
   }
 
-  function quiz2Change(event): void {
+  function quiz2Change(event: React.ChangeEvent<HTMLInputElement>): void {
     const student = state.student;
-    student.quiz2 = event.target.value;
+    student.quiz2 = Number(event.target.value);
     setState({ ...state, student });
   }
 
-  function midtermChange(event): void {
+  function midtermChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const student = state.student;
-    student.midterm = event.target.value;
+    student.midterm = Number(event.target.value);
     setState({ ...state, student });
   }
 
-  function finalChange(event): void {
+  function finalChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const student = state.student;
-    student.final = event.target.value;
+    student.final = Number(event.target.value);
     setState({ ...state, student });
   }
 

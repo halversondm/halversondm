@@ -47,9 +47,9 @@ export default function Game(): ReactNode {
     };
   }
 
-  function human(event): void {
+  function human(event: React.MouseEvent<HTMLButtonElement>): void {
     let state = initialState();
-    const choice = event.currentTarget.dataset.choice;
+    const choice = event.currentTarget.dataset.choice ?? "";
     const player2 = gameService.getPick();
     state = setPlayer1Class(choice, state);
     state = setPlayer2Class(player2, state);
@@ -90,7 +90,7 @@ export default function Game(): ReactNode {
     }
   }
 
-  function setPlayer1Class(choice, state): IGameState {
+  function setPlayer1Class(choice: string, state: IGameState): IGameState {
     switch (choice) {
       case "rock":
         state.rock = "btn btn-default btn-success";
@@ -113,7 +113,7 @@ export default function Game(): ReactNode {
     return state;
   }
 
-  function setPlayer2Class(choice, state): IGameState {
+  function setPlayer2Class(choice: string, state: IGameState): IGameState {
     switch (choice) {
       case "rock":
         state.rock2 = "btn btn-default btn-danger";

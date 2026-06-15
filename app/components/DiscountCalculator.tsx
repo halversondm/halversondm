@@ -43,15 +43,15 @@ export default function DiscountCalculator(): ReactNode {
     setState(initialState());
   }
 
-  function labelPriceChange(event): void {
+  function labelPriceChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setState({ ...state, labelPrice: event.target.value });
   }
 
-  function discount1Change(event): void {
+  function discount1Change(event: React.ChangeEvent<HTMLInputElement>): void {
     setState({ ...state, discount1: event.target.value });
   }
 
-  function discount2Change(event): void {
+  function discount2Change(event: React.ChangeEvent<HTMLInputElement>): void {
     setState({ ...state, discount2: event.target.value });
   }
 

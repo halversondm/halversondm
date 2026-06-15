@@ -4,9 +4,12 @@
     "jsx": "react",
     "module": "commonjs",
     "target": "es5",
+    "ignoreDeprecations": "6.0",
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
     "esModuleInterop": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "rootDir": "./app"
   },
   "include": ["app"],
   "exclude": ["node_modules"]

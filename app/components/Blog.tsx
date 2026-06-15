@@ -36,11 +36,11 @@ export default function Blog(): ReactNode {
       });
   }, []);
 
-  function createMarkup(html): { __html: string } {
+  function createMarkup(html: string): { __html: string } {
     return { __html: html };
   }
 
-  function filterData(event): void {
+  function filterData(event: React.ChangeEvent<HTMLInputElement>): void {
     const regex = new RegExp(event.target.value, "i");
     const filtered = state.items.filter((data) => {
       return data.content.search(regex) > -1;

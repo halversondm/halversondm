@@ -29,14 +29,14 @@ export default function UrlBuilder(): ReactNode {
     };
   }
 
-  function addQuery(event): void {
+  function addQuery(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
     const queries = state.queries;
     queries.push(state.query);
     setState({ ...state, queries, query: { key: "", value: "" } });
   }
 
-  function assemble(event): void {
+  function assemble(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
     let assembled = state.baseUrl + "?";
     const queries = state.queries;
@@ -54,14 +54,14 @@ export default function UrlBuilder(): ReactNode {
     setState({ ...state, assembledUrl: assembled });
   }
 
-  function setCookie(cname, value): void {
+  function setCookie(cname: string, value: string): void {
     const d = new Date();
     d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
     const expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + value + "; " + expires;
   }
 
-  function launch(event): void {
+  function launch(event: React.MouseEvent<HTMLButtonElement>): void {
     event.preventDefault();
     const myWindow = window.open(
       "",
@@ -79,19 +79,19 @@ export default function UrlBuilder(): ReactNode {
     }
   }
 
-  function keyChange(event): void {
+  function keyChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const query = state.query;
     query.key = event.target.value;
     setState({ ...state, query });
   }
 
-  function valueChange(event): void {
+  function valueChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const query = state.query;
     query.value = event.target.value;
     setState({ ...state, query });
   }
 
-  function baseUrlChange(event): void {
+  function baseUrlChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setState({ ...state, baseUrl: event.target.value });
   }
 

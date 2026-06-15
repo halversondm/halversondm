@@ -137,7 +137,7 @@ export default function ABC(): ReactNode {
     setState({ ...state, user });
   }
 
-  function antecedentRadios(event): void {
+  function antecedentRadios(event: React.ChangeEvent<HTMLInputElement>): void {
     const antecedent = event.target.value;
     const user = state.user;
     user.antecedent = antecedent;
@@ -151,28 +151,28 @@ export default function ABC(): ReactNode {
     setState({ ...state, user, antecedentOtherDisabled });
   }
 
-  function antecedentOtherText(event): void {
+  function antecedentOtherText(event: React.ChangeEvent<HTMLInputElement>): void {
     const antecedentOtherText = event.target.value;
     const user = state.user;
     user.antecedentOther = antecedentOtherText;
     setState({ ...state, user });
   }
 
-  function locationRadios(event): void {
+  function locationRadios(event: React.ChangeEvent<HTMLInputElement>): void {
     const location = event.target.value;
     const user = state.user;
     user.location = location;
     setState({ ...state, user });
   }
 
-  function durationRadios(event): void {
+  function durationRadios(event: React.ChangeEvent<HTMLInputElement>): void {
     const duration = event.target.value;
     const user = state.user;
     user.duration = duration;
     setState({ ...state, user });
   }
 
-  function intensityRadios(event): void {
+  function intensityRadios(event: React.ChangeEvent<HTMLInputElement>): void {
     const intensity = event.target.value;
     const user = state.user;
     user.intensity = intensity;
@@ -268,7 +268,7 @@ export default function ABC(): ReactNode {
     setState(initialState());
   }
 
-  function toggleSelected(event, scope): void {
+  function toggleSelected(event: React.ChangeEvent<HTMLInputElement>, scope: string): void {
     const label = event.target.value;
     let currentState;
     const user = state.user;
@@ -303,7 +303,7 @@ export default function ABC(): ReactNode {
     setState({ ...state, user });
   }
 
-  function updateArray(currentState, label): ABCState {
+  function updateArray(currentState: string[], label: string): string[] {
     const index = currentState.indexOf(label);
     if (index > -1) {
       currentState.splice(index, 1);
@@ -313,7 +313,7 @@ export default function ABC(): ReactNode {
     return currentState;
   }
 
-  function setOtherLabelChange(event, scope): void {
+  function setOtherLabelChange(event: React.ChangeEvent<HTMLInputElement>, scope: string): void {
     const otherLabelText = event.target.value;
     const user = state.user;
     switch (scope) {
