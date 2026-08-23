@@ -73,7 +73,11 @@ export default function PhotoGallery({
     return localState;
   }
 
-  function buildArray(pageNumber: number, firstPhoto: number[], lastPhoto: number[]): string[] {
+  function buildArray(
+    pageNumber: number,
+    firstPhoto: number[],
+    lastPhoto: number[],
+  ): string[] {
     const photoArray: string[] = [];
     for (
       let i = firstPhoto[pageNumber - 1];

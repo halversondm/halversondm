@@ -72,16 +72,18 @@ export default function Grades(): ReactNode {
       finalGrade >= 90
         ? "A"
         : finalGrade >= 80 && finalGrade <= 89
-        ? "B"
-        : finalGrade >= 70 && finalGrade <= 79
-        ? "C"
-        : finalGrade >= 60 && finalGrade <= 69
-        ? "D"
-        : "F";
+          ? "B"
+          : finalGrade >= 70 && finalGrade <= 79
+            ? "C"
+            : finalGrade >= 60 && finalGrade <= 69
+              ? "D"
+              : "F";
     return student;
   }
 
-  function studentNumberChange(event: React.ChangeEvent<HTMLInputElement>): void {
+  function studentNumberChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void {
     const student = state.student;
     student.studentNumber = Number(event.target.value);
     setState({ ...state, student });

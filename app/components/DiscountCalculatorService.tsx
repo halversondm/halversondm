@@ -5,7 +5,11 @@ export interface IDiscountCalculatorService {
   isError: () => boolean;
   getMessage: () => string[];
   calculate: () => void;
-  validate: (firstDiscount: string, secondDiscount: string, labelPriceVal: string) => void;
+  validate: (
+    firstDiscount: string,
+    secondDiscount: string,
+    labelPriceVal: string,
+  ) => void;
 }
 export default function DiscountCalculatorService(): IDiscountCalculatorService {
   let discount1: number = 0;
@@ -31,7 +35,11 @@ export default function DiscountCalculatorService(): IDiscountCalculatorService 
     message.push("Your final price is $" + finalPrice + " plus tax");
   }
 
-  function validate(firstDiscount: string, secondDiscount: string, labelPriceVal: string): void {
+  function validate(
+    firstDiscount: string,
+    secondDiscount: string,
+    labelPriceVal: string,
+  ): void {
     message = [];
     error = false;
     validateLabelPrice(labelPriceVal);

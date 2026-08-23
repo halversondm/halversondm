@@ -151,7 +151,9 @@ export default function ABC(): ReactNode {
     setState({ ...state, user, antecedentOtherDisabled });
   }
 
-  function antecedentOtherText(event: React.ChangeEvent<HTMLInputElement>): void {
+  function antecedentOtherText(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void {
     const antecedentOtherText = event.target.value;
     const user = state.user;
     user.antecedentOther = antecedentOtherText;
@@ -268,7 +270,10 @@ export default function ABC(): ReactNode {
     setState(initialState());
   }
 
-  function toggleSelected(event: React.ChangeEvent<HTMLInputElement>, scope: string): void {
+  function toggleSelected(
+    event: React.ChangeEvent<HTMLInputElement>,
+    scope: string,
+  ): void {
     const label = event.target.value;
     let currentState;
     const user = state.user;
@@ -313,7 +318,10 @@ export default function ABC(): ReactNode {
     return currentState;
   }
 
-  function setOtherLabelChange(event: React.ChangeEvent<HTMLInputElement>, scope: string): void {
+  function setOtherLabelChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    scope: string,
+  ): void {
     const otherLabelText = event.target.value;
     const user = state.user;
     switch (scope) {
@@ -370,7 +378,7 @@ export default function ABC(): ReactNode {
             <div className="radio">
               <label>
                 <input
-                    id="antecedentOtherRadio"
+                  id="antecedentOtherRadio"
                   type="radio"
                   checked={state.user.antecedent === "Other"}
                   value="Other"

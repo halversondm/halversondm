@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from '@testing-library/react';
+import { render } from "@testing-library/react";
 import PhotoGallery from "../../app/components/PhotoGallery";
 
 test("Photo Gallery to match", () => {
