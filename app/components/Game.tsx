@@ -57,7 +57,7 @@ export default function Game(): ReactNode {
     gameService.setPlayer2(player2);
     try {
       gameService.takeTurn();
-    } catch (Error) {
+    } catch {
       // no winner
     }
     if (gameService.getWinner() === "Player 1") {

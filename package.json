@@ -13,6 +13,7 @@
     "test": "vitest --config vitest.config.js",
     "test:coverage": "vitest --config vitest.config.js --coverage",
     "test:run": "vitest run --config vitest.config.js",
+    "lint": "eslint .",
     "prettier": "prettier . --write",
     "prettier:check": "prettier . --check",
     "tsc": "tsc -w",
@@ -48,6 +49,7 @@
     "react-router-dom": "*"
   },
   "devDependencies": {
+    "@eslint/js": "*",
     "@testing-library/react": "*",
     "@testing-library/user-event": "*",
     "@types/jest": "*",
@@ -57,8 +59,11 @@
     "copy-webpack-plugin": "*",
     "css-loader": "*",
     "css-minimizer-webpack-plugin": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
     "file-loader": "*",
     "global-jsdom": "*",
+    "globals": "*",
     "happy-dom": "*",
     "html-webpack-plugin": "*",
     "husky": "*",
@@ -71,6 +76,7 @@
     "style-loader": "*",
     "ts-loader": "*",
     "typescript": "*",
+    "typescript-eslint": "*",
     "vitest": "*",
     "webpack": "*",
     "webpack-cli": "*",
@@ -78,6 +84,7 @@
     "webpack-merge": "*"
   },
   "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix",
     "*.{js,tsx,css,md}": "prettier --write"
   },
   "overrides": {

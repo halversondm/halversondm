@@ -23,5 +23,8 @@ jobs:
       - name: Check Formatting
         run: npm run prettier:check
 
+      - name: Lint Code
+        run: npm run lint
+
       - name: Build Code
         run: npm run build
