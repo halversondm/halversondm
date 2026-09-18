@@ -23,11 +23,11 @@
     "start": "cross-env NODE_ENV=production node server"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "*",
-    "@aws-sdk/client-secrets-manager": "*",
-    "body-parser": "*",
-    "cross-env": "*",
-    "express": "*",
-    "morgan": "*"
+    "@aws-sdk/client-dynamodb": "^3.1135.0",
+    "@aws-sdk/client-secrets-manager": "^3.1135.0",
+    "body-parser": "^2.3.0",
+    "cross-env": "^10.1.0",
+    "express": "^5.2.1",
+    "morgan": "^1.12.1"
   }
 }
