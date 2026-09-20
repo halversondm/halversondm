@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+coverage
+.git
+.github
+.husky
+.devcontainer
+kube
+certs
+*.md

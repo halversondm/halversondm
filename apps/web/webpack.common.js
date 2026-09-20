@@ -28,7 +28,6 @@ module.exports = {
       patterns: [
         { from: "app/images/", to: "images/" },
         { from: "app/extras" },
-        { from: "app/runtime" },
       ],
     }),
   ],

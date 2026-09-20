@@ -54,8 +54,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          cd dist
-          docker buildx build --platform linux/arm64 -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker buildx build --platform linux/arm64 -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Tell the ECS Service to update with the latest image

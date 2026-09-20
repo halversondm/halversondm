@@ -1,12 +1,9 @@
 {
-  "name": "halversondm",
+  "name": "@halversondm/server",
   "version": "1.0.0",
-  "description": "The personal website of Dan Halverson",
+  "description": "Backend (Express) for halversondm.com",
   "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/halversondm/halversondm.git"
-  },
+  "private": true,
   "keywords": [
     "express",
     "webpack",
@@ -18,9 +15,9 @@
   "type": "module",
   "author": "Dan Halverson",
   "license": "MIT",
-  "homepage": "https://github.com/halversondm/halversondm.git",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server"
+    "start": "cross-env NODE_ENV=production node server",
+    "dev": "node --watch server.js"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1135.0",

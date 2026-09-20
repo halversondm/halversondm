@@ -13,6 +13,7 @@ import secretsManager from "./secretsManager.js";
 console.log("halversondm personal site");
 
 const __dirname = path.resolve();
+const publicDir = path.join(__dirname, "public");
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -25,7 +26,7 @@ if (process.env.AWS_REGION) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));
-app.use(express.static(__dirname));
+app.use(express.static(publicDir));
 
 app.get("/api/abc", async (req, res) => {
   const params = {
@@ -42,7 +43,7 @@ app.get("/api/abc", async (req, res) => {
 });
 
 app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
 app.post("/saveABC", async (req, res) => {

@@ -5,7 +5,7 @@ import prettier from "eslint-config-prettier";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "tests/**", "**/*.js"],
+    ignores: ["**/dist/**", "**/tests/**", "**/*.js"],
   },
   js.configs.recommended,
   tseslint.configs.recommended,
