@@ -18,6 +18,7 @@ RUN npm ci --workspace=apps/server --omit=dev --ignore-scripts
 
 FROM node:24-alpine
 LABEL maintainer="Dan Halverson"
+RUN apk update && apk add curl
 ENV TABLE_NAME=ABC
 ENV AWS_REGION=us-east-1
 WORKDIR /app
