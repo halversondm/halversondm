@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM node:22-alpine AS web-build
+FROM node:24-alpine AS web-build
 WORKDIR /repo
 COPY package.json package-lock.json ./
 COPY apps/web/package.json apps/web/package.json
@@ -9,14 +9,14 @@ RUN npm ci --ignore-scripts
 COPY apps/web apps/web
 RUN npm run build --workspace=apps/web
 
-FROM node:22-alpine AS server-deps
+FROM node:24-alpine AS server-deps
 WORKDIR /repo
 COPY package.json package-lock.json ./
 COPY apps/web/package.json apps/web/package.json
 COPY apps/server/package.json apps/server/package.json
 RUN npm ci --workspace=apps/server --omit=dev --ignore-scripts
 
-FROM node:22-alpine
+FROM node:24-alpine
 LABEL maintainer="Dan Halverson"
 ENV TABLE_NAME=ABC
 ENV AWS_REGION=us-east-1

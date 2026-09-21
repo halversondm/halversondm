@@ -26,6 +26,8 @@ Run a single test file: `npx vitest run --config apps/web/vitest.config.js apps/
 
 Build and run the production Docker image from the repo root: `docker build -t halversondm .` then `docker run -p 3000:3000 halversondm`.
 
+Run the full stack locally against emulated AWS services: `docker compose up --build`, then hit `http://localhost:3000`. See "Local AWS services" below.
+
 ## Architecture
 
 - **`apps/web/`** is the frontend workspace. `apps/web/app/` is the TypeScript/React source root (`apps/web/tsconfig.json` `rootDir`); `apps/web/app/main.tsx` mounts `App` from `apps/web/app/components/App.tsx` into `#root`.
@@ -40,6 +42,10 @@ Build and run the production Docker image from the repo root: `docker build -t h
 - `apps/server/scripts/ABCCreateTable.js` is a one-off script (uses the old `aws-sdk` v2, not a declared dependency) for provisioning the local DynamoDB `ABC` table; it's not part of the app runtime.
 - The root `Dockerfile` is a 3-stage build: `web-build` runs `npm run build --workspace=apps/web`, `server-deps` runs `npm ci --workspace=apps/server --omit=dev`, and the final stage copies the server's `node_modules` + source plus the web build's `dist` output (mounted as `./public`) into a single image whose `CMD` is `node server.js`. There is no local commit of a `dist/` deploy artifact — the image is built directly from source.
 - In dev, `apps/web/webpack.dev.js` stubs the `/api/*` proxy responses directly (see the `bypass` function) instead of hitting the real Express server, so `stockSymbol` queries and blog responses are faked locally.
+
+### Local AWS services
+
+`apps/server` depends on two real AWS services: DynamoDB (`dyna.js`) and Secrets Manager (`secretsManager.js`), neither of which is mocked in code — both clients are constructed with no explicit endpoint and rely entirely on env vars (`AWS_REGION`, and the SDK's built-in `AWS_ENDPOINT_URL_<SERVICE>` override support) for where to connect. `docker-compose.yml` runs a single `localstack/localstack` container emulating both services, seeded on startup by `localstack/init/01-init.sh` (creates the `ABC` table and a `prod/halversondm` secret with dummy Polygon/Google API keys), and points the `web` service at it via `AWS_ENDPOINT_URL_DYNAMODB`/`AWS_ENDPOINT_URL_SECRETS_MANAGER`. The `web` service's `depends_on` health check polls LocalStack's `/_localstack/init/READY` endpoint (not `/_localstack/health`) specifically so it waits for the init script to finish seeding data, not just for the LocalStack process to be up.
 
 ## Testing
 
