@@ -20,8 +20,8 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.1141.0",
-    "@aws-sdk/client-secrets-manager": "^3.1141.0",
+    "@aws-sdk/client-dynamodb": "^3.1146.0",
+    "@aws-sdk/client-secrets-manager": "^3.1146.0",
     "body-parser": "^2.3.0",
     "cross-env": "^10.1.0",
     "express": "^5.2.1",
