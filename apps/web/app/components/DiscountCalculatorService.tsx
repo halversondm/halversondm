@@ -48,8 +48,8 @@ export default function DiscountCalculatorService(): IDiscountCalculatorService 
   }
 
   function validateLabelPrice(labelPriceVal: string): void {
-    const parsed = parseFloat(labelPriceVal);
-    if (labelPriceVal.length === 0 || isNaN(parsed)) {
+    const parsed = Number.parseFloat(labelPriceVal);
+    if (labelPriceVal.length === 0 || Number.isNaN(parsed)) {
       message.push("Label price is required and must be a number");
       error = true;
     } else {
@@ -58,8 +58,8 @@ export default function DiscountCalculatorService(): IDiscountCalculatorService 
   }
 
   function validateFirstDiscount(firstDiscount: string): void {
-    const parsed = parseFloat(firstDiscount);
-    if (firstDiscount.length === 0 || isNaN(parsed)) {
+    const parsed = Number.parseFloat(firstDiscount);
+    if (firstDiscount.length === 0 || Number.isNaN(parsed)) {
       message.push("Discount #1 is required and must be a number");
       error = true;
     } else {
@@ -68,8 +68,9 @@ export default function DiscountCalculatorService(): IDiscountCalculatorService 
   }
 
   function validateSecondDiscount(secondDiscount: string): void {
-    const parsed = secondDiscount.length > 0 ? parseFloat(secondDiscount) : 0;
-    if (isNaN(parsed)) {
+    const parsed =
+      secondDiscount.length > 0 ? Number.parseFloat(secondDiscount) : 0;
+    if (Number.isNaN(parsed)) {
       message.push("Discount #2 must be a number, if provided");
       error = true;
     } else {
