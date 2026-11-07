@@ -61,12 +61,31 @@ describe("ABC App Testing", () => {
     expect(payload.location).toBe("Home");
     expect(payload.intensity).toBe("Medium");
     expect(payload.antecedentOther).toBe("test antecedent other");
+    expect(await screen.findByText("ABC Save Results")).toBeTruthy();
+    expect(await screen.findByText("ABC Saved!")).toBeTruthy();
   });
 
   it("Will save an empty situation", async () => {
     render(<ABC />);
     await userEvent.click(document.getElementById("save"));
     expect(sendSpy).not.toHaveBeenCalled();
+    expect(await screen.findByText("ABC Save Results")).toBeTruthy();
+    expect(
+      screen.getByText("At least one Person is required to save."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("At least one Behavior is required to save."),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("At least one Consequence is required to save."),
+    ).toBeTruthy();
+    expect(screen.getByText("An Antecedent is required to save.")).toBeTruthy();
+    expect(screen.getByText("A Location is required to save.")).toBeTruthy();
+    expect(screen.getByText("A Duration is required to save.")).toBeTruthy();
+    expect(screen.getByText("An Intensity is required to save.")).toBeTruthy();
+    expect(
+      screen.getByText("The date and time of the ABC is required to save."),
+    ).toBeTruthy();
   });
 
   it("Will save a partially empty situation", async () => {
@@ -81,5 +100,13 @@ describe("ABC App Testing", () => {
     );
     await userEvent.click(document.getElementById("save"));
     expect(sendSpy).not.toHaveBeenCalled();
+    expect(await screen.findByText("ABC Save Results")).toBeTruthy();
+    for (const scope of ["People", "Behavior", "Consequence", "Antecedent"]) {
+      expect(
+        screen.getByText(
+          `For ${scope} - Other, the text description of Other must be entered.`,
+        ),
+      ).toBeTruthy();
+    }
   });
 });
