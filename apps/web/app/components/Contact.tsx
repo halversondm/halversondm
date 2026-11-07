@@ -42,7 +42,7 @@ export default function Contact(): ReactNode {
           <table className="table table-striped">
             <tbody>
               <tr>
-                <td>Email</td>
+                <th scope="row">Email</th>
                 <td>
                   <a href="mailto:daniel.m.halverson@gmail.com">
                     daniel.m.halverson@gmail.com
@@ -50,13 +50,13 @@ export default function Contact(): ReactNode {
                 </td>
               </tr>
               <tr>
-                <td>Twitter</td>
+                <th scope="row">Twitter</th>
                 <td>
                   <TwitterFollowButton />
                 </td>
               </tr>
               <tr>
-                <td>Linkedin</td>
+                <th scope="row">Linkedin</th>
                 <td>
                   <LinkedInButton />
                 </td>

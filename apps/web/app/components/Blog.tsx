@@ -3,6 +3,7 @@
  */
 import * as React from "react";
 import { Card } from "react-bootstrap";
+import DOMPurify from "dompurify";
 import { type ReactNode, useState, useEffect } from "react";
 
 export interface BlogState {
@@ -37,13 +38,13 @@ export default function Blog(): ReactNode {
   }, []);
 
   function createMarkup(html: string): { __html: string } {
-    return { __html: html };
+    return { __html: DOMPurify.sanitize(html) };
   }
 
   function filterData(event: React.ChangeEvent<HTMLInputElement>): void {
-    const regex = new RegExp(event.target.value, "i");
+    const term = event.target.value.toLowerCase();
     const filtered = state.items.filter((data) => {
-      return data.content.search(regex) > -1;
+      return data.content.toLowerCase().includes(term);
     });
     setState({ ...state, filteredData: filtered });
   }

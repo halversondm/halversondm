@@ -16,6 +16,7 @@ const __dirname = path.resolve();
 const publicDir = path.join(__dirname, "public");
 const port = process.env.PORT || 3000;
 const app = express();
+app.disable("x-powered-by");
 
 let apiKeys = "";
 if (process.env.AWS_REGION) {
@@ -84,8 +85,7 @@ app.post("/saveABC", async (req, res) => {
   };
 
   try {
-    console.log(params);
-    const result = await dyna.put(params);
+    await dyna.put(params);
     res.status(200).send("ABC Saved!");
   } catch (error) {
     console.log(error);
@@ -94,7 +94,7 @@ app.post("/saveABC", async (req, res) => {
 });
 
 app.post("/mail.php", (req, res) => {
-  console.log(req.body);
+  console.log("mail.php request received");
   res.send("Email Success!");
 });
 
@@ -104,10 +104,10 @@ app.post("/api/stock", (request, response) => {
     port: 443,
     path:
       "/v2/aggs/ticker/" +
-      request.query.stockSymbol +
-      "/prev?adjusted=true&apiKey=" +
-      apiKeys.polygonApiKey,
+      encodeURIComponent(String(request.query.stockSymbol)) +
+      "/prev?adjusted=true",
     method: "GET",
+    headers: { Authorization: "Bearer " + String(apiKeys.polygonApiKey) },
   };
   const proxyRequest = https.request(options, (proxyResponse) => {
     proxyResponse.setEncoding("utf8");
@@ -143,10 +143,10 @@ app.post("/api/blog", (request, response) => {
     hostname: "www.googleapis.com",
     port: 443,
     path:
-      "/blogger/v3/blogs/2815390959079070088/posts?key=" +
-      apiKeys.googleApiKey +
-      "&fields=nextPageToken,items(published,url,title,content)&maxResults=50",
+      "/blogger/v3/blogs/2815390959079070088/posts" +
+      "?fields=nextPageToken,items(published,url,title,content)&maxResults=50",
     method: "GET",
+    headers: { "x-goog-api-key": String(apiKeys.googleApiKey) },
   };
   const proxyRequest = https.request(options, (proxyResponse) => {
     let data = "";

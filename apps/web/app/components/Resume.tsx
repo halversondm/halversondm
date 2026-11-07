@@ -85,7 +85,7 @@ export default function Resume(): ReactNode {
                   <Col xs={1} sm={1} md={1} lg={1} xl={1}>
                     <div className="social-btn-holder">
                       <a
-                        href="http://www.linkedin.com/in/dmhalverson"
+                        href="https://www.linkedin.com/in/dmhalverson"
                         className="btn btn-social btn-block btn-linkedin"
                       >
                         <FontAwesomeIcon icon={faLinkedin} />
@@ -105,7 +105,7 @@ export default function Resume(): ReactNode {
                   <Col xs={1} sm={1} md={1} lg={1} xl={1}>
                     <div className="social-btn-holder">
                       <a
-                        href="http://stackoverflow.com/users/975640/dan"
+                        href="https://stackoverflow.com/users/975640/dan"
                         className="btn btn-social btn-block btn-stackoverflow"
                       >
                         <FontAwesomeIcon icon={faStackOverflow} />

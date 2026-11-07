@@ -17,7 +17,8 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "test:run": "vitest run --config vitest.config.js"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1164.0",

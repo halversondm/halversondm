@@ -182,7 +182,7 @@ export default function ABC(): ReactNode {
   }
 
   function save(): void {
-    setState({ ...state, showModal: true });
+    setState((prev) => ({ ...prev, showModal: true }));
     if (validSave()) {
       postToServer();
     }
@@ -203,7 +203,7 @@ export default function ABC(): ReactNode {
         console.log("unsucc ", xhr.responseText);
         messages.push(xhr.status + " " + xhr.statusText);
       }
-      setState({ ...state, messages });
+      setState((prev) => ({ ...prev, messages }));
     };
     xhr.onerror = () => {
       console.log(xhr);
@@ -261,7 +261,7 @@ export default function ABC(): ReactNode {
     if (state.user.when.length === 0) {
       messages.push("The date and time of the ABC is required to save.");
     }
-    setState({ ...state, messages });
+    setState((prev) => ({ ...prev, messages }));
     console.log(messages);
     return messages.length === 0;
   }
