@@ -37,6 +37,8 @@ jobs:
         run: |
           npm run test:run --workspace=apps/web -- --coverage --coverage.reporter=lcov
           sed -i 's#^SF:#SF:apps/web/#' apps/web/coverage/lcov.info
+          npm run test:run --workspace=apps/server -- --coverage --coverage.reporter=lcov
+          sed -i 's#^SF:#SF:apps/server/#' apps/server/coverage/lcov.info
 
       - name: SonarCloud Scan
         if: env.SONAR_TOKEN != ''

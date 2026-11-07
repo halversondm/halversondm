@@ -1,9 +1,20 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
+import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import ABC from "../../app/components/ABC";
 
 describe("ABC App Testing", () => {
+  let sendSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    sendSpy = vi.spyOn(XMLHttpRequest.prototype, "send");
+  });
+
+  afterEach(() => {
+    sendSpy.mockRestore();
+  });
+
   it("Will have a snapshot that matches", () => {
     const component = render(<ABC />);
     expect(component.container.toString()).toMatchSnapshot();
@@ -44,14 +55,22 @@ describe("ABC App Testing", () => {
       "test consequence other",
     );
     await userEvent.click(document.getElementById("save"));
+    expect(sendSpy).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(String(sendSpy.mock.calls[0][0]));
+    expect(payload.people).toContain("Mom");
+    expect(payload.location).toBe("Home");
+    expect(payload.intensity).toBe("Medium");
+    expect(payload.antecedentOther).toBe("test antecedent other");
   });
 
   it("Will save an empty situation", async () => {
-    const component = render(<ABC />);
+    render(<ABC />);
     await userEvent.click(document.getElementById("save"));
+    expect(sendSpy).not.toHaveBeenCalled();
   });
+
   it("Will save a partially empty situation", async () => {
-    const component = render(<ABC />);
+    render(<ABC />);
     await userEvent.click(document.getElementById("antecedentOtherRadio"));
     await userEvent.click(document.getElementById("peopleOtherLabelCheckbox"));
     await userEvent.click(
@@ -61,5 +80,6 @@ describe("ABC App Testing", () => {
       document.getElementById("consequenceOtherLabelCheckbox"),
     );
     await userEvent.click(document.getElementById("save"));
+    expect(sendSpy).not.toHaveBeenCalled();
   });
 });

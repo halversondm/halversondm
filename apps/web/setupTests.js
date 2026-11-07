@@ -2,7 +2,7 @@ import { http, HttpResponse } from "msw";
 import { setupServer } from "msw/node";
 import { beforeAll, afterAll, afterEach } from "vitest";
 
-const server = setupServer(
+export const server = setupServer(
   http.post("/saveABC", () => {
     return HttpResponse.text("ABC Saved!");
   }),
